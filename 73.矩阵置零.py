@@ -46,7 +46,7 @@ class Solution:
 
 
 # @lc code=end
-m=[[0, 1, 2, 0], [3, 4, 5, 2], [1, 3, 1, 5]]
-s = Solution()
-s.setZeroes(m)
-print(m)
+# m=[[0, 1, 2, 0], [3, 4, 5, 2], [1, 3, 1, 5]]
+# s = Solution()
+# s.setZeroes(m)
+# print(m)
