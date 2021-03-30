@@ -6,10 +6,10 @@
 
 # @lc code=start
 # Definition for singly-linked list.
-class ListNode:
-    def __init__(self, x):
-        self.val = x
-        self.next = None
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
 
 class Solution:
     def rotateRight(self, head: ListNode, k: int) -> ListNode:
@@ -44,19 +44,19 @@ class Solution:
         return l
 
 # @lc code=end
-def printLinkedList(head: ListNode):
-    n = head
-    while n:
-        print(n.val)
-        n = n.next
+# def printLinkedList(head: ListNode):
+#     n = head
+#     while n:
+#         print(n.val)
+#         n = n.next
 
-l = [1, 2]
-n = ListNode(l[0])
-n0 = n
-for val in l[1:]:
-    node = ListNode(val)
-    n.next = node
-    n = node
-s = Solution()
-n = s.rotateRight(n0, 2)
-printLinkedList(n)
+# l = [1, 2]
+# n = ListNode(l[0])
+# n0 = n
+# for val in l[1:]:
+#     node = ListNode(val)
+#     n.next = node
+#     n = node
+# s = Solution()
+# n = s.rotateRight(n0, 2)
+# printLinkedList(n)

@@ -6,7 +6,8 @@
 
 // @lc code=start
 public class Solution {
-    // you need treat n as an unsigned value
+    // 1. You need treat n as an unsigned value
+    // 2. Works for 32-bit data only 
     public int reverseBits(int n) {
         int ans = 0;
         for (int i = 0; i < 32; ++i) {

@@ -32,22 +32,22 @@ class Solution:
         slow.next = fast    # don't forget the last one
         return dummy.next
 
-def printList(head: ListNode) -> None:
-    n = head
-    string = ''
-    while n.next:
-        string += str(n.val) + '->'
-        n = n.next
-    string += str(n.val)
-    print(string)
+# def printList(head: ListNode) -> None:
+#     n = head
+#     string = ''
+#     while n.next:
+#         string += str(n.val) + '->'
+#         n = n.next
+#     string += str(n.val)
+#     print(string)
 
 # @lc code=end
-l = [ListNode(1),ListNode(1),ListNode(3),ListNode(3),ListNode(4),ListNode(4),ListNode(5)]
-for i in range(len(l)-1):
-    n, nn = l[i:i+2]
-    n.next = nn
-printList(l[0])
+# l = [ListNode(1),ListNode(1),ListNode(3),ListNode(3),ListNode(4),ListNode(4),ListNode(5)]
+# for i in range(len(l)-1):
+#     n, nn = l[i:i+2]
+#     n.next = nn
+# printList(l[0])
 
-s = Solution()
-nd = s.deleteDuplicates(l[0])
-printList(nd)
+# s = Solution()
+# nd = s.deleteDuplicates(l[0])
+# printList(nd)

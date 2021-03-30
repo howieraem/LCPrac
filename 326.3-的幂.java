@@ -15,7 +15,10 @@ class Solution {
     //     return n == 1;
     // }
 
-    /** Solution for n <= Integer.MAX_VALUE only */
+    /** 
+     * Solution for n <= Integer.MAX_VALUE only,
+     * can be generalized to all prime numbers
+     */
     // MAX_CASE = 3 ^ floor(log3(2 ^ 31 - 1)) = 3 ^ 19
     private static final int MAX_CASE = 1162261467;  
     // (int) Math.pow(3, Math.floor(Math.log(Integer.MAX_VALUE) / Math.log(3)));
