@@ -3,7 +3,7 @@
 #
 # [90] 子集 II
 #
-from typing import List
+# from typing import List
 
 # @lc code=start
 class Solution:
@@ -25,5 +25,5 @@ class Solution:
         return res
 
 # @lc code=end
-s = Solution()
-print(s.subsetsWithDup([1,2,2,2]))
+# s = Solution()
+# print(s.subsetsWithDup([1,2,2,2]))
