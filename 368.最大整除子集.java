@@ -29,6 +29,7 @@ class Solution {
                 if (nums[i] % nums[j] == 0 && dp[i].size() < dp[j].size() + 1) {
                     // 以数字 S[i] 作为这个集合的最大数，只要判断是否存在以 S[k] 为最大数的集合，使最大数 S[k] 能被 S[i] 整除即可。
                     // dp[i] 代表以 nums[i] 为结尾的最大整除子集（该子集是排序了的）。
+                    // The reason for `dp[j].size() + 1` is that `nums[i]` has not been added to `dp[j]` yet. 
                     dp[i] = new ArrayList<>(dp[j]);
                     dp[i].add(nums[i]);
                 }
