@@ -32,7 +32,7 @@ class Solution:
 
 
 # @lc code=end
-s = Solution()
-n = [0,0,0,1,1,1,2,3]
-i = s.removeDuplicates(n)
-print(n[:i])
+# s = Solution()
+# n = [0,0,0,1,1,1,2,3]
+# i = s.removeDuplicates(n)
+# print(n[:i])
