@@ -22,13 +22,15 @@ class Solution {
 
         // len from 2 to n
         for (int len = 2; len <= n; ++len) {
+            // enumerate cases of s1
             for (int i = 0; i <= n - len; ++i) {
+                // enumerate cases of s2
                 for (int j = 0; j <= n - len; ++j) {
                     // split cases
                     for (int k = 1; k <= len - 1; ++k) {
                         if (
-                            (dp[i][j][k] && dp[i+k][j+k][len-k]) ||     // leaf nodes not swapped
-                            (dp[i][j+len-k][k] && dp[i+k][j][len-k])    // leaf nodes swapped
+                            (dp[i][j][k] && dp[i+k][j+k][len-k]) ||     // substrings not swapped
+                            (dp[i][j+len-k][k] && dp[i+k][j][len-k])    // substrings swapped
                         ) {
                             dp[i][j][len] = true;
                             break;
