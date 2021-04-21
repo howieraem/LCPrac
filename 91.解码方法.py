@@ -60,5 +60,5 @@ class Solution:
         return dp[1]
 
 # @lc code=end
-s = Solution()
-print(s.numDecodings('17'))
+# s = Solution()
+# print(s.numDecodings('17'))
