@@ -15,8 +15,8 @@ class Solution {
         // 为了更方便地找到最大的数，先对数组进行排序。
         int n = nums.length;
         if (n == 0)  return new ArrayList<>();
-
         Arrays.sort(nums);
+
         List<Integer>[] dp = new ArrayList[n];
         dp[0] = new ArrayList<>();
         dp[0].add(nums[0]);
