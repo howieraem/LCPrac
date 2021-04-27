@@ -1,3 +1,6 @@
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
 /*
  * @lc app=leetcode.cn id=1011 lang=java
  *
@@ -8,8 +11,8 @@
 class Solution {
     public int shipWithinDays(int[] weights, int D) {
         // 二分搜索，找最左边的目标值
-        int l = getMax(weights);        // mininum possible cap
-        int r = getSum(weights) + 1;    // maximum possible cap, add 1 to search for the leftmost item
+        int l = Arrays.stream(weights).min().getAsInt(); // getMax(weights), mininum cap required
+        int r = IntStream.of(weights).sum() + 1;    // getSum(weights) + 1, maximum possible cap, add 1 to search for the leftmost item
         while (l < r) {
             int mid = l + (r - l) / 2;
             if (canFinish(weights, D, mid)) {
@@ -33,21 +36,21 @@ class Solution {
         return false;
     }
 
-    private int getMax(int[] arr) {
-        int ans = Integer.MIN_VALUE;
-        for (int n : arr) {
-            ans = Math.max(ans, n);
-        }
-        return ans;
-    }
+    // private int getMax(int[] arr) {
+    //     int ans = Integer.MIN_VALUE;
+    //     for (int n : arr) {
+    //         ans = Math.max(ans, n);
+    //     }
+    //     return ans;
+    // }
 
-    private int getSum(int[] arr) {
-        int ans = 0;
-        for (int n : arr) {
-            ans += n;
-        }
-        return ans;
-    }
+    // private int getSum(int[] arr) {
+    //     int ans = 0;
+    //     for (int n : arr) {
+    //         ans += n;
+    //     }
+    //     return ans;
+    // }
 }
 // @lc code=end
 
