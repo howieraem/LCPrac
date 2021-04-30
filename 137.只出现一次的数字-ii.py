@@ -17,7 +17,7 @@ class Solution:
             - x&1 = x
         """
         seen_once = seen_twice = 0
-        
+
         for num in nums:
             # first appearance: 
             # add num to `seen_once`.
