@@ -49,5 +49,5 @@ class Solution:
     """
 
 # @lc code=end
-s = Solution()
-print(s.reverse(-123))
+# s = Solution()
+# print(s.reverse(-123))
