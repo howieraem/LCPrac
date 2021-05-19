@@ -1,5 +1,3 @@
-import jdk.javadoc.internal.doclets.formats.html.resources.standard;
-
 /*
  * @lc app=leetcode.cn id=13 lang=java
  *
@@ -11,9 +9,9 @@ class Solution {
     public int romanToInt(String s) {
         int sum = 0;
         int preNum = getValue(s.charAt(0));
-        for(int i = 1; i < s.length(); ++i) {
+        for (int i = 1; i < s.length(); ++i) {
             int num = getValue(s.charAt(i));
-            if(preNum < num) {
+            if (preNum < num) {
                 // preNum is 'I', Num is 'V' or 'X'; etc.
                 sum -= preNum;
             } else {
@@ -101,9 +99,9 @@ class Solution {
 
 // @lc code=end
 
-class Test {
-    public static void main(String[] args) {
-        Solution s = new Solution();
-        System.out.println(s.romanToInt("LVIII"));
-    }
-}
+// class Test {
+//     public static void main(String[] args) {
+//         Solution s = new Solution();
+//         System.out.println(s.romanToInt("LVIII"));
+//     }
+// }
