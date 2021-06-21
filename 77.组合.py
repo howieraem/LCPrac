@@ -26,5 +26,5 @@ class Solution:
             
 
 # @lc code=end
-s = Solution()
-print(s.combine(3, 2))
+# s = Solution()
+# print(s.combine(3, 2))

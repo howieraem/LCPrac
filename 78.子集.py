@@ -21,5 +21,5 @@ class Solution:
         return res
     
 # @lc code=end
-s = Solution()
-print(s.subsets([2, 1, 3]))
+# s = Solution()
+# print(s.subsets([2, 1, 3]))
