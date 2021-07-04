@@ -9,9 +9,11 @@ class Solution {
     public boolean validPalindrome(String s) {
         int l = 0, r = s.length() - 1;
         while (l < r && s.charAt(l) == s.charAt(r)) {
+            // skip the same characters on either side
             ++l;
             --r;
         }
+        // try skiping one character on either side and verify
         return isPalindrome(s, l, r - 1) || isPalindrome(s, l + 1, r);
     }
 

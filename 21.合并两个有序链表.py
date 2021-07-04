@@ -13,7 +13,6 @@
 
 class Solution:
     def mergeTwoLists(self, l1: ListNode, l2: ListNode) -> ListNode:
-        cur1, cur2 = l1, l2
         dummy = ListNode(None)
         prev = dummy
         while l1 and l2:
@@ -30,29 +29,29 @@ class Solution:
         
         return dummy.next
 
-def printList(head: ListNode) -> None:
-    if not head:
-        return
-    prev = head
-    string = ''
-    while prev.next:
-        string += str(prev.val) + '->'
-        prev = prev.next
-    string += str(prev.val)
-    print(string)
+# def printList(head: ListNode) -> None:
+#     if not head:
+#         return
+#     prev = head
+#     string = ''
+#     while prev.next:
+#         string += str(prev.val) + '->'
+#         prev = prev.next
+#     string += str(prev.val)
+#     print(string)
         
 # @lc code=end
-l1 = [7]
-l2 = [1, 4, 10]
+# l1 = [7]
+# l2 = [1, 4, 10]
 
-l1 = [ListNode(v) for v in l1]
-l2 = [ListNode(v) for v in l2]
-for i in range(len(l1)-1):
-    l1[i].next = l1[i+1]
-for i in range(len(l2)-1):
-    l2[i].next = l2[i+1]
-printList(l1[0])
-printList(l2[0])
+# l1 = [ListNode(v) for v in l1]
+# l2 = [ListNode(v) for v in l2]
+# for i in range(len(l1)-1):
+#     l1[i].next = l1[i+1]
+# for i in range(len(l2)-1):
+#     l2[i].next = l2[i+1]
+# printList(l1[0])
+# printList(l2[0])
 
-prev = Solution().mergeTwoLists(l1[0], l2[0])
-printList(prev)
+# prev = Solution().mergeTwoLists(l1[0], l2[0])
+# printList(prev)

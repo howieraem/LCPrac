@@ -45,9 +45,8 @@ class UF {
     public void union(int p, int q) {
         int rootP = find(p);
         int rootQ = find(q);
-        if (rootP == rootQ)
-            return;  // already connected
-        
+        if (rootP == rootQ)  return;  // already connected
+
         // 小树接到大树下面，使时间复杂度为O(logN)
         if (size[rootP] > size[rootQ]) {
             parent[rootQ] = rootP;
