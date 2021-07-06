@@ -21,7 +21,7 @@ class Solution {
         PriorityQueue<Map.Entry<String, Integer>> q = new PriorityQueue<>(
             k,
             (e1, e2) -> {
-                // sort by count and if equal count then by natural order
+                // sort by count and then by natural order
                 return e1.getValue() == e2.getValue() ? 
                     e2.getKey().compareTo(e1.getKey()) : e1.getValue() - e2.getValue();
             }
