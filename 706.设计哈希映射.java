@@ -6,10 +6,11 @@
 
 // @lc code=start
 class MyHashMap {
-    public class Node {
+    private static class Node {
         public int key;
         public int value;
         public Node next;
+
         public Node(int k, int v) {
             key = k;
             value = v;
