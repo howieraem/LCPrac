@@ -8,13 +8,13 @@
 class Solution {
     public int change(int amount, int[] coins) {
         // time O(N*amount), space O(amount)
-        int[] dp = new int[amount+1];
+        int[] dp = new int[amount + 1];
         dp[0] = 1;
 
         // 完全背包，即数组中的元素可重复使用
         for (int coin : coins) {
             for (int i = coin; i <= amount; ++i) {
-                dp[i] += dp[i-coin];
+                dp[i] += dp[i - coin];
             }
         }
         return dp[amount];
