@@ -1,4 +1,5 @@
-import java.util.LinkedList;
+import java.util.Deque;
+import java.util.ArrayDeque;
 
 /*
  * @lc app=leetcode.cn id=239 lang=java
@@ -8,10 +9,11 @@ import java.util.LinkedList;
 
 // @lc code=start
 class MonoQueue {
-    LinkedList<Integer> q;
+    // Order in q is from max to min
+    Deque<Integer> q;
 
     public MonoQueue() {
-        q = new LinkedList<>();
+        q = new ArrayDeque<>();
     }
 
     public void push(int n) {

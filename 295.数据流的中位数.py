@@ -20,23 +20,23 @@ class MedianFinder:
         """
         initialize your data structure here.
         """
-        self.max_heap = []  # 存储「前有序数组」
-        self.min_heap = []  # 存储「后有序数组」
+        self.heap_small = []  # 大根堆存储「前有序数组」
+        self.heap_large = []  # 小根堆存储「后有序数组」
         self.len = 0
 
     def addNum(self, num: int) -> None:
-        heapq.heappush(self.max_heap, -num)  # since python's heapq is min heap, need to negate the number to simulate max heap
-        max_heap_top = heapq.heappop(self.max_heap)
-        heapq.heappush(self.min_heap, -max_heap_top)
+        heapq.heappush(self.heap_small, -num)  # since python's heapq is min heap, need to negate the number to simulate max heap
+        heap_small_top = heapq.heappop(self.heap_small)
+        heapq.heappush(self.heap_large, -heap_small_top)
         self.len += 1
         if self.len & 1:    # if total size is odd, make the size of max heap larger 
-            min_heap_top = heapq.heappop(self.min_heap)
-            heapq.heappush(self.max_heap, -min_heap_top)
+            heap_large_top = heapq.heappop(self.heap_large)
+            heapq.heappush(self.heap_small, -heap_large_top)
 
     def findMedian(self) -> float:
         if self.len & 1:
-            return -self.max_heap[0]
-        return (-self.max_heap[0] + self.min_heap[0]) / 2.
+            return -self.heap_small[0]
+        return (-self.heap_small[0] + self.heap_large[0]) / 2.
 
 
 # Your MedianFinder object will be instantiated and called as such:

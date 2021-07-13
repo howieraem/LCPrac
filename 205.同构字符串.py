@@ -19,7 +19,8 @@ class Solution:
         return True
     '''
     def isIsomorphic(self, s: str, t: str) -> bool:
-        map_s = [0] * 128    # 128 is the number of ASCII characters
+        # 128 is the number of ASCII characters
+        map_s = [0] * 128
         map_t = [0] * 128
         for i in range(len(s)):     # given len(s) = len(t)
             cidx_s, cidx_t = ord(s[i]), ord(t[i])
