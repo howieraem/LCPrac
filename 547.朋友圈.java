@@ -10,15 +10,14 @@
  * 
  * Properties of UF:
  * 1. Node p is connected to itself;
- * 2. If p is connected to q, then q is connected to p.
+ * 2. If p -> q, then q -> p.
  * 3. If p -> q and q -> r, then p -> r.
  */
 class UF {
-    // 连通分量个数（如无任何连接时等于节点数）
+    // No. of connected components (if none connected this equals the number of nodes)
     private int count;
-    // 存储一棵树
+
     private int[] parent;
-    // 记录树的“重量”，用于平衡树高，降低复杂度至logN，防止产生链表
     private int[] size;
 
     /**
@@ -47,7 +46,7 @@ class UF {
         int rootQ = find(q);
         if (rootP == rootQ)  return;  // already connected
 
-        // 小树接到大树下面，使时间复杂度为O(logN)
+        // Re-balance height to avoid building a linked list
         if (size[rootP] > size[rootQ]) {
             parent[rootQ] = rootP;
             size[rootP] += size[rootQ];
@@ -66,9 +65,7 @@ class UF {
      * @return true if p and q are connected.
      */
     public boolean connected(int p, int q) {
-        int rootP = find(p);
-        int rootQ = find(q);
-        return rootP == rootQ;
+        return find(p) == find(q);
     }
 
     /**
@@ -79,8 +76,7 @@ class UF {
      */
     private int find(int x) {
         while (parent[x] != x) {
-            // 进行路径压缩，进一步降低find()和union()复杂度至O(1)，
-            // 动态调整使树高不超过3
+            // path compression
             parent[x] = parent[parent[x]];
             x = parent[x];
         }

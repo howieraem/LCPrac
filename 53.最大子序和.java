@@ -14,7 +14,9 @@ class Solution {
         int[] dp = new int[n];  
         dp[0] = nums[0];
         for (int i = 1; i < n; ++i) {
-            dp[i] = Math.max(nums[i], dp[i - 1] + nums[i]);
+            // Dicision: whether to include the current number in the subarray,
+            // or make a new subarray
+            dp[i] = Math.max(dp[i - 1] + nums[i], nums[i]);
         }
 
         // dp[-1] may not be the maximum.
