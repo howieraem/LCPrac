@@ -12,16 +12,17 @@ class Solution {
         char[] arr = s.toCharArray();
         Stack<Integer> stack = new Stack<>();
 
-        // 每匹配一对括号，就将括号内的字符串翻转
+        // Once a pair of parenthese is found, reverse the string in between
         for (int i = 0; i < arr.length; ++i) {
             if (arr[i] == '(') {
                 stack.push(i);
             } else if (arr[i] == ')') {
-                // 注意：翻转时不包括左右边界的括号符
+                // When reversing don't include the parethese
                 reverse(arr, stack.pop() + 1, i - 1);
             }
         }
 
+        // Iteratate through the reverted string skipping the parenthese
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < arr.length; ++i) {
             if (arr[i] != '(' && arr[i] != ')') {

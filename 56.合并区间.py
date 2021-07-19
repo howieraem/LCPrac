@@ -10,7 +10,7 @@ class Solution:
     def merge(self, intervals: List[List[int]]) -> List[List[int]]:
         if len(intervals) < 2:
             return intervals
-        intervals = sorted(intervals, key=lambda x: x[0])
+        intervals.sort(key=lambda x: x[0])
         res = []
         start, end = intervals[0]
         for left, right in intervals[1:]:
