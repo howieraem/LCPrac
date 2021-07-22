@@ -9,17 +9,27 @@ import java.util.Stack;
 // @lc code=start
 class Solution {
     public int[] nextGreaterElements(int[] nums) {
-        // use i % n to iterate circular array
         int n = nums.length;
         int[] res = new int[n];
-        Stack<Integer> s = new Stack<>();
-        for (int i = 2*n - 1; i >= 0; --i) {
+        Stack<Integer> stack = new Stack<>();
+        
+        // Circular find is required, so "copy" the array and paste to the right
+        // by doubling the max iterations and iterating backwards
+        for (int i = 2 * n - 1; i >= 0; --i) {
+            // Map index back to the range of original array.
+            // Each idx will be visited twice.
             int idx = i % n;
-            while (!s.empty() && s.peek() <= nums[idx]) {
-                s.pop();
+
+            // Mono stack: stack is ordered and stack top is minimum.
+            // When i < n, larger numbers of the "circular" part are
+            // already stored in the stack.
+            while (!stack.empty() && stack.peek() <= nums[idx]) {
+                stack.pop();
             }
-            res[idx] = s.empty() ? -1 : s.peek();
-            s.push(nums[idx]);
+            // If there is no next number greater than current number,
+            // the stack will be empty.
+            res[idx] = stack.empty() ? -1 : stack.peek();
+            stack.push(nums[idx]);
         }
         return res;
     }

@@ -58,6 +58,7 @@ class DoublyLinkedList {
 
 class LRUCache {
     private HashMap<Integer, Node> map;
+    // List head is least recent, tail is most recent
     private DoublyLinkedList cache;
     private int cap;
 
