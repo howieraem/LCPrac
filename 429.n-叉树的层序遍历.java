@@ -4,7 +4,7 @@
  * [429] N 叉树的层序遍历
  */
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.ArrayDeque;
 import java.util.List;
 import java.util.Queue;
 
@@ -48,7 +48,7 @@ class Solution {
     public List<List<Integer>> levelOrder(Node root) {
         List<List<Integer>> res = new ArrayList<>();
         if (root == null)  return res;
-        Queue<Node> q = new LinkedList<>();
+        Queue<Node> q = new ArrayDeque<>();
         q.add(root);
 
         while (!q.isEmpty()) {
@@ -58,8 +58,8 @@ class Solution {
                 Node cur = q.poll();
 
                 // Unlike binary tree node where node.left or node.right might be
-                // null, all children are valid nodes and thus no need to check 
-                // null here.
+                // null, all children in list are assumed valid nodes and thus 
+                // no need to check null here.
                 lvl.add(cur.val);
                 q.addAll(cur.children);
             }

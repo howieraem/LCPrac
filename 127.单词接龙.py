@@ -42,8 +42,8 @@ class Solution:
             return 0
         
 # @lc code=end
-b = 'hit'
-e = 'cog'
-wordList = ['hit', 'hot', 'dot', 'dog', 'lot', 'log', 'cog']
+# b = 'hit'
+# e = 'cog'
+# wordList = ['hit', 'hot', 'dot', 'dog', 'lot', 'log', 'cog']
 
-print(Solution().ladderLength(b, e, wordList))
+# print(Solution().ladderLength(b, e, wordList))

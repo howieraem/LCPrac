@@ -1,5 +1,5 @@
-// import java.util.HashMap;
-import java.util.LinkedHashMap;
+import java.util.HashMap;
+// import java.util.LinkedHashMap;
 
 /*
  * @lc app=leetcode.cn id=146 lang=java
@@ -8,7 +8,6 @@ import java.util.LinkedHashMap;
  */
 
 // @lc code=start
-/*
 class Node {
     public int k, v;
     public Node pre, nxt;
@@ -109,8 +108,9 @@ class LRUCache {
         map.remove(deleted.k);
     }
 }
-*/
 
+
+/*
 class LRUCache {
     LinkedHashMap<Integer, Integer> cache;
     int cap;
@@ -139,13 +139,14 @@ class LRUCache {
         cache.put(key, value);
     }
 
-    /** Ensures the key is the first one in the key set of hashmap. */
+    // Ensures the key is the first one in the key set of hashmap.
     private void makeRecent(int key) {
         int value = cache.get(key);
         cache.remove(key);
         cache.put(key, value);
     }
 }
+*/
 
 /**
  * Your LRUCache object will be instantiated and called as such:
