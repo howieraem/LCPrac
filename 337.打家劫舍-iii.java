@@ -1,13 +1,17 @@
 import java.util.Map;
-
-import javax.swing.tree.TreeNode;
-
 import java.util.HashMap;
 /*
  * @lc app=leetcode.cn id=337 lang=java
  *
  * [337] 打家劫舍 III
  */
+
+class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+    TreeNode(int x) { val = x; }
+}
 
 // @lc code=start
 /**

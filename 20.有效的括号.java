@@ -12,7 +12,7 @@ class Solution {
         final String open = "([{";
         final String close = ")]}";
         Stack<Character> buff = new Stack<>();
-        for (char ch: s.toCharArray()) {
+        for (char ch : s.toCharArray()) {
             if (open.indexOf(ch) != -1) {
                 buff.push(ch);
             } else if (close.indexOf(ch) != -1) {
