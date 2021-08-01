@@ -9,10 +9,12 @@ class Solution {
     public int findMin(int[] nums) {
         int left = 0, right = nums.length - 1;
         while (left < right) {
-            int mid = left + (right - left) / 2;
-            if (nums[mid] > nums[right]) {          
+            int mid = left + ((right - left) >> 1);
+            if (nums[mid] > nums[right]) {
+                // not sorted, shift the left boundary          
                 left = mid + 1;
-            } else {    // nums[mid] < nums[right], no repetition in nums                           
+            } else {
+                // nums[mid:right+1] is sorted without duplicates               
                 right = mid;
             }
         }
