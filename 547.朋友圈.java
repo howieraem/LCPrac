@@ -46,7 +46,8 @@ class UF {
         int rootQ = find(q);
         if (rootP == rootQ)  return;  // already connected
 
-        // Re-balance height to avoid building a linked list
+        // Re-balance height by connecting the smaller graph to the larger graph,
+        // to avoid building a linked list
         if (size[rootP] > size[rootQ]) {
             parent[rootQ] = rootP;
             size[rootP] += size[rootQ];

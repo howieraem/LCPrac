@@ -8,36 +8,44 @@ import java.util.*;
 // @lc code=start
 class Solution {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
-        // actual question: is `prerequisites` a DAG (directed graph without loop)?
-        // approach: use topological sort.
-        int[] inDegrees = new int[numCourses];
-        List<List<Integer>> adjacency = new ArrayList<>();
-        Queue<Integer> q = new LinkedList<>();
-        for (int i=0; i<numCourses; ++i) {
-            adjacency.add(new ArrayList<>());
-        }
+        // Actual question: Do prerequisites form a DAG (Directed Acyclic Graph)?
+        // Approach: use topological sort. 
+        // Topological sort does not exist if there exist loop(s).
 
         // Get the in-degree and adjacency of every course.
-        for (int[] edges: prerequisites) {
+        int[] inDegrees = new int[numCourses];
+        List<List<Integer>> adjacency = new ArrayList<>();
+        for (int i = 0; i < numCourses; ++i) {
+            adjacency.add(new ArrayList<>());
+        }
+        for (int[] edges : prerequisites) {
             inDegrees[edges[0]]++;
             adjacency.get(edges[1]).add(edges[0]);
         }
 
-        // Get all the courses with zero in-degree.
-        for (int i=0; i<inDegrees.length; ++i) {
+        // Separate all the courses (nodes) with zero in-degree.
+        Queue<Integer> q = new ArrayDeque<>();
+        for (int i = 0; i < numCourses; ++i) {
             if (inDegrees[i] == 0)  q.add(i);
         }
 
         // BFS topological sort
-        while (q.size() != 0) {
-            int pre = q.poll();  // pop left
-            numCourses--;
-            for (int cur: adjacency.get(pre)) {
+        while (!q.isEmpty()) {
+            int pre = q.poll();
+            --numCourses;
+
+            // If the topological sort result is needed, 
+            // add `pre` to the result collection here
+
+            for (int cur : adjacency.get(pre)) {
+                // Decrement the in-degree of nodes to which the sperated node points.
+                // If this causes the in-degree of this pointed node to be 0, 
+                // enqueue it as well.
                 if (--inDegrees[cur] == 0)  q.add(cur);
             }
         }
 
-        return numCourses == 0;
+        return numCourses == 0;     // Whether all nodes are visited in topological sort process
     }
 }
 // @lc code=end
