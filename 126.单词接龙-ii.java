@@ -86,7 +86,9 @@ class Solution {
             } else { // 该点不为终点 继续搜索
                 for (int i = 0; i < edges[last].size(); ++i) {
                     int next = edges[last].get(i);
-                    // 此处<=目的在于把代价相同的不同路径全部保留下来
+                    // 检查next是否已被访问
+                    // cost[next]等于Integer.MAX_VALUE时表示next尚未被访问。
+                    // 此处`<=`目的在于把代价相同的不同路径全部保留下来。
                     if (cost[last] + 1 <= cost[next]) {
                         cost[next] = cost[last] + 1;
                         // 把next加入路径中
