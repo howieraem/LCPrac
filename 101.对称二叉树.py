@@ -24,7 +24,7 @@ class Solution:
                 # base symmetric case
                 return True
             if (not left or not right) or left.val != right.val:
-                # trim asymmetric case branch
+                # prune asymmetric case branch
                 return False
             return dfs(left.left, right.right) and dfs(left.right, right.left)  # note the symmetry here
         return dfs(root.left, root.right)

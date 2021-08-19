@@ -38,8 +38,8 @@ class Solution:
                 row[i][num] = col[j][num] = subgrid[k][num] = True
                 if solve(n+1):
                     return True
-                # failed to find solution for current number at current step,
-                # trim branch
+                # Failed to find solution for current number at current step,
+                # prune branch
                 row[i][num] = col[j][num] = subgrid[k][num] = False
             board[i][j] = '.'
             return False

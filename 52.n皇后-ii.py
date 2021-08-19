@@ -15,7 +15,7 @@ class Solution:
             记录行、列、正对角、负对角，不能有两个以上的棋子。
             如何判断是否在对角上呢？正对角就是相加之和一样的，负对角就是相减之差一样的。
             """
-            # while iterating on the rows, trim branches with invalid columns or diagonals
+            # while iterating on the rows, prune branches with invalid columns or diagonals
             if i == n:
                 nonlocal count
                 count += 1

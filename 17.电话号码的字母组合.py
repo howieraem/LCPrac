@@ -42,5 +42,5 @@ class Solution:
                 Solution.backtrack(res, combination+letter, next_d[1:])
 
 # @lc code=end
-s = Solution()
-print(s.letterCombinations("23"))
+# s = Solution()
+# print(s.letterCombinations("23"))

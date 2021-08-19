@@ -16,7 +16,7 @@ class Solution {
             for (int j = 0; j < cols; ++j) {
                 if (matrix[i][j] == '1') {
                     if (i == 0 || j == 0) {
-                        // At boundary, side length of a square can only be one
+                        // At left or top boundary, side length of a square can only be one
                         dp[i][j] = 1;
                     } else {
                         // Otherwise, current side length is subject to three adjacent matrix entries.
