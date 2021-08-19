@@ -32,5 +32,5 @@ class Solution:
     """
 
 # @lc code=end
-s = Solution()
-print(s.uniquePaths(3, 2))
+# s = Solution()
+# print(s.uniquePaths(3, 2))

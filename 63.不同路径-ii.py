@@ -13,8 +13,8 @@ class Solution:
         m, n = len(obstacleGrid), len(obstacleGrid[0])
         dp = [[0]*n for _ in range(m)]
         dp[0][0] = 1
-        for i in range(0, m):
-            for j in range(0, n):
+        for i in range(m):
+            for j in range(n):
                 if obstacleGrid[i][j]:
                     continue
                 if i or j:  # not at origin
@@ -24,5 +24,5 @@ class Solution:
         return dp[-1][-1]
 
 # @lc code=end
-s = Solution()
-print(s.uniquePathsWithObstacles([[0, 0], [1, 1], [0, 0]]))
+# s = Solution()
+# print(s.uniquePathsWithObstacles([[0, 0], [1, 1], [0, 0]]))

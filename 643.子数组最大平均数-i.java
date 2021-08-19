@@ -13,7 +13,7 @@ class Solution {
         }
         double ans = sum;
         for (int i = k; i < nums.length; ++i) {
-            sum += nums[i] - nums[i-k];
+            sum += nums[i] - nums[i - k];
             ans = Math.max(ans, sum);
         }
         return ans / k;

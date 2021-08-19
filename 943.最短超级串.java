@@ -46,8 +46,9 @@ class Solution {
                 if ((s & (1 << j)) == 0)  continue;     // seen
                 int ps = s & ~(1 << j);     // mark seen
                 for (int i = 0; i < n; ++i) {
-                    if (dp[ps][i] + g[i][j] < dp[s][j]) {
-                        dp[s][j] = dp[ps][i] + g[i][j];
+                    int newCost = dp[ps][i] + g[i][j];
+                    if (newCost < dp[s][j]) {
+                        dp[s][j] = newCost;
                         parents[s][j] = i;
                     }
                 }
