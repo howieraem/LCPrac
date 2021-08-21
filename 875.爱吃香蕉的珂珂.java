@@ -1,3 +1,4 @@
+import java.util.Arrays;
 /*
  * @lc app=leetcode.cn id=875 lang=java
  *
@@ -8,12 +9,14 @@
 class Solution {
     public int minEatingSpeed(int[] piles, int H) {
         int l = 1, r = getMax(piles) + 1;   // min and max speed
+
+        // find lower bound (min speed)
         while (l < r) {
-            int mid = l + (r - l) / 2;
-            if (canFinish(piles, mid, H)) {
-                r = mid;
+            int m = l + ((r - l) >> 1);
+            if (canFinish(piles, m, H)) {
+                r = m;
             } else {
-                l = mid + 1;
+                l = m + 1;
             }
         }
         return l;
@@ -29,15 +32,18 @@ class Solution {
 
     /** Returns how long it takes to consume n bananas at given speed. */
     private int getDuration(int n, int speed) {
-        return (n / speed) + ((n % speed > 0) ? 1 : 0);
+        // return Math.ceil((double) n / speed);
+        // return (n / speed) + ((n % speed > 0) ? 1 : 0);
+        return (n + speed - 1) / speed;  
     }
 
     private int getMax(int[] arr) {
-        int ans = Integer.MIN_VALUE;
-        for (int n : arr) {
-            ans = Math.max(ans, n);
-        }
-        return ans;
+        // int ans = Integer.MIN_VALUE;
+        // for (int n : arr) {
+        //     ans = Math.max(ans, n);
+        // }
+        // return ans;
+        return Arrays.stream(arr).max().getAsInt();
     }
 }
 // @lc code=end

@@ -77,7 +77,7 @@ class TimeMap {
         if (timestamp >= values.get(r).t)  return values.get(r).v;
 
         // Find the maximum timestamp <= the given timestamp,
-        // so search for the right boundary
+        // so search for the right (upper) boundary
         while (l <= r) {
             int m = l + ((r - l) >> 1);
             int mTime = values.get(m).t;

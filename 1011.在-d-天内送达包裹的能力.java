@@ -1,6 +1,3 @@
-import java.util.Arrays;
-import java.util.stream.IntStream;
-
 /*
  * @lc app=leetcode.cn id=1011 lang=java
  *
@@ -10,25 +7,29 @@ import java.util.stream.IntStream;
 // @lc code=start
 class Solution {
     public int shipWithinDays(int[] weights, int D) {
-        // 二分搜索，找最左边的目标值
-        int l = Arrays.stream(weights).min().getAsInt(); // getMax(weights), mininum cap required
-        int r = IntStream.of(weights).sum() + 1;    // getSum(weights) + 1, maximum possible cap, add 1 to search for the leftmost item
+        int min = Integer.MAX_VALUE, sum = 0;
+        for (int w : weights) {
+            min = Math.min(min, w);
+            sum += w;
+        }
+        int l = min, r = sum + 1;
+        // Find lower bound (min. capacity required)
         while (l < r) {
-            int mid = l + (r - l) / 2;
-            if (canFinish(weights, D, mid)) {
-                r = mid;
+            int m = l + ((r - l) >> 1);
+            if (canFinish(weights, D, m)) {
+                r = m;
             } else {
-                l = mid + 1;
+                l = m + 1;
             }
         }
         return l;
     }
 
-    private boolean canFinish(int[] weights, int D, int cap) {
+    private boolean canFinish(int[] weights, int D, int maxCap) {
         int i = 0;
         for (int day = 0; day < D; ++day) {
-            int maxCap = cap;
-            while ((maxCap -= weights[i]) >= 0) {
+            int cap = maxCap;
+            while ((cap -= weights[i]) >= 0) {
                 ++i;
                 if (i == weights.length)  return true;
             }
