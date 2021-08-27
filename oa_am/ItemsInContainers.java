@@ -1,6 +1,6 @@
 import java.util.Arrays;
 import java.util.TreeMap;
- 
+
 public class ItemsInContainers {
     // Items in Containers
     // <a href="https://link.1point3acres.com/?url=https%3A%2F%2Fwww.amazon.com%2F" target="_blank" class="relatedlink">Amazon</a> would like to know how much inventory exists in their closed inventory compartments. Given a string s consisting of items as and closed compartments as an open and close i', an array of starting indices startIndices, and an array of ending indices endIndices, determine the number of items in closed compartments within the substring between the two indices, inclusive.

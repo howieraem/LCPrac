@@ -27,8 +27,8 @@ class ExamRoom {
         pq = new TreeSet<>((a, b) -> {
             // sort segments by length
             int distA = dist(a), distB = dist(b);
-            if (distA == distB)  return b[0] - a[0];    // for allocating student to the left most possible seat
-            return distA - distB;
+            // Allocate student to the left most possible seat if distances the same
+            return distA == distB ? b[0] - a[0] : distA - distB;
         });
         // Add a dummy segment, like in a custom linked list,
         // such that when there are less than 3 students,
@@ -43,7 +43,7 @@ class ExamRoom {
         int seat;
         if (p == -1)  seat = 0;
         else if (q == n)  seat = n - 1;
-        else  seat = p + (q - p) / 2;   // avoid overflow, equivalent to (p + q) / 2
+        else  seat = p + ((q - p) >> 1);   // avoid overflow, equivalent to (p + q) / 2
 
         removeSegment(longest);
         addSegment(new int[] {p, seat});    // new left segment
@@ -75,7 +75,7 @@ class ExamRoom {
         int p = seg[0], q = seg[1];
         if (p == -1)  return q;
         if (q == n)  return n - 1 - p;
-        return (q - p) / 2;
+        return (q - p) >> 1;
     }
 }
 

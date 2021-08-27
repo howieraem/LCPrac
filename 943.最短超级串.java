@@ -13,7 +13,7 @@ class Solution {
         // Build the cost graph.
         // g[i][j]: the cost of appending words[j] after words[i], i.e. the length of trailing substring of words[j] 
         // that do not overlap with the trailing substring of words[i], which equals the length of words[j] 
-        // subtracted by the number of overlapping chars between trailing chars of words[i] and leading 
+        // minus the number of overlapping chars between trailing chars of words[i] and leading 
         // chars of words[j].
         // The objective is to find the shortest path (min. cost) to visit each node exactly once.
         int[][] g = new int[n][n];

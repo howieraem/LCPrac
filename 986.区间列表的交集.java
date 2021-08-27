@@ -17,42 +17,47 @@ class Solution {
         while (i < n1 && j < n2) {
             int start1 = firstList[i][0], end1 = firstList[i][1], 
                 start2 = secondList[j][0], end2 = secondList[j][1];
-            if (start1 > end2) {
-                ++j;
-                continue;
-            }
-            if (start2 > end1) {
+            // if (start1 > end2) {
+            //     ++j;
+            //     continue;
+            // }
+            // if (start2 > end1) {
+            //     ++i;
+            //     continue;
+            // }
+            // if (start1 == start2 && end1 == end2) {
+            //     res.add(new int[]{start1, end1});
+            //     ++i;
+            //     ++j;
+            // } else if (start1 <= end2 && start1 >= start2) {
+            //     if (end1 > end2) {
+            //         res.add(new int[]{start1, end2});
+            //         ++j;
+            //     } else {
+            //         res.add(new int[]{start1, end1});
+            //         ++i;
+            //     }
+            // } else if (start2 <= end1 && start2 >= start1) {
+            //     if (end2 > end1) {
+            //         res.add(new int[]{start2, end1});
+            //         ++i;
+            //     } else {
+            //         res.add(new int[]{start2, end2});
+            //         ++j;
+            //     }
+            // }
+            int start = Math.max(start1, start2), end;  // end = min(end1, end2);
+            if (end1 < end2) {
+                end = end1;
                 ++i;
-                continue;
-            }
-            if (start1 == start2 && end1 == end2) {
-                res.add(new int[]{start1, end1});
-                ++i;
+            } else {
+                end = end2;
                 ++j;
-            } else if (start1 <= end2 && start1 >= start2) {
-                if (end1 > end2) {
-                    res.add(new int[]{start1, end2});
-                    ++j;
-                } else {
-                    res.add(new int[]{start1, end1});
-                    ++i;
-                }
-            } else if (start2 <= end1 && start2 >= start1) {
-                if (end2 > end1) {
-                    res.add(new int[]{start2, end1});
-                    ++i;
-                } else {
-                    res.add(new int[]{start2, end2});
-                    ++j;
-                }
             }
+            if (start <= end)  res.add(new int[]{start, end});
         }
         
-        int[][] ret = new int[res.size()][2];
-        for (int idx = 0; idx < res.size(); ++idx) {
-            ret[idx] = res.get(idx);
-        }
-        return ret;
+        return res.toArray(new int[res.size()][]);
     }
 }
 // @lc code=end
