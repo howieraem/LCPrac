@@ -42,9 +42,9 @@ class Trie {
     /** Inserts a word into the trie. */
     public void insert(String word) {
         TrieNode tmp = root;
-        // for (char chr: word.toCharArray()) {
-        for (int i = 0; i < word.length(); ++i) {
-            char chr = word.charAt(i);
+        for (char chr : word.toCharArray()) {
+        // for (int i = 0; i < word.length(); ++i) {
+            // char chr = word.charAt(i);
             int chrIdx = chr - 'a';
             if (tmp.get(chrIdx) == null) {
                 tmp.put(chrIdx, new TrieNode());
@@ -57,8 +57,9 @@ class Trie {
     /** Returns if the word is in the trie. */
     public boolean search(String word) {
         TrieNode tmp = root;
-        for (int i = 0; i < word.length(); ++i) {
-            char cur = word.charAt(i);
+        for (char cur : word.toCharArray()) {
+        // for (int i = 0; i < word.length(); ++i) {
+            // char cur = word.charAt(i);
             int chrIdx = cur - 'a';
             if (tmp.get(chrIdx) != null) {
                 tmp = tmp.get(chrIdx);
@@ -72,8 +73,9 @@ class Trie {
     /** Returns if there is any word in the trie that starts with the given prefix. */
     public boolean startsWith(String prefix) {
         TrieNode tmp = root;
-        for (int i = 0; i < prefix.length(); ++i) {
-            char cur = prefix.charAt(i);
+        for (char cur : prefix.toCharArray()) {
+        // for (int i = 0; i < prefix.length(); ++i) {
+            // char cur = prefix.charAt(i);
             int chrIdx = cur - 'a';
             if (tmp.get(chrIdx) != null) {
                 tmp = tmp.get(chrIdx);
