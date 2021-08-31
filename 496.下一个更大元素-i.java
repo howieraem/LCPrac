@@ -1,5 +1,4 @@
-import java.util.HashMap;
-import java.util.Stack;
+import java.util.*;
 
 /*
  * @lc app=leetcode.cn id=496 lang=java
@@ -12,7 +11,7 @@ class Solution {
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {
         int[] res = new int[nums1.length];
         Stack<Integer> s = new Stack<>();
-        HashMap<Integer, Integer> map = new HashMap<>();
+        Map<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < nums2.length; ++i) {
             while (!s.empty() && s.peek() < nums2[i]) {
                 map.put(s.pop(), nums2[i]);

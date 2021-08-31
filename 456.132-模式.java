@@ -3,7 +3,6 @@
  *
  * [456] 132模式
  */
-import java.util.Arrays;
 import java.util.Stack;
 
 // @lc code=start
@@ -13,7 +12,7 @@ class Solution {
         int n = nums.length;
         Stack<Integer> s = new Stack<>();
         int numK = Integer.MIN_VALUE;
-        for (int i = n - 1; i >=0; --i) {
+        for (int i = n - 1; i >= 0; --i) {
             if (nums[i] < numK)  return true;   // numK is the smallest in a non-empty mono stack
             while (!s.isEmpty() && s.peek() < nums[i]) {
                 // mono stack

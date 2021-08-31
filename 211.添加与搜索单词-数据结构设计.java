@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 /*
  * @lc app=leetcode.cn id=211 lang=java
  *
@@ -32,7 +30,7 @@ class WordDictionary {
         char[] arr = word.toCharArray();
         TrieNode cur = root;
         for (int i = 0; i < arr.length; ++i) {
-            int cIdx = (int) arr[i] - 'a';
+            int cIdx = arr[i] - 'a';
             if (cur.children[cIdx] == null) {
                 cur.children[cIdx] = new TrieNode();
             }
@@ -46,19 +44,19 @@ class WordDictionary {
         return helper(word, root);
     }
 
-    private boolean helper(String word, TrieNode root) {
+    private static boolean helper(String word, TrieNode root) {
         char[] arr = word.toCharArray();
         TrieNode cur = root;
         for (int i = 0; i < arr.length; ++i) {
             if (arr[i] == '.') {
                 for (int j = 0; j < 26; ++j) {
-                    if (cur.children[j] != null && helper(word.substring(i+1), cur.children[j])) {
+                    if (cur.children[j] != null && helper(word.substring(i + 1), cur.children[j])) {
                         return true;
                     }
                 }
                 return false;
             }
-            int cIdx = (int) arr[i] - 'a';
+            int cIdx = arr[i] - 'a';
             if (cur.children[cIdx] == null) {
                 return false;
             }
