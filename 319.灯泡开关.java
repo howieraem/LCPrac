@@ -17,7 +17,7 @@ class Solution {
         // 其次，P = A * A，这种情况对于P来说最多只能出现1次，而这种情况只可能出现在完全平方数中。
         // 所以对于正整数而言，只有完全平方数的因数的个数是奇数个。
         // 综上所述，所以每个完全平方数就是答案。
-        return (int)Math.sqrt(n);
+        return (int) Math.sqrt(n);
     }
 }
 // @lc code=end

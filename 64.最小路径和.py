@@ -21,5 +21,5 @@ class Solution:
         return grid[-1][-1]
 
 # @lc code=end
-s = Solution()
-print(s.minPathSum([[1, 1]]))
+# s = Solution()
+# print(s.minPathSum([[1, 1]]))

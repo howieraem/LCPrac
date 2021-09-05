@@ -10,11 +10,8 @@ class Solution:
         cur_sum = 0
         ans = nums[0]
         for num in nums:
-            cur_sum = cur_sum+num if cur_sum > 0 else num
+            cur_sum = max(cur_sum + num, num)
             ans = max(ans, cur_sum)
         return ans
 
-
-
 # @lc code=end
-
