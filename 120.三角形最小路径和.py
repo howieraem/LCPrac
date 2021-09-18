@@ -34,11 +34,11 @@ class Solution:
         return min(dp)
 
 # @lc code=end
-tr = [
-    [2],
-    [3, 4],
-    [6, 5, 7],
-    [4, 1, 8, 3],
-]
-s = Solution()
-print(s.minimumTotal(tr))
+# tr = [
+#     [2],
+#     [3, 4],
+#     [6, 5, 7],
+#     [4, 1, 8, 3],
+# ]
+# s = Solution()
+# print(s.minimumTotal(tr))
