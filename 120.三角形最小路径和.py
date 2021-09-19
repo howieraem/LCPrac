@@ -15,7 +15,7 @@ class Solution:
                         min(dp[i-1][j-1], dp[i-1][j])+tr[i][j], otherwise
 
         This can be simplified to
-            dp[j] = min(dp[j-1], dp[j]) + tr[i][j] with j enumerated from i to 0.
+            dp[j] = min(dp[j-1], dp[j]) + tr[i][j] with j enumerated reversely from i to 0.
 
         If possible, one may modify the original triangle inplace to avoid any extra space.
         """       
@@ -34,11 +34,11 @@ class Solution:
         return min(dp)
 
 # @lc code=end
-# tr = [
-#     [2],
-#     [3, 4],
-#     [6, 5, 7],
-#     [4, 1, 8, 3],
-# ]
-# s = Solution()
-# print(s.minimumTotal(tr))
+tr = [
+    [2],
+    [3, 4],
+    [6, 5, 7],
+    [4, 1, 8, 3],
+]
+s = Solution()
+print(s.minimumTotal(tr))
