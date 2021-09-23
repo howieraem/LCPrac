@@ -7,6 +7,7 @@
 
 // @lc code=start
 class Solution {
+    // Special case of Q1027.
     public int longestSubsequence(int[] arr, int difference) {
         // Map<Integer, Integer> dp = new HashMap<>();
 
