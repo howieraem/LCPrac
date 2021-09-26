@@ -19,9 +19,8 @@ class Solution:
         def backtrack(node, path, cur_sum):
             if not node:
                 return
-            val = node.val
-            cur_sum += val
-            path.append(val)
+            cur_sum += node.val
+            path.append(node.val)
             if not node.left and not node.right and cur_sum == sum:
                 res.append(path[:])     # append a copy of current `path`
             else:
