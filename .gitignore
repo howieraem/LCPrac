@@ -3,4 +3,4 @@
 draft.txt
 *.exe
 *.pdb
-
+.vscode
