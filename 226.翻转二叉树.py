@@ -16,7 +16,7 @@ class Solution:
     def invertTree(self, root: TreeNode) -> TreeNode:
         if not root:
             return
-        # preorder manner, invert subtrees before
+        # preorder manner, invert subtrees at the bottom first
         self.invertTree(root.left)
         self.invertTree(root.right)
         root.left, root.right = root.right, root.left

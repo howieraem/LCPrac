@@ -23,6 +23,8 @@ class Solution {
                             int[] post, int postL, int postR) {
         if (inL > inR)  return null;
 
+        // TODO can generate a value-index mapping for the inorder array beforehand
+        // to avoid looping in recursion
         int rootVal = post[postR], rootIdxIn = -1;
         for (int i = inL; i <= inR; ++i) {
             if (in[i] == rootVal) {

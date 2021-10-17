@@ -24,6 +24,9 @@ class Solution {
         if (preL > preR)  return null;
 
         int rootVal = pre[preL];
+
+        // TODO can generate a value-index mapping for the inorder array beforehand
+        // to avoid looping in recursion
         int rootIdxIn = 0;
         for (int i = inL; i <= inR; ++i) {
             if (in[i] == rootVal) {

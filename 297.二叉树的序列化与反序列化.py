@@ -3,6 +3,7 @@
 #
 # [297] 二叉树的序列化与反序列化
 #
+from collections import deque
 
 # @lc code=start
 # Definition for a binary tree node.
@@ -11,7 +12,6 @@
 #         self.val = x
 #         self.left = None
 #         self.right = None
-from collections import deque
 
 class Codec:
 
