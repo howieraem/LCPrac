@@ -22,6 +22,5 @@ class Solution:
                 end = right
         res.append([start, end])    # don't forget the last one
         return res
-                
 
 # @lc code=end
