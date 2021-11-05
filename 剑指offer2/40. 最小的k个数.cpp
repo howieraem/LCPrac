@@ -1,7 +1,10 @@
 class Solution {
 public:
     /** Solution based on quick sort/select. 
-      * Usually the fastest if array numbers are random. 
+      * Usually the fastest if array numbers 
+      * are random.
+      * 
+      * 直接通过快排切分排好第 k 小的数（下标为 k-1），那么它左边的数就是比它小的另外 k-1 个数 
       */
     vector<int> getLeastNumbers(vector<int>& arr, int k) {
         if (!k || !arr.size())  return {};  // empty vector (since C++11)
