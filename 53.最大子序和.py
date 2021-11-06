@@ -3,6 +3,7 @@
 #
 # [53] 最大子序和
 #
+from typing import List
 
 # @lc code=start
 class Solution:
