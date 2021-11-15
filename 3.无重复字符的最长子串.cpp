@@ -23,8 +23,9 @@ public:
                 ++l;
                 --window[d];
             }
-            res = max()
+            ans = max(ans, r - l);
         }
+        return ans;
     }
 };
 // @lc code=end
