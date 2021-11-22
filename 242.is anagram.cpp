@@ -13,12 +13,12 @@ public:
     bool isAnagram(string s, string t) {
         if (s.size() != t.size())  return false;
         int count[26] = {0};
-        for (int i=0; i<s.size(); ++i) {
-            count[s[i]-'a']++;
-            count[t[i]-'a']--;
+        for (int i = 0; i < s.size(); ++i) {
+            count[s[i] - 'a']++;
+            count[t[i] - 'a']--;
         }
-        for (auto num:count) {
-            if (num)  return false;
+        for (auto &num : count) {
+            if (num) return false;
         }
         return true;
     }
