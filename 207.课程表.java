@@ -18,9 +18,9 @@ class Solution {
         for (int i = 0; i < numCourses; ++i) {
             adjacency.add(new ArrayList<>());
         }
-        for (int[] edges : prerequisites) {
-            inDegrees[edges[0]]++;
-            adjacency.get(edges[1]).add(edges[0]);
+        for (int[] edge : prerequisites) {
+            inDegrees[edge[0]]++;
+            adjacency.get(edge[1]).add(edge[0]);
         }
 
         // Separate all the courses (nodes) with zero in-degree.
