@@ -1,5 +1,7 @@
 #include <bits/stdc++.h>
 
+using std::vector;
+
 class Solution {
 public:
     vector<double> dicesProbability(int n) {

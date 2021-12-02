@@ -1,5 +1,8 @@
 #include <bits/stdc++.h>
 
+using std::queue;
+using std::deque;
+
 class MaxQueue {
 public:
     MaxQueue() {}

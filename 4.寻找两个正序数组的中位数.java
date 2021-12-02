@@ -13,7 +13,7 @@ class Solution {
             nums2 = nums1;
             nums1 = tmp;
         }
-        int n1 = nums1.length, n2 = nums2.length;
+        final int n1 = nums1.length, n2 = nums2.length;
 
         /* See https://zxi.mytechroad.com/blog/wp-content/uploads/2017/11/4-ep102.png for explanation of maxLeft and minRight. */
         int l = 0, r = n1;

@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class FunWithAnagrams {
 
     public static boolean areAnagram(String w1, String w2) {
@@ -45,7 +47,7 @@ public class FunWithAnagrams {
         return ans;
     }
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws java.io.FileNotFoundException {
         // List<String> a = Arrays.asList("code", "doce", "ecod", "framer", "frame");
         List<String> a = Arrays.asList("code", "aaagmnrs", "anagrams", "doce");
         System.out.println(funWithAnagrams(a));
