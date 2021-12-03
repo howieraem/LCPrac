@@ -17,6 +17,7 @@ public:
         for (auto &edge : prerequisites) {
             ++inDeg[edge[0]];
             A[edge[1]].push_back(edge[0]);
+            // Directed, do not write `A[edge[0]].push_back(edge[1]);`
         }
 
         // Topological sort using BFS
