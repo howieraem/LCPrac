@@ -21,9 +21,9 @@ class Solution {
     public List<List<Integer>> kSmallestPairs(int[] nums1, int[] nums2, int k) {
         List<List<Integer>> res = new ArrayList<>();
         int m = nums1.length, n = nums2.length;
-        if (nums1 == null || nums2 == null || m == 0 || n == 0 || k <= 0) {
-            return res; 
-        }
+        // if (nums1 == null || nums2 == null || m == 0 || n == 0 || k <= 0) {
+        //     return res; 
+        // }
 
         PriorityQueue<Pair> pq = new PriorityQueue<>((p1, p2) -> nums1[p1.i] + nums2[p1.j] - nums1[p2.i] - nums2[p2.j]);
         for (int i = 0; i < m; ++i)  pq.add(new Pair(i, 0));

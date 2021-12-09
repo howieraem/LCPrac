@@ -28,12 +28,14 @@ public:
             }
         }
 
-        while (!q.empty()) {
-            int pre = q.front(); q.pop();
-            --numCourses;
+        while (q.size()) {
+            for (int sz = q.size(); sz > 0; --sz) {
+                int pre = q.front(); q.pop();
+                --numCourses;
 
-            for (const int &cur : A[pre]) {
-                if (!(--inDeg[cur]))  q.push(cur);
+                for (const int &cur : A[pre]) {
+                    if (!(--inDeg[cur]))  q.push(cur);
+                }
             }
         }
         // If not all courses (node) have been visited, then 
