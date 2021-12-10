@@ -3,6 +3,7 @@
 #
 # [102] 二叉树的层序遍历
 #
+from collections import deque
 
 # @lc code=start
 # Definition for a binary tree node.
@@ -15,12 +16,14 @@
 class Solution:
     def levelOrder(self, root: TreeNode) -> List[List[int]]:
         """Solution with BFS."""
-        queue, res = [root], []
+        queue = deque()
+        queue.append(root)
+        res = []
         while queue:
             level = []
             for _ in range(len(queue)):
                 # dequeue
-                cur = queue.pop(0)
+                cur = queue.popleft()
 
                 # node is null
                 if not cur:
