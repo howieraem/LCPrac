@@ -58,6 +58,11 @@
         "array": "cpp",
         "chrono": "cpp",
         "forward_list": "cpp",
-        "span": "cpp"
+        "span": "cpp",
+        "bitset": "cpp",
+        "random": "cpp",
+        "ranges": "cpp",
+        "regex": "cpp",
+        "valarray": "cpp"
     }
 }
