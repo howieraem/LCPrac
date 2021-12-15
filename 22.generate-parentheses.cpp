@@ -11,6 +11,8 @@ using std::vector;
 
 // @lc code=start
 class Solution {
+    // T: O(2 ^ (2n))
+    // S: O(n)
     static void backtrack(string path, int nLeft, int nRight, vector<string> &res) {
         if (nLeft > nRight) {
             // As below we are adding the left parethesis first, need to ensure 

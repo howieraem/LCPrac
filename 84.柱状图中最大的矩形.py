@@ -3,6 +3,7 @@
 #
 # [84] 柱状图中最大的矩形
 #
+from typing import List
 
 # @lc code=start
 class Solution:

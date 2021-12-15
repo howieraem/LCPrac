@@ -10,6 +10,8 @@ using std::stack;
 // @lc code=start
 class Solution {
 public:
+    // T: O(N)
+    // S: O(N)
     bool isValid(string s) {
         stack<char> stk;
         for (const auto &c : s) {

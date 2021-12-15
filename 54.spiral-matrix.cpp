@@ -10,6 +10,8 @@ using std::vector;
 // @lc code=start
 class Solution {
 public:
+    // T: O(m * n)
+    // S: O(1) ignoring the result container
     vector<int> spiralOrder(vector<vector<int>>& matrix) {
         const int m = matrix.size(), n = matrix[0].size();
         vector<int> res(m * n);

@@ -9,7 +9,7 @@ import java.util.*;
 class Solution {
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
         List<List<Integer>> res = new ArrayList<>();
-        Arrays.sort(candidates);
+        Arrays.sort(candidates);    // IMPORTANT
         backtrack(new ArrayList<>(), candidates, target, res);
         return res;
     }

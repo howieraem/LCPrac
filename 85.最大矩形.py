@@ -3,6 +3,7 @@
 #
 # [85] 最大矩形
 #
+from typing import List
 
 # @lc code=start
 class Solution:

@@ -7,6 +7,8 @@ import java.util.*;
 
 // @lc code=start
 class Solution {
+    // T: O(n * log(n)), n := len(intervals)
+    // S: O(1) ignoring the result container
     public int[][] merge(int[][] intervals) {
         final int n = intervals.length;
         if (n < 2)  return intervals;

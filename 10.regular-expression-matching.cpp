@@ -12,6 +12,8 @@ class Solution {
 public:
     /*
     // Solution with 2D array
+    // T: O(s*p)
+    // S: O(s*p)
     bool isMatch(string s, string p) {
         const int m = s.size(), n = p.size();
 
@@ -44,6 +46,8 @@ public:
     */
 
     // Solution with 1D array (states compressed)
+    // T: O(s*p)
+    // S: O(p)
     bool isMatch(string s, string p) {
         const int m = s.size(), n = p.size();
         bool dp[n + 1];

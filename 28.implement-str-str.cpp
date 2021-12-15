@@ -10,6 +10,8 @@ using std::string;
 // @lc code=start
 class Solution {
 public:
+    // T: O(n + m) worst case, m := len(needle), n := len(haystack)
+    // S: O(m)
     int strStr(string haystack, string needle) {
         const int m = needle.size();
         if (!m)  return 0;
@@ -22,6 +24,7 @@ public:
         while (i < m) {
             if (needle[i] == needle[j]) {
                 f[i++] = ++j;
+                // f[i] = j + 1; i++; j++;
             } else if (j > 0) {
                 j = f[j - 1];
             } else {

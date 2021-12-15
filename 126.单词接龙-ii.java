@@ -7,17 +7,11 @@ import java.util.*;
 
 // @lc code=start
 class Solution {
-    private Map<String, Integer> wordId; // 单词到id的映射
-    private ArrayList<String> idWord; // id到单词的映射
-    private ArrayList<Integer>[] edges; // 图的边
-
-    public Solution() {
-        wordId = new HashMap<>();
-        idWord = new ArrayList<>();
-    }
-
     @SuppressWarnings("unchecked")
     public List<List<String>> findLadders(String beginWord, String endWord, List<String> wordList) {
+        Map<String, Integer> wordId = new HashMap<>(); // 单词到id的映射
+        ArrayList<String> idWord = new ArrayList<>(); // id到单词的映射
+
         /** 构建图 */
         int id = 0;
         // 将wordList所有单词加入wordId中，相同的只保留一个，并为每一个单词分配一个id
@@ -38,7 +32,7 @@ class Solution {
         }
 
         // 初始化存边用的数组
-        edges = new ArrayList[idWord.size()];
+        ArrayList<Integer>[] edges = new ArrayList[idWord.size()];
         for (int i = 0; i < idWord.size(); ++i) {
             edges[i] = new ArrayList<>();
         }

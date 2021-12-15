@@ -12,11 +12,13 @@ using std::min;
 // @lc code=start
 class Solution {
 public:
+    // T: O(min(log(n1, n2)))
+    // S: O(1)
     double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
         if (nums1.size() > nums2.size()) { 
             return findMedianSortedArrays(nums2, nums1);
         }
-        
+
         const int n1 = nums1.size(), n2 = nums2.size(), k = (n1 + n2 + 1) >> 1;
         int l = 0, r = n1;
         while (l < r) {
