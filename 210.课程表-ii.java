@@ -8,6 +8,8 @@ import java.util.*;
 
 // @lc code=start
 class Solution {
+    // T: O(V+E), V := the number of nodes, E := the number of edges
+    // S: O(V)
     public int[] findOrder(int numCourses, int[][] prerequisites) {
         // Modified from Q207. The difference here is that 
         // the topological sort result is required.

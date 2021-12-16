@@ -3,9 +3,9 @@
  *
  * [146] LRU Cache
  */
-#include <bits/stdc++.h>
+#include <unordered_map>
 
-using namespace std;
+using std::unordered_map;
 
 // @lc code=start
 /*
@@ -54,10 +54,12 @@ struct Node {
     Node(int _k, int _v) : k(_k), v(_v), pre(nullptr), nxt(nullptr) {}
 };
 
+// T: get and put are both O(1)
+// S: O(n), n := the number of elements
 class LRUCache {
     Node *head, *tail;
     int cap;
-    unordered_map<int, Node*> mp;
+    unordered_map<int, Node*> mp;   // maps key value to pointer to Node
 
     void addToHead(Node* node) {
         node->pre = head;

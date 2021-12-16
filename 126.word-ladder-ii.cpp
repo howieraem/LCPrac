@@ -42,6 +42,8 @@ public:
                         } else {
                             q.push(new_path);
                         }
+                        // Cannot erase `tmp` from `ws` here because
+                        // we need all the shortest paths
                         lvlVis.insert(tmp);
                     }
                 }
