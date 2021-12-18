@@ -9,14 +9,11 @@ class NumMatrix {
     private int[][] sums;
 
     public NumMatrix(int[][] matrix) {
-        int rows = matrix.length;
-        if (rows > 0) {
-            int cols = matrix[0].length;
-            sums = new int[rows+1][cols+1];
-            for (int i = 0; i < rows; ++i) {
-                for (int j = 0; j < cols; ++j) {
-                    sums[i+1][j+1] = sums[i+1][j] + sums[i][j+1] - sums[i][j] + matrix[i][j];
-                }
+        final int rows = matrix.length, cols = matrix[0].length;
+        sums = new int[rows+1][cols+1];
+        for (int i = 0; i < rows; ++i) {
+            for (int j = 0; j < cols; ++j) {
+                sums[i+1][j+1] = sums[i+1][j] + sums[i][j+1] - sums[i][j] + matrix[i][j];
             }
         }
     }

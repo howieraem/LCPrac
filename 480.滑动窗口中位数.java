@@ -17,7 +17,8 @@ class MedianFinder {
         isKOdd = ((k & 1) == 1);
 
         // min heap to store the larger half of the sliding window
-        large = new PriorityQueue<>((n1, n2) -> n1.compareTo(n2));
+        // large = new PriorityQueue<>((n1, n2) -> n1.compareTo(n2));
+        large = new PriorityQueue<>();  // min heap by default in Java
 
         // max heap to store the smaller half of the sliding window
         small = new PriorityQueue<>((n1, n2) -> n2.compareTo(n1));

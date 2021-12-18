@@ -3,7 +3,6 @@
 #
 # [347] 前 K 个高频元素
 #
-import heapq
 
 # @lc code=start
 class Solution:
@@ -17,9 +16,9 @@ class Solution:
                 hashmap[num] += 1
 
         # bucket sort
-        tmp = [[] for _ in range(len(nums)+1)]
+        tmp = [[] for _ in range(len(nums))]
         for num, count in hashmap.items():
-            tmp[count].append(num)
+            tmp[count - 1].append(num)
         n, res = 0, []
         for i in range(len(tmp)-1, -1, -1):
             if n == k:
