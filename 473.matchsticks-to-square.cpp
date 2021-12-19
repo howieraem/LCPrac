@@ -14,7 +14,7 @@ class Solution {
     static const int N = 4;
 
     // T: O(N ^ n), N := the number of sides, n := len(matchsticks)
-    // S: O(1)
+    // S: O(N)
     bool backtrack(vector<int> &sides, const vector<int> &matches, int idx, int target) {
         if (idx == matches.size()) {
             // All sides must have the same length.

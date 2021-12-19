@@ -19,6 +19,8 @@ public:
      * sort them using the default comparison. 
      * The first representation in this order is then the canonical one.
      */
+    // T: O(m * n * log(m * n))
+    // S: O(m * n)
     int numDistinctIslands2(vector<vector<int>>& grid) {
         set<vector<pair<int, int>>> set;    // using unordered_set will cause compile error
         for (int i = 0; i < grid.size(); ++i) {
@@ -46,7 +48,7 @@ private:
         dfs(grid, i, j + 1, coord);
     }
 
-    vector<pair<int, int>> norm(vector<pair<int, int>> v) {
+    vector<pair<int, int>> norm(const vector<pair<int, int>> &v) {
         // compute rotations/reflections, 8 variants
         vector<vector<pair<int, int>>> s(8);
         for (auto &p : v) {
@@ -61,10 +63,12 @@ private:
             s[7].push_back({y, x});
         }
 
-        // sort
+        // sort each variant
         for (auto &l : s) {
             sort(l.begin(), l.end());
         }
+
+        // for each variant, make the first point origin and shift other points
         for (auto &l : s) {
             for (int i = 1; i < v.size(); ++i) {
                 l[i] = {l[i].first - l[0].first, l[i].second - l[0].second};
@@ -72,7 +76,7 @@ private:
             l[0] = {0, 0};
         }
         sort(s.begin(), s.end());
-        return s[0];
+        return s[0];    // normalized form
     }
 };
 // @lc code=end

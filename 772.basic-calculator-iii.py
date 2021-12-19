@@ -7,6 +7,8 @@ from collections import deque
 
 # @lc code=start
 class Solution:
+    # T: O(n)
+    # S: O(n)
     def calculate(self, s: str) -> int:
         return self.helper(deque(s))
 

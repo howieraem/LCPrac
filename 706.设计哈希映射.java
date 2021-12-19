@@ -19,7 +19,7 @@ class MyHashMap {
     }
 
     private Node[] data;
-    private static final int SZ = 1000;     // around 10 nodes per bucket
+    private static final int SZ = 1000;     // at most 10000 operations, so around 10 nodes per bucket
 
     /** Initialize your data structure here. */
     public MyHashMap() {

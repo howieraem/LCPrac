@@ -11,8 +11,6 @@ import java.util.HashMap;
 
 // @lc code=start
 class UF {
-    // 连通分量个数（如无任何连接时等于节点数）
-    private int count;
     // 存储一棵树
     private int[] parent;
     // 记录树的“重量”，用于平衡树高，降低复杂度至logN，防止产生链表
@@ -24,7 +22,6 @@ class UF {
      * @param n Number of graph nodes.
      */
     public UF(int n) {
-        count = n;
         parent = new int[n];
         size = new int[n];
         for (int i = 0; i < n; ++i) {
@@ -52,20 +49,6 @@ class UF {
             parent[rootP] = rootQ;
             size[rootQ] += size[rootP];
         }
-        --count;
-    }
-
-    /**
-     * Determines whether two nodes in graph are connected.
-     * 
-     * @param p An integer less than the graph capacity n.
-     * @param q An integer less than the graph capacity n.
-     * @return true if p and q are connected.
-     */
-    public boolean connected(int p, int q) {
-        int rootP = find(p);
-        int rootQ = find(q);
-        return rootP == rootQ;
     }
 
     /**
@@ -83,25 +66,17 @@ class UF {
         }
         return x;
     }
-
-    /**
-     * @return The number of connected components in graph.
-     */
-    public int count() {
-        return count;
-    }
 }
 
 class Solution {
     public List<List<String>> accountsMerge(List<List<String>> accounts) {
-        int n = accounts.size();
+        final int n = accounts.size();
         UF uf = new UF(n);
         Map<String, Integer> email2nameId = new HashMap<>();
 
         for (int i = 0; i < n; ++i) {
             List<String> emails = accounts.get(i);
-            int m = emails.size();
-            for (int j = 1; j < m; ++j) {
+            for (int j = 1; j < emails.size(); ++j) {
                 String email = emails.get(j);
                 if (!email2nameId.containsKey(email)) {
                     email2nameId.put(email, i);

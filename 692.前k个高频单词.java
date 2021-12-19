@@ -12,6 +12,8 @@ import java.util.PriorityQueue;
 
 // @lc code=start
 class Solution {
+    // T: O(n * log(k))
+    // S: O(n)
     public List<String> topKFrequent(String[] words, int k) {
         Map<String, Integer> cnts = new HashMap<>();
         for (String w : words) {

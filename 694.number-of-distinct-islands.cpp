@@ -12,6 +12,8 @@ using namespace std;
 // @lc code=start
 class Solution {
 public:
+    // T: O(m * n)
+    // S: O(m * n) or O(1)?
     int numDistinctIslands(vector<vector<int>>& grid) {
         unordered_set<string> islands;
         for (int i = 0; i < grid.size(); ++i) {
@@ -23,10 +25,9 @@ public:
                 // can thus be represented by a string with characters indicating 
                 // DFS directions from the reference point.
                 if (grid[i][j]) {
-                    string sb;
-                    if (dfs(grid, i, j, sb, 'o')) {
-                        grid[i][j] = 0;
-                        islands.insert(sb);
+                    string island;
+                    if (dfs(grid, i, j, island, 'o')) {
+                        islands.insert(island);
                     }
                 }
             }
@@ -38,17 +39,17 @@ private:
     /**
      * Returns true if the island is new.
      */
-    static bool dfs(vector<vector<int>>& grid, int i, int j, string& sb, char dirn) {
+    static bool dfs(vector<vector<int>> &grid, int i, int j, string &island, char dirn) {
         if (i < 0 || i == grid.size() || j < 0 || j == grid[i].size() || !grid[i][j]) {
             return false;
         }
-        sb.push_back(dirn);
-        grid[i][j] = 0;
-        dfs(grid, i - 1, j, sb, 'u');
-        dfs(grid, i + 1, j, sb, 'd');
-        dfs(grid, i, j - 1, sb, 'l');
-        dfs(grid, i, j + 1, sb, 'r');
-        sb.push_back('b');
+        island.push_back(dirn);
+        grid[i][j] = 0;     // mark visited
+        dfs(grid, i - 1, j, island, 'u');
+        dfs(grid, i + 1, j, island, 'd');
+        dfs(grid, i, j - 1, island, 'l');
+        dfs(grid, i, j + 1, island, 'r');
+        island.push_back('b');
         return true;
     }
 };

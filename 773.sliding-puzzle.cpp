@@ -24,6 +24,8 @@ class Solution {
 
 public:
     // Minimum number of moves -> BFS. Need to refactor the data to apply BFS more conveniently.
+    // T: O(m * n * (m * n)!)
+    // S: O(m * n * (m * n)!)
     int slidingPuzzle(vector<vector<int>>& board) {
         string state;
         for (int i = 0; i < M; ++i) {
@@ -46,8 +48,7 @@ public:
             int qs = q.size();
             while (qs--) {
                 string s = q.front(); q.pop();
-                int idx_0 = 0;
-                while (s[idx_0] != '0')  ++idx_0;
+                int idx_0 = s.find('0');
                 for (const auto &next : NEXT_IDS[idx_0]) {
                     string ns = s;
                     swap(ns[idx_0], ns[next]);
