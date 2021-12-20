@@ -28,7 +28,7 @@ using std::unordered_set;
  *     void clean();
  * };
  */
-struct pair_hash {
+struct PairHash {
     template <class T1, class T2>
     std::size_t operator () (const pair<T1, T2> &pair) const {
         auto h1 = std::hash<T1>()(pair.first);
@@ -40,7 +40,7 @@ struct pair_hash {
 class Solution {
     static constexpr int DIRN[5] = {-1, 0, 1, 0, -1};
 
-    void dfs(Robot& robot, int x, int y, int dirn, unordered_set<pair<int, int>, pair_hash> &visited) {
+    void dfs(Robot& robot, int x, int y, int dirn, unordered_set<pair<int, int>, PairHash> &visited) {
         robot.clean();
         visited.insert(pair<int, int>(x, y));
         for (int d = 0; d < 4; ++d) {
@@ -63,8 +63,10 @@ class Solution {
     }
 
 public:
+    // T: O(n - m), n := the total number of cells, m := the number of obstacles
+    // S: O(n - m)
     void cleanRoom(Robot& robot) {
-        unordered_set<pair<int, int>, pair_hash> vis;
+        unordered_set<pair<int, int>, PairHash> vis;
         dfs(robot, 0, 0, 0, vis);
     }
 };

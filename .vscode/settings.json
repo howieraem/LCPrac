@@ -71,6 +71,10 @@
         "mutex": "cpp",
         "thread": "cpp",
         "xloctime": "cpp",
-        "format": "cpp"
+        "format": "cpp",
+        "xlocmon": "cpp",
+        "fstream": "cpp",
+        "sstream": "cpp",
+        "cfloat": "cpp"
     }
 }

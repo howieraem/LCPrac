@@ -7,6 +7,8 @@
 // @lc code=start
 class Solution {
     public boolean stoneGame(int[] piles) {
+        // 1. As sum(piles) % 2 != 0, there will not be draw.
+        // 2. As len(piles) % 2 == 0, one will always win, no matter who starts first.
         return true;
     }
 }

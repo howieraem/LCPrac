@@ -7,6 +7,8 @@ import java.util.*;
 
 // @lc code=start
 class Solution {
+    // T: O(n * log(n))
+    // S: O(n)
     public int minRefuelStops(int target, int startFuel, int[][] stations) {
         int n = stations.length;
         if (n == 0)  return startFuel >= target ? 0 : -1;
@@ -14,9 +16,11 @@ class Solution {
         int ans = 0, cur = startFuel;
         PriorityQueue<Integer> pq = new PriorityQueue<>((o1, o2) -> o2 - o1);
         for (int i = 0; i < n; ++i) {
-            while (cur < stations[i][0]) {
+            while (cur < stations[i][0]) {  // one liter of gas per one mile
                 if (pq.isEmpty())  return -1;
-                // Greedy: always refuel with max available amount
+                // Greedy: always go to and refuel with max available amount 
+                // (no need to sort stations before as they are sorted by
+                // position).
                 cur += pq.poll();
                 ++ans;
             }

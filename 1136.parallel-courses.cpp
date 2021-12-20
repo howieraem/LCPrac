@@ -8,18 +8,20 @@
 using namespace std;
 
 // @lc code=start
-enum State { visited, visiting, notVisited };
+#define NOT_VISITED -1
+#define VISITED 1
+#define VISITING 0
 
 class Solution {
-    static bool dfs(int i, const vector<vector<int>> &A, vector<int> &depth, vector<State> &vis) {
-        if (vis[i] == visited)  return true;
-        else if (vis[i] == visiting)  return false;   // graph loop found
-        vis[i] = visiting;
+    static bool dfs(int i, const vector<vector<int>> &A, vector<int> &depth, vector<int> &vis) {
+        if (vis[i] == VISITED)  return true;
+        else if (vis[i] == VISITING)  return false;   // graph loop found
+        vis[i] = VISITING;
         for (const int &next : A[i]) {
             if (!dfs(next, A, depth, vis))  return false;
             depth[i] = max(depth[i], depth[next] + 1);
         }
-        vis[i] = visited;
+        vis[i] = VISITED;
         return true;
     }
 
@@ -31,7 +33,7 @@ public:
             A[e[0] - 1].push_back(e[1] - 1);
         }
         vector<int> depth(n, 1);
-        vector<State> vis(n, notVisited);
+        vector<int> vis(n, NOT_VISITED);
         for (int i = 0; i < n; ++i) {
             if (!dfs(i, A, depth, vis))  return -1;
         }
@@ -40,6 +42,8 @@ public:
 
     /*
     // BFS-based topological sort
+    // T: O(V + E)
+    // S: O(V + E)
     int minimumSemesters(int n, vector<vector<int>>& relations) {
         int inDeg[n];
         memset(inDeg, 0, sizeof(inDeg));
