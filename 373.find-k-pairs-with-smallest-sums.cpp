@@ -3,7 +3,9 @@
  *
  * [373] Find K Pairs with Smallest Sums
  */
-#include <bits/stdc++.h>
+#include <queue>
+#include <utility>
+#include <vector>
 
 using namespace std;
 
@@ -12,6 +14,8 @@ typedef pair<int, int> int_pair;
 
 class Solution {
 public:
+    // T: O(k * log(k))
+    // S: O(k)
     vector<vector<int>> kSmallestPairs(vector<int>& nums1, vector<int>& nums2, int k) {
         const int m = nums1.size(), n = nums2.size();
 
@@ -24,7 +28,7 @@ public:
         vector<vector<int>> res;
         while (k-- > 0 && pq.size()) {
             auto p = pq.top(); pq.pop();
-            res.push_back(vector<int>{nums1[p.first], nums2[p.second]});
+            res.push_back({nums1[p.first], nums2[p.second]});
 
             /**
              * Explanations to the if conditions below:
@@ -39,9 +43,9 @@ public:
              *    either still in the queue but not popped yet or not even pushed into queue, you don't need to 
              *    worry about (3, 3) at this moment, because (3, 2) is guaranteed to be no greater than (3, 3). 
              *    So you can wait till you see (3, 2).
-             * 6. Every time you see (i, j), just push (i+1, j) into queue. (i, j+1) can be pushed into queue later 
-             *    when you see (i - 1, j + 1). The only exception to this is, when i == 0, there is no (i-1, j+1), 
-             *    so you want to push both (i+1, j) and (i, j+1) when i == 0. 
+             * 6. Every time you see (i, j), just push (i + 1, j) into queue. (i, j + 1) will then be pushed into queue later 
+             *    when (i - 1, j + 1) is encountered. The only exception to this is, when i == 0, there is no (i - 1, j + 1), 
+             *    so you want to push both (i + 1, j) and (i, j + 1) when i == 0. 
              */
             if (p.first + 1 < m) {
                 pq.emplace(p.first + 1, p.second);

@@ -9,14 +9,18 @@
 using namespace std;
 
 // @lc code=start
+#define NO_RANK -2
+
 class Solution {
 public:
     /** 
      * An edge is a critical connection, if and only if it is not in a cycle.
      */
+    // T: O(V + E)
+    // S: O(V + E)
     vector<vector<int>> criticalConnections(int n, vector<vector<int>>& connections) {
         vector<int> graph[n];
-        for (auto& conn : connections) {
+        for (const auto &conn : connections) {
             graph[conn[0]].push_back(conn[1]);
             graph[conn[1]].push_back(conn[0]);
         }
@@ -32,18 +36,16 @@ public:
     }
 
 private:
-    static const int NO_RANK = -2;  // not visited
-
     int dfs(vector<int> graph[], int n, int node, int curRank, int ranks[], vector<vector<int>>& res) {
         if (ranks[node] != NO_RANK)  return ranks[node];
         ranks[node] = curRank;
 
         int lowestRank = curRank;
-        for (auto neighbor : graph[node]) {
+        for (const auto &neighbor : graph[node]) {
             if (ranks[neighbor] == curRank - 1 || ranks[neighbor] == n) {
                 // Notes for ranks[neighbor] == curRank - 1:
-                // Do NOT go back immediately to parent, this will lead to parent-child-parent circle immediately.
-                // This is why NO_RANK is set to -2 instead of -1, because the first node of a recursion has curRank 0.
+                //     Do NOT go back immediately to parent, this will lead to parent-child-parent circle immediately.
+                //     This is why NO_RANK is set to -2 instead of -1, because the first node of a recursion has curRank 0.
                 continue;
             }
             int neighborRank = dfs(graph, n, neighbor, curRank + 1, ranks, res);

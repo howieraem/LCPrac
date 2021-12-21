@@ -27,7 +27,7 @@ struct TreeNode {
 class Solution {
 public:
     // T: O(N)
-    // S: O(1) (C/C++ tail recursion)
+    // S: O(N)
     void flatten(TreeNode* root) {
         if (!root)  return;
 

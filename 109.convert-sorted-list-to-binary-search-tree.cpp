@@ -45,7 +45,7 @@ struct TreeNode {
 class Solution {
 public:
     // T: O(N), N := the number of nodes
-    // S: O(1) (C/C++ tail recursion)
+    // S: O(N)
     TreeNode* sortedListToBST(ListNode* head) {
         if (!head)  return nullptr;
         if (!head->next)  return new TreeNode(head->val);

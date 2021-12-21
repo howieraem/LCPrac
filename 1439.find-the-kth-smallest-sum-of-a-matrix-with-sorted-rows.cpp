@@ -12,6 +12,8 @@ typedef pair<int, int> int_pair;
 
 class Solution {
 public:
+    // T: O(k * log(k) * m), m := len(mat)
+    // S: O(k)
     int kthSmallest(vector<vector<int>>& mat, int k) {
         vector<int> row = mat[0];
         for (int i = 1; i < mat.size(); ++i) {
@@ -22,7 +24,7 @@ public:
 
 private:
     // Code adapted from Question 373, returning the pair sum instead of 
-    // pair of indices. 
+    // pair of indices. Time complexity O(k * log(k)).
     vector<int> kSmallestPairs(vector<int>& nums1, vector<int>& nums2, int k) {
         const int m = nums1.size(), n = nums2.size();
 

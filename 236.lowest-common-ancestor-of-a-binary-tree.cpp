@@ -23,7 +23,7 @@ struct TreeNode {
 class Solution {
 public:
     // T: O(n), n := the number of nodes
-    // S: O(1) (C/C++ tail recursion)
+    // S: O(n) (recursion stack)
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
         if (!root || root == p || root == q)  return root;
         TreeNode *left = lowestCommonAncestor(root->left, p, q),

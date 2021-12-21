@@ -8,6 +8,8 @@ import java.util.Stack;
 
 // @lc code=start
 class Solution {
+    // T: O(n ^ 2)
+    // S: O(n)
     public String reverseParentheses(String s) {
         char[] arr = s.toCharArray();
         Stack<Integer> stack = new Stack<>();

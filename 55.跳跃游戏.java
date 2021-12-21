@@ -7,7 +7,7 @@
 // @lc code=start
 class Solution {
     public boolean canJump(int[] nums) {
-        int n = nums.length;
+        final int n = nums.length;
         int furthest = 0;
         for (int i = 0; i < n - 1; ++i) {
             furthest = Math.max(furthest, i + nums[i]);

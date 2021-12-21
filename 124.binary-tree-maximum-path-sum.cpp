@@ -32,7 +32,7 @@ struct TreeNode {
 class Solution {
 public:
     // T: O(n), n := the number of nodes
-    // S: O(1) (C/C++ tail recursion)
+    // S: O(n)
     int maxPathSum(TreeNode* root) {
         int ans = INT_MIN;
         dfs(root, ans);

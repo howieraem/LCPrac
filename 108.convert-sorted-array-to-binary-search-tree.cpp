@@ -31,7 +31,7 @@ struct TreeNode {
 class Solution {
 public:
     // T: O(n), n := len(nums)
-    // S: O(1) (C/C++ tail recursion, igoring space of nodes created)
+    // S: O(n)
     TreeNode* sortedArrayToBST(vector<int>& nums) {
         return helper(nums, 0, nums.size() - 1);
     }

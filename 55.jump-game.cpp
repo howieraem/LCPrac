@@ -17,16 +17,15 @@ public:
     bool canJump(vector<int>& nums) {
         const int n = nums.size();
         int curFurthest = 0;
-        for (int i = 0; i < n; ++i) {
-            if (i <= curFurthest) {
-                if ((curFurthest = max(curFurthest, i + nums[i])) >= n - 1) {
-                    return true;
-                }
-            } else {
+        for (int i = 0; i < n - 1; ++i) {
+            curFurthest = max(curFurthest, i + nums[i]);
+            if (curFurthest >= n - 1) {
+                return true;
+            } else if (curFurthest <= i) {
                 return false;
             }
         }
-        return false;
+        return curFurthest >= n - 1;
     }
 };
 // @lc code=end

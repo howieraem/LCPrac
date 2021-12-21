@@ -29,7 +29,7 @@ struct ListNode {
 class Solution {
 public:
     // T: O(k*log(k)*n), k := the number of lists, n := avg. length of list
-    // S: O(1)? (C/C++ tail recursion)
+    // S: O(k*n) (recursion stacks)
     ListNode* mergeKLists(vector<ListNode*>& lists) {
         return partition(lists, 0, lists.size() - 1);
     }

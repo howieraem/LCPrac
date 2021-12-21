@@ -3,8 +3,10 @@
  *
  * [45] Jump Game II
  */
+#include <algorithm>
 #include <vector>
 
+using std::max;
 using std::vector;
 
 // @lc code=start
@@ -16,9 +18,7 @@ public:
         int ans = 0, curFurthest = 0, curEnd = 0;
         const int last = nums.size() - 1;
         for (int i = 0; i < last; ++i) {
-            if (i + nums[i] > curFurthest) {
-                curFurthest = i + nums[i];
-            }
+            curFurthest = max(curFurthest, i + nums[i]);
             if (i == curEnd) {
                 // Do next jump.
                 // This also applies to the base case i = 0

@@ -29,7 +29,7 @@ struct TreeNode {
 class Solution {
 public:
     // T: O(N), N := the number of nodes
-    // S: O(1) (C/C++ tail recursion)
+    // S: O(N)
     bool isValidBST(TreeNode* root) {
         return isValidBST(root, LONG_MIN, LONG_MAX);
     }

@@ -53,7 +53,7 @@ public:
     /*
     // DFS solution
     // T: O(m * n), m := the number of rows, n := the number of columns
-    // S: O(1) (C/C++ tail recursion)
+    // S: O(m * n)
     int numIslands(vector<vector<char>>& grid) {
         int ans = 0;
         for (int i = 0; i < grid.size(); ++i) {

@@ -27,7 +27,7 @@ struct TreeNode {
 class Solution {
 public:
     // T: O(N), N := the number of nodes
-    // S: O(1) (C/C++ tail recursion)
+    // S: O(N) (recursion stack)
     void recoverTree(TreeNode* root) {
         n1 = nullptr;
         n2 = nullptr;
