@@ -14,7 +14,7 @@ class Solution {
             ++cnt[s.charAt(i) - 'a'];
         }
 
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder(); // acts like a stack
         for (int i = 0; i < n; ++i) {
             char c = s.charAt(i);
             if (!visited[c - 'a']) {

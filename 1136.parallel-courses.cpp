@@ -64,6 +64,7 @@ public:
                 int pre = q.front(); q.pop();
                 --n;
                 for (const int &next : A[pre]) {
+                    // Add to queue if the in-degree of the neighbor node becomes 0
                     if (!--inDeg[next])  q.push(next);
                 }
             }

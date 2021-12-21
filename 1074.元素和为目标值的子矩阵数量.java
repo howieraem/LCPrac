@@ -10,8 +10,8 @@ import java.util.Map;
 // @lc code=start
 class Solution {
     public int numSubmatrixSumTarget(int[][] matrix, int target) {
-        int m = matrix.length, n = matrix[0].length;
-        int[][] sum = new int[m + 1][n + 1];
+        final int m = matrix.length, n = matrix[0].length;
+        int[][] sum = new int[m + 1][n + 1];    // prefix sum matrix
         for (int i = 1; i <= m; ++i) {
             for (int j = 1; j <= n; ++j) {
                 sum[i][j] = sum[i - 1][j] + sum[i][j - 1] - sum[i - 1][j - 1] + matrix[i - 1][j - 1];
@@ -35,6 +35,7 @@ class Solution {
 
         // Optimized: if three sides of a rectangle are known, then the 4th side can be determined directly.
         // The "side" here means a sub-matrix's boundary. Time complexity O(m^2 * n).
+        // On each row, the situation is very similar to Q560.
         for (int top = 1; top <= m; ++top) {
             for (int bottom = top; bottom <= m; ++bottom) {
                 int cur = 0;

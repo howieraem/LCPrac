@@ -20,6 +20,9 @@ class Solution {
     private int m, n;
     private int[] D = new int[]{-1, 0, 1, 0, -1};
 
+    // Multi-start BFS
+    // T: O(m * n) as each cell is visited constant times
+    // S: O(m * n)
     public int shortestBridge(int[][] grid) {
         this.grid = grid;
         m = grid.length; 
@@ -41,10 +44,10 @@ class Solution {
         int ans = -1;
         while (!q.isEmpty()) {
             int nq = q.size();
-            for (int i = 0; i < nq ; ++i) {
+            while (nq-- != 0) {
                 Pair p = q.poll();
-                for (int j = 0; j < 4; ++j) {
-                    int x = p.x + D[j], y = p.y + D[j + 1];
+                for (int d = 0; d < 4; ++d) {
+                    int x = p.x + D[d], y = p.y + D[d + 1];
                     if (x < 0 || x >= m || y < 0 || y >= n || grid[x][y] == 2)  continue;
                     if (grid[x][y] == 1)  return ans + 1;
                     grid[x][y] = 2;

@@ -36,6 +36,8 @@ class TreeNode {
 class Solution {
     private int val;
 
+    // T: O(N)
+    // S: O(N) (recursion stack)
     public boolean isUnivalTree(TreeNode root) {
         val = root.val;
         return dfs(root);
