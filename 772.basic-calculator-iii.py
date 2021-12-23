@@ -15,7 +15,7 @@ class Solution:
     @staticmethod
     def helper(s: deque):
         stack = []
-        sign = '+'
+        op = '+'
         cur = 0
 
         while len(s):
@@ -28,16 +28,16 @@ class Solution:
 
             # Character is one of {'+', '-', '*', '/'}
             if (not isdigit and c != ' ') or not s:
-                if sign == '+':
+                if op == '+':
                     stack.append(cur)
-                elif sign == '-':
+                elif op == '-':
                     stack.append(-cur)
-                elif sign == '*':
+                elif op == '*':
                     stack[-1] *= cur
-                elif sign == '/':
+                elif op == '/':
                     stack[-1] = int(stack[-1] / cur)
                 cur = 0
-                sign = c
+                op = c
 
             if c == ')':
                 break

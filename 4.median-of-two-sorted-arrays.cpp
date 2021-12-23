@@ -8,15 +8,17 @@
 using std::vector;
 using std::max;
 using std::min;
+using std::swap;
 
 // @lc code=start
 class Solution {
 public:
-    // T: O(min(log(n1, n2)))
+    // T: O(log(min(n1, n2))))
     // S: O(1)
     double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
-        if (nums1.size() > nums2.size()) { 
-            return findMedianSortedArrays(nums2, nums1);
+        if (nums1.size() > nums2.size()) {
+            // make nums2 the longer array to reduce time complexity in binary search 
+            swap(nums1, nums2);
         }
 
         const int n1 = nums1.size(), n2 = nums2.size(), k = (n1 + n2 + 1) >> 1;

@@ -50,6 +50,7 @@ public:
     // S: O(p)
     bool isMatch(string s, string p) {
         const int m = s.size(), n = p.size();
+        if (n && p[0] == '*')  return true;
         bool dp[n + 1];
         memset(dp, false, sizeof(dp));
 
@@ -64,9 +65,9 @@ public:
             for (int j = 1; j <= n; ++j) {
                 bool tmp = dp[j];
                 if (p[j - 1] == '*') {
-                    dp[j] = dp[j - 2] || (dp[j] && (s[i - 1] == p[j - 2] || p[j - 2] == '.'));
+                    dp[j] = dp[j - 2] || (tmp && (s[i - 1] == p[j - 2] || p[j - 2] == '.'));    // tmp is equivalent to dp[i - 1][j]
                 } else {
-                    dp[j] = pre && (s[i - 1] == p[j - 1] || p[j - 1] == '.');
+                    dp[j] = pre && (s[i - 1] == p[j - 1] || p[j - 1] == '.');   // pre is equivalent to dp[i - 1][j - 1]
                 }
                 pre = tmp;
             }

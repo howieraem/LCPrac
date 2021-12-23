@@ -39,7 +39,7 @@ public:
             if (root) {
                 s.push(root);
                 root = root->left;
-            } else {
+            } else {    // finished the left subtrees
                 root = s.top(); s.pop();
                 res.push_back(root->val);
                 root = root->right;

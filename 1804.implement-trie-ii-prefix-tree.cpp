@@ -11,13 +11,14 @@ using std::vector;
 
 // @lc code=start
 struct Node {
-    vector<Node*> next;
+    // vector<Node*> next;
+    Node* next[26] {};
     int wCnt, pCnt;
 
-    Node() : next(26, nullptr), wCnt(0), pCnt(0) {}
+    Node() : wCnt(0), pCnt(0) {}
 };
 
-
+// S: O(n * s), n := max word length, s := alphabet size
 class Trie {
     Node *root;
 
@@ -26,6 +27,7 @@ public:
         root = new Node();
     }
     
+    // T: O(n)
     void insert(string word) {
         Node *tmp = root;
         for (auto &c : word) {
@@ -39,6 +41,7 @@ public:
         tmp->wCnt++;
     }
     
+    // T: O(n)
     int countWordsEqualTo(string word) {
         Node *tmp = root;
         for (auto &c : word) {
@@ -51,6 +54,7 @@ public:
         return tmp->wCnt;
     }
     
+    // T: O(n)
     int countWordsStartingWith(string prefix) {
         Node *tmp = root;
         for (auto &c : prefix) {
@@ -63,6 +67,7 @@ public:
         return tmp->pCnt;
     }
     
+    // T: O(n)
     void erase(string word) {
         // Assuming word is in the Trie.
         // Although not required by this question, may need to
@@ -79,6 +84,7 @@ public:
     // Extra: find all words with prefix
     // This solution does not require modifying the node, though one 
     // may store the actual words at the nodes
+    // T: O(n)
     vector<string> search(string prefix) {
         Node *tmp = root;
         for (auto &c : prefix) {

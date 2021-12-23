@@ -8,6 +8,8 @@ import java.util.Arrays;
 
 // @lc code=start
 class Solution {
+    // T: O(n ^ 2)
+    // S: O(1)
     public int threeSumClosest(int[] nums, int target) {
         Arrays.sort(nums);
         int ans = nums[0] + nums[1] + nums[2];
@@ -24,6 +26,8 @@ class Solution {
                 } else if (sum3 < target) {
                     ++l;
                 } else {
+                    // No need to skip duplicates of y and z here because
+                    // we are only looking for the closest sum
                     return ans;
                 }
             }

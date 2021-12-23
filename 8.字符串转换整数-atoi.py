@@ -3,6 +3,7 @@
 #
 # [8] 字符串转换整数 (atoi)
 #
+import re
 
 # @lc code=start
 class Solution:
@@ -51,5 +52,5 @@ class Solution:
     """
 
 # @lc code=end
-s = Solution()
-print(s.myAtoi("-91283472332"))
+# s = Solution()
+# print(s.myAtoi("-91283472332"))

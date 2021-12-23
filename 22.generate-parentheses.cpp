@@ -11,7 +11,7 @@ using std::vector;
 
 // @lc code=start
 class Solution {
-    // T: O(2 ^ (2n))
+    // T: O(2 ^ (2n)) as there are 2 recursive calls in backtrack and it requires 2n steps to get one result
     // S: O(n)
     static void backtrack(string &path, int nLeft, int nRight, vector<string> &res) {
         if (nLeft > nRight) {
@@ -25,8 +25,8 @@ class Solution {
             return;
         }
         // As path + '(' or path + ')' will create a new string,
-        // space complexity is better with push_back() and 
-        // pop_back(). 
+        // space complexity is better with passing path by reference 
+        // and using push_back() and pop_back(). 
         if (nLeft) {
             // backtrack(path + '(', nLeft - 1, nRight, res);
             path.push_back('(');
