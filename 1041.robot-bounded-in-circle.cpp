@@ -10,6 +10,8 @@ using namespace std;
 // @lc code=start
 class Solution {
 public:
+    // T: O(n)
+    // S: O(1)
     bool isRobotBounded(string instructions) {
         int dirn = 0, x = 0, y = 0;
         for (int i = 0; i < instructions.size(); ++i) {
