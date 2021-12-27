@@ -7,8 +7,8 @@
 // @lc code=start
 class Solution {
     public int trap(int[] height) {
-        int n = height.length;
-        if (n == 0)  return 0;
+        final int n = height.length;
+        // if (n == 0)  return 0;
         int l = 0, r = n - 1;
         int ans = 0;
         int l_max = height[0], r_max = height[n - 1];

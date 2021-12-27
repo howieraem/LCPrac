@@ -10,7 +10,7 @@ class Solution:
         ans = 0
         max_left = max_right = 0
         left, right = 1, len(height)-2
-        for i in range(1, len(height)-1):
+        for _ in range(1, len(height)-1):
             if height[left-1] < height[right+1]:
                 # shift left pointer
                 max_left = max(max_left, height[left-1])

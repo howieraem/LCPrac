@@ -10,6 +10,8 @@ using namespace std;
 // @lc code=start
 class Solution {
 public:
+    // T: O(n)
+    // S: O(1)
     int pivotIndex(vector<int>& nums) {
         int sum = 0;
         for (auto &n : nums) {
