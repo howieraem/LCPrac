@@ -27,9 +27,12 @@ public:
     }
 
 private:
+    // Each of the rows and columns is sorted in ascending order, 
+    // i.e. the last entry of the current row is less than 
+    // the first entry of the next row.
     static int cntSmaller(vector<vector<int>>& mat, int mid) {
         int ans = 0;
-        for (int i = 0, j = mat[0].size() - 1; i < mat.size(); i++) {
+        for (int i = 0, j = mat[0].size() - 1; i < mat.size() && j >= 0; i++) {
             while (j >= 0 && mat[i][j] > mid)  --j;
             ans += (j + 1);
         }

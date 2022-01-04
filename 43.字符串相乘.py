@@ -52,7 +52,7 @@ class Solution:
         # `res_list` represents a[i]*b[j] terms without `*10^(n*k)`.
         # Summation is also done on every k digits of the intermediate
         # results.
-        print(res_list)
+        # print(res_list)
         res, carry = [], 0
         for i in range(len(res_list)):
             res_tmp = str(res_list[i] + carry)
@@ -68,5 +68,5 @@ class Solution:
         return res if res else '0'
 
 # @lc code=end
-s = Solution()
-print(s.multiply('1234', '5678'))
+# s = Solution()
+# print(s.multiply('1234', '5678'))
