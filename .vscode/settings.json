@@ -75,6 +75,9 @@
         "xlocmon": "cpp",
         "fstream": "cpp",
         "sstream": "cpp",
-        "cfloat": "cpp"
+        "cfloat": "cpp",
+        "complex": "cpp",
+        "filesystem": "cpp",
+        "iterator": "cpp"
     }
 }
