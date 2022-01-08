@@ -50,8 +50,7 @@ private:
 struct Node {
     int k, v;
     Node *pre, *nxt;
-    Node() : k(0), v(0), pre(nullptr), nxt(nullptr) {}
-    Node(int _k, int _v) : k(_k), v(_v), pre(nullptr), nxt(nullptr) {}
+    Node(int _k = 0, int _v = 0) : k(_k), v(_v), pre(nullptr), nxt(nullptr) {}
 };
 
 // T: get and put are both O(1)

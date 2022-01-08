@@ -8,16 +8,16 @@
 class Solution {
     public String longestCommonPrefix(String[] strs) {
         // slightly simpler solution
-        if(strs.length == 0) 
-            return "";
+        // if (strs.length == 0) 
+        //     return "";
         String ans = strs[0];
-        for(int i = 1; i < strs.length; ++i) {
+        for (int i = 1; i < strs.length; ++i) {
             int j = 0;
-            for(; j < ans.length() && j < strs[i].length(); j++) {
+            for (; j < ans.length() && j < strs[i].length(); j++) {
                 if(ans.charAt(j) != strs[i].charAt(j)) break;
             }
             ans = ans.substring(0, j);
-            if(ans.equals(""))
+            if (ans.isEmpty())
                 return ans;
         }
         return ans;
@@ -53,10 +53,10 @@ class Solution {
 }
 // @lc code=end
 
-class Test14 {
-    public static void main(String[] args) {
-        String[] ss = {"dog1"};
-        Solution s = new Solution();
-        System.out.println(s.longestCommonPrefix(ss));
-    }
-}
+// class Test14 {
+//     public static void main(String[] args) {
+//         String[] ss = {"dog1"};
+//         Solution s = new Solution();
+//         System.out.println(s.longestCommonPrefix(ss));
+//     }
+// }
