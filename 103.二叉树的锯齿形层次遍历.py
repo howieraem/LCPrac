@@ -29,7 +29,7 @@ class Solution:
                 
                 # visit the current node
                 if rev:     # reverse the order of appending
-                    lvl.insert(0, cur.val)
+                    lvl.insert(0, cur.val)  # might be better to use deque
                 else:
                     lvl.append(cur.val)
 
@@ -51,13 +51,13 @@ n5 = TreeNode(7)
 n1.left, n1.right = n2, n3
 n3.left, n3.right = n4, n5
 '''
-n1 = TreeNode(1)
-n2 = TreeNode(2)
-n3 = TreeNode(3)
-n4 = TreeNode(4)
-n5 = TreeNode(5)
-n1.left, n1.right = n2, n3
-n2.left, n2.right = n4, n5
+# n1 = TreeNode(1)
+# n2 = TreeNode(2)
+# n3 = TreeNode(3)
+# n4 = TreeNode(4)
+# n5 = TreeNode(5)
+# n1.left, n1.right = n2, n3
+# n2.left, n2.right = n4, n5
 
-s = Solution()
-print(s.zigzagLevelOrder(n1))
+# s = Solution()
+# print(s.zigzagLevelOrder(n1))

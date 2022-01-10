@@ -11,9 +11,11 @@ using namespace std;
 // @lc code=start
 class Solution {
 public:
+    // T: O(n)
+    // S: O(1)
     void moveZeroes(vector<int>& nums) {
         for (int i = 0, j = 0; i < nums.size(); ++i) {
-            if (nums[i] != 0) {
+            if (nums[i]) {
                 if (i > j) {
                     nums[j] = nums[i];
                     nums[i] = 0;

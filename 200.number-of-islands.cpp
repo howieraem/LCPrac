@@ -28,6 +28,8 @@ public:
                 if (grid[i][j] == '1') {
                     ++ans;
                     grid[i][j] = '0';   // mark visited
+
+                    // For each island, do BFS and mark all island elements visited
                     q.clear();
                     q.emplace_back(i, j);
                     while (q.size()) {
