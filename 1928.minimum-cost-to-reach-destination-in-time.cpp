@@ -24,7 +24,7 @@ public:
         cost[0] = fees[0];
         time[0] = 0;
 
-        // Modified Djikstra's Algo
+        // Modified Dijkstra's Algo
         // min-heap is used, which compares cost first and then time
         priority_queue<vector<int>, vector<vector<int>>, greater<vector<int>>> pq;
         pq.push({cost[0], time[0], 0}); // (cost, time, vertex), start from vertex 0

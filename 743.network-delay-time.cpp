@@ -16,7 +16,7 @@ using namespace std;
 class Solution {
 public:
     /*
-    // Bellman Ford Algorithm: works with negative weights. Djikstra's algorithm
+    // Bellman Ford Algorithm: works with negative weights. Dijkstra's algorithm
     // only works with non-negative weights. However, time complexity is O(V*E).
     int networkDelayTime(vector<vector<int>>& times, int n, int k) {
         vector<int> dist(n + 1, INT_MAX);   // add 1 because of 1-indexed nodes
@@ -38,7 +38,7 @@ public:
     }
     */
 
-    // Djikstra's algorithm, O(V + E*log(V))
+    // Dijkstra's algorithm, O(V + E*log(V))
     int networkDelayTime(vector<vector<int>>& times, int n, int k) {
         vector<vector<pair<int, int>>> g(n + 1);
         for (const auto &e : times) {
