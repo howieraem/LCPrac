@@ -17,6 +17,7 @@ public:
     vector<vector<int>> highFive(vector<vector<int>>& items) {
         map<int, priority_queue<int, vector<int>, greater<int>>> mp;
 
+        // One priority queue (maximum size 5) for each ID
         for (const auto &item : items) {
             int id = item[0], score = item[1];
             priority_queue<int, vector<int>, greater<int>> *pq = &mp[id];
@@ -26,6 +27,7 @@ public:
             }
         }
 
+        // Calculate average for each ID
         vector<vector<int>> res(mp.size());
         int i = 0;
         for (auto &p : mp) {

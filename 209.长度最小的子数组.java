@@ -7,8 +7,8 @@
 // @lc code=start
 class Solution {
     public int minSubArrayLen(int s, int[] nums) {
-        int n = nums.length;
-        if (n == 0)  return 0;
+        final int n = nums.length;
+        // if (n == 0)  return 0;
 
         // `sum` stands for sum(nums[start:end+1])
         int ans = Integer.MAX_VALUE, start = 0, end = 0, sum = 0;
