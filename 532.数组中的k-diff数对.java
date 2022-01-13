@@ -10,7 +10,10 @@ import java.util.HashSet;
 class Solution {
     public int findPairs(int[] nums, int k) {
         Set<Integer> visited = new HashSet<>();
-        Set<Integer> diff = new HashSet<>();  // stores the smaller number of a k-diff pair and avoids repetition
+
+        // stores the smaller number of a k-diff pair and avoids repetition
+        Set<Integer> diff = new HashSet<>();
+
         for (int num : nums) {
             if (visited.contains(num - k))
                 diff.add(num - k);
