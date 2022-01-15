@@ -5,8 +5,11 @@ using namespace std;
 class Solution {
 public:
     bool isMatch(string s, string p) {
-        int n = s.size(), m = p.size();
-        vector<vector<bool>> dp(n + 1, vector<bool> (m + 1));
+        const int n = s.size(), m = p.size();
+        bool dp[n + 1][m + 1];  // avoid using vector<bool>
+        for (int i = 0; i <= n; ++i) {
+            fill_n(dp[i], m + 1, false);
+        }
 
         dp[0][0] = true;    // dp[i][j] means whether s[:i] matches p[:j]
         for (int i = 0; i <= n; ++i) {

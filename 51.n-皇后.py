@@ -26,7 +26,7 @@ class Solution:
                               col = col | {j},                # Union
                               diag_tb = diag_tb | {i + j},    # Union
                               diag_bt = diag_bt | {i - j})    # Union
-            
+
         backtrack(0, [], set(), set(), set())    
         return res
 

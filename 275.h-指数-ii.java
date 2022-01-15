@@ -20,7 +20,6 @@ class Solution {
                 l = m + 1;
             }
         }
-        // occurs when max(citations) > len(citations)
         return n - l;
     }
 }

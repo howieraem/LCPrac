@@ -7,8 +7,8 @@
 # @lc code=start
 class Solution:
     def totalNQueens(self, n: int) -> int:
-        s = "." * n
         count = 0
+        s = "." * n
 
         def backtrack(i, row, col, diag_tb, diag_bt):
             """

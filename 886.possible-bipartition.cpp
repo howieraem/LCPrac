@@ -27,7 +27,8 @@ public:
     bool possibleBipartition(int n, vector<vector<int>>& dislikes) {
         vector<vector<int>> A(n + 1);
         vector<int> colors(n + 1, UNCOLORED);
-        vector<bool> vis(n + 1, false);
+        bool vis[n + 1];    // avoid using vector<bool>
+        fill_n(vis, n + 1, false);
 
         // Build adjacency
         for (const auto &e : dislikes) {

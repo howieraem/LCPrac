@@ -22,7 +22,8 @@ public:
             G[edges[i][0]].push_back({edges[i][1], probs[i]});
             G[edges[i][1]].push_back({edges[i][0], probs[i]});
         }
-        vector<bool> vis(n, false);
+        bool vis[n];    // avoid using vector<bool>
+        fill_n(vis, n, false);
         vector<double> maxProb(n, 0.0);
         maxProb[start] = 1.0;
         priority_queue<pair<double, int>> q;

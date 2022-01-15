@@ -12,7 +12,10 @@ using namespace std;
 class Solution {
 public:
     int minTrioDegree(int n, vector<vector<int>>& edges) {
-        vector<vector<bool>> A(n + 1, vector<bool>(n + 1, false));
+        bool A[n + 1][n + 1];   // avoid using vector<bool>
+        for (int i = 0; i <= n; ++i) {
+            fill_n(A[i], n + 1, false);
+        }
         vector<int> deg(n + 1, 0);
 
         for (auto &e : edges) {

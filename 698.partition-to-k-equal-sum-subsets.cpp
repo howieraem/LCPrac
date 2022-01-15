@@ -26,12 +26,13 @@ public:
         sort(nums.begin(), nums.end(), greater<int>());
         if (nums[0] > target)  return false;
 
-        vector<bool> vis(n);
+        bool vis[n];    // avoid using vector<bool>
+        fill_n(vis, n, false);
         return backtrack(nums, 0, target, 0, k, vis);
     }
 
 private:
-    static bool backtrack(const vector<int> &nums, int start, const int &target, int cur, int k, vector<bool> &vis) {
+    static bool backtrack(const vector<int> &nums, int start, const int &target, int cur, int k, bool vis[]) {
         if (k == 1)  return true;
         if (cur == target) {
             // partition

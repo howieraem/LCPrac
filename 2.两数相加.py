@@ -3,6 +3,10 @@
 #
 # [2] 两数相加
 #
+class ListNode:
+    def __init__(self, x):
+        self.val = x
+        self.next = None
 
 # @lc code=start
 # Definition for singly-linked list.

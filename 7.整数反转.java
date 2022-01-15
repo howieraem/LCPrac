@@ -8,7 +8,7 @@
 class Solution {
     public int reverse(int x) {
         int ans = 0;
-        int preMax = Integer.MAX_VALUE / 10, preMin = Integer.MIN_VALUE / 10;
+        final int preMax = Integer.MAX_VALUE / 10, preMin = Integer.MIN_VALUE / 10;
         while (x != 0) {
             int pop = x % 10;
             // look ahead for potential overflow
