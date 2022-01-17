@@ -8,12 +8,15 @@
 class Solution {
     public int reverse(int x) {
         int ans = 0;
-        final int preMax = Integer.MAX_VALUE / 10, preMin = Integer.MIN_VALUE / 10;
+        final int preMax = Integer.MAX_VALUE / 10, 
+                  preMin = Integer.MIN_VALUE / 10, 
+                  preMaxRemainder = Integer.MAX_VALUE % 10,
+                  preMinRemainder = Integer.MIN_VALUE % 10;
         while (x != 0) {
             int pop = x % 10;
             // look ahead for potential overflow
-            if ((ans > preMax || (ans == preMax && pop > 7)) ||     // 7 是 2^31 - 1 的个位
-                (ans < preMin || (ans == preMin && pop < -8))) {    // 8 是 -2^31 的个位
+            if ((ans > preMax || (ans == preMax && pop > preMaxRemainder)) ||
+                (ans < preMin || (ans == preMin && pop < preMinRemainder))) {
                 return 0;
             }
 
