@@ -24,7 +24,7 @@ class Solution:
             # ss = ''.join(sorted(s))
             # visited[ss].append(s)
 
-            # Below is O(N), but be careful of overflow in other languages
+            # Below is O(N), but be careful of overflow in other programming languages
             key = 1
             for c in s:
                 # Use primes to ensure uniqueness of string encoding

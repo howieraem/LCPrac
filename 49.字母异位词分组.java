@@ -23,7 +23,7 @@ class Solution {
             // }
             // d.computeIfAbsent(key.toString(), k -> new ArrayList<>()).add(s);
 
-            // Below is faster for short strings, O(NlogN)
+            // Below is faster for short strings, O(N*log(N))
             char[] a = s.toCharArray();
             Arrays.sort(a);
             d.computeIfAbsent(String.valueOf(a), k -> new ArrayList<>()).add(s);
