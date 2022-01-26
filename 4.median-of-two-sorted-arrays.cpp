@@ -21,23 +21,34 @@ public:
             swap(nums1, nums2);
         }
 
+        // By definition, the array median can split the array into two equal-length portions.
+        // Say nums1 is split into left and right portions at i,
+        // and nums2 is split into left and right portions at j.
+        // After nums1 and nums2 are concatenated to one array A, if len(A) = n1 + n2 is even, 
+        // we can set i + j = n1 - i + n2 - j, such that:
+        //     median_A = (max(nums1[i - 1], nums2[j - 1]) + min(nums1[i], nums2[j])) / 2.0
+        // If n1 + n2 is odd, i + j = n1 - i + n2 - j + 1, we have:
+        //     median_A = max(nums1[i - 1], nums2[j - 1])
+        // For either case, j can be inferred from i:
+        //     j = (n1 + n2 + 1) / 2 - i
+        // and i can be found via binary search as nums1 is already sorted.
         const int n1 = nums1.size(), n2 = nums2.size(), k = (n1 + n2 + 1) >> 1;
-        int l = 0, r = n1;
+        int l = 0, r = n1;  // range of i
         while (l < r) {
-            int m1 = l + ((r - l) >> 1), m2 = k - m1;
-            if (nums1[m1] < nums2[m2 - 1])  l = m1 + 1;
-            else  r = m1;
+            int i = l + ((r - l) >> 1), j = k - i;
+            if (nums1[i] < nums2[j - 1])  l = i + 1;
+            else  r = i;
         }
 
-        // Check if indices of medians are out of range
-        int m1 = l, m2 = k - l;
+        // Check if split indices are out of bound
+        int i = l, j = k - l;
         int maxLeft = max(
-            m1 > 0 ? nums1[m1 - 1] : INT_MIN,
-            m2 > 0 ? nums2[m2 - 1] : INT_MIN);
+            i > 0 ? nums1[i - 1] : INT_MIN,
+            j > 0 ? nums2[j - 1] : INT_MIN);
         if ((n1 + n2) & 1)  return static_cast<double>(maxLeft);
         int minRight = min(
-            m1 < n1 ? nums1[m1] : INT_MAX,
-            m2 < n2 ? nums2[m2] : INT_MAX);
+            i < n1 ? nums1[i] : INT_MAX,
+            j < n2 ? nums2[j] : INT_MAX);
         return 0.5 * maxLeft + 0.5 * minRight;
     }
 };

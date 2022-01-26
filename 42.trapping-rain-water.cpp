@@ -8,6 +8,7 @@
 // @lc code=start
 class Solution {
 public:
+    // Idea: sum water amount of each bin (width = 1).
     // T: O(n)
     // S: O(1)
     int trap(vector<int>& height) {

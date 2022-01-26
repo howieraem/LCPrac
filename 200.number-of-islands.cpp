@@ -29,7 +29,7 @@ public:
                     ++ans;
                     grid[i][j] = '0';   // mark visited
 
-                    // For each island, do BFS and mark all island elements visited
+                    // For each island, do BFS and mark all cells of that current island visited
                     q.clear();
                     q.emplace_back(i, j);
                     while (q.size()) {
