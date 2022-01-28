@@ -16,7 +16,7 @@ class Solution {
     //     return ans;
     // }
 
-    // Make similar to Q53: do maxSubArray() on the array of interday price differences
+    // Made similar to Q53: do maxSubArray() on the array of interday price differences
     public int maxProfit(int[] prices) {
         int ans = 0, dp = 0;
         for (int i = 1; i < prices.length; ++i) {

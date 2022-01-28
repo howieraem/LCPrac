@@ -58,7 +58,9 @@ struct Node {
 class LRUCache {
     Node *head, *tail;
     int cap;
-    unordered_map<int, Node*> mp;   // maps key value to pointer to Node
+
+    // maps key value to pointer to Node
+    unordered_map<int, Node*> mp;
 
     void addToHead(Node* node) {
         node->pre = head;

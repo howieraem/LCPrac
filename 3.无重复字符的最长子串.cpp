@@ -12,27 +12,25 @@ class Solution {
 public:
     // Sliding window
     // T: O(n)
-    // S: O(1)
+    // S: O(s), s := alphabet size
     int lengthOfLongestSubstring(string s) {
-        unordered_map<char, int> window;
-        int l = 0, r = 0;
+        // unordered_map<char, int> window;
+        int window[255] {0};
+        
         int ans = 0;
-        while (r < s.size()) {
-            // Shift the right boundary
+        for (int l = 0, r = 0; r < s.size(); ++r) {
             char c = s[r];
-            ++r;
             ++window[c];
 
-            // If after including the rightmost character there is a duplicate,
+            // If including the current rightmost character there is a duplicate,
             // shift the left boundary and update the frequency.
             while (window[c] > 1) {
-                char d = s[l];
-                ++l;
+                char d = s[l++];
                 --window[d];
             }
 
             // Update maximum length found
-            ans = max(ans, r - l);
+            ans = max(ans, r - l + 1);
         }
         return ans;
     }
