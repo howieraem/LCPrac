@@ -11,13 +11,15 @@ using namespace std;
 // @lc code=start
 class Solution {
 public:
+    // T: O(n * maxWidth)
+    // S: O(maxWidth)
     vector<string> fullJustify(vector<string>& words, int maxWidth) {
         vector<string> res;
         
         for (int i = 0, j; i < words.size(); i = j) {
             // Find words and spaces needed for a line
             int width = 0;
-            for (j = i; j < words.size() && width + words[j].size() + j - i <= maxWidth; j++) {
+            for (j = i; j < words.size() && width + words[j].size() + j - i <= maxWidth; ++j) {
                 width += words[j].size();
             }
             int space = 1, extra = 0;
@@ -32,6 +34,8 @@ public:
                 // Add space between words
                 line += string(space, ' ');
                 if (extra-- > 0) {
+                    // Insert any extra spaces for the first few gaps 
+                    // between words
                     line.push_back(' ');
                 }
 

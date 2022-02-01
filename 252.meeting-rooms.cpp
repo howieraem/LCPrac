@@ -12,13 +12,14 @@ using std::vector;
 // @lc code=start
 class Solution {
 public:
-    // T: O(n*log(n)), S: O(1) (ignoring space complexity of std::sort())
+    // T: O(n * log(n))
+    // S: O(log(n)) (space complexity of std::sort())
     bool canAttendMeetings(vector<vector<int>>& intervals) {
-        sort(
-            intervals.begin(), intervals.end(), 
-            [](const auto &i1, const auto &i2) { 
-                return i1[0] < i2[0]; });
+        // Sort by start and then end
+        sort(intervals.begin(), intervals.end());
+
         for (int i = 1; i < intervals.size(); ++i) {
+            // If any intervals overlap, then it's impossible to attend these meetings
             if (intervals[i][0] < intervals[i - 1][1])  return false;
         }
         return true;

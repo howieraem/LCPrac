@@ -13,7 +13,7 @@ using std::vector;
 class Solution {
 public:
     // T: O(n*log(n))
-    // S: O(n) (ignoring space complexity of std::sort())
+    // S: O(n)
     int minMeetingRooms(vector<vector<int>>& intervals) {
         const int n = intervals.size();
         vector<int> starts(n, 0), ends(n, 0);
@@ -24,12 +24,14 @@ public:
         sort(starts.begin(), starts.end());
         sort(ends.begin(), ends.end());
 
-        int ans = 0, intervalEndIdx = 0;
+        int ans = 0, curEndIdx = 0;
         for (int i = 0; i < n; ++i) {
-            if (starts[i] < ends[intervalEndIdx]) {
+            if (starts[i] < ends[curEndIdx]) {
+                // Has overlap, must create a new room
                 ++ans;
             } else {
-                ++intervalEndIdx;
+                // No overlap, an existing room can be reused
+                ++curEndIdx;
             }
         }
         return ans;
