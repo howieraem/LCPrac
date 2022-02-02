@@ -17,9 +17,12 @@ public:
     
     // T: O(1)
     bool insert(int val) {
+        // Since duplicates are allowed, the value should be inserted regardless of
+        // whether it already exists.
         bool ret = val2Idxs.find(val) == val2Idxs.end();  // || !val2Idxs[val].size();
-        val2Idxs[val].push_back(vals.size()); 
-        vals.push_back({val, val2Idxs[val].size() - 1});
+        auto *val_idxs = &val2Idxs[val];
+        val_idxs->push_back(vals.size());   // k: val, v: val's index in vals
+        vals.push_back({val, val_idxs->size() - 1});  // (val, n_duplicates - 1)
         return ret;
     }
     
@@ -27,19 +30,20 @@ public:
     bool remove(int val) {
         bool ret = val2Idxs.find(val) != val2Idxs.end();  // && val2Idxs[val].size();
         if (ret) {  // val exists
-            auto back = vals.back();
+            auto back = vals.back();    // similar to Q380
             auto *val_idxs = &val2Idxs[val];
-            int val_idx = val_idxs->back();
-            val2Idxs[back.first][back.second] = val_idx;
-            vals[val_idx] = back;
-            val_idxs->pop_back();
+            int val_idx = val_idxs->back();     // use the latest index of val
+            val2Idxs[back.first][back.second] = val_idx;    // also need to update the index of the back value
+            vals[val_idx] = back;   // similar to Q380
+            vals.pop_back();        // similar to Q380
+            val_idxs->pop_back();   // removes the latest index of val
             if (!val_idxs->size()) {
                 // Erasing seems faster overall and saves memory
                 // than not erasing when the map value vector 
-                // becomes empty.
+                // becomes empty. There is no need to check 
+                // val2Idxs[val].size().
                 val2Idxs.erase(val);
             }
-            vals.pop_back();
         } 
         return ret;
     }

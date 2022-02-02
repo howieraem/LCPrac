@@ -3,47 +3,44 @@
  *
  * [227] 基本计算器 II
  */
-import java.util.LinkedList;
+import java.util.Stack;
 
 // @lc code=start
 class Solution {
     public int calculate(String s) {
-        LinkedList<Character> str = new LinkedList<>();
-        for (int i = 0; i < s.length(); ++i) {
-            str.add(s.charAt(i));
-        }
+        final int n = s.length();
+        char op = '+';
+        int num = 0, inter;
+        Stack<Integer> nums = new Stack<>();
 
-        char sign = '+';
-        int num = 0;
-        LinkedList<Integer> nums = new LinkedList<>();
-
-        while (!str.isEmpty()) {
-            char c = str.pollFirst();
-            if (Character.isDigit(c)) {
+        char[] str = s.toCharArray();
+        for (int i = 0; i < n; ++i) {
+            char c = str[i];
+            boolean isDigit = Character.isDigit(c);
+            if (isDigit) {
                 num = 10 * num + (int) (c - '0');
             }
 
-            if ((!Character.isDigit(c) && c != ' ') || str.isEmpty()) {
+            if ((!isDigit && c != ' ') || i == n - 1) {
                 // character denotes an operator, or has reached the end of expression
-                int inter;
-                switch (sign) {
+                switch (op) {
                     case '+':
-                        nums.addLast(num);
+                        nums.add(num);
                         break;
                     case '-':
-                        nums.addLast(-num);
+                        nums.add(-num);
                         break;
                     case '*':
-                        inter = nums.pollLast();
-                        nums.addLast(inter * num);
+                        inter = nums.pop();
+                        nums.add(inter * num);
                         break;
                     case '/':
-                        inter = nums.pollLast();
-                        nums.addLast(inter / num);
+                        inter = nums.pop();
+                        nums.add(inter / num);
                         break;
                 }
                 num = 0;
-                sign = c;
+                op = c;
             }
         }
 

@@ -8,6 +8,8 @@
 // @lc code=start
 class Solution {
 public:
+    // T: O(log10(x))
+    // S: O(1)
     int reverse(int x) {
         int ans = 0;
         const int MAX = INT_MAX / 10, 
@@ -16,13 +18,12 @@ public:
                   MIN_R = INT_MIN % 10;
         
         while (x) {
-            int u = x % 10;
+            int u = x % 10; // least significant digit
             if (ans > MAX || (ans == MAX && u > MAX_R) || ans < MIN || (ans == MIN && u < MIN_R)) {
                 // overflow
                 return 0;
             }
-            ans *= 10;
-            ans += u;
+            ans = ans * 10 + u;
             x /= 10;
         }
 

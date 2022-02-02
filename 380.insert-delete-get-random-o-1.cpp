@@ -18,7 +18,7 @@ public:
     // T: O(1)
     bool insert(int val) {
         if (val2Idx.find(val) != val2Idx.end())  return false;
-        // Since a set cannot contain duplicates, it is fine to overwrite the index
+        // Since a set cannot contain duplicates, it is fine to overwrite its index
         val2Idx[val] = vals.size(); 
         vals.push_back(val);
         return true;
@@ -28,6 +28,11 @@ public:
     bool remove(int val) {
         if (val2Idx.find(val) == val2Idx.end())  return false;
         int back = vals.back(), idx = val2Idx[val];
+        // When a value is being removed, replace it with the back of
+        // the value collection and update the corresponding index.
+        // Then, this back value can be safely popped from the value
+        // collection and the value being removed can be erased from
+        // the map.
         vals[idx] = back;
         val2Idx[back] = idx;
         vals.pop_back();
