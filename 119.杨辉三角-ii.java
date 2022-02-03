@@ -12,6 +12,7 @@ class Solution {
         List<Integer> res = new ArrayList<>();
         res.add(1);
         for (int i = 1; i < rowIndex; ++i) {
+            // C(n, i) = C(n, i - 1) * (n - i + 1) / i
             long ret = (long) res.get(i - 1) * (long) (rowIndex + 1 - i) / i;
             res.add((int) ret);
         }

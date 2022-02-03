@@ -7,6 +7,8 @@ import java.util.*;
 
 // @lc code=start
 class Solution {
+    // It turns out res[i][j] equals iCj (the number of combinations of 
+    // j items sampled from i items without replacement)
     public List<List<Integer>> generate(int numRows) {
         List<List<Integer>> res = new ArrayList<>();
         if (numRows < 1)  return res;
@@ -14,10 +16,10 @@ class Solution {
         first.add(1);
         res.add(first);
         for (int i = 1; i < numRows; ++i) {
-            List<Integer> cur = new ArrayList<>(), pre = res.get(i-1);
+            List<Integer> cur = new ArrayList<>(), pre = res.get(i - 1);
             cur.add(1);
             for (int j = 1; j < i; ++j) {
-                cur.add(pre.get(j-1)+pre.get(j));
+                cur.add(pre.get(j - 1) + pre.get(j));
             }
             cur.add(1);
             res.add(cur);
