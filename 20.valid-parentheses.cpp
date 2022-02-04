@@ -4,8 +4,10 @@
  * [20] Valid Parentheses
  */
 #include <stack>
+#include <string>
 
 using std::stack;
+using std::string;
 
 // @lc code=start
 class Solution {

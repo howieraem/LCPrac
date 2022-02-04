@@ -3,14 +3,16 @@
  *
  * [560] 和为K的子数组
  */
-#include <vector>
 #include <unordered_map>
+#include <vector>
 
 using namespace std;
 
 // @lc code=start
 class Solution {
 public:
+    // T: O(n)
+    // S: O(n)
     int subarraySum(vector<int>& nums, int k) {
         unordered_map<int, int> mp;
         mp[0] = 1;
@@ -18,10 +20,12 @@ public:
 
         for (int i = 0; i < nums.size(); ++i) {
             sum += nums[i];
+
+            // Sum of a subarray sum(nums[i:j + 1]) = prefix_sum[j] - prefix_sum[i - 1]
             if (mp.find(sum - k) != mp.end()) {
                 cnt += mp[sum - k];
             }
-            mp[sum]++;
+            ++mp[sum];
         }
         return cnt;
     }

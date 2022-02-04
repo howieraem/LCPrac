@@ -3,6 +3,9 @@
  *
  * [680] Valid Palindrome II
  */
+#include <string>
+
+using std::string;
 
 // @lc code=start
 class Solution {
@@ -23,7 +26,7 @@ public:
     }
 
 private:
-    bool isPalindrome(string s, int l, int r, const int &n) {
+    bool isPalindrome(const string &s, int l, int r, const int &n) {
         for (; l < r; ++l, --r) {
             if (s[l] != s[r])  return false;
         }

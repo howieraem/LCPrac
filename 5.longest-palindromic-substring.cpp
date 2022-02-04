@@ -61,8 +61,8 @@ public:
     }
 
 private:
-    // Tries extending the palindrome s[l:r+1] to both left and right, and updates the 
-    // maximum length and the final start index of that palindrome
+    // Tries extending the palindrome s[l:r+1] to both left and right, and updates
+    // the maximum length and the final start index of that palindrome
     static void extendPalindrome(string s, int l, int r, int &res_len, int &res_start) {
         while (l >= 0 && r < s.size() && s[l] == s[r]) {
             --l, ++r;

@@ -16,10 +16,13 @@ class Solution {
         for (int num : nums) {
             curSum += num;
             int diff = curSum - k;
+
+            // Sum of a subarray sum(nums[i:j + 1]) = prefix_sum[j] - prefix_sum[i]
             if (prefixSumFreq.containsKey(diff)) {
                 ans += prefixSumFreq.get(diff);
             }
-            prefixSumFreq.put(curSum, prefixSumFreq.getOrDefault(curSum, 0) + 1);
+            prefixSumFreq.put(
+                curSum, prefixSumFreq.getOrDefault(curSum, 0) + 1);
         }
         return ans;
     }
