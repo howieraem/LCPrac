@@ -47,10 +47,10 @@ class Solution {
     //     return res;
     // }
 
-    // Method 3: Quick select (worse O(N^2), expected O(N))
+    // Method 3: Quick select (worst O(N^2), expected O(N))
     public int[][] kClosest(int[][] points, int k) {
-        int n = points.length;
-        if (n <= k)  return points;     // avoid index out of bound
+        final int n = points.length;
+        if (n == k)  return points;     // avoid index out of bound
         quickSelect(points, 0, n - 1, k);
         return Arrays.copyOfRange(points, 0, k);
     }
