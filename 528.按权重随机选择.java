@@ -24,8 +24,8 @@ import java.util.Random;
  */
 class Solution {
     private int[] prefixSum;
-    int n, sum;
-    Random rand = new Random();
+    private int n, sum;
+    private Random rand = new Random();
 
     public Solution(int[] w) {
         n = w.length;
