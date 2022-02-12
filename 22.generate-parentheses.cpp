@@ -24,8 +24,8 @@ class Solution {
             res.push_back(path);
             return;
         }
-        // As path + '(' or path + ')' will create a new string,
-        // space complexity is better with passing path by reference 
+        // As `path + '('` or `path + ')'` will create a new string,
+        // space complexity is better with passing `path` by reference 
         // and using push_back() and pop_back(). 
         if (nLeft) {
             // backtrack(path + '(', nLeft - 1, nRight, res);

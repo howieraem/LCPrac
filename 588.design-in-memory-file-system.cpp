@@ -13,7 +13,7 @@ using namespace std;
 /* Solution inspired by Trie */
 class FileSystem {
     struct Node {
-        map<string, Node*> children;    // keys are ordered
+        map<string, Node*> children;    // keys are ordered, required by `ls()`
         string name, content;
         bool is_file;   // In reality, this is not the same as `!content.empty()`
 

@@ -12,13 +12,12 @@ using std::vector;
 // @lc code=start
 class Solution {
 public:
+    // T: O(m * n), m := average word length, n := the number of words
     string longestCommonPrefix(vector<string>& strs) {
         string ans = strs[0];
         for (int i = 1; i < strs.size(); ++i) {
             int j;
-            for (j = 0; j < strs[i].size(); ++j) {
-                if (ans[j] != strs[i][j])  break;
-            }
+            for (j = 0; j < strs[i].size() && ans[j] == strs[i][j]; ++j);
             ans = ans.substr(0, j);
             if (ans.empty())  return ans;
         }
