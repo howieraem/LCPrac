@@ -28,13 +28,14 @@ struct ListNode {
  */
 class Solution {
 public:
-    // T: O(k*log(k)*n), k := the number of lists, n := avg. length of list
-    // S: O(k*n) (recursion stacks)
+    // T: O(n * log(k)), k := the number of lists, n := avg. length of list
+    // S: O(n * k) (recursion stacks)
     ListNode* mergeKLists(vector<ListNode*>& lists) {
         return partition(lists, 0, lists.size() - 1);
     }
 
 private:
+    // S: O(k)
     static ListNode* partition(vector<ListNode*>& lists, int l, int r) {
         if (l == r)  return lists[l];   // the number of linked lists is odd
         else if (l > r)  return nullptr;
@@ -46,7 +47,8 @@ private:
         }
     }
 
-    // Recursively merges two lists, avoids creating a dummy node
+    // Recursively merges two lists, avoids creating a dummy node (but recursion stack exists)
+    // S: O(n)
     static ListNode* merge(ListNode* l1, ListNode* l2) {
         if (!l1)  return l2;
         if (!l2)  return l1;

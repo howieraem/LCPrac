@@ -7,12 +7,12 @@
 // @lc code=start
 class Solution {
     public int shipWithinDays(int[] weights, int D) {
-        int min = Integer.MAX_VALUE, sum = 0;
+        int max = Integer.MIN_VALUE, sum = 0;
         for (int w : weights) {
-            min = Math.min(min, w);
+            max = Math.max(max, w);
             sum += w;
         }
-        int l = min, r = sum + 1;
+        int l = max, r = sum;
         // Find lower bound (min. capacity required)
         while (l < r) {
             int m = l + ((r - l) >> 1);
@@ -36,22 +36,6 @@ class Solution {
         }
         return false;
     }
-
-    // private int getMax(int[] arr) {
-    //     int ans = Integer.MIN_VALUE;
-    //     for (int n : arr) {
-    //         ans = Math.max(ans, n);
-    //     }
-    //     return ans;
-    // }
-
-    // private int getSum(int[] arr) {
-    //     int ans = 0;
-    //     for (int n : arr) {
-    //         ans += n;
-    //     }
-    //     return ans;
-    // }
 }
 // @lc code=end
 

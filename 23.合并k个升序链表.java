@@ -24,6 +24,8 @@ class ListNode {
  * }
  */
 class Solution {
+    // T: O(n * log(k)), n := avg list length, k := the number of lists
+    // S: O(k) (recursion stack)
     public ListNode mergeKLists(ListNode[] lists) {
         return helper(lists, 0, lists.length - 1);
     }
@@ -36,8 +38,9 @@ class Solution {
         return merge2Lists(helper(lists, l, mid), helper(lists, mid + 1, r));
     }
 
+    // T: O(n)
+    // S: O(1)
     private ListNode merge2Lists(ListNode a, ListNode b) {
-        // O(N)
         if (a == null || b == null)  return a != null ? a : b;
         ListNode dummy = new ListNode(-1);
         ListNode cur = dummy, curA = a, curB = b;

@@ -11,9 +11,12 @@ using namespace std;
 
 // @lc code=start
 class Solution {
+    static constexpr int D[] {0, 1, 0, -1, 0};
+
 public:
+    // Solution 1: DFS
     // T: O(m * n)
-    // S: O(m * n) or O(1)?
+    // S: O(m * n)
     int numDistinctIslands(vector<vector<int>>& grid) {
         unordered_set<string> islands;
         for (int i = 0; i < grid.size(); ++i) {
@@ -26,9 +29,8 @@ public:
                 // DFS directions from the reference point.
                 if (grid[i][j]) {
                     string island;
-                    if (dfs(grid, i, j, island, 'o')) {
-                        islands.insert(island);
-                    }
+                    dfs(grid, i, j, island, 'o');
+                    islands.insert(island);
                 }
             }
         }
@@ -36,22 +38,57 @@ public:
     }
 
 private:
-    /**
-     * Returns true if the island is new.
-     */
-    static bool dfs(vector<vector<int>> &grid, int i, int j, string &island, char dirn) {
+    static void dfs(vector<vector<int>> &grid, int i, int j, string &island, char dirn) {
         if (i < 0 || i == grid.size() || j < 0 || j == grid[i].size() || !grid[i][j]) {
-            return false;
+            return;
         }
         island.push_back(dirn);
         grid[i][j] = 0;     // mark visited
-        dfs(grid, i - 1, j, island, 'u');
-        dfs(grid, i + 1, j, island, 'd');
-        dfs(grid, i, j - 1, island, 'l');
-        dfs(grid, i, j + 1, island, 'r');
-        island.push_back('b');
-        return true;
+        for (int d = 0; d < 4; ++d) {
+            dfs(grid, i + D[d], j + D[d + 1], island, d + '0');
+        }
+        island.push_back('b');  // REQUIRED
     }
+
+    /*
+    // Solution 2: BFS
+    // T: O(m * n)
+    // S: O(m * n)
+    int numDistinctIslands(vector<vector<int>>& grid) {
+        queue<pair<int, int>> q;
+        string island;
+        unordered_set<string> islands;
+        const int m = grid.size(), n = grid[0].size();
+        
+        for (int i = 0; i < m; ++i) {
+            for (int j = 0; j < n; ++j) {
+                if (grid[i][j]) {
+                    q.push({i, j});
+                    grid[i][j] = 0;
+                    island = ",";
+                    
+                    while (q.size()) {
+                        const auto &[r, c] = q.front();
+                        for (int d = 0; d < 4; ++d) {
+                            int nr = r + D[d], nc = c + D[d + 1];
+
+                            if (nr >= 0 && nr < m && nc >= 0 && nc < n && grid[nr][nc]) {
+                                grid[nr][nc] = 0;
+                                q.push({nr, nc});
+                                island.push_back(d + '0');
+                            }
+                        }
+                        island.push_back(',');
+                        q.pop();
+                    }
+                    
+                    islands.insert(island);
+                }
+            }
+        }
+        return islands.size();
+    }
+    */
 };
 // @lc code=end
 

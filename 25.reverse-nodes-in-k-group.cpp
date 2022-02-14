@@ -56,6 +56,7 @@ public:
             pre->next = reverse(start);
             start->next = tmp;
 
+            // Prepare for next round of reversing k nodes
             pre = end = start;
         }
         return dummy->next;
