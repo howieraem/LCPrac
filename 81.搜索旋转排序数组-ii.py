@@ -9,15 +9,12 @@ from typing import List
 class Solution:
     def search(self, nums: List[int], target: int) -> bool:
         """Best case: no repetition, O(log(N)); worse case: mostly repeated, O(N)."""
-        n = len(nums)
-        if not n:
-            return False
-        low, high = 0, n-1
+        low, high = 0, len(nums)-1
         while low <= high:
             mid = (low + high) >> 1
             if nums[mid] == target:
                 return True
-            if nums[low] < nums[mid]:
+            elif nums[low] < nums[mid]:
                 if nums[low] <= target < nums[mid]:
                     high = mid-1    # search in lower half
                 else:   # target > nums[mid]
@@ -32,6 +29,6 @@ class Solution:
         return False
 
 # @lc code=end
-s = Solution()
-nums = [1, 3, 1, 1, 1]
-print(s.search(nums, 3))
+# s = Solution()
+# nums = [1, 3, 1, 1, 1]
+# print(s.search(nums, 3))

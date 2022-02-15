@@ -38,13 +38,13 @@ struct PairHash {
 };
 
 class Solution {
-    static constexpr int DIRN[5] = {-1, 0, 1, 0, -1};
+    static constexpr int DIRN[] {0, 1, 0, -1, 0};
 
     void dfs(Robot& robot, int x, int y, int dirn, unordered_set<pair<int, int>, PairHash> &visited) {
         robot.clean();
         visited.insert(pair<int, int>(x, y));
         for (int d = 0; d < 4; ++d) {
-            int newDirn = (dirn + d) & 3;   // % 4
+            int newDirn = (dirn + d) & 3;   // % 4, REQUIRED VARIABLE
             int nx = x + DIRN[newDirn], ny = y + DIRN[newDirn + 1];
             if (visited.find(pair<int, int>(nx, ny)) == visited.end() && robot.move()) {
                 dfs(robot, nx, ny, newDirn, visited);

@@ -36,5 +36,5 @@ def numInvalid(string: str):
     
 
 # @lc code=end
-s = Solution()
-print(s.restoreIpAddresses('101023'))
+# s = Solution()
+# print(s.restoreIpAddresses('101023'))

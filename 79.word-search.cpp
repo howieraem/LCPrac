@@ -21,7 +21,7 @@ public:
     }
 
 private:
-    static constexpr int D[5] {-1, 0, 1, 0, -1};
+    static constexpr int D[] {-1, 0, 1, 0, -1};
 
     // T: O(3 ^ l) (Though 4 adjacencies for each cell in the middle, the adjancency that is the previous step should not be counted)
     static bool backtrack(vector<vector<char>> &b, const string &w, int r, int c, int wi) {
