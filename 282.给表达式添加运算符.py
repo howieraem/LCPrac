@@ -3,7 +3,7 @@
 #
 # [282] 给表达式添加运算符
 #
-
+from typing import *
 
 # @lc code=start
 class Solution:

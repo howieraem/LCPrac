@@ -63,7 +63,7 @@ class Solution {
         // Swap elements, such that in terms of distance to origin, 
         // elements on the left of pivot are less than pivot, and
         // elements on the right of pivot are greater than pivot
-        int l = start, r = end;
+        int l = start + 1, r = end;
         while (l <= r) {
             if (calcD(points[l]) <= pivot) {
                 // Element on the left of pivot already less than pivot,

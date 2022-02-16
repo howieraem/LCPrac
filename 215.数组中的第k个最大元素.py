@@ -10,7 +10,7 @@ class Solution:
     def findKthLargest(self, nums: List[int], k: int) -> int:
         shuffle(nums)   # randomize to get better pivots
         l, r = 0, len(nums) - 1
-        target = len(nums) - k
+        target = len(nums) - k  # kth largest, (n-k)th smallest
         while l < r:
             mid = self.quickSelect(nums, l, r)
             if mid == target:

@@ -22,7 +22,7 @@ public:
 
 private:
     static void quickSelect(vector<int> &nums, int begin, int end, const int &k) {
-        int pivot = nums[begin], l = begin, r = end;
+        int pivot = nums[begin], l = begin + 1, r = end;
         while (l <= r) {
             if (nums[l] <= pivot) {
                 ++l;

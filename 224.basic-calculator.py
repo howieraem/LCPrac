@@ -1,11 +1,13 @@
 #
-# @lc app=leetcode id=772 lang=python3
+# @lc app=leetcode id=224 lang=python3
 #
-# [772] Basic Calculator III
+# [224] Basic Calculator
 #
 
 # @lc code=start
 class Solution:
+    # T: O(n)
+    # S: O(n_brackets)
     def calculate(self, s: str) -> int:
         i = 0
         n = len(s)
@@ -28,17 +30,11 @@ class Solution:
 
                 # Deal with operations when c is an operator or 
                 # the index i has reached the end of s
-                # if (not is_digit and c != ' ') or i == n:
-                if not is_digit or i == n:
+                if (not is_digit and c != ' ') or i == n:
                     if pre_op == '+':
                         nums.append(num)
                     elif pre_op == '-':
                         nums.append(-num)
-                    elif pre_op == '*':
-                        nums[-1] *= num
-                    elif pre_op == '/':
-                        # nums[-1] //= num won't work for negative num 
-                        nums[-1] = int(nums[-1] / num)
                     
                     num = 0
                     pre_op = c
@@ -49,6 +45,7 @@ class Solution:
             return sum(nums)
 
         return helper(s)
-        
+
+
 # @lc code=end
 

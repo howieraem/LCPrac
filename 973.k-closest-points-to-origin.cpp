@@ -3,6 +3,8 @@
  *
  * [973] K Closest Points to Origin
  */
+#include <algorithm>
+#include <random>
 #include <vector>
 
 using std::swap;
@@ -21,6 +23,11 @@ public:
     vector<vector<int>> kClosest(vector<vector<int>>& points, int k) {
         const int n = points.size();
         if (k == n)  return points;
+
+        // Shuffling helps quick sort and quick select
+        auto rng = std::default_random_engine {};
+        std::shuffle(std::begin(points), std::end(points), rng);
+        
         quickSelect(points, 0, n - 1, k);
         points.resize(k);
         return points;
@@ -28,7 +35,7 @@ public:
 
 private:
     static void quickSelect(vector<vector<int>>& points, int begin, int end, const int &k) {
-        int pivot = dist(points[begin]), l = begin, r = end;
+        int pivot = dist(points[begin]), l = begin + 1, r = end;
         while (l <= r) {
             if (dist(points[l]) <= pivot) {
                 ++l;
