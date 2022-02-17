@@ -10,7 +10,7 @@ using namespace std;
 
 // @lc code=start
 class Solution {
-    static constexpr int D[5] {-1, 0, 1, 0, -1};
+    static constexpr int D[] {-1, 0, 1, 0, -1};
 
 public:
     // T: O(m * n)

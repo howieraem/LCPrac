@@ -17,7 +17,7 @@ public:
     // S: O(n)
     string decodeString(string s) {
         string cur;
-        int mult;
+        int mult = 0;
         stack<pair<int, string>> stk;
 
         for (const auto &c : s) {
