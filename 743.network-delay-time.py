@@ -3,6 +3,7 @@
 #
 # [743] Network Delay Time
 #
+from cmath import inf
 import heapq
 from typing import List
 
@@ -15,9 +16,8 @@ class Solution:
         for u, v, w in times:
             graph[u].append((v, w))
 
-        inf = float('inf')
-        dist = [inf] * n
-        dist[k - 1] = 0
+        dist_to_node = [inf] * n
+        dist_to_node[k - 1] = 0
 
         pq = []
         heapq.heappush(pq, (0, k))  # heapq implements min-heap
@@ -25,11 +25,12 @@ class Solution:
         while len(pq):
             _, u = heapq.heappop(pq)    # poll the edge with the least weight (time)
             for v, w in graph[u]:   # O(E)
-                if dist[v - 1] > dist[u - 1] + w:
-                    dist[v - 1] = dist[u - 1] + w
-                    heapq.heappush(pq, (dist[v - 1], v))    # O(log(V))?
+                if dist_to_node[u - 1] + w < dist_to_node[v - 1]:
+                    # Only visit if new distance is less
+                    dist_to_node[v - 1] = dist_to_node[u - 1] + w
+                    heapq.heappush(pq, (dist_to_node[v - 1], v))    # O(log(V))?
 
-        ans = max(dist)  # O(V)
+        ans = max(dist_to_node)  # O(V)
         return ans if ans != inf else -1
 
 

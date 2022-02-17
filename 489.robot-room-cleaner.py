@@ -3,7 +3,6 @@
 #
 # [489] Robot Room Cleaner
 #
-from collections import deque
 
 # @lc code=start
 # """
@@ -65,6 +64,10 @@ class Solution:
 
     @staticmethod
     def reset(robot):
+        # Because of the nature of robot.move(), if we want to 
+        # visit another direction from the previous step, we 
+        # need to go back and keep the current direction.
+
         # Turn 180 deg (reverse the direction)
         # (can also do turnRight() twice)
         robot.turnLeft()

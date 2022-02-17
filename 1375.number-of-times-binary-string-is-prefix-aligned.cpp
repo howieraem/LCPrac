@@ -21,6 +21,7 @@ public:
             // If the index of rightmost bit flipped equals to
             // the number of bits flipped, then all the bits
             // flipped are on the left.
+            // Flips are 1-indexed, so i + 1.
             ans += (rightmost == i + 1); 
         }
         return ans;
