@@ -13,7 +13,7 @@ class Solution:
             freq[c] += 1
         
         ans_begin = 0
-        ans_len = 100001
+        ans_len = 100001  # inf
         cur_freq = 0
 
         l = 0

@@ -27,7 +27,7 @@ public:
     }
 
 private:
-    static constexpr int DIRN[5] {-1, 0, 1, 0, -1};
+    static constexpr int DIRN[] {-1, 0, 1, 0, -1};
 
     static int dfs(vector<vector<int>> &matrix, int i, int j, vector<vector<int>> &memo) {
         if (memo[i][j])  return memo[i][j];

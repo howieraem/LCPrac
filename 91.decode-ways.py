@@ -14,7 +14,7 @@ class Solution:
         '''
         # Without state compression
         dp = [0] * (n + 1)
-        dp[0] = 1
+        dp[0] = 1   # base case: empty string
         dp[1] = int(s[0] != '0')
         
         for i in range(2, n + 1):
@@ -45,6 +45,8 @@ class Solution:
             pre1 = cur
 
         return cur
+
+        # FOLLOW-UP: Print all decodings
 
 
 # @lc code=end

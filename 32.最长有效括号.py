@@ -6,6 +6,7 @@
 
 # @lc code=start
 class Solution:
+    '''
     def longestValidParentheses(self, s: str) -> int:
         """Need to iterate twice, but space is O(1)."""
         n, left, right, curr_max = len(s), 0, 0, 0
@@ -29,6 +30,7 @@ class Solution:
             elif right < left:
                 left = right = 0
         return curr_max
+    '''
 
     def longestValidParentheses(self, s: str) -> int:
         """Stack approach, O(N) space."""
@@ -44,7 +46,7 @@ class Solution:
                     stack.append(i)
                 else:
                     # 如果栈不为空，当前右括号的下标减去栈顶元素即为「以该右括号为结尾的最长有效括号的长度」
-                    curr_max = max(curr_max, i-stack[-1])   # i-stack.peep()
+                    curr_max = max(curr_max, i-stack[-1])
         return curr_max
 
 # @lc code=end

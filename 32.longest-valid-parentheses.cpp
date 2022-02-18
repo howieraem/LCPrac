@@ -14,7 +14,6 @@ using std::string;
 // @lc code=start
 class Solution {
 public:
-    /*
     // iterate string once
     // T: O(N)
     // S: O(N)
@@ -35,8 +34,8 @@ public:
         }
         return ans;
     }
-    */
 
+    /*
     // iterate string twice
     // T: O(N)
     // S: O(1)
@@ -64,6 +63,7 @@ public:
         }
         return ans;
     }
+    */
 };
 // @lc code=end
 

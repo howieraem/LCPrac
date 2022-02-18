@@ -11,13 +11,13 @@ class Solution:
     # S: O(1)
     def removeDuplicates(self, nums: List[int]) -> int:
         n = len(nums)
-        i, j = 1, 0
-        while i < n:
-            if nums[j] != nums[i]:
-                j += 1
-                nums[j] = nums[i]
-            i += 1
-        return j + 1
+        cur, pre = 1, 0
+        while cur < n:
+            if nums[pre] != nums[cur]:
+                pre += 1
+                nums[pre] = nums[cur]
+            cur += 1
+        return pre + 1
 
 # @lc code=end
 
