@@ -27,7 +27,7 @@ class Solution:
         for w in words:
             cnt[w] += 1
         
-        heap = []
+        heap: List[Node] = []
 
         # To keep the space usage k, instead of simulating a max heap with 
         # elements (-c, w), define a node type with customized comparator,

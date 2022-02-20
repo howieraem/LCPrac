@@ -15,9 +15,9 @@ class Solution:
             last_idxs[int(x)] = i   # get the last indexes for each digit
 
         for i, x in enumerate(s):
-            for j in range(9, int(x), -1):
+            for y in range(9, int(x), -1):
                 # See if the current digit can be swapped with a greater one after
-                k = last_idxs[j]
+                k = last_idxs[y]
                 if k > i:
                     s[i], s[k] = s[k], s[i]
                     return int("".join(s))

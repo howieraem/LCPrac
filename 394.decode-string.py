@@ -3,12 +3,11 @@
 #
 # [394] Decode String
 #
-from collections import deque
 
 # @lc code=start
 class Solution:
     def decodeString(self, s: str) -> str:
-        stack = deque()
+        stack = []
         string = ""
         mult = 0
 

@@ -38,7 +38,7 @@ class Solution:
         root.right = self.helper(inorder, root_idx_in + 1, in_r, 
                                  postorder, post_l + left_subtree_size, post_r - 1)
         return root
-    
-        
+
+
 # @lc code=end
 

@@ -53,9 +53,7 @@ class SnakeGame:
             self.body.append(pre_tail)
             self.food_i += 1
             self.score += 1
-            return self.score
-
-        # normal move (no food eaten)
+        
         return self.score
 
 # Your SnakeGame object will be instantiated and called as such:

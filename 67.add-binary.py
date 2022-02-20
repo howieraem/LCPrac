@@ -11,7 +11,7 @@ class Solution:
     def addBinary(self, a: str, b: str) -> str:
         i, j = len(a), len(b)
         l = (max(i, j) + 1)
-        res = [0] * l
+        res = ['0'] * l
         carry = 0
 
         # As we add a and b from their least significant bits, 

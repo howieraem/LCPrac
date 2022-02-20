@@ -15,7 +15,7 @@ public:
     // S: O(s), s := alphabet size
     int lengthOfLongestSubstring(string s) {
         // unordered_map<char, int> window;
-        int window[255] {0};
+        int window[128] {0};
         
         int ans = 0;
         for (int l = 0, r = 0; r < s.size(); ++r) {

@@ -4,11 +4,11 @@
  * [200] Number of Islands
  */
 
-#include <deque>
+#include <queue>
 #include <vector>
 #include <utility>
 
-using std::deque;
+using std::queue;
 using std::pair;
 using std::vector;
 

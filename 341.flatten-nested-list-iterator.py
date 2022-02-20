@@ -3,7 +3,6 @@
 #
 # [341] Flatten Nested List Iterator
 #
-from collections import deque
 from typing import *
 
 class NestedInteger:
@@ -52,7 +51,7 @@ class NestedInteger:
 
 class NestedIterator:
     def __init__(self, nestedList: List[NestedInteger]):
-        self.stack: Deque[NestedInteger] = deque()
+        self.stack: List[NestedInteger] = []
         for i in range(len(nestedList) - 1, -1, -1):
             self.stack.append(nestedList[i])
     

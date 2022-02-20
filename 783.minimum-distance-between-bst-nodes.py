@@ -23,7 +23,7 @@ class Solution:
     # any two adjacent elements in the traversal result.
     def minDiffInBST(self, root: Optional[TreeNode]) -> int:
         cur_min = 2**31 - 1
-        pre = None
+        pre: TreeNode = None
 
         def inorder(node: TreeNode):
             nonlocal cur_min, pre

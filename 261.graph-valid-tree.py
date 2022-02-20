@@ -48,9 +48,7 @@ class Solution:
     def validTree(self, n: int, edges: List[List[int]]) -> bool:
         uf = UF(n)  
         for p, q in edges:
-            ret = uf.union(p, q)
-            # print(p, q, ret)
-            if not ret:
+            if not uf.union(p, q):
                 # If p and q are already connected,
                 # then there must exist a cycle
                 return False

@@ -15,7 +15,7 @@ class Solution:
         """
         n = len(matrix)
 
-        # Swap/shift the 4 corners, from outer to inner
+        # Swap/shift 4 corners each time
         for i in range(n >> 1):
             for j in range(n - (n >> 1)):
                 # 90 deg clockwise

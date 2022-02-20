@@ -19,6 +19,7 @@ class Solution:
                 return dp[state]
 
             if i == n:
+                # return 1 if cur == target else 0
                 return cur == target
 
             pos = memo_dfs(i + 1, cur + nums[i])

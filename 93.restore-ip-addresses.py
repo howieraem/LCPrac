@@ -33,38 +33,43 @@ class Solution:
     # S: O(n)
     def restoreIpAddresses(self, s: str) -> List[str]:
         res = []
-        if 4 <= len(s) <= 12:
-            self.helper("", s, 0, 0, res)
+        n = len(s)
+
+        if 4 <= n <= 12:
+            # PRUNE 0: avoid impossible lengths
+
+            def dfs(path: str, i: int, cnt: int):
+                if cnt == 4:
+                    if i == n:
+                        res.append(path)
+                    return
+                
+                for l in range(1, 4):
+                    j = i + l
+
+                    if j > n:
+                        # PRUNE 1: index out of bound
+                        break
+                    
+                    if l != 1 and s[i] == '0':
+                        # PRUNE 2:
+                        # Unless segment length is 1 (the case '0'),
+                        # segment cannot start with '0'
+                        break
+                    
+                    seg = s[i:j]
+                    if int(seg) < 256:
+                        # PRUNE 3: Segment cannot be greater than 255
+                        new_path = path + seg
+                        if cnt < 3:
+                            # Avoid adding a trailing dot to the restored IP
+                            new_path += '.'
+                        dfs(new_path, j, cnt + 1)
+
+            dfs("", 0, 0)
+
         return res
 
-    @staticmethod
-    def helper(path: str, s: str, i: int, cnt: int, res: list):
-        if cnt == 4:
-            if i == len(s):
-                res.append(path)
-            return
-        
-        for l in range(1, 4):
-            j = i + l
-
-            if j > len(s):
-                # PRUNE 1: index out of bound
-                break
-            
-            if l != 1 and s[i] == '0':
-                # PRUNE 2:
-                # Unless segment length is 1 (the case '0'),
-                # segment cannot start with '0'
-                break
-            
-            seg = s[i:j]
-            if int(seg) < 256:
-                # PRUNE 3: Segment cannot be greater than 255
-                new_path = path + seg
-                if cnt < 3:
-                    # Avoid adding a trailing dot to the restored IP
-                    new_path += '.'
-                Solution.helper(new_path, s, j, cnt + 1, res)
 
         
 # @lc code=end
