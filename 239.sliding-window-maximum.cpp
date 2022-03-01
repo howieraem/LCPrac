@@ -24,7 +24,7 @@ public:
 
             // dq.front() is the index of the maximum number
             // in the current sliding window
-            while (!dq.empty() && nums[i] > nums[dq.back()]) {
+            while (!dq.empty() && nums[dq.back()] < nums[i]) {
                 dq.pop_back();
             }
 
