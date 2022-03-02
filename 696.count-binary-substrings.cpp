@@ -12,7 +12,9 @@ using namespace std;
 class Solution {
 public:
     /*
-    // Solution 1: two loops
+    // Solution 1: two loops with auxiliary count array
+    // T: O(n)
+    // S: O(n)
     int countBinarySubstrings(string s) {
         vector<int> contiguousLen;
         int cnt = 1;
@@ -38,6 +40,8 @@ public:
     */
 
     // Solution 2: optimized version of solution 1, only one loop
+    // T: O(n)
+    // S: O(1)
     int countBinarySubstrings(string s) {
         int cur = 1, pre = 0, ans = 0;
         for (int i = 1; i < s.size(); ++i) {

@@ -70,9 +70,9 @@ class Solution {
     public List<String> findWords(char[][] board, String[] words) {
         b = board;
         m = board.length; 
-        if (m == 0)  return new ArrayList<>();
+        // if (m == 0)  return new ArrayList<>();
         n = board[0].length;
-        if (n == 0)  return new ArrayList<>();
+        // if (n == 0)  return new ArrayList<>();
         
         root = new TrieNode();
         for (String w : words) {
