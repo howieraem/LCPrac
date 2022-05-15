@@ -18,5 +18,5 @@ class Solution:
         return "/" + "/".join(stack)
         
 # @lc code=end
-s = Solution()
-print(s.simplifyPath('/a//b////c/d//././/..'))
+# s = Solution()
+# print(s.simplifyPath('/a//b////c/d//././/..'))
