@@ -21,7 +21,7 @@ class Solution:
         node = ListNode(None)
         node.next = head
         fast, slow = node, node
-        for i in range(n):
+        for _ in range(n):
             fast = fast.next
         while fast.next is not None:
             fast = fast.next
