@@ -46,13 +46,15 @@ class Solution {
         traverse(root, 0, 0);
 
         List<List<Integer>> res = new ArrayList<>();
+
         // Use tree maps to keep the order of columns and their contents
         for (Map.Entry<Integer, Map<Integer, Integer>> c : d.entrySet()) {
             Map<Integer, Integer> column = c.getValue();
             List<Integer> colRes = new ArrayList<>();
             for (Map.Entry<Integer, Integer> e : column.entrySet()) {
+                int val = e.getKey() % 10000;
                 for (int i = 0; i < e.getValue(); ++i) {
-                    colRes.add(e.getKey() % 10000);
+                    colRes.add(val);
                 }
             }
             res.add(colRes);
@@ -63,7 +65,7 @@ class Solution {
     private void traverse(TreeNode root, int row, int col) {
         if (root == null)  return;
         Map<Integer, Integer> column = d.computeIfAbsent(col, k -> new TreeMap<>());
-        // Column results ordered by row and if same row by value
+        // Column results ordered by row and then by value (if same row)
         int key = row * 10000 + root.val;
         // In case duplicate values exist, need to store the count as well
         column.put(key, column.getOrDefault(key, 0) + 1);

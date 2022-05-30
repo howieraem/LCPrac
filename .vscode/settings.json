@@ -80,5 +80,6 @@
         "filesystem": "cpp",
         "iterator": "cpp",
         "*.tcc": "cpp"
-    }
+    },
+    "editor.detectIndentation": true
 }

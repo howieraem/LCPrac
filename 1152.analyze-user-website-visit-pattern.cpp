@@ -12,7 +12,7 @@ public:
     // S: O(n ^ 3)
     std::vector<std::string> mostVisitedPattern(
             std::vector<std::string>& username, std::vector<int>& timestamp, std::vector<std::string>& website) {
-        // Preprocess data: user -> timestamp -> website
+        // Preprocess data: user => timestamp => website
         std::unordered_map<std::string, std::map<int, std::string>> user_data;
         for (int i = 0; i < username.size(); ++i) {
             user_data[username[i]][timestamp[i]] = website[i];
