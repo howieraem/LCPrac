@@ -7,8 +7,8 @@
 // @lc code=start
 class Solution {
     public void gameOfLife(int[][] board) {
-        int[] dx = {-1, 0, 1, -1, 1, -1, 0, 1};
-        int[] dy = {-1, -1, -1, 0, 0, 1, 1, 1};
+        final int[] dx = {-1, 0, 1, -1, 1, -1, 0, 1};
+        final int[] dy = {-1, -1, -1, 0, 0, 1, 1, 1};
 
         for (int i = 0; i < board.length; ++i) {
             for (int j = 0 ; j < board[0].length; ++j) {
