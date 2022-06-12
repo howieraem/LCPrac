@@ -33,7 +33,8 @@ public:
                 }
                 */
 
-                // Below keeps space complexity O(1) and seems to be faster
+                // Below keeps space complexity O(1) and seems to be faster,
+                // even though needs to reverse the digits
                 int k = j;
                 while (cnt) {
                     chars[j++] = (char) ((cnt % 10) + '0'); 

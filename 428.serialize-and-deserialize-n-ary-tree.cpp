@@ -1,7 +1,7 @@
 /*
- * @lc app=leetcode id=427 lang=cpp
+ * @lc app=leetcode id=428 lang=cpp
  *
- * [427] Serialize and Deserialize N-ary Tree
+ * [428] Serialize and Deserialize N-ary Tree
  */
 #include <bits/stdc++.h>
 

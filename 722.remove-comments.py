@@ -15,14 +15,14 @@ class Solution:
         block_comment = False
 
         for line in source:
-            i, n = 0, len(line)
-            while i < n:
-                if i < n - 1 and line[i:i + 2] == "//" and not block_comment:
+            i, l = 0, len(line)
+            while i < l:
+                if i < l - 1 and line[i:i + 2] == "//" and not block_comment:
                     break
-                elif i < n - 1 and line[i:i + 2] == "/*" and not block_comment:
+                elif i < l - 1 and line[i:i + 2] == "/*" and not block_comment:
                     block_comment = True
                     i += 1
-                elif i < n - 1 and line[i:i + 2] == "*/" and block_comment:
+                elif i < l - 1 and line[i:i + 2] == "*/" and block_comment:
                     block_comment = False
                     i += 1
                 elif not block_comment:
