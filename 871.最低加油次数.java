@@ -10,7 +10,7 @@ class Solution {
     // T: O(n * log(n))
     // S: O(n)
     public int minRefuelStops(int target, int startFuel, int[][] stations) {
-        int n = stations.length;
+        final int n = stations.length;
         if (n == 0)  return startFuel >= target ? 0 : -1;
 
         int ans = 0, cur = startFuel;
