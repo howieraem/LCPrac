@@ -81,6 +81,7 @@ public:
             }
         }
 
+        res.reserve(N_TWEETS_IN_FEED);
         int n = 0;
         while (pq.size() && n++ < N_TWEETS_IN_FEED) {
             Tweet* tweet = pq.top(); pq.pop();
