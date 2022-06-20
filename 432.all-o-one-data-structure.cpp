@@ -29,11 +29,8 @@ class AllOne {
 
     Bucket *head, *tail;
 
-    // maps key to count
-    unordered_map<string, int> cnts;
-
-    // maps key count to bucket pointer
-    unordered_map<int, Bucket*> mp;
+    // maps key to bucket pointer
+    unordered_map<string, Bucket*> mp;
 
     void remove_bucket(Bucket* bucket) {
         bucket->nxt->pre = bucket->pre;
@@ -46,27 +43,7 @@ class AllOne {
         bucket->keys.erase(k);
         if (bucket->keys.empty()) {
             remove_bucket(bucket);
-            mp.erase(bucket->cnt);
         }
-    }
-
-    void change(string k, int diff) {
-        int cnt = cnts[k], new_cnt = cnt + diff;
-        cnts[k] = new_cnt;
-        Bucket* pre_bucket = mp[cnt], *bucket;
-        if (mp.find(new_cnt) != mp.end()) {
-            bucket = mp[new_cnt];
-        } else {
-            bucket = new Bucket(new_cnt);
-            mp[new_cnt] = bucket;
-            if (diff == 1) {
-                pre_bucket->add_bucket_after(bucket);
-            } else {    // diff == -1
-                pre_bucket->pre->add_bucket_after(bucket);
-            }
-        }
-        bucket->keys.insert(k);
-        remove_key_from_bucket(pre_bucket, k);
     }
 
 public:
@@ -78,31 +55,44 @@ public:
     }
     
     void inc(string key) {
-        if (cnts.find(key) != cnts.end()) {
-            change(key, 1);
+        if (mp.find(key) != mp.end()) {
+            Bucket* bucket = mp[key];
+            if (bucket->cnt == bucket->nxt->cnt - 1) {
+                mp[key] = bucket->nxt;
+                bucket->nxt->keys.insert(key);
+            } else {    // counts not contiguous
+                Bucket* new_bucket = new Bucket(bucket->cnt + 1);
+                new_bucket->keys.insert(key);
+                mp[key] = new_bucket;
+                bucket->add_bucket_after(new_bucket);
+            }
+            remove_key_from_bucket(bucket, key);
         } else {
-            cnts[key] = 1;
-            Bucket* cur;
-            if (head->nxt->cnt != 1) {
+            Bucket* cur = head->nxt;
+            if (cur->cnt != 1) {
                 cur = new Bucket(1);
                 head->add_bucket_after(cur);
-            } else {
-                cur = head->nxt;
             }
             cur->keys.insert(key);
-            mp[1] = cur;
+            mp[key] = cur;
         }
     }
     
     void dec(string key) {
-        if (cnts.find(key) != cnts.end()) {
-            int cnt = cnts[key];
-            if (cnt == 1) {
-                cnts.erase(key);
-                remove_key_from_bucket(mp[1], key);
+        if (mp.find(key) != mp.end()) {
+            Bucket* bucket = mp[key];
+            if (bucket->cnt == 1) {
+                mp.erase(key);
+            } else if (bucket->cnt == bucket->pre->cnt + 1) {
+                bucket->pre->keys.insert(key);
+                mp[key] = bucket->pre;
             } else {
-                change(key, -1);
+                Bucket* new_bucket = new Bucket(bucket->cnt - 1);
+                new_bucket->keys.insert(key);
+                mp[key] = new_bucket;
+                bucket->pre->add_bucket_after(new_bucket);
             }
+            remove_key_from_bucket(bucket, key);
         }
     }
     
