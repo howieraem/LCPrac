@@ -12,12 +12,14 @@ using std::vector;
 // @lc code=start
 class Solution {
 public:
+    // T: O(n)
+    // S: O(n)
     vector<int> maxSlidingWindow(vector<int>& nums, int k) {
         deque<int> dq;
         vector<int> res;
 
         for (int i = 0; i < nums.size(); ++i) {
-            // slide the window
+            // slide the window, index of the previous maximum is outside the new window 
             if (!dq.empty() && dq.front() <= i - k) {
                 dq.pop_front();
             }

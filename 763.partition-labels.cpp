@@ -28,7 +28,7 @@ public:
         for (int i = 0; i < n; ++i) {
             end = max(end, lastIdxs[s[i] - 'a']);
             
-            // Greedy: Partition as many as possble, so just partition
+            // Greedy: Partition as many as possible, so just partition
             // at the last occurrence of a type of character.
             if (i == end) {
                 res.push_back(end - start + 1);

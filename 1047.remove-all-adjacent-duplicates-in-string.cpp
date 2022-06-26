@@ -12,8 +12,10 @@ class Solution {
 public:
     // In C++, pop operation can be done on std::string. No need to use 
     // an auxillary std::stack.
+    // T: O(n)
+    // S: O(1)
     string removeDuplicates(string s) {
-        string res = "";
+        string res;
         for (char& c : s) {
             if (res.size() && c == res.back())  res.pop_back();
             else  res.push_back(c);
