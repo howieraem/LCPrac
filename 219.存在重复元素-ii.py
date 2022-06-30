@@ -3,6 +3,7 @@
 #
 # [219] 存在重复元素 II
 #
+from typing import List
 
 # @lc code=start
 class Solution:
