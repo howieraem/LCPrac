@@ -3,6 +3,7 @@
 #
 # [238] 除自身以外数组的乘积
 #
+from typing import List
 
 # @lc code=start
 class Solution:
