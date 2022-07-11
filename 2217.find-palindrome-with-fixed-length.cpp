@@ -13,7 +13,7 @@ using std::string;
 class Solution {
 public:
     // T: O(n * len)
-    // S: O(len)
+    // S: O(len) (may be optimized to O(1) if not using string conversions)
     vector<long long> kthPalindrome(const vector<int>& queries, const int& len) {
         // Examples:
         // Say we need to find the 35th palindrome number. 
