@@ -18,6 +18,7 @@ class DLinkedList:
 
     def __init__(self):
         self._head = DLinkedList.Node(None, None)
+        # circular, easier to track the tail
         self._head.prev = self._head.next = self._head
         self._sz = 0
 
@@ -36,7 +37,7 @@ class DLinkedList:
         if not self._sz:
             return None
         if not node:
-            node = self._head.prev
+            node = self._head.prev  # tail of list
         if isinstance(node, DLinkedList.Node):
             node.prev.next = node.next
             node.next.prev = node.prev
@@ -78,7 +79,8 @@ class LFUCache:
             node.v = value
         else:
             if self._sz == self._cap:
-                # Full, pop the least freq element
+                # Full, pop the least freq element which is the tail of 
+                # the list with the minimum freq
                 node = self._freqs[self._min_freq].remove_node()
                 self._nodes.pop(node.k)
                 self._sz -= 1

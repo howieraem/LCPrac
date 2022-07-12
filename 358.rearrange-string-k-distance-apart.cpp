@@ -59,15 +59,16 @@ public:
     // S: O(s)
     string rearrangeString(string s, int k) {
         if (!k)  return s;
-        vector<int> cnt(26, 0);
-        priority_queue<pair<int, char>> pq;
 
+        vector<int> cnts(26, 0);
         for (const char& c : s) {
-            ++cnt[c - 'a'];
+            ++cnts[c - 'a'];
         }
+
+        priority_queue<pair<int, char>> max_heap;
         for (int i = 0; i < 26; ++i) {
             if (cnt[i]) {
-                pq.push({cnt[i], 'a' + i});
+                max_heap.push({cnts[i], 'a' + i});
             }
         }
 
@@ -77,12 +78,12 @@ public:
         vector<pair<int, char>> tmp_pairs;
         tmp_pairs.reserve(26);
 
-        while (pq.size()) {
+        while (max_heap.size()) {
             tmp_pairs.clear();
             int cnt = std::min(k, len);
             while (cnt-- > 0) {
-                if (pq.empty()) return "";
-                auto p = pq.top(); pq.pop();
+                if (max_heap.empty()) return "";
+                auto p = max_heap.top(); max_heap.pop();
                 res.push_back(p.second);
                 if (--p.first > 0) {
                     tmp_pairs.push_back(p);
@@ -90,7 +91,7 @@ public:
                 --len;
             }
             for (const auto& p : tmp_pairs) {
-                pq.push(p);
+                max_heap.push(p);
             }
         }
         return res;
