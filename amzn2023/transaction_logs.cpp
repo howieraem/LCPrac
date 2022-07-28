@@ -24,7 +24,8 @@
  */ 
 #include <bits/stdc++.h>
 
-
+// T: O(n)
+// S: O(n)
 std::vector<std::string> get_fraud_id(std::vector<std::string>& uid, int thres) {
     std::unordered_map<std::string, int> mp;
     std::vector<std::string> tmp;

@@ -38,6 +38,8 @@
 
 using std::vector;
 
+// T: O(len(cmds))
+// S: O(1)
 int rover_control(const std::vector<std::string>& cmds, int n) {
     int row = 0, col = 0;
     for (const auto& cmd : cmds) {
