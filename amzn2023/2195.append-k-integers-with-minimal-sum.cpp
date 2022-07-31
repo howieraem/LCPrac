@@ -15,9 +15,10 @@ public:
     long long minimalKSum(vector<int>& nums, int k) {
         std::set<int> s(nums.begin(), nums.end());
 
-        // Compute the minimal possible sum as k * (k + 1) / 2). 
+        // Compute the minimal possible sum as k * (k + 1) / 2.
+        // (equation of sum of arithmetic progression 1...k). 
         // Then, we go through unique numbers in the array, and 
-        // substitute all numbers less than, or equal k, with 
+        // substitute all numbers less than or equal to k with 
         // increasing numbers greater than k.
         long long ans = ((long long)k * (k + 1)) >> 1;
         for (const int& x : s) {
