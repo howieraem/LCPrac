@@ -13,7 +13,7 @@ class Solution {
         std::string item;
 
         while (std::getline(ss, item, delim)) {
-            res.push_back(item);
+            res.push_back(std::move(item));
         }
         return res;
     }
