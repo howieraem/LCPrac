@@ -39,11 +39,7 @@ class Solution:
             matches = master.guess(candidate)
             if matches == L:
                 return
-            candidates = []
-            for w in words:
-                if matches == self.get_matches(candidate, w):
-                    candidates.append(w)
-            words = candidates
+            words = list(filter(lambda w: self.get_matches(w, candidate) == matches, words))
 
     @staticmethod
     def get_matches(w1, w2):
