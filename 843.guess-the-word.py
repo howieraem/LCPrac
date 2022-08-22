@@ -13,21 +13,32 @@ class Master:
 # @lc code=start
 class Solution:
     # Reduce calling guess(w) as many as possible. Try to narrow the 
-    # candidates after each time we call guess(w).
-    # However, calling guess(w) less than 10 times is not strictly guaranteed.
-    # More explanations: 
-    #   - https://leetcode.com/problems/guess-the-word/discuss/556075
-    #   - https://leetcode.com/problems/guess-the-word/discuss/134251
+    # candidates after each time we call guess(w). However, calling 
+    # guess(w) less than 10 times is not strictly guaranteed.
     # T: O(n^2 * l), n := initial len(wordlist), l := word length
     # S: O(n)
     def findSecretWord(self, words: List[str], master: 'Master') -> None:
+        MAX_GUESSES = 10
         L = len(words[0])  # 6
         matches = 0
-        while True:
+        for _ in range(MAX_GUESSES):
             # Approach 1: random guess (more likely to fail some test cases)
+            # https://leetcode.com/problems/guess-the-word/discuss/556075
             # candidate = words[random.randint(0, len(words) - 1)]
 
             # Approach 2: histogram-based min-max heuristic
+            """
+            https://leetcode.com/problems/guess-the-word/discuss/134251
+            In order to maximize the number of words we eliminate at each guess, 
+            we choose a guess that partitions the potential candidate set roughly 
+            equally by all possible distances. That is, if we choose a guess that 
+            is roughly equally at distance 0 from 1/6 of all words, distance 1 
+            from 1/6 of all words, etc., we know that whatever distance the secret 
+            happens to be from the guess, we can eliminate a substantial number of 
+            words. This is where we use a min-max heuristic. For each word, we 
+            compute a histogram of its distance from every word in the candidate 
+            set, and then select the word whose histogram peak is the smallest.
+            """
             hist = {}
             for w1 in words:
                 hist_w = [0] * 7  # -1, 0, 1, ..., 6

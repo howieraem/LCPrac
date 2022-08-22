@@ -47,7 +47,7 @@ private:
             res.push_back({});
         }
         res[height].push_back(node->val);
-        return h;
+        return height;
     }
 };
 // @lc code=end
