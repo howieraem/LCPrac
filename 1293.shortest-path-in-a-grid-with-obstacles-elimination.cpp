@@ -38,7 +38,7 @@ public:
 
             if (vis[x][y] != NOT_VIS && vis[x][y] >= obs_remove) {
                 // The cell has been visited, and it has already reached this cell via
-                // some prev. path by removing lesser obstacles in that prev. path
+                // some prev. path by removing fewer obstacles in that prev. path
                 continue;
             }
             vis[x][y] = obs_remove;
