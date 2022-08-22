@@ -10,7 +10,7 @@ import threading
 # Optimization: keep messages for at most 20 seconds.
 
 # T: O(1)
-# S: O(1)
+# S: O(m), m := the number of messages received within 20 secs.
 class Logger:
     def __init__(self):
         self.last_seen_t = 0
