@@ -13,6 +13,8 @@ using namespace std;
 // @lc code=start
 class Solution {
 public:
+    // T: O(n * (log(n) + l)), n := len(words), l := max word length
+    // S: O(n)
     int longestStrChain(vector<string>& words) {
         // Sort words by length
         sort(words.begin(), words.end(), [] (const string& w1, const string& w2) { 

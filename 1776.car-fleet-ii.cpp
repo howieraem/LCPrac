@@ -21,7 +21,7 @@ public:
         for (int i = n - 1; i >= 0; --i) {
             while (stk.size()) {
                 int j = stk.top();
-                if (cars[i][1] <= cars[j][1] || getCollisionTime(cars[j], cars[i]) >= res[j] && res[j] > 0) {
+                if (cars[i][1] <= cars[j][1] || (getCollisionTime(cars[j], cars[i]) >= res[j] && res[j] > 0)) {
                     stk.pop();
                 } else {
                     break;
