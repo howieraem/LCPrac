@@ -45,7 +45,7 @@ public:
 
             // Padding right 
             line += string(maxWidth - line.size(), ' ');
-            res.push_back(line);
+            res.push_back(std::move(line));
         }
 
         return res;

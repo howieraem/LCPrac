@@ -7,7 +7,7 @@ from typing import *
 
 # @lc code=start
 class Solution:
-    # T: O(n ^ 2 * m), m := len(targetPath)
+    # T: O(e + n ^ 2 * m), m := len(targetPath), e := len(roads)
     # S: O(n * m)
     def mostSimilar(self, n: int, roads: List[List[int]], names: List[str], targetPath: List[str]) -> List[int]:
         graph = [[] for _ in range(n)]
