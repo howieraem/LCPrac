@@ -53,6 +53,7 @@ class Solution:
     def dfs(robot, point, cur_dirn, vis):
         robot.clean()
         vis.add(point)
+        print(len(vis))
         for k in range(4):
             new_dirn = (cur_dirn + k) & 3  # % 4
             next_point = (point[0] + Solution.D[new_dirn], 

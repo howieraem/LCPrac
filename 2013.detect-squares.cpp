@@ -18,7 +18,7 @@ class DetectSquares {
     vector<pt> pts;
 
     long long convert_pt_to_key(pt p) {
-        return (long long)p.first << 32 | p.second;
+        return (long long)p.first << 32 | (p.second & 0xffffffffL);
     }
 
 public:
