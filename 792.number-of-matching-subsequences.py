@@ -3,11 +3,31 @@
 #
 # [792] Number of Matching Subsequences
 #
-from collections import defaultdict
+from collections import defaultdict, Counter
 from typing import List
 
 # @lc code=start
 class Solution:
+    '''
+    # Solution 1: Brute-force
+    # T: O(m * n * l), m := len(s), n := len(words), l := max. word length of words
+    # S: O(n)
+    def numMatchingSubseq(self, s: str, words: List[str]) -> int:
+        cnts = Counter(words)
+        ans = 0
+        for w in cnts:
+            i = 0
+            j = 0
+            while i < len(s) and j < len(w):
+                j += s[i] == w[j]
+                i += 1
+            
+            if j == len(w):
+                ans += cnts[w]
+        return ans
+    '''
+
+    # Solution 2: construct buckets with each char in words
     # T: O(m * n * l), m := len(s), n := len(words), l := max. word length of words
     # S: O(n * l)
     def numMatchingSubseq(self, s: str, words: List[str]) -> int:
