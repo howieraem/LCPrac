@@ -21,13 +21,14 @@ class Solution:
         self.__traverse(root)
         return self.res
 
+    # T: O(n ^ 2)
     def __traverse(self, root):
         # post-order traversal to serialize subtrees for counting duplicates
         if not root:
             return '#'
         left = self.__traverse(root.left)
         right = self.__traverse(root.right)
-        subtree_serialized = left + ',' + right + ',' + str(root.val)
+        subtree_serialized = left + ',' + right + ',' + str(root.val)  # this line is O(n)
         cnt = self.subtree_cnts[subtree_serialized]
         if cnt == 1:
             self.res.append(root)

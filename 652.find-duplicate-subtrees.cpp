@@ -32,7 +32,7 @@ struct TreeNode {
  */
 class Solution {
 public:
-    // T: O(n)
+    // T: O(n ^ 2)
     // S: O(n)
     vector<TreeNode*> findDuplicateSubtrees(TreeNode* root) {
         unordered_map<string, int> subtree_cnts;
@@ -46,7 +46,7 @@ private:
         if (!node) return "#";
         auto left = traverse(node->left, subtree_cnts, res),
              right = traverse(node->right, subtree_cnts, res);
-        auto serialized = left + "," + right + "," + std::to_string(node->val);
+        auto serialized = left + "," + right + "," + std::to_string(node->val);  // this line is O(n)!
 
         // increment count, and only record one instance of the duplicate subtree
         if (++subtree_cnts[serialized] == 2) {
