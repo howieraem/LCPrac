@@ -41,6 +41,8 @@ class Solution:
             # Continue taking chars from the subsequence
             i = d[i][c_idx] + 1
 
+            # Reached the last char of source, need to start over 
+            # and use a new subsequence
             if i == M:
                 ans += 1
                 i = 0

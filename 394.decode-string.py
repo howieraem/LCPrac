@@ -6,26 +6,28 @@
 
 # @lc code=start
 class Solution:
+    # T: O(n)
+    # S: O(n)
     def decodeString(self, s: str) -> str:
         stack = []
-        string = ""
+        cur_strs = []
         mult = 0
 
         for c in s:
             if c.isdigit():
                 mult = mult * 10 + int(c)
             elif c == '[':
-                stack.append((string, mult))
-                string = ""
+                stack.append((cur_strs, mult))
+                cur_strs = []
                 mult = 0
             elif c == ']':
-                left, m = stack.pop()
+                outer_strs, m = stack.pop()
                 for _ in range(m):
-                    left += string
-                string = left
+                    outer_strs.extend(cur_strs)
+                cur_strs = outer_strs
             else:
-                string += c
-        return string
+                cur_strs.append(c)
+        return "".join(cur_strs)
 
 # @lc code=end
 

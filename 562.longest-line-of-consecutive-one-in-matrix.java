@@ -13,7 +13,7 @@ class Solution {
     public int longestLine(int[][] mat) {
         final int m = mat.length, n = mat[0].length;
 
-        // 4 directions: horizontal, vertical, diagonal and anti-diagonal
+        // 4 directions: horizontal, vertical, diagonal and antidiagonal
         int[][][] dp = new int[m][n][4];
 
         int ans = 0;
