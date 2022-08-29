@@ -22,8 +22,9 @@ public:
             sum += nums[i];
 
             // Sum of a subarray sum(nums[i:j + 1]) = prefix_sum[j] - prefix_sum[i - 1]
-            if (mp.find(sum - k) != mp.end()) {
-                cnt += mp[sum - k];
+            auto it = mp.find(sum - k);
+            if (it != mp.end()) {
+                cnt += it->second;
             }
             ++mp[sum];
         }

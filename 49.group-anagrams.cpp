@@ -17,17 +17,19 @@ public:
     // S: O(m * n)
     vector<vector<string>> groupAnagrams(vector<string>& strs) {
         unordered_map<string, vector<string>> groups;
-        int cnt[26];
+        
         for (const string &s : strs) {
-            fill_n(cnt, 26, 0);
+            int cnt[26] {};
             for (const auto &c : s) {
                 ++cnt[c - 'a'];
             }
 
             string key;
             for (int i = 0; i < 26; ++i) {
-                key.push_back('a' + i);
-                key += to_string(cnt[i]);
+                if (cnt[i] > 0) {
+                    key.push_back('a' + i);
+                    key.append(to_string(cnt[i]));
+                }
             }
             groups[key].push_back(s);
         }
