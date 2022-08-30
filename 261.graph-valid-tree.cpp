@@ -11,7 +11,7 @@ using std::vector;
 class Solution {
 public:
     // Solution based on Union-Find
-    // T: O(n * a(n)) ~= O(n), a(n) := Inverse Ackermann Function (grows slowly, can be treated as a constant)
+    // T: O(n * a(n)) ~= O(n), a() := Inverse Ackermann Function (grows slowly, can be treated as a constant)
     // S: O(n)
     bool validTree(int n, vector<vector<int>>& edges) {
         // Check if any nodes not connected or if there exist duplicate edge(s)
