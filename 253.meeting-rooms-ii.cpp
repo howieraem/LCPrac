@@ -43,7 +43,7 @@ public:
     }
     */
 
-    // Solution 2: Sweeping line, only need to sort once
+    // Solution 2: Sweep line, only need to sort once
     // T: O(n*log(n))
     // S: O(n)
     int minMeetingRooms(vector<vector<int>>& intervals) {

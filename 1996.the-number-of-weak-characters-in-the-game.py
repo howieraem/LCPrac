@@ -10,7 +10,7 @@ class Solution:
     # T: O(n * log(n))
     # S: O(n)
     def numberOfWeakCharacters(self, properties: List[List[int]]) -> int:
-        # Sort by attack ASC and then defense DSC
+        # Sort by attack ASC and then defense DESC
         properties.sort(key=lambda x: (x[0], -x[1]))
 
         # At this point, any character in properties must be weaker or on par with 

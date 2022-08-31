@@ -62,17 +62,19 @@ public:
                 value_to_pos[matrix[i][j]].push_back({i, j});
             }
         }
-        
+
         vector<int> rank(tot, 0);
         vector<vector<int>> res(m, vector<int>(n, 0));
-        for (const auto& p : value_to_pos) {
+        for (const auto& p : value_to_pos) {    // values ordered by red-black tree map
             UF uf(tot);
 
             vector<int> tmp(rank);
             for (const auto& [r, c] : p.second) {
-                pos parents = uf.connect(r, c + m);  // Offset column by m so that it's unique in UF
-                // Update the ranks on a temporary copy instead
-                tmp[parents.second] = std::max(tmp[parents.first], tmp[parents.second]);
+                pos prev_parents = uf.connect(r, c + m);  // Offset column by m so that it's unique in UF
+
+                // Get the maximum rank of all included rows and columns of the same group.
+                // Update the maximum on a temporary copy instead to avoid incorrect overwriting.
+                tmp[prev_parents.second] = std::max(tmp[prev_parents.first], tmp[prev_parents.second]);
             }
 
             for (const auto& [r, c] : p.second) {
