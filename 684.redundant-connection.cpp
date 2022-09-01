@@ -9,12 +9,12 @@ using std::vector;
 
 // @lc code=start
 class UF {
-    vector<int> parent, rank;
+    vector<int> parent, size;
 
 public:
     UF(int n) {
         parent = vector<int>(n);
-        rank = vector<int>(n, 1);
+        size = vector<int>(n, 1);
         for (int i = 0; i < n; ++i) {
             parent[i] = i;  // a node's parent is itself initially
         }
@@ -26,12 +26,12 @@ public:
 
         // Re-balance height by connecting the smaller graph to the larger graph,
         // to avoid building a linked list
-        if (rank[rootP] > rank[rootQ]) {
+        if (size[rootP] > size[rootQ]) {
             parent[rootQ] = rootP;
-            rank[rootP] += rank[rootQ];
+            size[rootP] += size[rootQ];
         } else {
             parent[rootP] = rootQ;
-            rank[rootQ] += rank[rootP];
+            size[rootQ] += size[rootP];
         }
         return true;
     }

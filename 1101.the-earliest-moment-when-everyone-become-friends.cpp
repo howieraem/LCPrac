@@ -11,10 +11,10 @@ using std::vector;
 class Solution {
     class UF {
         int cnt;
-        vector<int> parent, rank;
+        vector<int> parent, size;
 
     public:
-        UF(int n) : cnt(n), parent(n), rank(n, 1) {
+        UF(int n) : cnt(n), parent(n), size(n, 1) {
             for (int i = 0; i < n; ++i) {
                 parent[i] = i;  // a node's parent is itself initially
             }
@@ -26,12 +26,12 @@ class Solution {
 
             // Re-balance height by connecting the smaller graph to the larger graph,
             // to avoid building a linked list
-            if (rank[rootP] > rank[rootQ]) {
+            if (size[rootP] > size[rootQ]) {
                 parent[rootQ] = rootP;
-                rank[rootP] += rank[rootQ];
+                size[rootP] += size[rootQ];
             } else {
                 parent[rootP] = rootQ;
-                rank[rootQ] += rank[rootP];
+                size[rootQ] += size[rootP];
             }
             --cnt;
             return true;
