@@ -29,18 +29,20 @@ class Solution:
                 i = q.popleft()
                 if i == n - 1:
                     return steps
+
+                # Try going forward and backward
                 for j in (i - 1, i + 1):
                     if 0 <= j < n and not vis[j]:
                         vis[j] = True
                         q.append(j)
-                
-                # Very important pruning!
-                # Avoids visiting indices of the same value more than once.
+
+                # Try visiting indices of the same value
                 if arr[i] not in val_vis:
                     for j in val2idxs[arr[i]]:
                         if not vis[j]:  # 0 <= j < n is always true
                             vis[j] = True
                             q.append(j)
+                    # IMPORTANT: avoid visiting indices of the same value more than once
                     val_vis.add(arr[i])
             steps += 1
         return 0

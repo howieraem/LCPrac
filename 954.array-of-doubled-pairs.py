@@ -8,7 +8,7 @@ from typing import List
 
 # @lc code=start
 class Solution:
-    # T: O(n + k * log(k)), k := unique number of numbers
+    # T: O(n + k * log(k)), k := the number of unique numbers
     # S: O(n)
     def canReorderDoubled(self, arr: List[int]) -> bool:
         cnts = Counter(arr)

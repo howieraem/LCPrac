@@ -11,7 +11,7 @@ using std::unordered_map;
 // @lc code=start
 class Solution {
 public:
-    // T: O(n + k*log(k)), k := unique number of values
+    // T: O(n + k*log(k)), k := the number of unique numbers
     // S: O(n)
     vector<int> findOriginalArray(vector<int>& changed) {
         if (changed.size() & 1) return {};  // array length must be even
