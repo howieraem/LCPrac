@@ -44,9 +44,7 @@ class Solution:
 
             i += 1
 
-        if min_subseq_start == -1:
-            return ""
-        return s1[min_subseq_start:min_subseq_start + min_len]
+        return s1[min_subseq_start:min_subseq_start + min_len] if min_subseq_start != -1 else ""
 
         
 # @lc code=end

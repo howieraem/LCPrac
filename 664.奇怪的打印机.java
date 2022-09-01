@@ -9,7 +9,7 @@ import java.util.Arrays;
 // @lc code=start
 class Solution {
     public int strangePrinter(String s) {
-        int n = s.length();
+        final int n = s.length();
         if (n < 2)  return n;
 
         // dp[i][j] stands for the minimum steps to print s[i:j+1]
