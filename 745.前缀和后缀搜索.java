@@ -6,6 +6,8 @@ import java.util.*;
  */
 
 // @lc code=start
+/** Solution with 2 tries, 1 for prefix and 1 for suffix */
+
 class TrieNode {
     TrieNode[] next;
     List<Integer> idxs;
@@ -79,6 +81,7 @@ class WordFilter {
             }
         }
 
+        // If there is more than one valid index, return the largest of them
         int i = np.idxs.size() - 1, j = ns.idxs.size() - 1;
         while (i >= 0 && j >= 0) {
             int ip = np.idxs.get(i), is = ns.idxs.get(j);
