@@ -11,8 +11,8 @@ using namespace std;
 // @lc code=start
 class Solution {
 public:
-    // T: O(n * log(n))
-    // S: O
+    // T: O(n * log(x)), n := len(nums), x := sum(nums) - max(nums)
+    // S: O(1)
     int splitArray(vector<int>& nums, int m) {
         // Lower: max(nums)
         // Upper: sum(nums)
