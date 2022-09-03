@@ -19,6 +19,7 @@ class ProductOfNumbers:
 
     def getProduct(self, k: int) -> int:
         if k >= len(self.prefix_product):
+            # k == n also returns 0 because there is a leading 1 in the array
             return 0
         # n = len(self.prefix_product)
         # return self.prefix_product[n - 1] // self.prefix_product[n - 1 - k]

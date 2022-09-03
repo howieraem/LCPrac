@@ -16,7 +16,7 @@ public:
     // T: O(n * l) without hash collision check, n := len(dict), l := word length; O(n * l ^ 2) worst case with hash collision check
     // S: O(n)
     bool differByOne(vector<string>& dict) {
-        const int n = dict.size(), l = dict[0].size(), MOD = 1000000007;
+        const int n = dict.size(), l = dict[0].size(), MOD = 1000000007;  // use a large MOD to reduce the chance of hash collisions
         vector<int> hash(n);
         // hash[i] = w[0] * 26 ^ (l - 1) + w[1] * 26 ^ (l - 2) + ... + w[l - 2] * 26 + w[l - 1], w = dict[i]
         for (int i = 0; i < n; ++i) {

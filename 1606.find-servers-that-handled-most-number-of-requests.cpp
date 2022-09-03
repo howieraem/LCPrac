@@ -21,7 +21,7 @@ public:
             avail.insert(i);
         }
 
-        // PQ with elements (end_time, srv_id)
+        // min heap with elements (end_time, srv_id)
         std::priority_queue<pair<int, int>, vector<pair<int, int>>, greater<>> busy;
         
         for (int i = 0; i < arrival.size(); ++i) {
