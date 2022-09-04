@@ -7,9 +7,8 @@ from typing import List
 
 # @lc code=start
 class Solution:
-    """Notes:
-        subsequence requires correct ordering but not contiguity of elements.
-    """
+    """Note: the subsequence requires correct ordering but not contiguity of elements."""
+    '''
     def lengthOfLIS(self, nums: List[int]) -> int:
         """Dynamic programming approach. Time complexity O(N^2)."""
         n = len(nums)
@@ -23,6 +22,7 @@ class Solution:
                     dp[i] = max(dp[i], dp[j] + 1)
             ans = max(dp[i], ans)
         return ans
+    '''
 
     def lengthOfLIS(self, nums: List[int]) -> int:
         """Sorted DP array with binary search. Time complexity O(Nlog(N))."""

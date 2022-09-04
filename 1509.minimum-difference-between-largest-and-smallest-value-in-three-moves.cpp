@@ -21,8 +21,8 @@ public:
         // The answer is the minimum of the following 4 cases:
         // 1. change the top-3 values
         // 2. change the bottom-3 values
-        // 3. change the top-2 and bottom values
-        // 4. change the bottom-2 and top values
+        // 3. change the top-2 and bottom-1 values
+        // 4. change the bottom-2 and top-1 values
 
         /*
         // Intuitive: sort all numbers, T: O(n*log(n)), S: O(log(n))

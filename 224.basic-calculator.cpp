@@ -34,7 +34,7 @@ private:
 
         while (q.size()) {
             char c = q.front(); q.pop();
-            bool isDigit = (c >= '0' && c <= '9');
+            bool isDigit = std::isdigit(c);
             if (isDigit) {
                 num = 10 * num + (c - '0');
             } else if (c == '(') {

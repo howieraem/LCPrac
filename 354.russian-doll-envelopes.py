@@ -13,20 +13,24 @@ class Solution:
         # sort by width ASC then by height DESC
         envelopes.sort(key=lambda e: (e[0], -e[1]))
 
-        # After sorting, the problem is equivalent to finding 
-        # the length of the longest increasing subsequence of 
-        # the heights
-        heights_lis = []
-        sz = 0
-        for _, h in envelopes:
-            if not len(heights_lis) or h > heights_lis[-1]:
+        # After sorting, the problem is reduced to finding the
+        # length of the longest increasing subsequence (LIS) 
+        # of the heights. Widths of the corresponding height 
+        # subsequence are always increasing. 
+        # heights_lis is sorted, so use greedy + binary search (leftmost)
+        # to find where to overwrite in the LIS. More explanation: 
+        # https://leetcode.com/problems/longest-increasing-subsequence/discuss/1326308
+        heights_lis = [envelopes[0][1]]
+        for i in range(1, len(envelopes)):
+            h = envelopes[i][1]
+            if h > heights_lis[-1]:
+                # append if h is greater than all numbers currently in the LIS
                 heights_lis.append(h)
-                sz += 1
             else:
-                # heights_lis is sorted, so use binary search 
-                # to find where to overwrite
-                # More explanation: https://leetcode.com/problems/longest-increasing-subsequence/discuss/1636162/
-                l, r = 0, sz
+                # When new number h is not greater than the last element of the LIS, 
+                # do binary search to find the smallest element >= h in LIS, and 
+                # replace with h
+                l, r = 0, len(heights_lis)
                 while l < r:
                     m = l + ((r - l) >> 1)
                     if heights_lis[m] < h:
@@ -34,7 +38,11 @@ class Solution:
                     else:
                         r = m
                 heights_lis[l] = h
-        return sz
+
+                # If using built-in function:
+                # idx = bisect.bisect_left(heights_lis, h)
+                # heights_lis[idx] = h
+        return len(heights_lis)
 
 # @lc code=end
 

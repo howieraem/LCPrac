@@ -22,6 +22,8 @@ class Solution:
 
         while len(s):
             c = s.popleft()
+            if c == ' ':
+                continue
             isdigit = c.isdigit()
             if isdigit:
                 cur = cur * 10 + int(c)
@@ -29,8 +31,7 @@ class Solution:
                 cur = Solution.helper(s)
 
             # Character is one of {'+', '-', '*', '/'}
-            if (not isdigit and c != ' ') or not s:
-                print(cur)
+            if not isdigit or not s:
                 if op == '+':
                     nums.append(cur)
                 elif op == '-':

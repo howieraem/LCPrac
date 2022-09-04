@@ -16,20 +16,20 @@ public:
     vector<vector<int>> merge(vector<vector<int>>& intervals) {
         // Sort by start time and then end time
         sort(intervals.begin(), intervals.end());
-        int cur_start = intervals[0][0],
-            cur_end = intervals[0][1];
-        
+
         vector<vector<int>> res;
+        int cur_start = intervals[0][0],
+            cur_end = intervals[0][1];        
         for (int i = 1; i < intervals.size(); ++i) {
             int start = intervals[i][0], 
                 end = intervals[i][1];
             if (start > cur_end) {
-                // Start a new interval
+                // No overlap, start a new interval
                 res.push_back({cur_start, cur_end});
                 cur_start = start;
                 cur_end = end;
             } else if (end > cur_end) {
-                // Extend the current interval
+                // Partly overlap, extend the current interval
                 cur_end = end;
             } 
             // else: intervals[i] is entirely covered by 
