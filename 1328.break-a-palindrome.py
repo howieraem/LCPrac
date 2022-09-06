@@ -17,6 +17,7 @@ class Solution:
             if arr[i] != 'a':
                 arr[i] = 'a'
                 return "".join(arr)
+        # If the palindrome only consists of 'a'
         arr[n - 1] = 'b'
         return "".join(arr)
 

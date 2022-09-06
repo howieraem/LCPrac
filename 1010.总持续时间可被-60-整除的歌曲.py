@@ -3,6 +3,7 @@
 #
 # [1010] 总持续时间可被 60 整除的歌曲
 #
+from typing import List
 
 # @lc code=start
 class Solution:
