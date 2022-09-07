@@ -18,6 +18,7 @@ class Solution:
             res.append(path[:])
             for i in range(start_idx, n):
                 if i != start_idx and nums[i - 1] == nums[i]:
+                    # IMPORTANT
                     continue
                 path.append(nums[i])
                 backtrack(path, i + 1)

@@ -27,6 +27,7 @@ private:
 
         while (i < n) {
             char c = s[i++];
+            if (c == ' ') continue;
 
             bool is_digit = isdigit(c);
             if (is_digit) {
@@ -37,7 +38,7 @@ private:
 
             // Different from Q227, the condition is i == n rather than i - 1 == n 
             // because i has been incremented above
-            if ((!is_digit && c != ' ') || i == n) {
+            if (!is_digit || i == n) {
                 // c is one of {'+', '-', '*', '/', ')'}
                 if (pre_op == '+') {
                     nums.push_back(cur);
