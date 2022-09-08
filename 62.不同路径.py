@@ -17,7 +17,7 @@ class Solution:
         return dp[-1]
 
     def uniquePaths(self, m: int, n: int) -> int:
-        """找规律，排列组合：C(m+1, m+n-2)"""
+        """The number of combinations nCr: C(m+1, m+n-2)"""
         return int(math.factorial(m+n-2)/math.factorial(m-1)/math.factorial(n-1))
 
     """
