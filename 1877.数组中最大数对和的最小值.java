@@ -13,9 +13,7 @@ class Solution {
         int l = 0, r = nums.length - 1;
         int ans = -1;
         while (l < r) {
-            ans = Math.max(ans, nums[l] + nums[r]);
-            ++l;
-            --r;
+            ans = Math.max(ans, nums[l++] + nums[r--]);
         }
         return ans;
     }
