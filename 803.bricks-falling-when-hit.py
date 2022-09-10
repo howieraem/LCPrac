@@ -8,7 +8,7 @@ from typing import List
 # @lc code=start
 class UF:
     def __init__(self, n: int):
-        self.parents = [i for i in range(n)]
+        self.parents = list(range(n))
         self.sizes = [1] * n
 
     def union(self, p: int, q: int):

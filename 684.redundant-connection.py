@@ -10,7 +10,7 @@ class UF:
     # S: O(n)
     def __init__(self, n: int):
         self.cnt = n
-        self.parents = [i for i in range(n)]
+        self.parents = list(range(n))
         self.sizes = [1] * n
 
     # With rebalancing, T is O(log(n))

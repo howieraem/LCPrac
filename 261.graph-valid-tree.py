@@ -10,7 +10,7 @@ class UF:
     # S: O(n)
     def __init__(self, n: int):
         self.cnt = n
-        self.parents = [i for i in range(n)]
+        self.parents = list(range(n))
 
         # Store how many nodes are connected to each node, 
         # which is used in connecting two nodes to avoid 

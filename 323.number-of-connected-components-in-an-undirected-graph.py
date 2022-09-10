@@ -9,7 +9,7 @@ from typing import *
 class UF:
     def __init__(self, n):
         self.cnt = n
-        self.parents = [i for i in range(n)]
+        self.parents = list(range(n))
         self.sizes = [1] * n
 
     def find(self, p):
