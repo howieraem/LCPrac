@@ -53,21 +53,22 @@ public:
         // times to get the shortest path.
         for (int i = 0; i < n; ++i) {
             int mask = (1 << i);
-            q.emplace(State(mask, i, 1));
-            vis.emplace(State(mask, i, 0));
+            State state(mask, i, 0);
+            q.emplace(state);
+            vis.emplace(state);
         }
 
         while (q.size()) {
             int qs = q.size();
             while (qs--) {
                 State s = q.front(); q.pop();
-                if (s.mask == (1 << n) - 1)  return s.cost - 1;
+                if (s.mask == (1 << n) - 1)  return s.cost;
                 for (const int &j : graph[s.nodeId]) {
                     int mask = s.mask;
                     mask |= (1 << j);
-                    State ns(mask, j, 0);
+                    State ns(mask, j, s.cost + 1);
                     if (vis.find(ns) == vis.end()) {
-                        q.emplace(State(mask, j, s.cost + 1));
+                        q.emplace(ns);
                         vis.emplace(ns);
                     }
                 }
