@@ -7,15 +7,15 @@
 // @lc code=start
 class Solution {
     public int findDuplicate(int[] nums) {
-        // Equivalent to finding a loop in linked list
+        // Equivalent to finding a cycle in linked list
         int slow = 0, fast = 0;
         while (true) {
             slow = nums[slow];
             fast = nums[nums[fast]];
-            if (slow == fast)  break;  // found a loop
+            if (slow == fast)  break;  // found a cycle
         }
 
-        // Now find the loop entrance
+        // Now find the cycle's entrance
         fast = 0;
         while (true) {
             slow = nums[slow];

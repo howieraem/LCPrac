@@ -34,6 +34,7 @@ public:
         }
 
         vector<int> res;
+        res.reserve(numCourses);
         while (q.size()) {
             for (int sz = q.size(); sz > 0; --sz) {
                 int pre = q.front(); q.pop();
@@ -49,7 +50,7 @@ public:
             }
         }
         // If not all courses (node) have been visited, then 
-        // there must exist a loop, i.e. unable to complete
+        // there must exist a cycle, i.e. unable to complete
         // all courses.
         return numCourses ? vector<int>() : res;
     }
@@ -83,7 +84,7 @@ public:
 
 private:
     static bool dfs(const vector<vector<int>> &g, vector<int> &vis, int i, vector<int> &res) {
-        if (vis[i] == VISITING)  return false;    // loop found
+        if (vis[i] == VISITING)  return false;    // cycle found
         else if (vis[i] == VISITED)  return true;
 
         vis[i] = VISITING;

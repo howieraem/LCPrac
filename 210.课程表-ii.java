@@ -42,7 +42,7 @@ class Solution {
                 if (--inDegrees[cur] == 0)  q.add(cur);
             }
         }
-        // Return empty result if loop found
+        // Return empty result if cycle found
         return idx != numCourses ? new int[0] : result;
     }
 }

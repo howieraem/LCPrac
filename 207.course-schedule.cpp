@@ -39,7 +39,7 @@ public:
             }
         }
         // If not all courses (node) have been visited, then 
-        // there must exist a loop.
+        // there must exist a cycle.
         return numCourses == 0;
     }
 };

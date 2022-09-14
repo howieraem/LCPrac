@@ -10,7 +10,7 @@ class Solution {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
         // Actual question: Do prerequisites form a DAG (Directed Acyclic Graph)?
         // Approach: use topological sort. 
-        // Topological sort does not exist if there exist loop(s).
+        // Topological sort does not exist if there exist cycle(s).
 
         // Get the in-degree and adjacency of every course.
         int[] inDegrees = new int[numCourses];
