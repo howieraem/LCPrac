@@ -18,29 +18,22 @@ class TimeMap:
 
     # T: O(log(n))
     def get(self, key: str, timestamp: int) -> str:
-        if key not in self.map:
-            return ""
-        
         # According to the question specs, values are sorted by time
-        values = self.map[key]
-
-        # Special cases
-        # if timestamp < values[0][0]:
-        #     return ""
-        # if timestamp >= values[-1][0]:
-        #     return values[-1][1]
+        values = self.map.get(key, None)
+        if not values:
+            return ""
 
         # Find value at the latest time before timestamp,
-        # upper bound binary search
-        l, r = 0, len(values) - 1
-        while l <= r:
+        # i.e. rightmost binary search
+        l, r = 0, len(values)
+        while l < r:
             m = (l + r) >> 1
             mt = values[m][0]
             if mt <= timestamp:
                 l = m + 1
             else:
-                r = m - 1
-        return "" if r < 0 else values[r][1]
+                r = m
+        return "" if l <= 0 else values[l - 1][1]
 
 # Your TimeMap object will be instantiated and called as such:
 # obj = TimeMap()

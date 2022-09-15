@@ -59,25 +59,23 @@ class TimeMap {
         d = new HashMap<>();
     }
 
+    // T: O(1)
     public void set(String key, String value, int timestamp) {
-        if (!d.containsKey(key)) {
-            d.put(key, new ArrayList<>());
-        }
         // Assuming a timestamp is inserted once only for each key 
-        // (i.e. not updating value for the given timestamp)
-        d.get(key).add(new Pair<>(timestamp, value));
+        // (i.e. not updating value for the given timestamp), and 
+        // the order of insertion is sorted by timestamp from early 
+        // to late.
+        d.computeIfAbsent(key, k -> new ArrayList<>()).add(new Pair<>(timestamp, value));
     }
 
+    // T: O(log(n))
     public String get(String key, int timestamp) {
-        if (!d.containsKey(key))  return "";
         List<Pair<Integer, String>> values = d.get(key);
-        int l = 0, r = values.size() - 1;
-        // Deal with special cases
-        if (timestamp < values.get(l).t)  return "";
-        if (timestamp >= values.get(r).t)  return values.get(r).v;
+        if (values == null) return "";
 
         // Find the maximum timestamp <= the given timestamp,
-        // so search for the right (upper) boundary
+        // so search for the rightmost one
+        int l = 0, r = values.size() - 1;
         while (l <= r) {
             int m = l + ((r - l) >> 1);
             int mTime = values.get(m).t;
@@ -87,9 +85,7 @@ class TimeMap {
                 r = m - 1;
             }
         }
-        if (r < 0)  return "";  
-        // Note: no need to check `value.get(r).t == timestamp` here
-        return values.get(r).v;
+        return r >= 0 ? values.get(r).v : "";
     }
 }
 

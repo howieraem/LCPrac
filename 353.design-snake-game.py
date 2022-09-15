@@ -15,7 +15,9 @@ class SnakeGame:
         self.set = set()
         self.score = 0
         self.food = food
-        self.food_i = 0  # as food is not a set, use an index to mark visited
+        # Each piece of food appears one by one on the screen, meaning the second piece of food will not appear 
+        # until the snake eats the first piece of food. Therefore, use an index to track the current food.
+        self.food_i = 0
 
         self.body.append((0, 0))
         self.set.add((0, 0))

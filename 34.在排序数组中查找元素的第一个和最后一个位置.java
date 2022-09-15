@@ -8,15 +8,15 @@
 class Solution {
     public int[] searchRange(int[] nums, int target) {
         if (nums.length == 0)  return new int[]{-1, -1};
-        int lower = findLower(nums, target);
-        int upper = findUpper(nums, target);
+        int lower = findLeftMost(nums, target);
+        int upper = findRightMost(nums, target);
         if (lower == nums.length || nums[lower] != target) {
             return new int[]{-1, -1};
         }
         return new int[]{lower, upper};
     }
 
-    private int findLower(int[] nums, int target) {
+    private int findLeftMost(int[] nums, int target) {
         int l = 0, r = nums.length, mid;
         while (l < r) {
             mid = l + (r - l) / 2;
@@ -26,7 +26,7 @@ class Solution {
         return l;
     }
 
-    private int findUpper(int[] nums, int target) {
+    private int findRightMost(int[] nums, int target) {
         int l = 0, r = nums.length, mid;
         while (l < r) {
             mid = l + (r - l) / 2;
