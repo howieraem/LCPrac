@@ -31,11 +31,13 @@ public:
             if (q.size() > k)  q.pop();
         }
 
-        vector<string> res;
+        // Results are written to the container reversely as heap
+        // top is always the node with smallest freq. 
+        vector<string> res(k, "");
+        int p = k - 1;
         while (q.size()) {
-            res.push_back(q.top().first); q.pop();
+            res[p--] = q.top().first; q.pop();
         }
-        reverse(res.begin(), res.end());
         return res;
     }
 };

@@ -4,7 +4,7 @@
 # [692] Top K Frequent Words
 #
 import heapq
-from collections import defaultdict
+from collections import Counter
 from typing import *
 
 # @lc code=start
@@ -23,23 +23,23 @@ class Solution:
     # T: O(n * log(k))
     # S: O(n)
     def topKFrequent(self, words: List[str], k: int) -> List[str]:
-        cnt = defaultdict(int)
-        for w in words:
-            cnt[w] += 1
+        cnt = Counter(words)
         
         heap: List[Node] = []
 
         # To keep the space usage k, instead of simulating a max heap with 
         # elements (-c, w), define a node type with customized comparator,
         # such that heap top is the least element with the largest lexicographical
-        # rank. Lastly, results are written to the container reversely. 
+        # rank.
         for w, c in cnt.items():
             node = Node(w, c)
             if len(heap) == k:
                 heapq.heappushpop(heap, node)
             else:
                 heapq.heappush(heap, node)
-
+        
+        # Results are written to the container reversely as heap
+        # top is always the node with smallest freq. 
         res = [""] * len(heap)
         for i in range(k - 1, -1, -1):
             res[i] = heapq.heappop(heap).word

@@ -11,6 +11,8 @@ class Solution:
     # As nums contains negative numbers, we can't use sliding window.
     # Idea: the sum of a subarray equals the difference 
     # between two prefix sums.
+    # T: O(n)
+    # S: O(n)
     def subarraySum(self, nums: List[int], k: int) -> int:
         prefix_sum_cnts = defaultdict(int)
         prefix_sum_cnts[0] = 1  # IMPORTANT
@@ -28,6 +30,8 @@ class Solution:
         return ans
 
     # Follow-up: return all subarrays
+    # T: O(n ^ 3)?
+    # S: O(n ^ 2)
     def subarraySumF(self, nums: List[int], k: int) -> List[List[int]]:
         prefix_sum_subarrs = defaultdict(list)
         prefix_sum_subarrs[0] = [-1]  # IMPORTANT
