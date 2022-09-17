@@ -27,14 +27,15 @@ public:
         }
 
         vector<int> res;
-        int cnt = 0;
+        res.reserve(k);
         // upper bound of frequency is n
-        for (int i = n; i >= 0 && cnt < k; --i) {
+        for (int i = n; i >= 0 && res.size() < k; --i) {
             if (buckets[i].size()) {
                 res.insert(res.end(), buckets[i].begin(), buckets[i].end());
-                cnt += buckets[i].size();
             }
         }
+        // The problem specs state that "it is guaranteed that the answer is unique",
+        // so no need to take the subarray from 0th element to kth element
         return res;
     }
 };
