@@ -12,13 +12,16 @@ using std::vector;
 // @lc code=start
 class Solution {
 public:
+    // Mono-deque
     // T: O(n)
     // S: O(n)
     vector<int> maxSlidingWindow(vector<int>& nums, int k) {
+        const int n = nums.size();
         deque<int> dq;
         vector<int> res;
+        res.reserve(n - k + 1);  // there are n - k + 1 windows with size k
 
-        for (int i = 0; i < nums.size(); ++i) {
+        for (int i = 0; i < n; ++i) {
             // slide the window, index of the previous maximum is outside the new window 
             if (!dq.empty() && dq.front() <= i - k) {
                 dq.pop_front();
@@ -29,11 +32,10 @@ public:
             while (!dq.empty() && nums[dq.back()] < nums[i]) {
                 dq.pop_back();
             }
-
             dq.push_back(i);
 
             if (i >= k - 1) {
-                // start collecting results when the first window is formed
+                // start collecting results after the first window is formed
                 res.push_back(nums[dq.front()]);
             }
         }

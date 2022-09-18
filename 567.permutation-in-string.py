@@ -3,7 +3,7 @@
 #
 # [567] Permutation in String
 #
-from collections import defaultdict
+from collections import Counter
 
 # @lc code=start
 class Solution:
@@ -15,9 +15,7 @@ class Solution:
         if k > n:
             return False
 
-        freq = defaultdict(int)
-        for c in s1:
-            freq[c] += 1
+        freq = Counter(s1)
 
         for r in range(n):
             l = r - k

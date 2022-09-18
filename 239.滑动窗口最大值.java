@@ -27,8 +27,8 @@ class MonoQueue {
         return q.getFirst();
     }
 
-    public void pop(int n) {
-        if (n == q.getFirst()) {
+    public void pop(int x) {
+        if (x == q.getFirst()) {
             q.pollFirst();
         }
     }
@@ -40,15 +40,14 @@ class Solution {
         int[] res = new int[nums.length - k + 1];   // total number of windows is n-k+1 when stride is 1
         int j = 0;
         for (int i = 0; i < nums.length; ++i) {
+            window.push(nums[i]);
             if (i < k - 1) {
                 // fill the first k-1 elements in window
-                window.push(nums[i]);
-            } else {
-                window.push(nums[i]);
-                res[j] = window.max();
-                window.pop(nums[i - k + 1]);    // remove the left most number
-                ++j;
+                continue;
             }
+            res[j] = window.max();
+            window.pop(nums[i - k + 1]);    // remove the left most number
+            ++j;
         }
         return res;
     }
