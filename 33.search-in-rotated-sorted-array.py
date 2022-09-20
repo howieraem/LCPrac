@@ -13,12 +13,12 @@ class Solution:
     def search(self, nums: List[int], target: int) -> int:
         l, r = 0, len(nums) - 1
         while l <= r:
-            m = (l + r) >> 1
+            m = l + ((r - l) >> 1)
             if nums[m] == target:
                 return m
             elif nums[m] < nums[l]:
                 # pivot is on the left of m
-                if nums[m] < target and target <= nums[r]:
+                if nums[m] < target <= nums[r]:
                     # Check if target is on the right monotonic (sorted) segment
                     # on the right of m. If so, shift l. It is necessary to 
                     # check target <= nums[r] because numbers to the 
@@ -28,7 +28,7 @@ class Solution:
                     r = m - 1
             else:
                 # pivot is on the right of m
-                if nums[l] <= target and target < nums[m]:
+                if nums[l] <= target < nums[m]:
                     # Check if target is on the left monotonic (sorted) segment
                     # on the left of m. If so, shift r. It is necessary to  
                     # check target >= nums[l] because numbers to the 

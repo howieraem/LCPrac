@@ -10,7 +10,7 @@ class Solution {
     public int minEatingSpeed(int[] piles, int H) {
         int l = 1, r = getMax(piles) + 1;   // min and max speed
 
-        // find lower bound (min speed)
+        // find left bound (min speed)
         while (l < r) {
             int m = l + ((r - l) >> 1);
             if (canFinish(piles, m, H)) {

@@ -14,6 +14,8 @@ class TimeMap:
 
     # T: O(1)
     def set(self, key: str, value: str, timestamp: int) -> None:
+        # Key assumption/constraint: values of the same key must be inserted in the order of timestamp,
+        # so map[key] = [(t0, v0), (t1, v1), ...] is always sorted by timestamp
         self.map[key].append((timestamp, value))
 
     # T: O(log(n))
@@ -25,15 +27,14 @@ class TimeMap:
 
         # Find value at the latest time before timestamp,
         # i.e. rightmost binary search
-        l, r = 0, len(values)
-        while l < r:
-            m = (l + r) >> 1
-            mt = values[m][0]
-            if mt <= timestamp:
+        l, r = 0, len(values) - 1
+        while l <= r:
+            m = l + ((r - l) >> 1)
+            if values[m][0] <= timestamp:
                 l = m + 1
             else:
-                r = m
-        return "" if l <= 0 else values[l - 1][1]
+                r = m - 1
+        return "" if r < 0 else values[r][1]
 
 # Your TimeMap object will be instantiated and called as such:
 # obj = TimeMap()

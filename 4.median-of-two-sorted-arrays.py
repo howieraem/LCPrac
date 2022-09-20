@@ -15,19 +15,21 @@ class Solution:
 
         n1, n2 = len(nums1), len(nums2)
 
-        # Need to find indexes m1 and m2 from nums1 and nums2 respectively to
+        # Need to find the median indexes m1 and m2 from nums1 and nums2 respectively to
         # calculate the median of the merged array.
-        # If (n1 + n2) & 1:
-        #   median = max(nums1[m1 - 1], nums2[m2 - 1])
+        # If (n1 + n2) is odd:
+        #     median = max(nums1[m1 - 1], nums2[m2 - 1])
         # Else:
-        #   median = (max(nums1[m1 - 1], nums2[m2 - 1]) + min(nums1[m1], num2[m2])) / 2.
+        #     median = (max(nums1[m1 - 1], nums2[m2 - 1]) + min(nums1[m1], nums2[m2])) / 2.
 
-        # Relationship of m1, m2 and array lengths:
-        #   m1 + m2 = n1 + n2 - m1 - m2 + ((n1 + n2) & 1)
-        #   m1 + m2 = (n1 + n2 + 1) // 2
+        # Based on the fact that the number of elements on the left of the median must equal 
+        # the number of elements on the right of the median, we can derive the relationship 
+        # between m1, m2 and array lengths:
+        #     m1 + m2 = n1 + n2 - m1 - m2 + ((n1 + n2) % 2)
+        #     m1 + m2 = (n1 + n2 + 1) // 2 which is a constant
         k = (n1 + n2 + 1) >> 1
 
-        # Find m1 (lower bound) via binary search in nums1
+        # Find m1 (left bound) via binary search in nums1 as nums1 is sorted
         l, r = 0, n1
         while l < r:
             m1 = (l + r) >> 1
