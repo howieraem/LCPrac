@@ -33,25 +33,4 @@ class Solution:
         if right > 0:
             self.dfs(res, cur_str + ')', left, right - 1)
 
-    """
-    original solution, can have repetitions:
-
-    def generateParenthesis(self, n: int) -> List[str]:
-        if not n:
-            return []
-        self._n = n
-        res = set()
-        self.backtrack(res, '', 1)
-        return list(res)
-        
-    def backtrack(self, res: set, combo: str, i: int):
-        if i > self._n:   # len(next) == 0
-            res.add(combo)
-        else:
-            for idx in range(i):
-                self.backtrack(res, combo[:idx]+'()'+combo[idx:], i+1)
-    """
-
 # @lc code=end
-# s = Solution()
-# print(s.generateParenthesis(3))

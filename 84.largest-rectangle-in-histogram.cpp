@@ -10,11 +10,12 @@ using namespace std;
 // @lc code=start
 class Solution {
 public:
+    // mono-stack
     // T: O(n)
     // S: O(n)
     int largestRectangleArea(vector<int>& heights) {
         const int n = heights.size();
-        stack<pair<int, int>> s;
+        stack<pair<int, int>> s; // Stores pairs of (index, height) in ascending order of height
         // Insert a dummy data point to make the following solution more elegant
         s.push({-1, 0});
         int ans = -1;

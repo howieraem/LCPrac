@@ -11,16 +11,17 @@ using std::vector;
 
 // @lc code=start
 class Solution {
-    // T: O(2 ^ (2n)) as there are 2 recursive calls in backtrack and it requires 2n steps to get one result
+    // T: O(2 ^ (2n)) as there are 2 recursive calls in backtrack() and it requires 2n steps to get one result
     // S: O(n)
     static void backtrack(string &path, int nLeft, int nRight, vector<string> &res) {
         if (nLeft > nRight) {
-            // As below we are adding the left parethesis first, need to ensure 
-            // the number of right paretheses do not exceed the number of left
-            // paretheses.
+            // As below we are adding the left parenthesis first, need to ensure 
+            // the number of right parentheses do not exceed the number of left
+            // parentheses.
             return;
         }
         if (!(nLeft || nRight)) {
+            // nLeft == nRight == 0
             res.push_back(path);
             return;
         }

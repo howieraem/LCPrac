@@ -21,6 +21,7 @@ public:
     int carFleet(int target, vector<int>& position, vector<int>& speed) {
         const int n = position.size();
         vector<pair<int, double>> cars;
+        cars.reserve(n);
         for (int i = 0; i < n; ++i) {
             // (position, time needed to reach target ignoring other cars)
             cars.emplace_back(position[i], (double) (target - position[i]) / speed[i]);
@@ -30,12 +31,16 @@ public:
             return a.first < b.first;
         });     // sort by the first element, i.e. position
 
+        // If a car needs more time to reach the target than some other cars,
+        // it is slower and will become the lead of a car fleet.
+
         /*
-        // Space complexity below is O(n)
-        // In Car Fleet II Q1776, a mono stack is needed.
+        // Use a mono-stack of car time to find the number of fleets. 
+        // Space complexity below is O(n).
+        // In Car Fleet II Q1776, a mono-stack is needed.
         stack<float> mono;
         for (int i = 0; i < n; ++i) {
-            while (mono.size() && cars[i].second >= mono.top()) {
+            while (mono.size() && mono.top() <= cars[i].second) {
                 mono.pop();
             }
             mono.push(cars[i].second);
@@ -43,6 +48,7 @@ public:
         return mono.size();
         */
 
+        // Iterate backward to check which cars will be caught up
         // Space complexity below is O(1)
         double cur = 0;
         int ans = 0;
