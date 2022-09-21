@@ -1,8 +1,9 @@
 /*
- * @lc app=leetcode id=19 lang=cpp
+ * @lc app=leetcode id=21 lang=cpp
  *
- * [19] Remove Nth Node From End of List
+ * [21] Merge Two Sorted Lists
  */
+
 struct ListNode {
     int val;
     ListNode *next;
@@ -24,23 +25,21 @@ struct ListNode {
  */
 class Solution {
 public:
-    // T: O(n)
+    // T: O(m + n)
     // S: O(1)
-    ListNode* removeNthFromEnd(ListNode* head, int n) {
-        ListNode* dummy = new ListNode();
-        dummy->next = head;  // return dummy->next at the end, just in case the original head gets deleted
-        ListNode *fast = dummy, *slow = dummy;
-        while (n--) {
-            fast = fast->next;
+    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+        ListNode *dummy = new ListNode(), *cur = dummy;
+        while (list1 && list2) {
+            if (list1->val < list2->val) {
+                cur->next = list1;
+                list1 = list1->next;
+            } else {
+                cur->next = list2;
+                list2 = list2->next;
+            }
+            cur = cur->next;
         }
-
-        while (fast->next) {
-            fast = fast->next;
-            slow = slow->next;
-        }
-
-        slow->next = slow->next->next;  // remove node from list
-
+        cur->next = list1 ? list1 : list2;
         return dummy->next;
     }
 };

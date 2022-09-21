@@ -4,6 +4,14 @@
  * [143] 重排链表
  */
 
+class ListNode {
+    int val;
+    ListNode next;
+    ListNode() {}
+    ListNode(int val) { this.val = val; }
+    ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+}
+
 // @lc code=start
 /**
  * Definition for singly-linked list.
@@ -18,7 +26,7 @@
 class Solution {
     public void reorderList(ListNode head) {
         /**
-         * 1. Split linked list in half
+         * 1. Split linked list in halves
          * 2. Reverse the second half
          * 3. Alternate the first half nodes and the reversed second half nodes
          * 
@@ -32,19 +40,19 @@ class Solution {
             slow = slow.next;
             fast = fast.next.next;
         }
-        ListNode headLatterHalf = slow.next;
+        ListNode headOfLatterHalf = slow.next;
         slow.next = null;
 
         /** Reverse the latter half */
-        headLatterHalf = reverseList(headLatterHalf);
+        headOfLatterHalf = reverseList(headOfLatterHalf);
 
         /** Merge half lists */
-        while (headLatterHalf != null) {
-            ListNode tmp = headLatterHalf.next;
-            headLatterHalf.next = head.next;
-            head.next = headLatterHalf;
-            head = headLatterHalf.next;
-            headLatterHalf = tmp;
+        while (headOfLatterHalf != null) {
+            ListNode tmp = headOfLatterHalf.next;
+            headOfLatterHalf.next = head.next;
+            head.next = headOfLatterHalf;
+            head = headOfLatterHalf.next;
+            headOfLatterHalf = tmp;
         }
     }
 
