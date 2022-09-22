@@ -30,7 +30,7 @@ class Solution:
 
     def findDuplicate(self, nums: List[int]) -> int:
         """Fast-slow pointers. Equivalent to finding
-        a loop/circle in linked list. Time complexity
+        a cycle in linked list. Time complexity
         O(N)."""
         slow = fast = 0
         while True:

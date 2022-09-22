@@ -79,12 +79,6 @@ class LRUCache {
         addToHead(node);
     }
 
-    Node* removeTail() {
-        Node *node = tail->pre;
-        removeNode(node);
-        return node;
-    }
-
 public:
     LRUCache(int capacity) : cap(capacity) {
         head = new Node();
@@ -102,14 +96,15 @@ public:
     
     void put(int key, int value) {
         if (mp.find(key) == mp.end()) {
+            if (mp.size() == cap) {
+                Node *back = tail->pre;
+                removeNode(back);
+                mp.erase(back->k);
+                delete back;
+            }
             Node* node = new Node(key, value);
             mp[key] = node;
             addToHead(node);
-            if (mp.size() > cap) {
-                Node* removed = removeTail();
-                mp.erase(removed->k);
-                delete removed;
-            }
         } else {
             Node* node = mp[key];
             node->v = value;

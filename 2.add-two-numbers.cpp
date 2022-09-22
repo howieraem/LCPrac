@@ -25,7 +25,7 @@ struct ListNode {
 class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        ListNode *dummy = new ListNode(0), *cur = dummy;
+        ListNode *dummy = new ListNode(), *cur = dummy;
         bool carry = false;
         while (l1 && l2) {
             int sum = l1->val + l2->val + carry;
