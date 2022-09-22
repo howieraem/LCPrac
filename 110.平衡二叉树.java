@@ -28,9 +28,9 @@ class Solution {
     public int helper(TreeNode root) {
         if (root == null)  return 0;
         int left = helper(root.left);
-        if (left == -1)  return -1;  // prune, reducing unnecessaary computation
+        if (left == -1)  return -1;  // prune, reducing unnecessary computation
         int right = helper(root.right);
-        if (right == -1)  return -1;  // prune, reducing unnecessaary computation
+        if (right == -1)  return -1;  // prune, reducing unnecessary computation
         return Math.abs(right - left) < 2 ? Math.max(left, right) + 1 : -1;
     }
 }
