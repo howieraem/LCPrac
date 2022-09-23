@@ -22,6 +22,8 @@ class TreeNode:
 class Solution:
     '''
     # Solution 1: BFS
+    # T: O(n)
+    # S: O(n)
     def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
         res = []
         if not root:
@@ -45,20 +47,23 @@ class Solution:
     '''
 
     # Solution 2: DFS
+    # T: O(n)
+    # S: O(n)
     def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
         res = []
-        self.dfs(root, 0, res)
+        Solution.dfs(root, 0, res)
         return res
     
-    def dfs(self, node: TreeNode, height: int, res: List[List[int]]):
+    @staticmethod
+    def dfs(node: TreeNode, height: int, res: List[List[int]]):
         if not node:
             return
         if height >= len(res):
             res.append([])
         res[height].append(node.val)
         height += 1
-        self.dfs(node.left, height, res)
-        self.dfs(node.right, height, res)
+        Solution.dfs(node.left, height, res)
+        Solution.dfs(node.right, height, res)
 
 # @lc code=end
 

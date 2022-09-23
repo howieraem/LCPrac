@@ -50,15 +50,20 @@ public:
     // S: O(k)
     int kthSmallest(TreeNode* root, int& k) {
         stack<TreeNode*> stk;
-        while (true) {
+        while (root || stk.size()) {
             while (root) {
-                stk.emplace(root);
+                stk.push(root);
                 root = root->left;
-            }
+            }   
+            
+            // The visit logic in in-order traversal
             root = stk.top(); stk.pop();
-            if (!--k) return root->val;
+            if (!--k) break;
+            // The visit logic in in-order traversal
+
             root = root->right;
         }
+        return root->val;
     }
 };
 // @lc code=end

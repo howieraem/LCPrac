@@ -47,7 +47,7 @@ private:
             res.push_back(node->val);
         }
         ++depth;
-        // Not standard pre-order traversal as the right child is visited first.
+        // Not a standard pre-order traversal, as the right child is visited first.
         // If visit the left child first, the result becomes the left side view.
         dfs(node->right, depth, res);
         dfs(node->left, depth, res);

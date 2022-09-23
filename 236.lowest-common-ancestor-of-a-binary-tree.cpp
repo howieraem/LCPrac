@@ -26,7 +26,7 @@ public:
     // If only one of them is in that subtree, then the result is that one (IMPORTANT CONDITION).
     // If neither are in that subtree, then the result is null.
     // T: O(n), n := the number of nodes
-    // S: O(n) (recursion stack)
+    // S: O(n) recursion stack worst case
     TreeNode* lowestCommonAncestor(TreeNode* root, const TreeNode* p, const TreeNode* q) {
         if (!root || root == p || root == q)  return root;
         TreeNode *left = lowestCommonAncestor(root->left, p, q),
