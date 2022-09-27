@@ -21,6 +21,7 @@ struct TrieNode {
 class Solution {
     static constexpr int D[] {0, 1, 0, -1, 0};
     TrieNode *root;
+    int n_words;
 
     void build_trie(const vector<string> &words) {
         root = new TrieNode();
@@ -38,12 +39,16 @@ class Solution {
     }
 
     void dfs(vector<vector<char>> &board, int r, int c, TrieNode *p, vector<string> &res) {
+        if (n_words == 0)  return;
         char ch = board[r][c];
         if (ch == VIS_C || !p->next[ch - 'a'])  return;
         p = p->next[ch - 'a'];
         if (p->word.size()) {
-            res.push_back(p->word);
-            p->word.clear();    // no need to use a hash set to filter duplicates in res
+            // By storing word in trie node and clearing it once visited, 
+            // there is no need to use a hash set to filter duplicates in res
+            res.push_back(std::move(p->word));
+            // p->word.clear();
+            --n_words;
         }
 
         board[r][c] = VIS_C;
@@ -60,11 +65,16 @@ public:
     // T: O(3 ^ l * m * n), l := max word length
     // S: O(m * n + l * s) recursive stack and trie, s := alphabet size
     vector<string> findWords(vector<vector<char>>& board, vector<string>& words) {
+        n_words = words.size();
         build_trie(words);
         vector<string> res;
         for (int i = 0; i < board.size(); ++i) {
             for (int j = 0; j < board[i].size(); ++j) {
                 dfs(board, i, j, root, res);
+                if (n_words == 0) {
+                    // IMPORTANT: prevent unnecessary recursions if all words found
+                    return res;
+                }
             }
         }
         return res;
