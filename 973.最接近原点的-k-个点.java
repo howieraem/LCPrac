@@ -18,34 +18,38 @@ class Solution {
     //     return Arrays.copyOfRange(points, 0, k);
     // }
 
+    /*
     // Method 2: heap with comparator, point indices stored
-    // public int[][] kClosest(int[][] points, int k) {
-    //     PriorityQueue<int[]> pq = new PriorityQueue<>(
-    //         // Java's PQ is a max heap, so comparator should be d2 - d1.
-    //         (pt1, pt2) -> calcD(pt2) - calcD(pt1));
+    public int[][] kClosest(int[][] points, int k) {
+        // We need a max heap to get the k points closest to the origin,
+        // because points with larger distances got popped from the heap.
+        // Java's PQ is a min heap, so comparator should be d2 - d1.
+        PriorityQueue<int[]> pq = new PriorityQueue<>(
+            (pt1, pt2) -> calcD(pt2) - calcD(pt1));
 
-    //     // insert the first k points into the heap
-    //     for (int i = 0; i < k; ++i) {
-    //         pq.offer(points[i]);
-    //     }
+        // insert the first k points into the heap
+        for (int i = 0; i < k; ++i) {
+            pq.offer(points[i]);
+        }
 
-    //     // For the rest points, insert if dist is less 
-    //     // (usually quicker than adding all points)
-    //     for (int i = k; i < points.length; ++i) {
-    //         int d = calcD(points[i]);
-    //         if (d < calcD(pq.peek())) {
-    //             pq.poll();
-    //             pq.offer(points[i]);
-    //         }
-    //     }
+        // For the rest points, insert if dist is less 
+        // (usually quicker than adding all points)
+        for (int i = k; i < points.length; ++i) {
+            int d = calcD(points[i]);
+            if (d < calcD(pq.peek())) {
+                pq.poll();
+                pq.offer(points[i]);
+            }
+        }
 
-    //     // Convert heap to result format
-    //     int[][] res = new int[k][2];
-    //     for (int i = 0; i < k; ++i) {
-    //         res[i] = pq.poll();
-    //     }
-    //     return res;
-    // }
+        // Convert heap to result format
+        int[][] res = new int[k][2];
+        for (int i = 0; i < k; ++i) {
+            res[i] = pq.poll();
+        }
+        return res;
+    }
+    */
 
     // Method 3: Quick select (worst O(N^2), expected O(N))
     public int[][] kClosest(int[][] points, int k) {

@@ -8,6 +8,7 @@ from typing import *
 
 # @lc code=start
 class Solution:
+    # We don't care the order of the k points, and assume points can be modified, so we can use quick select
     # T: O(n ^ 2) worst, O(n) best/average
     # S: O(1) iterative
     def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:
@@ -25,7 +26,8 @@ class Solution:
             else:
                 break
         return points[:k]
-
+    
+    # This method modifies `points` in place
     @staticmethod
     def partition(points, l, r):
         p = randint(l, r)
@@ -34,19 +36,28 @@ class Solution:
         pivot = Solution.dist(points[l])
         i, j = l + 1, r
 
-        while True:
-            while i < r and Solution.dist(points[i]) <= pivot:
+        while i <= j:
+            if Solution.dist(points[i]) <= pivot:
                 i += 1
-            while j > l and Solution.dist(points[j]) >= pivot:
+                continue
+            if Solution.dist(points[j]) >= pivot:
                 j -= 1
+                continue
             
-            if i >= j:
-                break
+            # while i < r and Solution.dist(points[i]) <= pivot:
+            #     i += 1
+            # while j > l and Solution.dist(points[j]) >= pivot:
+            #     j -= 1
+            # if i >= j:
+            #     break
+            
             points[i], points[j] = points[j], points[i]
+            i += 1
+            j -= 1
         
         # Now j should be the new index of pivot, so that numbers on the left
         # are less than or equal to pivot and numbers on the right are greater 
-        # or equal to pivot. 
+        # than or equal to pivot. 
         points[l], points[j] = points[j], points[l]
         return j
 

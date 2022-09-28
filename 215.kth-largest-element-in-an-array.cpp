@@ -11,18 +11,28 @@ using std::vector;
 // @lc code=start
 class Solution {
 public:
+    Solution() : gen((std::random_device())()) {};
+
     // We are finding the k-th largest, not the k-th smallest. Thus, set k = n - k.
     // T: O(n) average, O(n ^ 2) worst
     // S: O(log(n)) average, O(n) worst
     int findKthLargest(vector<int>& nums, int k) {
-        k = nums.size() - k;
-        quickSelect(nums, 0, nums.size() - 1, k);
-        return nums[k];
+        _k = nums.size() - k;  // IMPORTANT
+        quickSelect(nums, 0, nums.size() - 1);
+        return nums[_k];
     }
 
 private:
-    static void quickSelect(vector<int> &nums, int begin, int end, const int &k) {
-        int pivot = nums[begin], l = begin + 1, r = end;
+    std::mt19937 gen;
+    int _k;
+
+    void quickSelect(vector<int> &nums, int begin, int end) {
+        std::uniform_int_distribution<> distrib(begin, end);
+        int pivot_idx = distrib(gen);
+        swap(nums[pivot_idx], nums[begin]);
+        int pivot = nums[begin];
+
+        int l = begin + 1, r = end;
         while (l <= r) {
             if (nums[l] <= pivot) {
                 ++l;
@@ -37,8 +47,8 @@ private:
         }
 
         swap(nums[begin], nums[r]);
-        if (r < k)  quickSelect(nums, r + 1, end, k);
-        else if (r > k)  quickSelect(nums, begin, r - 1, k);
+        if (r < _k)  quickSelect(nums, r + 1, end);
+        else if (r > _k)  quickSelect(nums, begin, r - 1);
     }
 };
 // @lc code=end

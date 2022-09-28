@@ -11,6 +11,9 @@ using namespace std;
 // @lc code=start
 class Solution {
 public:
+    // Simulation
+    // T: O(n * log(n))
+    // S: O(n)
     int lastStoneWeight(vector<int>& stones) {
         priority_queue<int> pq;
         for (auto &s : stones)  pq.push(s);

@@ -18,7 +18,8 @@ public:
         for (auto& x : nums) {
             min_heap.push(std::move(x));
             // Keep the heap size no more than k by popping the smaller values,
-            // so that the heap top is always the k-th largest.
+            // so that the heap top is always the k-th largest, and the heap 
+            // contains only the top-k elements. 
             if (min_heap.size() > k) min_heap.pop();
         }
     }

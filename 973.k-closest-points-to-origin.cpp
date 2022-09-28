@@ -16,26 +16,35 @@ class Solution {
         return p[0] * p[0] + p[1] * p[1];
     }
 
+    std::mt19937 gen;
+    int _k;
+
 public: 
+    Solution() : gen((std::random_device())()) {};
+
     // Quick select (heap-based methods can get TLE)
     // T: O(n ^ 2) worst, O(n) best/average
     // S: O(log(n)) average, O(n) worst
     vector<vector<int>> kClosest(vector<vector<int>>& points, int k) {
         const int n = points.size();
         if (k == n)  return points;
-
-        // Shuffling helps quick sort and quick select
-        auto rng = std::default_random_engine {};
-        std::shuffle(std::begin(points), std::end(points), rng);
-        
-        quickSelect(points, 0, n - 1, k);
+        _k = k;
+        quickSelect(points, 0, n - 1);
         points.resize(k);
         return points;
     }
 
 private:
-    static void quickSelect(vector<vector<int>>& points, int begin, int end, const int &k) {
-        int pivot = dist(points[begin]), l = begin + 1, r = end;
+    void quickSelect(vector<vector<int>>& points, int begin, int end) {
+        // Find a random pivot and move it to the beginning of the array of the subproblem 
+        std::uniform_int_distribution<> distrib(begin, end);
+        int pivot_idx = distrib(gen);
+        swap(points[begin], points[pivot_idx]);
+        int pivot = dist(points[begin]);
+        
+        // Since begin is now the pivot's index, 
+        // do the swapping from begin + 1
+        int l = begin + 1, r = end;
         while (l <= r) {
             if (dist(points[l]) <= pivot) {
                 ++l;
@@ -52,9 +61,13 @@ private:
             --r;
         }
 
+        // Now r should be the new index of pivot, so that numbers on the left
+        // are less than or equal to pivot and numbers on the right are greater 
+        // than pivot. 
         swap(points[begin], points[r]);
-        if (r < k)  quickSelect(points, r + 1, end, k);
-        else if (r > k)  quickSelect(points, begin, r - 1, k);
+
+        if (r < _k)  quickSelect(points, r + 1, end);
+        else if (r > _k)  quickSelect(points, begin, r - 1);
     }
 };
 // @lc code=end
