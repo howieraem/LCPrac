@@ -8,12 +8,13 @@
 using std::vector;
 
 // @lc code=start
+// Tweet linked list + User object + Priority queue wrt timestamp
 class Twitter {
     struct Tweet {
         int id, t;
         Tweet* next;
 
-        Tweet(int _id, int _t) : id(_id), t(_t), next(nullptr) {}
+        Tweet(int _id, int _t, Tweet* _next) : id(_id), t(_t), next(_next) {}
     };
 
     class TweetComparator {
@@ -31,7 +32,7 @@ class Twitter {
         Tweet* head;
 
         User(int _id) : id(_id), head(nullptr) {
-            following.insert(_id);
+            following.insert(_id);  // IMPORTANT: user can see own tweets
         }
 
         void follow(int uid) {
@@ -43,65 +44,88 @@ class Twitter {
         }
 
         void post(int tweet_id, int t) {
-            Tweet* tweet = new Tweet(tweet_id, t);
-            tweet->next = head;
-            head = tweet;
+            head = new Tweet(tweet_id, t, head);
         }
     };
 
     static const int N_TWEETS_IN_FEED = 10;
     int time = 0;
+
+    // Possible improvement: use std::unordered_set<User*> instead,
+    // with custom hash and equal functions
+    // https://stackoverflow.com/questions/50888127
+    // https://stackoverflow.com/questions/31628251
     std::unordered_map<int, User*> users;
 
 public:
-    Twitter() {}
-    
+    /**
+     * @brief Composes a new tweet with ID tweetId by the user userId. 
+     * Each call to this function will be made with a unique tweetId.
+     * 
+     * @param userId 
+     * @param tweetId 
+     */
     void postTweet(int userId, int tweetId) {
+        auto it = users.find(userId);
         User* u;
-        if (users.find(userId) == users.end()) {
+        if (it == users.end()) {
             u = new User(userId);
             users[userId] = u;
         } else {
-            u = users[userId];
+            u = it->second;
         }
         u->post(tweetId, time++);
     }
-    
+
+    /**
+     * @brief Retrieves the 10 most recent tweet IDs in the user's news feed. 
+     * Each item in the news feed must be posted by users who the user followed or by the user themself. 
+     * Tweets must be ordered from most recent to least recent.
+     * 
+     * @param userId 
+     * @return vector<int> 
+     */
     vector<int> getNewsFeed(int userId) {
         vector<int> res;
-        if (users.find(userId) == users.end()) {
+        auto it = users.find(userId);
+        if (it == users.end()) {
             return res;
         }
 
-        std::priority_queue<Tweet*, vector<Tweet*>, TweetComparator> pq;
-        for (const int& u : users[userId]->following) {
-            Tweet* tweet = users[u]->head;
-            if (tweet != nullptr) {
-                pq.push(tweet);
+        std::priority_queue<Tweet*, vector<Tweet*>, TweetComparator> max_heap;
+        for (const int& u : it->second->following) {
+            if (users[u]->head != nullptr) {
+                max_heap.push(users[u]->head);
             }
         }
 
         res.reserve(N_TWEETS_IN_FEED);
-        int n = 0;
-        while (pq.size() && n++ < N_TWEETS_IN_FEED) {
-            Tweet* tweet = pq.top(); pq.pop();
+        while (max_heap.size()) {
+            Tweet* tweet = max_heap.top(); max_heap.pop();
             res.push_back(tweet->id);
+            if (res.size() == N_TWEETS_IN_FEED) break;
             if (tweet->next != nullptr) {
-                pq.push(tweet->next);
+                max_heap.push(tweet->next);
             }
         }
 
         return res;
     }
     
+    /**
+     * @brief The user with ID followerId started following the user with ID followeeId.
+     * 
+     * @param followerId 
+     * @param followeeId 
+     */
     void follow(int followerId, int followeeId) {
         User* follower;
-
-        if (users.find(followerId) == users.end()) {
+        auto it = users.find(followerId);
+        if (it == users.end()) {
             follower = new User(followerId);
             users[followerId] = follower;
         } else {
-            follower = users[followerId];
+            follower = it->second;
         }
 
         if (users.find(followeeId) == users.end()) {
@@ -111,9 +135,18 @@ public:
         follower->follow(followeeId);
     }
     
+    /**
+     * @brief The user with ID followerId started unfollowing the user with ID followeeId.
+     * 
+     * @param followerId 
+     * @param followeeId 
+     */
     void unfollow(int followerId, int followeeId) {
-        if (users.find(followerId) != users.end() && followerId != followeeId) {
-            users[followerId]->unfollow(followeeId);
+        if (followerId != followeeId) {
+            auto it = users.find(followerId);
+            if (it != users.end()) {
+                it->second->unfollow(followeeId);
+            }
         }
     }
 };

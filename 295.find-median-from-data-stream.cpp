@@ -14,16 +14,25 @@ using std::vector;
 // @lc code=start
 class MedianFinder {
     // S: O(n)
-    priority_queue<int> small;  // max heap
-    priority_queue<int, vector<int>, greater<int>> large;   // min heap
-
+    priority_queue<int> small;  // max heap storing the smaller half of the elements
+    priority_queue<int, vector<int>, greater<int>> large;   // min heap storing the larger half of the elements
+    
 public:
     // T: O(log(n))
     void addNum(int num) {
-        small.push(num);
-        large.push(small.top()); small.pop();
+        if (small.empty() || num <= small.top()) {
+            small.push(num);
+        } else {
+            large.push(num);
+        }
+        
+        // Balance heap sizes.
+        // If the total number of elements is odd, make the max heap store one more element,
+        // so that its top is the median.
         if (small.size() < large.size()) {
             small.push(large.top()); large.pop();
+        } else if (small.size() > large.size() + 1) {
+            large.push(small.top()); small.pop();
         }
     }
 
