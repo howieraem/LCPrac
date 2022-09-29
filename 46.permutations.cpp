@@ -38,7 +38,7 @@ private:
         int new_begin = begin + 1;
         for (int i = begin; i < nums.size(); ++i) {
             swap(nums[begin], nums[i]);
-            backtrack(nums, new_begin, res);
+            backtrack(nums, new_begin, res);  // IMPORTANT: unlike subset/combination, new_begin is not i + 1
             // 2nd swap is optional, if we don't need to restore the original nums
             swap(nums[begin], nums[i]);
         }

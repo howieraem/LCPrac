@@ -22,12 +22,12 @@ public:
     }
 
 private:
-    static void backtrack(vector<int> &path, vector<int>& candidates, int remain, vector<vector<int>> &res) {
+    static void backtrack(vector<int> &path, const vector<int>& candidates, int remain, vector<vector<int>> &res) {
         if (!remain) {
             res.push_back(vector<int>(path));
             return;
         }
-        for (const int &num : candidates) {
+        for (const int &num : candidates) {  // The same number may be chosen from candidates an unlimited number of times
             if (num > remain)  break;
             if (path.size() && num < path.back())  continue;
             path.push_back(num);
