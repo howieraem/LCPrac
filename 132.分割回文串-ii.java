@@ -8,8 +8,10 @@ import java.util.Arrays;
 
 // @lc code=start
 class Solution {
+    // T: O(n ^ 2)
+    // S: O(n ^ 2)
     public int minCut(String s) {
-        int n = s.length();
+        final int n = s.length();
         boolean[][] dp = new boolean[n][n];
         int[] dp_min_cnts = new int[n];
 
