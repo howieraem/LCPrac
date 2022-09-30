@@ -31,21 +31,19 @@ private:
 
         // As there might only be one element in the board, we must
         // check before (rather than inside) the for loop below.
-        // Otherwise, the case {board=[['a']], word="a"} will fail.
+        // Otherwise, test cases like {board=[['a']], word="a"} will fail.
         if (r < 0 || r == b.size() || c < 0 || c == b[r].size())  return false;
         if (b[r][c] != w[wi]) {
             return false;
         }
 
-        char tmp = b[r][c];
         b[r][c] = 0;    // mark visited
-        ++wi;
         for (int d = 0; d < 4; ++d) {
-            if (backtrack(b, w, r + D[d], c + D[d + 1], wi)) {
+            if (backtrack(b, w, r + D[d], c + D[d + 1], wi + 1)) {
                 return true;
             }
         }
-        b[r][c] = tmp;  // undo visit
+        b[r][c] = w[wi];  // undo visit
         return false;
     }
 };

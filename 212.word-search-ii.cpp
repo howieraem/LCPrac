@@ -38,7 +38,7 @@ class Solution {
         }
     }
 
-    void dfs(vector<vector<char>> &board, int r, int c, TrieNode *p, vector<string> &res) {
+    void backtrack(vector<vector<char>> &board, int r, int c, TrieNode *p, vector<string> &res) {
         if (n_words == 0)  return;
         char ch = board[r][c];
         if (ch == VIS_C || !p->next[ch - 'a'])  return;
@@ -55,7 +55,7 @@ class Solution {
         for (int d = 0; d < 4; ++d) {
             int nr = r + D[d], nc = c + D[d + 1];
             if (nr >= 0 && nr < board.size() && nc >= 0 && nc < board[nr].size()) {
-                dfs(board, nr, nc, p, res);
+                backtrack(board, nr, nc, p, res);
             }
         }
         board[r][c] = ch;
@@ -70,7 +70,7 @@ public:
         vector<string> res;
         for (int i = 0; i < board.size(); ++i) {
             for (int j = 0; j < board[i].size(); ++j) {
-                dfs(board, i, j, root, res);
+                backtrack(board, i, j, root, res);
                 if (n_words == 0) {
                     // IMPORTANT: prevent unnecessary recursions if all words found
                     return res;
