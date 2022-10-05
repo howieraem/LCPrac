@@ -32,16 +32,16 @@ class Solution:
             return cloned
 
         return dfs(node)
-        
+      
 # @lc code=end
-n1 = Node(1)
-n2 = Node(2)
-n3 = Node(3)
-n4 = Node(4)
-n1.neighbors = [n2, n4]
-n2.neighbors = [n3, n1]
-n3.neighbors = [n4, n2]
-n4.neighbors = [n1, n3]
+# n1 = Node(1)
+# n2 = Node(2)
+# n3 = Node(3)
+# n4 = Node(4)
+# n1.neighbors = [n2, n4]
+# n2.neighbors = [n3, n1]
+# n3.neighbors = [n4, n2]
+# n4.neighbors = [n1, n3]
 
-n = Solution().cloneGraph(n1)
-print(n.neighbors)
+# n = Solution().cloneGraph(n1)
+# print(n.neighbors)
