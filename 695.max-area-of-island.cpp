@@ -57,7 +57,9 @@ public:
         for (size_t i = 0; i < m; ++i) {
             for (size_t j = 0; j < n; ++j) {
                 if (grid[i][j] == 1) {
-                    ans = std::max(ans, dfs(grid, i, j, m, n));
+                    int cur_area = 0;
+                    dfs(grid, i, j, cur_area, m, n);
+                    ans = std::max(ans, cur_area);
                 }
             }
         }
@@ -65,16 +67,15 @@ public:
     }
 
 private:
-    static int dfs(vector<vector<int>>& grid, size_t r, size_t c, const size_t& m, const size_t& n) {
-        int cur_area = 1;
+    static void dfs(vector<vector<int>>& grid, size_t r, size_t c, int& cur_area, const size_t& m, const size_t& n) {
+        ++cur_area;
         grid[r][c] = 0;
         for (int d = 0; d < 4; ++d) {
             size_t nr = r + D[d], nc = c + D[d + 1];
             if (0 <= nr && nr < m && 0 <= nc && nc < n && grid[nr][nc] == 1) {
-                cur_area += dfs(grid, nr, nc, m, n);
+                dfs(grid, nr, nc, cur_area, m, n);
             }
         }
-        return cur_area;
     }
 };
 // @lc code=end

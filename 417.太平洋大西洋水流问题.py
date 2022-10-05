@@ -3,6 +3,7 @@
 #
 # [417] 太平洋大西洋水流问题
 #
+from typing import *
 
 # @lc code=start
 class Solution:
