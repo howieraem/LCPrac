@@ -52,7 +52,7 @@ public:
         // If not all courses (node) have been visited, then 
         // there must exist a cycle, i.e. unable to complete
         // all courses.
-        return numCourses ? vector<int>() : res;
+        return numCourses == 0 ? res: vector<int>();
     }
     */
 
@@ -69,7 +69,7 @@ public:
             g[edge[1]].push_back(edge[0]);
         }
 
-        vector<int> vis(numCourses, UNVISITED);
+        vector<uint8_t> vis(numCourses, UNVISITED);
         vector<int> res;
 
         for (int i = 0; i < numCourses; ++i) {
@@ -83,7 +83,7 @@ public:
     }
 
 private:
-    static bool dfs(const vector<vector<int>> &g, vector<int> &vis, int i, vector<int> &res) {
+    static bool dfs(const vector<vector<int>> &g, vector<uint8_t> &vis, int i, vector<int> &res) {
         if (vis[i] == VISITING)  return false;    // cycle found
         else if (vis[i] == VISITED)  return true;
 

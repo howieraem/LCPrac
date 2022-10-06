@@ -4,7 +4,6 @@
 # [286] Walls and Gates
 #
 from collections import deque
-from dis import dis
 from typing import *
 
 # @lc code=start

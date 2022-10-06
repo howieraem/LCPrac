@@ -10,6 +10,8 @@ using namespace std;
 // @lc code=start
 class Solution {
 public:
+    // T: O(V + E)
+    // S: O(V + E)
     bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
         int inDeg[numCourses];
         memset(inDeg, 0, sizeof(inDeg));
@@ -17,7 +19,7 @@ public:
         for (auto &edge : prerequisites) {
             ++inDeg[edge[0]];
             A[edge[1]].push_back(edge[0]);
-            // Directed, do not write `A[edge[0]].push_back(edge[1]);`
+            // Directed, do NOT write `A[edge[0]].push_back(edge[1]);`
         }
 
         // Topological sort using BFS

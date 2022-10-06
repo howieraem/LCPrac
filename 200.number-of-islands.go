@@ -3,6 +3,7 @@
  *
  * [200] Number of Islands
  */
+package lc
 
 // @lc code=start
 var dirn = [5]int{1, 0, -1, 0, 1}
@@ -76,4 +77,3 @@ func numIslands(grid [][]byte) int {
 }
 
 // @lc code=end
-
