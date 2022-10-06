@@ -53,7 +53,7 @@ class Solution {
     };
 
 public:
-    // T: O(V + E * a(E)), V := n, E := len(logs), a() := Inverse Ackermann Function (grows slowly, can be treated as a constant)
+    // T: O(V + E * (log(E) + a(V))), V := n, E := len(logs), a() := Inverse Ackermann Function (grows slowly, can be treated as a constant and thus ignored)
     // S: O(V)
     int earliestAcq(vector<vector<int>>& logs, int n) {
         // sort by timestamp

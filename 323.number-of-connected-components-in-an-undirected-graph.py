@@ -30,6 +30,8 @@ class UF:
             self.cnt -= 1
 
 class Solution:
+    # T: O(E * a(V)), a() := inverse Ackermann function
+    # S: O(V)
     def countComponents(self, n: int, edges: List[List[int]]) -> int:
         uf = UF(n)
         for u, v in edges:
