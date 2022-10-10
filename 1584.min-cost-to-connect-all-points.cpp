@@ -47,7 +47,7 @@ public:
         }
     };
 
-    // T: O(n ^ 2 * log(n)) as there are n*(n-1)/2 possible undirected edges for n points and log(n^2) = 2log(n)
+    // T: O(n ^ 2 * (log(n) + a(n))) as there are n*(n-1)/2 possible undirected edges for n points and log(n^2) = 2log(n). a() := inverse Ackermann func
     // S: O(n ^ 2)
     int minCostConnectPoints(vector<vector<int>>& points) {
         const int n = points.size();

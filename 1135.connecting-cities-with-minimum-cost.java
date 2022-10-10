@@ -51,7 +51,9 @@ class UF {
 }
 
 class Solution {
-    // Kruskal’s algorithm to generate a minimum spanning tree for the graph
+    // Kruskal’s algorithm to generate a minimum spanning tree (MST) for the graph
+    // T: O(E * (log(E) + a(V))), a() := inverse Ackermann func
+    // S: O(V + log(E)) for union find and sorting edges
     public int minimumCost(int n, int[][] connections) {
         // Sort edges by cost ASC
         Arrays.sort(connections, (e1, e2) -> e1[2] - e2[2]);
