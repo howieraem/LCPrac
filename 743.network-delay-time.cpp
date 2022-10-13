@@ -36,19 +36,21 @@ public:
     }
     */
 
+    using pos = pair<int, int>;
+
     // Dijkstra's Algorithm. Only works with non-negative edge costs/weights.
     // T: O((V + E) * log(V))
     // S: O(V + E)
     int networkDelayTime(vector<vector<int>>& times, int n, int k) {
         // Build the adjacency list and convert nodes from 1-indexed to 0-indexed
         --k;
-        vector<vector<pair<int, int>>> adj(n);
+        vector<vector<pos>> adj(n);
         for (const auto &e : times) {
             adj[e[0] - 1].emplace_back(e[1] - 1, e[2]);
         }
 
         // Priority queue of (edge cost, edge destination node)
-        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> min_heap;
+        priority_queue<pos, vector<pos>, greater<pos>> min_heap;
         vector<int> dist(n, INT_MAX);
 
         // Start from node k

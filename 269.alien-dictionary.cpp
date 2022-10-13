@@ -18,52 +18,63 @@ public:
     // T: O(V+E) = O(m*n + m*n) = O(m*n), m := len(words), n := max(len(w) for w in words)
     // S: O(m*n)
     string alienOrder(vector<string>& words) {
+        // Build graph
         unordered_map<char, unordered_set<char>> graph;
         unordered_map<char, int> inDeg;
-
-        for (int i = 0; i < words.size(); i++) {
-            for (int j = 0; j < words[i].size(); j++) {
-                inDeg[words[i][j]] = 0; 
+        for (const auto& w : words) {
+            for (const auto& c : w) {
+                // IMPORTANT: initialize for all chars 0 in-deg to distinguish from non-existent chars
+                inDeg[c] = 0; 
             }
         }
-
-        // Build graph
         for (int i = 1; i < words.size(); ++i) {
             string pre = words[i - 1], cur = words[i];
             int n = min(pre.size(), cur.size());
+            
+            // By comparing the adjacent words, the first character that is different between 
+            // two adjacent words reflect the lexicographical order
             for (int j = 0; j < n; ++j) {
                 if (pre[j] != cur[j]) {
-                    unordered_set<char> *st = &graph[pre[j]];
-                    if (st->find(cur[j]) == st->end()) {
-                        st->insert(cur[j]);
-                        ++inDeg[cur[j]];
-                    }
+                    graph[pre[j]].insert(cur[j]);
+
+                    // IMPORTANT: we may update inDeg here rather than below, but need to check 
+                    // if graph[pre[j]] already contains cur[j]
+                    
                     break;
                 }
+
+                // The word order is probably incorrect, because when pre[:n] == cur[:n] but len(pre) > len(cur),
+                // namely cur is a prefix of pre, then lexicographically pre > cur. Impossible to give a solution.
                 if (j == n - 1 && pre.size() > cur.size())  return "";
             }
         }
+        for (const auto& [_, neighbors] : graph) {
+            for (const auto& u : neighbors) {
+                ++inDeg[u];
+            }   
+        }
 
         // Topological sort
-        string res;
         queue<char> q;
-        for (const auto &entry : inDeg) {
-            if (!entry.second)  q.push(entry.first);
+        for (const auto& [u, deg] : inDeg) {
+            if (deg == 0)  q.push(u);
         }
+        string res;
+        res.reserve(inDeg.size());
         while (q.size()) {
-            char cur = q.front(); q.pop();
-            res.push_back(cur);
+            char u = q.front(); q.pop();
+            res.push_back(u);
 
-            if (graph[cur].size()) {
-                for (const auto &c : graph[cur]) {
-                    --inDeg[c];
-                    if (!inDeg[c]) {
-                        q.push(c);
+            auto it = graph.find(u);
+            if (it != graph.end()) {
+                for (const auto &v : it->second) {
+                    if (--inDeg[v] == 0) {
+                        q.push(v);
                     }
                 }
             }
         }
-        // Check if there is any cycles
+        // If any cycles exist, then it's impossible to form a solution
         return res.size() == inDeg.size() ? res : "";
     }
 };

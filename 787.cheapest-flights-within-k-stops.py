@@ -10,13 +10,14 @@ from typing import *
 # @lc code=start
 class Solution:
     # Dijkstra's Algorithm
-    # T: O(n^k * log(n^k))
-    # S: O(n + e)
+    # T: O(E * k * log(E * k)), E := len(flights)
+    # S: O(E * k)
     def findCheapestPrice(self, n: int, flights: List[List[int]], src: int, dst: int, k: int) -> int:
         graph = [[] for _ in range(n)]
         for u, v, w in flights:
             graph[u].append((v, w))
 
+        # "hop" means how many edges in a path
         dist = [(inf, inf)] * n     # list of (cost, hops)
         dist[src] = (0, 0)
 
