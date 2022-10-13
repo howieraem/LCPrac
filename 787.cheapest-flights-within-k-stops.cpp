@@ -8,6 +8,7 @@
 using std::greater;
 using std::pair;
 using std::priority_queue;
+using std::queue;
 using std::vector;
 
 // @lc code=start
@@ -50,6 +51,7 @@ public:
     }
     */
 
+    /*
     // Solution 2: Variant of Bellman-Ford Algorithm (also works for negative edge weights)
     // T: O((E + n) * k)
     // S: O(n)
@@ -70,6 +72,44 @@ public:
             cost.swap(tmp);
         }
 
+        return cost[dst] != INT_MAX ? cost[dst] : -1;
+    }
+    */
+
+    // Solution 3: BFS, variant of level-order traversal, with cost array and constraint k
+    // T: O(E * k)
+    // S: O(E * k + n)
+    int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int k) {
+        // Build graph
+        vector<vector<pair<int, int>>> adj(n);
+        for (const auto& flight : flights) {
+            adj[flight[0]].emplace_back(flight[1], flight[2]);
+        }
+
+        // IMPORTANT: the queue needs to store both vertex and cur_cost, because 
+        // the cost of a vertex can be updated multiple times
+        queue<pair<int, int>> q;
+        vector<int> cost(n, INT_MAX);  // acts as the visited array and helps pruning
+
+        q.emplace(src, 0);
+        cost[src] = 0;
+
+        ++k;  // at most k edges => at most k+1 nodes
+        
+        while (k-- != 0 && q.size()) {
+            int qs = q.size();
+
+            while (qs-- > 0) {
+                auto [u, cur_cost] = q.front(); q.pop();
+
+                for (const auto& [v, w] : adj[u]) {
+                    if (cost[v] > cur_cost + w) {
+                        cost[v] = cur_cost + w;
+                        q.emplace(v, cost[v]);
+                    }
+                }
+            }
+        }
         return cost[dst] != INT_MAX ? cost[dst] : -1;
     }
 };
