@@ -42,14 +42,14 @@ class Solution:
             else:
                 # Find the index of the number in sub that is no less than x,
                 # and replace that number with x
-                idx = self.lower_bound(sub, x)
+                idx = self.left_bound(sub, x)
                 sub[idx] = x
         # Note that `sub` here is not the actual longest subsequence, 
         # but `len(sub)` is the answer
         return len(sub)
 
     # This version returns the actual longest subsequence
-    def lengthOfLIS_F(self, nums: List[int]) -> int:
+    def lengthOfLIS_F(self, nums: List[int]) -> List[int]:
         sub = []
         sub_idxs = []
         path = [-1] * len(nums)
@@ -59,7 +59,7 @@ class Solution:
                 path[i] = -1 if not len(sub_idxs) else sub_idxs[-1]
                 sub_idxs.append(i)
             else:
-                idx = self.lower_bound(sub, x)
+                idx = self.left_bound(sub, x)
                 sub[idx] = x
                 path[i] = -1 if idx == 0 else sub_idxs[idx - 1]
                 sub_idxs[idx] = i
@@ -73,7 +73,7 @@ class Solution:
         return res
 
     @staticmethod
-    def lower_bound(nums: List[int], target: int):
+    def left_bound(nums: List[int], target: int):
         l, r = 0, len(nums) - 1
         while l <= r:
             m = (l + r) >> 1
