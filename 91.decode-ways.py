@@ -32,7 +32,6 @@ class Solution:
         pre1 = int(s[0] != '0')
         if n == 1:
             return pre1
-        cur = 0
 
         for i in range(2, n + 1):
             cur = 0
@@ -44,7 +43,7 @@ class Solution:
             pre2 = pre1
             pre1 = cur
 
-        return cur
+        return pre1
 
         # FOLLOW-UP: Print all decodings
 
