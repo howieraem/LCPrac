@@ -53,9 +53,9 @@ public:
         vector<int> dp(n + 1, 0);
 
         for (int i = 0; i < m; ++i) {
-            int preRow = 0, preRowpreCol = 0;
+            int preRow = dp[0];
             for (int j = 0; j < n; ++j) {
-                preRowpreCol = preRow;
+                int preRowpreCol = preRow;
                 preRow = dp[j + 1];
                 if (text1[i] == text2[j]) {
                     dp[j + 1] = preRowpreCol + 1;
