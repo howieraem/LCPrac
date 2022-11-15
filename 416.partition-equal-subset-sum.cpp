@@ -30,12 +30,10 @@ public:
         dp[0] = 1;
 
         for (const int& x : nums) {
-            for (int j = target; j > 0; --j) {
+            for (int j = target; j >= x; --j) {
                 // The reason for iterating backwards is that in 2D DP dp[i][j] relies on dp[i-1][j-nums[i-1]] rather than dp[i][j - nums[i-1]].
                 // Details: https://leetcode.com/problems/partition-equal-subset-sum/discuss/90592/01-knapsack-detailed-explanation/431026
-                if (j >= x) {
-                    dp[j] |= dp[j - x];
-                }
+                dp[j] |= dp[j - x];
             }
         }
         return dp[target];
