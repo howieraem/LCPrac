@@ -15,9 +15,9 @@ func change(amount int, coins []int) int {
 	// IMPORTANT:
 	// There actually exists a naive 2D DP where we can have coins
 	// in the inner loop. However, when we have the space-optimized
-	// 1D DP, we must have coins in the outer loop, otherwise we
-	// will also count the permutations (but the question asks for
-	// combinations). Detailed explanation:
+	// 1D DP, we must have coins in the outer loop, otherwise we are
+	// counting the unique permutations like Q377 (but the question
+	// asks for unique combinations). Detailed explanation:
 	// https://leetcode.com/problems/coin-change-ii/discuss/176706/Beginner-Mistake:-Why-an-inner-loop-for-coins-doensn't-work-Java-Soln/306232
 	for _, coin := range coins {
 		for i := coin; i <= amount; i++ {
