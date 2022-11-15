@@ -25,6 +25,9 @@ func change(amount int, coins []int) int {
 		}
 	}
 
+	// If we really want coins in the inner loop, we need sorting and special value initializations:
+	// https://leetcode.com/problems/combination-sum-iv/discuss/111860/Coin-change-AND-this-problem/512140
+
 	return dp[amount]
 }
 
