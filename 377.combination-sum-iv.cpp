@@ -27,6 +27,17 @@ public:
             }
         }
 
+        /*
+        // Possible optimization: if min(nums) is large and len(nums) is much less than target
+        std::sort(nums.begin(), nums.end());
+        for (int i = 1; i <= target; ++i) {
+            for (const int& num : nums) {
+                if (i < num) break;
+                dp[i] += dp[i - num];
+            }
+        }
+        */
+
         return dp[target];
     }
 };
