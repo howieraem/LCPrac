@@ -13,9 +13,13 @@ class Solution {
     public int longestIncreasingPath(final int[][] matrix) {
         final int m = matrix.length, n = matrix[0].length;
         int ans = 0;
+
+        // Memoized DFS starting from each cell.
+        // DFS is needed because the path can contain all 4 directions.
+        int[][] memo = new int[m][n];
         for (int i = 0; i < m; ++i) {
             for (int j = 0; j < n; ++j) {
-                ans = Math.max(ans, dfs(matrix, i, j, new int[m][n]));
+                ans = Math.max(ans, dfs(matrix, i, j, memo));
             }
         }
         return ans;
