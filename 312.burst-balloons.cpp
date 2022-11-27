@@ -3,39 +3,79 @@
  *
  * [312] Burst Balloons
  */
-#include <vector>
+#include <bits/stdc++.h>
 
 using std::vector;
+using std::max;
 
 // @lc code=start
 class Solution {
 public:
-    // T: O(n^3)
-    // S: O(n^2)
+    /*
+    // DP (bottom-up)
+    // T: O(n ^ 3)
+    // S: O(n ^ 2)
     int maxCoins(vector<int>& nums) {
-        vector<int> coins;
-        coins.push_back(1);
+        // Pad with 1 to avoid complicated logics dealing with edge cases
+        vector<int> balloons;
+        balloons.reserve(nums.size() + 2);
+        balloons.push_back(1);
         for (const int &num : nums) {
-            if (num) {  // skip the zeros
-                coins.push_back(num);
+            if (num != 0) {  // skip the zeros
+                balloons.push_back(num);
             }
         }
-        coins.push_back(1);
-        const int n = coins.size();
+        balloons.push_back(1);
+        const int n = balloons.size();
 
+        // dp[i][j] means the maximum coins achievable by bursting 
+        // all balloons in (i, j), i and j NOT included
         int dp[n][n];
         memset(dp, 0, sizeof(dp));
-        for (int k = 2; k < n; ++k) {
-            for (int left = 0; left < n - k; ++left) {
-                int right = left + k;
+        
+        for (int k = 2; k < n; ++k) { // length of the interval
+            for (int left = 0; left < n - k; ++left) { // interval left bound
+                int right = left + k; // interval right bound
                 for (int i = left + 1; i < right; ++i) {
                     dp[left][right] = max(
-                        dp[left][right],
-                        coins[left] * coins[i] * coins[right] + dp[left][i] + dp[i][right]);
+                        dp[left][right],  // don't burst at i
+                        balloons[left] * balloons[i] * balloons[right] + dp[left][i] + dp[i][right]);  // burst at i
                 }
             }
         }
         return dp[0][n - 1];
+    }
+    */
+    
+    // Memoized DFS (top-down)
+    // T: O(n ^ 3)
+    // S: O(n ^ 2)
+    int maxCoins(vector<int>& nums) {
+        // Pad with 1 to avoid complicated logics dealing with edge cases
+        vector<int> balloons;
+        balloons.reserve(nums.size() + 2);
+        balloons.push_back(1);
+        for (const int &num : nums) {
+            if (num != 0) {  // skip the zeros
+                balloons.push_back(num);
+            }
+        }
+        balloons.push_back(1);
+        const int n = balloons.size();
+
+        vector<vector<int>> memo(n, vector<int>(n, 0));
+        return dfs(balloons, memo, 0, n - 1);
+    }
+
+    // IMPORTANT: dfs(..., l, r) does not involve bursting balloons[l] and balloons[r]
+    int dfs(const vector<int>& balloons, vector<vector<int>>& memo, int l, int r) {
+        if (l + 1 == r) return 0;
+        if (memo[l][r] != 0) return memo[l][r];
+        for (int i = l + 1; i < r; ++i) {  
+            memo[l][r] = max(memo[l][r], 
+                             balloons[l] * balloons[i] * balloons[r] + dfs(balloons, memo, l, i) + dfs(balloons, memo, i, r));
+        }
+        return memo[l][r];
     }
 };
 // @lc code=end
