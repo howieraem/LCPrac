@@ -14,7 +14,7 @@ public:
      * Core ideas:
      * 1. If car starts at A and cannot reach B, then any station between A and B
      *    cannot reach B. B is the first station that A cannot reach.
-     * 2. If the total number of gas is greater than the total number of cost, there must be a solution.
+     * 2. If the total gas is greater than the total cost, there must be a solution.
      */
     // T: O(n)
     // S: O(1)
@@ -33,6 +33,7 @@ public:
                 cur = 0;
             }
         }
+        // Based on the 2nd idea above, we don't need to simulate the circular run with mod etc.
         return tot < 0 ? -1 : start; 
     }
 };

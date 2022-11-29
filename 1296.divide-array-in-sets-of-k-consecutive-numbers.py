@@ -9,9 +9,11 @@ from typing import *
 # @lc code=start
 class Solution:
     # Same as Q846
-    # T: O(n + m * log(m)), m := the number of unique numbers
+    # T: O(n + m * log(m)) amortized, m := the number of unique numbers
     # S: O(m)
     def isPossibleDivide(self, nums: List[int], k: int) -> bool:
+        if len(nums) % k:
+            return False
         cnts = Counter(nums)
         for x in sorted(cnts):
             if cnts[x] > 0:
