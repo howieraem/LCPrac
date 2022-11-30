@@ -26,6 +26,7 @@ public:
         vector<int> res;
         int start = 0, end = 0;
         for (int i = 0; i < n; ++i) {
+            // This ensures rear parts will not contain letters appearing in front parts
             end = max(end, lastIdxs[s[i] - 'a']);
             
             // Greedy: Partition as many as possible, so just partition
