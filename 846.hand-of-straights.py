@@ -22,7 +22,7 @@ class Solution:
                 # Note that groupSize may not contribute to time complexity because each number in hand is used at most once.
                 # https://leetcode.com/problems/divide-array-in-sets-of-k-consecutive-numbers/discuss/470238/JavaC++Python-Exactly-Same-as-846.-Hand-of-Straights/1001094
                 for y in range(x + 1, x + groupSize):
-                    if cnts[y] < required:
+                    if y not in cnts or cnts[y] < required:
                         return False
                     cnts[y] -= required
         return True

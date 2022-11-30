@@ -29,7 +29,7 @@ public:
             if (x_cnt > 0) {
                 for (int y = x + 1; y < x + groupSize; ++y) {
                     auto p = cnts.find(y);
-                    if (p->second < x_cnt) {
+                    if (p == cnts.end() || p->second < x_cnt) {
                         return false;
                     }
                     p->second -= x_cnt;
