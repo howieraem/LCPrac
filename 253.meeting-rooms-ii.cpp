@@ -15,7 +15,6 @@ using std::vector;
 // @lc code=start
 class Solution {
 public:
-    /*
     // Solution 1: separate sorting
     // T: O(n*log(n))
     // S: O(n)
@@ -41,9 +40,9 @@ public:
         }
         return ans;
     }
-    */
 
-    // Solution 2: Sweep line, only need to sort once
+    /*
+    // Solution 2: Sweep line, only need to sort once (but the number of elements sorted is doubled, O(2n * log(2n)) is slower than O(2 * n * log(n)))
     // T: O(n*log(n))
     // S: O(n)
     int minMeetingRooms(vector<vector<int>>& intervals) {
@@ -58,10 +57,12 @@ public:
         sort(inters.begin(), inters.end());
         int ans = 0, cur_rooms = 0;
         for (const auto &inter : inters) {
+            // visualize to see why
             ans = max(ans, cur_rooms += inter.second);
         }
         return ans;
     }
+    */
 };
 // @lc code=end
 
