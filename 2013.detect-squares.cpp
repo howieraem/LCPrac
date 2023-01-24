@@ -13,33 +13,38 @@ using std::vector;
 // @lc code=start
 typedef pair<int, int> pt;
 
-class DetectSquares {
-    unordered_map<long long, int> pt_cnts;
-    vector<pt> pts;
-
-    long long convert_pt_to_key(pt p) {
-        return (long long)p.first << 32 | (p.second & 0xffffffffL);
+struct pt_hash {
+    auto operator()(const pt& p) const {
+        return std::hash<int>()(p.first) ^ std::hash<int>()(p.second);
     }
+};
+
+class DetectSquares {
+    unordered_map<pt, int, pt_hash> pt_cnts;
 
 public:
     DetectSquares() {}
     
     // T: O(1)
     void add(vector<int> point) {
-        pt p(point[0], point[1]);
-        ++pt_cnts[convert_pt_to_key(p)];
-        pts.push_back(std::move(p));
+        pt p(std::ref(point[0]), std::ref(point[1]));
+        ++pt_cnts[p];
     }
     
     // T: O(n)
     int count(vector<int> point) {
-        const int x1 = point[0], y1 = point[1];
+        const int &x1 = point[0], &y1 = point[1];
         int ans = 0;
-        for (const auto& [x3, y3] : pts) {
+        for (const auto& [p3, p3_cnt] : pt_cnts) {
+            const auto& [x3, y3] = p3;
             int dx = abs(x3 - x1), dy = abs(y3 - y1);
             if (dx != 0 && dx == dy) {
-                // found a valid diagonal
-                ans += pt_cnts[convert_pt_to_key({x1, y3})] * pt_cnts[convert_pt_to_key({x3, y1})];
+                // Found a valid diagonal, count the number of squares by calculating 
+                // the number of existing antidiagonals
+                auto p2_it = pt_cnts.find({x1, y3}), p4_it = pt_cnts.find({x3, y1});
+                if (p2_it != pt_cnts.end() && p4_it != pt_cnts.end()) {
+                    ans += p3_cnt * p2_it->second * p4_it->second;
+                }
             }
         }
         return ans;

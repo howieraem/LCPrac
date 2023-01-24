@@ -17,7 +17,7 @@ public:
 private:
     double helper(double x, int n) {
         double ans = 1.0;
-        while (n) {
+        while (n != 0) {
             if (n & 1) {
                 ans *= x;
             }
