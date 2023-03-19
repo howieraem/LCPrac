@@ -10,7 +10,7 @@ import java.util.*;
 // @lc code=start
 class Solution {
     public boolean isMatch(String s, String p) {
-        int ls = s.length(), lp = p.length();
+        final int ls = s.length(), lp = p.length();
         boolean[][] dp = new boolean[lp+1][ls+1];   // add one to consider the base case of empty string
         dp[0][0] = true;
         if (p.startsWith("*")) {
