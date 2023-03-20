@@ -49,6 +49,7 @@ public:
     //   if p[j] != '*', dp[i][j] = dp[i-1][j-1] && (s[i-1] == p[j-1] || p[j-1] == '?')
     //   if p[j] == '*', dp[i][j] = dp[i][j - 1] || dp[i - 1][j]
     //   ret dp[m][n]
+    // Example: https://leetcode.com/problems/wildcard-matching/solutions/256025
 };
 // @lc code=end
 
