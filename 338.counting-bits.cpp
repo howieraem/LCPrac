@@ -16,8 +16,8 @@ public:
         vector<int> res(n + 1, 0);
         // res[0] = 0;
 
-        // DP: res[i / 2] is the number of set bits of a number with a bit less,
-        // and i % 2 determines whether the newly appended bit is set.
+        // DP: res[i / 2] is the count of bit 1s of a number with one bit less,
+        // and i % 2 determines whether the newly appended bit is 1.
         for (int i = 1; i <= n; ++i) {
             // if (i % 2 == 0) {
             //    ans[i] = ans[i / 2];
