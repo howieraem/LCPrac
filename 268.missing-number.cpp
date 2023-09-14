@@ -12,7 +12,7 @@ class Solution {
 public:
     /**
      * Bit manipulation. For i from 0 to n - 1, if i exists in the array
-     * array somewhere, then the XOR of this number and this number
+     * somewhere, then the XOR of this number and this number
      * (i.e., the index) is 0. Do this XOR for all indices and
      * array elements, if there is a number not in the range(0, n),
      * the XOR result will reflect it.
