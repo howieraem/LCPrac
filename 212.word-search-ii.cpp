@@ -63,7 +63,7 @@ class Solution {
 
 public:
     // T: O(3 ^ l * m * n), l := max word length
-    // S: O(m * n + l * s) recursive stack and trie, s := alphabet size
+    // S: O(l + l * s) = O(l * s) recursive stack and trie, s := alphabet size (if not storing string references, need to mult by the number of words too)
     vector<string> findWords(vector<vector<char>>& board, vector<string>& words) {
         n_words = words.size();
         build_trie(words);
