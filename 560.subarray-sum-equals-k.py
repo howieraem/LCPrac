@@ -33,7 +33,7 @@ class Solution:
     # T: O(n ^ 3)?
     # S: O(n ^ 2)
     def subarraySumF(self, nums: List[int], k: int) -> List[List[int]]:
-        prefix_sum_subarrs = defaultdict(list)
+        prefix_sum_subarrs = defaultdict(list)  # k: prefix_sum, v: element indices in `nums`
         prefix_sum_subarrs[0] = [-1]  # IMPORTANT
         p_sum = 0
 
