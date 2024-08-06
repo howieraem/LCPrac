@@ -3,7 +3,7 @@
  *
  * [28] Implement strStr()
  */
-#include <string>
+#include <bits/stdc++.h>
 
 using std::string;
 
@@ -15,11 +15,10 @@ public:
     int strStr(string haystack, string needle) {
         const int m = needle.size();
         if (!m)  return 0;
-        const int n = haystack.size();
         
         // failure function
         int f[m];
-        memset(f, 0, sizeof(f));
+        std::memset(f, 0, sizeof(f));
         int i = 1, j = 0;
         while (i < m) {
             if (needle[i] == needle[j]) {
@@ -34,7 +33,7 @@ public:
         
         // KMP
         i = j = 0;
-        while (i < n) {
+        while (i < haystack.size()) {
             if (haystack[i] == needle[j]) {
                 if (j == m - 1)  return i - j;
                 else {
