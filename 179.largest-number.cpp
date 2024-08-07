@@ -15,7 +15,7 @@ public:
     // S: O(n * log(avg(nums)))
     string largestNumber(vector<int>& nums) {
         if (std::all_of(nums.begin(), nums.end(), [](const int& num) { return num == 0; })) {
-            // Handle special case beforehand to avoid changing 
+            // Handle special case beforehand to avoid sorting and changing 
             // the result string inefficiently after
             return "0";
         }
