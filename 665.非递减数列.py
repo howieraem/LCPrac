@@ -3,9 +3,12 @@
 #
 # [665] 非递减数列
 #
+from typing import List
 
 # @lc code=start
 class Solution:
+    # T: O(n)
+    # S: O(1)
     def checkPossibility(self, nums: List[int]) -> bool:
         cnt = 0
         for i in range(1, len(nums)):
