@@ -27,7 +27,7 @@ public:
     
     // O(1)
     void checkOut(int id, string stationName, int t) {
-        const auto [pre_station, t_pre] = passenger_check_in[id];
+        const auto& [pre_station, t_pre] = passenger_check_in[id];
         route_durations[pre_station + "=>" + stationName].push_back(t - t_pre);
     }
     
@@ -35,7 +35,7 @@ public:
     double getAverageTime(string startStation, string endStation) {
         double res = 0.;
         const string route = startStation + "=>" + endStation;
-        for (const auto &t : route_durations[route]) {
+        for (const auto& t : route_durations[route]) {
             res += t;
         }
         return res / route_durations[route].size();
