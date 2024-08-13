@@ -8,7 +8,8 @@
 -- Write your MySQL query statement below
 SELECT `name`
 FROM Customer
-WHERE id IS NULL OR id != 2;
+WHERE referee_id IS NULL -- important 
+    OR referee_id != 2;
 
 -- @lc code=end
 
