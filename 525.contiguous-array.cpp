@@ -3,7 +3,9 @@
  *
  * [525] Contiguous Array
  */
-#include <unordered_map>
+#include <bits/stdc++.h>
+
+using std::vector;
 
 // @lc code=start
 class Solution {
