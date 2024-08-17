@@ -3,8 +3,9 @@
  *
  * [121] Best Time to Buy and Sell Stock
  */
-#include <algorithm>
+#include <bits/stdc++.h>
 
+using std::vector;
 using std::max;
 using std::min;
 
