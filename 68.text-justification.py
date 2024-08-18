@@ -23,11 +23,13 @@ class Solution:
 
             # Find the spaces between words on the current line
             spaces = 1
-            extra_spaces = 0  # For the first few words on the current line, can have extra spaces
+            # For the first few words on the current line, can have extra spaces in between
+            extra_spaces = 0
             if j - i != 1 and j != N:
                 diff = max_width - cur_width
-                spaces = diff // (j - i - 1)
-                extra_spaces = diff % (j - i - 1)
+                spaces, extra_spaces = divmod(diff, j - i - 1)
+                # spaces = diff // (j - i - 1)
+                # extra_spaces = diff % (j - i - 1)
 
             # Build the current line from words[i:j] with spaces
             line = [words[i]]
