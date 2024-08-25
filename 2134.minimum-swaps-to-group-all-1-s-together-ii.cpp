@@ -1,7 +1,7 @@
 /*
- * @lc app=leetcode id=1151 lang=cpp
+ * @lc app=leetcode id=2134 lang=cpp
  *
- * [1151] Minimum Swaps to Group All 1's Together
+ * [2134] Minimum Swaps to Group All 1's Together II
  */
 #include <bits/stdc++.h>
 
@@ -12,14 +12,14 @@ class Solution {
 public:
     // T: O(n)
     // S: O(1)
-    int minSwaps(vector<int>& data) {
-        const int n = data.size();
+    int minSwaps(vector<int>& nums) {
+        const int n = nums.size();
         if (n < 3) {
             return 0;
         }
 
         int tot = 0;
-        for (int x : data) {
+        for (int x : nums) {
             tot += (x == 1);
         }
         // The total number of 1's is the target window size
@@ -28,27 +28,30 @@ public:
         int r = 0;
         int window_cnt = 0;
         int max_window_cnt = 0;
-        while (r < n) {
-            while (r < n && r - l < tot) {
+
+        // circular array simple trick: double upper bound, and use i % n for indexing
+        int upper = (n << 1);
+        while (r < upper) {
+            while (r < upper && (r - l) % n < tot) {
                 // right bound slides
-                if (data[r++] == 1) {
+                if (nums[r++ % n] == 1) {
                     ++window_cnt;
                 }
             }
 
             max_window_cnt = std::max(max_window_cnt, window_cnt);
 
-            if (data[l++] == 1) {
+            if (nums[l++ % n] == 1) {
                 // left bound slides
                 --window_cnt;
             }
         }
         // Alternative approach: instead of shifting l and r pointers based on conditions,
-        // use a fixed window size equal to tot, i.e. l = [0...n - tot), r = l + tot
+        // use a fixed window size equal to tot, i.e. l = [0...n), r = (l + tot) % n
 
         // The number of swaps equals the diff between target window size 
         // and max count of 1 in any window
-        return tot - max_window_cnt;
+        return std::max(tot - max_window_cnt, 0);
     }
 };
 // @lc code=end
