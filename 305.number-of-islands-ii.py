@@ -4,18 +4,18 @@ class UF:
     # S: O(m * n)
     def __init__(self, m: int, n: int) -> None:
         self.cnt = 0
-        self.total = m * n
+        total = m * n
         self.m = m
         self.n = n
-        self.parents = [-1] * self.total
+        self.parents = [-1] * total
 
         # Store how many nodes are connected to each node, 
         # which is used in connecting two nodes to avoid 
         # degration to linked list
-        self.sizes = [0] * self.total
+        self.sizes = [0] * total
 
     # With rebalancing, T is O(log(m * n))
-    def union(self, p: int, q: int) -> bool:
+    def union(self, p: int, q: int) -> None:
         root_p, root_q = self.find(p), self.find(q)
         if root_p == root_q:
             return
@@ -51,7 +51,7 @@ class UF:
         return p
 
     # T: O(1)
-    def find_2d(self, x: int, y: int) -> bool:
+    def find_2d(self, x: int, y: int) -> int:
         if not (0 <= x < self.m and 0 <= y < self.n):
             return -1
         p = x * self.n + y
