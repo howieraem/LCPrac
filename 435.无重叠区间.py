@@ -3,6 +3,7 @@
 #
 # [435] 无重叠区间
 #
+from typing import List
 
 # @lc code=start
 class Solution:
@@ -20,6 +21,6 @@ class Solution:
                 pre = intervals[i][1]
         return ans
 
-        
+
 # @lc code=end
 
