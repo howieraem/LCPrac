@@ -17,8 +17,9 @@ public:
         unordered_map<int, int> val2idx;
         for (int i = 0; i < nums.size(); ++i) {
             int diff = target - nums[i];
-            if (val2idx.find(diff) != val2idx.end()) {
-                return {val2idx[diff], i};
+            auto it = val2idx.find(diff);
+            if (it != val2idx.end()) {
+                return {it->second, i};
             }
             val2idx[nums[i]] = i;
         }
