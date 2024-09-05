@@ -3,13 +3,15 @@
 #
 # [169] 多数元素
 #
+from typing import List
 
 # @lc code=start
 class Solution:
+    '''
     def majorityElement(self, nums: List[int]) -> int:
         # Hash table
         d = dict()
-        half = len(nums) // 2
+        half = len(nums) >> 1
         for num in nums:
             if num not in d:
                 d[num] = 1
@@ -18,6 +20,7 @@ class Solution:
             if d[num] > half:
                 return num
         return None   # according to input assumptions, this shouldn't happen
+    '''
 
     def majorityElement(self, nums: List[int]) -> int:
         # Moore voting, much better space complexity than hash table

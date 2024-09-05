@@ -3,9 +3,10 @@
  *
  * [217] Contains Duplicate
  */
-#include <unordered_set>
+#include <bits/stdc++.h>
 
 using std::unordered_set;
+using std::vector;
 
 // @lc code=start
 class Solution {
