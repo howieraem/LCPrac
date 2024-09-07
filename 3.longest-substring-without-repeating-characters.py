@@ -16,12 +16,10 @@ class Solution:
         l = r = 0
         while r < len(s):
             c = ord(s[r])
-            if last_seen_idxs[c] != -1:
+            if last_seen_idxs[c] >= l:
                 # Now the char at the right boundary of the window should equal 
                 # the left boundary char, so need to shift the left boundary.
-                # Both left and right pointers can be shifted to the right only, so
-                # update `l` only if the last seen index of the char is larger.
-                l = max(l, last_seen_idxs[c] + 1)
+                l = last_seen_idxs[c] + 1
             last_seen_idxs[c] = r
             
             ans = max(ans, r - l + 1)

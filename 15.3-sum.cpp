@@ -25,7 +25,7 @@ public:
                 // to iterate over the remaining x.
                 return res;
             }
-            if (i && nums[i - 1] == x)  continue;   // skip duplicates of x
+            if (i > 0 && nums[i - 1] == x)  continue;   // skip duplicates of x
 
             int l = i + 1, r = n - 1;
             while (l < r) {
