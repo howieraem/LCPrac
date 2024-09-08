@@ -34,13 +34,15 @@ class MinStack:
         self.min = float('inf')
 
     def push(self, x: int) -> None:
-        if x <= self.min:   # note `<=`
+        if x <= self.min:   
+            # append last min if a new min is found; note `<=`
             self.stack.append(self.min)
             self.min = x
         self.stack.append(x)
 
     def pop(self) -> None:
         if self.stack.pop() == self.min:
+            # recover the last min
             self.min = self.stack.pop()
 
     def top(self) -> int:
