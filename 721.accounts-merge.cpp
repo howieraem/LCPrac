@@ -12,9 +12,7 @@ class UF {
     vector<int> parent, size;
 
 public:
-    UF(int n) {
-        parent = vector<int>(n);
-        size = vector<int>(n, 1);
+    UF(int n) : parent(n), size(n, 1) {
         for (int i = 0; i < n; ++i) {
             parent[i] = i;  // a node's parent is itself initially
         }
@@ -59,10 +57,11 @@ public:
                 string email = accounts[i][j];
                 // Choose the first email encountered as the root of this user in UF.
                 // Other emails will connect to this root.
-                if (email2id.find(email) == email2id.end()) {
+                auto id_it = email2id.find(email);
+                if (id_it == email2id.end()) {
                     email2id[email] = i;
                 } else {
-                    uf.connect(i, email2id[email]);
+                    uf.connect(i, id_it->second);
                 }
             }
         }
@@ -75,13 +74,16 @@ public:
 
         vector<vector<string>> res;
         for (const auto &e : id2emails) {
-            vector<string> email = e.second;
-            sort(email.begin(), email.end());   // sort emails of an account
+            vector<string> emails = e.second;
+            sort(emails.begin(), emails.end());   // sort emails of an account
 
             vector<string> account;
+            account.reserve(1 + emails.size());
             account.push_back(accounts[e.first][0]);
-            account.insert(account.end(), email.begin(), email.end());
-            res.push_back(account);
+            for (auto& email : emails) {
+                account.push_back(std::move(email));
+            }
+            res.push_back(std::move(account));
         }
         return res;
     }
