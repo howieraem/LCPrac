@@ -13,7 +13,6 @@ public:
     // T: O(n)
     // S: O(n + s)
     string removeDuplicateLetters(string s) {
-        const int n = s.size();
         bool vis[26] {};
         int cnt[26] {};
         int n_unique_chars = 0;
@@ -28,7 +27,7 @@ public:
         for (const char &ch : s) {
             int c = ch - 'a';
             if (!vis[c]) {
-                // Ensure smallest lexigraphical order
+                // Ensure smallest lexigraphical order (mono-stack variant)
                 while (res.size() && res.back() > ch && cnt[res.back() - 'a']) {
                     vis[res.back() - 'a'] = false;
                     res.pop_back();   // will add the popped character again later when the order allows
