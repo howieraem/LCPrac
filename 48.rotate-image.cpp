@@ -15,10 +15,12 @@ public:
     void rotate(vector<vector<int>>& matrix) {
         /*
         Given 2D rotation matrix R: [x', y'].T = R [x, y].T
+        R = [[cos(a), -sin(a)], 
+             [sin(a), cos(a)]]
 
-        90 deg clockwise = -pi/2 rad, R = [[0, 1], [-1, 0]]
-        180 deg = pi rad, R = [[-1, 0], [0, -1]]
-        90 deg anticlockwise = pi/2 rad, R = [[0, -1], [1, 0]]
+        90 deg clockwise: a = -pi/2 rad, R = [[0, 1], [-1, 0]], x' = -y, y' = x
+        180 deg: a = pi rad, R = [[-1, 0], [0, -1]], x' = -x, y' = -y
+        90 deg anticlockwise: a = pi/2 rad, R = [[0, -1], [1, 0]], x' = y, y' = -x
         */
         int n = matrix.size(), half = n >> 1;
         for (int i = 0; i < half; ++i) {

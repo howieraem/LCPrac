@@ -15,6 +15,14 @@ class Solution:
         """
         n = len(matrix)
 
+        # Math:
+        # Given 2D rotation matrix R: [x', y'].T = R [x, y].T
+        # R = [[cos(a), -sin(a)], 
+        #      [sin(a), cos(a)]]
+        # 90 deg clockwise: a = -pi/2 rad, R = [[0, 1], [-1, 0]], x' = -y, y' = x
+        # 180 deg: a = pi rad, R = [[-1, 0], [0, -1]], x' = -x, y' = -y
+        # 90 deg anticlockwise: a = pi/2 rad, R = [[0, -1], [1, 0]], x' = y, y' = -x
+
         # Swap/shift 4 corners each time
         for i in range(n >> 1):
             for j in range(n - (n >> 1)):

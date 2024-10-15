@@ -28,28 +28,36 @@ public:
     // T: O(n)
     // S: O(1)
     bool isPalindrome(ListNode* head) {
-        ListNode *fast = head, *rev = nullptr;
+        ListNode* fast = head;
+        ListNode* cur = head; 
+        ListNode* rev = nullptr;
         
         // Reverse the first half
-        while (fast && fast->next) {
+        while (fast != nullptr && fast->next != nullptr) {
             fast = fast->next->next;
-            ListNode *tmp = rev;
-            rev = head;
-            head = head->next;
+            ListNode* tmp = rev;
+            rev = cur;
+            cur = cur->next;
             rev->next = tmp;
         }
 
         // Odd/even number of nodes
-        ListNode *tail = fast ? head->next : head;
+        ListNode* tail = fast != nullptr ? cur->next : cur;
 
         // Check values and undo reversing
         bool ans = true;
-        while (rev) {
+        while (rev != nullptr) {
             ans &= rev->val == tail->val;
-            ListNode *tmp = head;
-            head = rev;
+            if (!ans) {
+                // if restoring is not necessary, return early
+                return false;
+            }
+
+            ListNode* tmp = cur;
+            cur = rev;
             rev = rev->next;
-            head->next = tmp;
+            cur->next = tmp;
+
             tail = tail->next;
         }
         return ans;

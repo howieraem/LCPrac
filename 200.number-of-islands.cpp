@@ -27,15 +27,14 @@ public:
             for (int j = 0; j < grid[i].size(); ++j) {
                 if (grid[i][j] == '1') {
                     // q should be empty when a new island is just found
-
                     ++ans;
                     grid[i][j] = '0';   // mark visited
 
                     // For each island, do BFS and mark all cells of that current island visited
                     q.emplace(i, j);
-                    while (q.size()) {
+                    while (!q.empty()) {
                         int qs = q.size();
-                        while (qs--) {
+                        while (qs-- > 0) {
                             const auto p = q.front(); q.pop();
                             for (int d = 0; d < 4; ++d) {
                                 int ni = p.first + DIRN[d],

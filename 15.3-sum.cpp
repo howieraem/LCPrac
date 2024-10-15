@@ -15,7 +15,8 @@ public:
     vector<vector<int>> threeSum(vector<int>& nums) {
         sort(nums.begin(), nums.end());
         vector<vector<int>> res;
-        const int n = nums.size(), target = 0;
+        const int n = nums.size(); 
+        const int target = 0;
 
         for (int i = 0; i < n - 2; ++i) {
             int x = nums[i];
@@ -23,9 +24,12 @@ public:
                 // After sorting, since y and z in the code below will be greater 
                 // than x, we have x + y + z > target = 0. There is thus no need 
                 // to iterate over the remaining x.
+                // However, if target < 0, this may not be valid.
                 return res;
             }
-            if (i > 0 && nums[i - 1] == x)  continue;   // skip duplicates of x
+            if (i > 0 && nums[i - 1] == x) {
+                continue;   // skip duplicates of x
+            }
 
             int l = i + 1, r = n - 1;
             while (l < r) {
@@ -34,13 +38,19 @@ public:
                     res.push_back({x, y, z});
 
                     // skip duplicates of y and z
-                    while (l < r && nums[l + 1] == nums[l])  ++l;
-                    while (l < r && nums[r - 1] == nums[r])  --r;
+                    while (l < r && nums[l + 1] == nums[l]) { 
+                        ++l;
+                    }
+                    while (l < r && nums[r - 1] == nums[r]) { 
+                        --r;
+                    }
                     ++l;
                     --r;
+                } else if (s > target) { 
+                    --r;
+                } else { 
+                    ++l;
                 } 
-                else if (s > target)  --r;
-                else  ++l; 
             }
         }
         return res;

@@ -16,16 +16,39 @@ public:
     // S: O(1)
     int minSubArrayLen(int target, vector<int>& nums) {
         const int n = nums.size();
-        int ans = n + 1, windowSum = 0;
-        for (int l = 0, r = 0; r < n; ++r) {
-            windowSum += nums[r];
-            while (windowSum >= target) {
+        int ans = n + 1;  // default to an impossible length
+        int window_sum = 0;
+        int l = 0;
+        for (int r = 0; r < n; ++r) {
+            window_sum += nums[r];
+            while (window_sum >= target) {
                 ans = min(ans, r - l + 1);
-                windowSum -= nums[l++];
+                window_sum -= nums[l++];
             }
         }
         return ans == n + 1 ? 0 : ans;
     }
+
+    /*
+    // Follow-up, requiring T: O(log(n))
+    // S: O(n)
+    int minSubArrayLen(int target, vector<int>& nums) {
+        const int n = nums.size();
+        int ans = n + 1;
+        vector<int> prefix_sums(n + 1, 0);
+        for (int i = 1; i <= n; ++i) {
+            prefix_sums[i] = prefix_sums[i - 1] + nums[i - 1];
+        }
+
+        for (int i = n; i >= 0 && prefix_sums[i] >= target; --i) {
+            int j = std::upper_bound(prefix_sums.begin(), prefix_sums.end(), prefix_sums[i] - s) - prefix_sums.begin();
+            ans = std::min(ans, i - j + 1);
+        }
+        return ans == n + 1 ? 0 : ans;
+    }
+    */
+
+    // Follow-up: negative numbers exist, see Q862
 };
 // @lc code=end
 

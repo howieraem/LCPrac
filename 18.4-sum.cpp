@@ -24,13 +24,14 @@ public:
         for (int i = 0; i < n - 3; ++i) {
             int w = nums[i];
             if (i > 0 && nums[i - 1] == w) {
-                continue;
+                continue;  // skip duplicates
             }
 
+            // Below is almost the same as 3sum Q15
             for (int j = i + 1; j < n - 2; ++j) {
                 int x = nums[j];
                 if (j > i + 1 && nums[j - 1] == x) {
-                    continue;
+                    continue;  // skip duplicates
                 }
 
                 int l = j + 1;
@@ -47,8 +48,12 @@ public:
                         ++l;
                     } else {
                         res.push_back({w, x, y, z});
-                        while (l < r && nums[l + 1] == nums[l]) { ++l; }
-                        while (l < r && nums[r - 1] == nums[r]) { --r; }
+                        while (l < r && nums[l + 1] == nums[l]) { 
+                            ++l;  // skip duplicates
+                        }
+                        while (l < r && nums[r - 1] == nums[r]) { 
+                            --r;  // skip duplicates
+                        }
                         ++l;
                         --r;
                     }
