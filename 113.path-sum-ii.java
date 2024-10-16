@@ -37,6 +37,8 @@ class TreeNode {
 class Solution {
     List<List<Integer>> res;
 
+    // T: O(n), n := no. of nodes
+    // S: O(n)
     public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
         res = new ArrayList<>();
         backtrack(root, new Stack<>(), targetSum);
@@ -44,13 +46,16 @@ class Solution {
     }
 
     private void backtrack(TreeNode node, Stack<Integer> path, int targetSum) {
-        if (node == null)  return;
+        if (node == null) {
+            return;
+        }
         path.add(node.val);
         if (node.left == null && node.right == null && node.val == targetSum) {
             res.add(new ArrayList<>(path));
         } else {
-            backtrack(node.left, path, targetSum - node.val);
-            backtrack(node.right, path, targetSum - node.val);
+            targetSum -= node.val;
+            backtrack(node.left, path, targetSum);
+            backtrack(node.right, path, targetSum);
         }
         path.pop();
     }

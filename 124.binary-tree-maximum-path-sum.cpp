@@ -40,14 +40,18 @@ public:
     }
 
 private:
-    static int dfs(TreeNode* root, int &curMax) {
-        if (!root)  return 0;
-        int leftSum = dfs(root->left, curMax),
-            rightSum = dfs(root->right, curMax);
+    static int dfs(TreeNode* root, int& curMax) {
+        if (root == nullptr) {
+            return 0;
+        }
+        int leftSum = dfs(root->left, curMax);
+        int rightSum = dfs(root->right, curMax);
         // Current path sum can include bath paths
         curMax = max(curMax, root->val + leftSum + rightSum);
 
-        // Choose one of the subtrees (paths) for the next step
+        // Choose one of the subtrees (paths) for the next step,
+        // or discard all paths if sum doesn't contribute positively
+        // (discarding is okay here because result has been updated above)
         return max(0, max(leftSum, rightSum) + root->val);
     }
 };

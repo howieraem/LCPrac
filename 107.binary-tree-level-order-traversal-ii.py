@@ -21,6 +21,8 @@ class TreeNode:
 class Solution:
     # Trivial solution: BFS level-order traversal (Q102) -> reverse levels in result container
     # Non-trivial DFS solution: find the depth -> pre-allocate space -> assign level result according to depth
+    # T: O(n), n := no. of nodes
+    # S: O(n)
     def levelOrderBottom(self, root: Optional[TreeNode]) -> List[List[int]]:
         depth = self.get_depth(root)
         res = [[] for _ in range(depth)]

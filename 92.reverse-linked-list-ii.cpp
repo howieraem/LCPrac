@@ -35,15 +35,20 @@ public:
         auto pre = dummy;
         auto cur = dummy->next;
         int i = 0;
-        while (i < left - 1) {
+        while (i < left - 1 && cur != nullptr) {
             pre = cur;
             cur = cur->next;
             ++i;
         }
+        // Now pre is at (left - 1)-th node and cur is at left-th node
+        if (cur == nullptr) {
+            // out of bound check
+            return head;
+        }
         auto pre_left = pre;
 
         // start reversing every pair of nodes between left and right
-        while (i < right) {
+        while (i < right && cur != nullptr) {
             auto tmp = cur->next;
             cur->next = pre;
             pre = cur;

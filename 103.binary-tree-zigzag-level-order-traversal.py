@@ -26,12 +26,13 @@ class Solution:
             return res
         q = deque()
         q.append(root)
-        i = 0
+        # i = 0
 
         while len(q):
             qs = len(q)
             lvl = []
-            if i & 1:
+            # if i & 1:
+            if len(res) & 1:
                 # If level index is odd, reverse the direction of 
                 # polling as well as pushing
                 for _ in range(qs):
@@ -51,9 +52,12 @@ class Solution:
                     if node.right:
                         q.append(node.right)
 
-            i += 1
+            # i += 1
             res.append(lvl)
         return res
-        
+    
+    # Note that for a DFS solution, we have to first do the DFS version of Q102,
+    # and then manually reverse the order of odd levels in res 
+
 # @lc code=end
 

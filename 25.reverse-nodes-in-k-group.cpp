@@ -38,20 +38,24 @@ public:
     // T: O(n)
     // S: O(1)
     ListNode* reverseKGroup(ListNode* head, int k) {
-        ListNode *dummy = new ListNode(0, head);
+        ListNode* dummy = new ListNode(0, head);
 
-        ListNode *pre = dummy, *start, *end = dummy, *tmp;
-        while (end) {
+        ListNode* pre = dummy; 
+        ListNode* start; 
+        ListNode* end = dummy;
+        while (end != nullptr) {
             for (int i = 0; i < k; ++i) {
                 end = end->next;
 
                 // keep order if last step is less than k
-                if (!end)  return dummy->next;
+                if (end == nullptr) { 
+                    return dummy->next;
+                }
             }
 
             // Disconnect, reverse and re-connect
             start = pre->next; 
-            tmp = end->next;
+            ListNode* tmp = end->next;
             end->next = nullptr;
             pre->next = reverse(start);
             start->next = tmp;
