@@ -3,7 +3,7 @@
  *
  * [215] Kth Largest Element in an Array
  */
-#include <vector>
+#include <bits/stdc++.h>
 
 using std::swap;
 using std::vector;
@@ -46,7 +46,11 @@ private:
             swap(nums[l++], nums[r--]);
         }
 
-        swap(nums[begin], nums[r]);
+        swap(nums[begin], nums[r]); // swap pivot back
+
+        // At this point, numbers on the left of the pivot are less 
+        // than or equal to the pivot, and numbers on the right of 
+        // the pivot are greater than or equal to the pivot.
         if (r < _k)  quickSelect(nums, r + 1, end);
         else if (r > _k)  quickSelect(nums, begin, r - 1);
     }

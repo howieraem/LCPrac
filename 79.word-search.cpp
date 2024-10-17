@@ -3,6 +3,10 @@
  *
  * [79] Word Search
  */
+#include <bits/stdc++.h>
+
+using std::string;
+using std::vector;
 
 // @lc code=start
 class Solution {

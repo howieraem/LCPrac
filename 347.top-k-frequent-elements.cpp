@@ -12,6 +12,7 @@ using std::vector;
 // @lc code=start
 class Solution {
 public:
+    // Bucket sort
     // T: O(n)
     // S: O(n)
     vector<int> topKFrequent(vector<int>& nums, int k) {
@@ -22,7 +23,7 @@ public:
         }
 
         vector<vector<int>> buckets(n + 1);
-        for (const auto &e : f) {
+        for (const auto& e : f) {
             buckets[e.second].push_back(e.first);
         }
 
@@ -30,7 +31,7 @@ public:
         res.reserve(k);
         // upper bound of frequency is n
         for (int i = n; i >= 0 && res.size() < k; --i) {
-            if (buckets[i].size()) {
+            if (!buckets[i].empty()) {
                 res.insert(res.end(), buckets[i].begin(), buckets[i].end());
             }
         }

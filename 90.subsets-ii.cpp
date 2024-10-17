@@ -9,8 +9,12 @@ using std::vector;
 
 // @lc code=start
 class Solution {
-static void backtrack(const vector<int> &nums, int begin, vector<int> &path, vector<vector<int>> &res) {
+    static void backtrack(const vector<int> &nums, int begin, vector<int> &path, vector<vector<int>> &res) {
         res.push_back(vector<int>(path));
+        // Subset elements are unordered (thus combinations of different lengths).
+        // Main difference between combination and permutation: 
+        // - permutation starts from i = 0 and marks visited
+        // - combination has a cutoff (no need to mark visited explicitly)
         for (int i = begin; i < nums.size(); ++i) {
             if (i > begin && nums[i] == nums[i - 1]) {
                 // IMPORTANT: skip duplicates

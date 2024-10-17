@@ -10,11 +10,13 @@ using std::vector;
 // @lc code=start
 class Solution {
 public:
-    // T: O(n * n!)
+    // T: O(n * n!), n := len(nums)
     // S: O(len(nums)) for path copying and recursion
     vector<vector<int>> permuteUnique(vector<int>& nums) {
         std::sort(nums.begin(), nums.end());   // IMPORTANT: sort nums to help deduplicate
-        int vis_mask = (1 << nums.size()) - 1;   // if i-th bit is 1, then nums[i] has not been visited
+        // If i-th bit is 1, then nums[i] has not been visited
+        // If n > 64, use a vector to mark visited instead
+        int vis_mask = (1 << nums.size()) - 1;   
         vector<vector<int>> res;
         vector<int> path;
         backtrack(nums, path, vis_mask, res);

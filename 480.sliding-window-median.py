@@ -7,7 +7,7 @@ import heapq
 from typing import *
 
 # @lc code=start
-
+'''
 class MedianFinder:
     def __init__(self):
         self.small = []
@@ -64,8 +64,10 @@ class MedianFinder:
     def move(src: list, dst: list):
         top = heapq.heappop(src)
         heapq.heappush(dst, -top)
+'''
 
 class Solution:
+    '''
     # Solution 1: Directly modified from Q295 median finder
     # T: O(n * k)
     # S: O(k)
@@ -84,9 +86,9 @@ class Solution:
             mf.remove(nums[j])
             res[j + 1] = mf.median()
         return res
-
     '''
-    # Solution 2: Advanced removal from heap
+
+    # Solution 2: sliding window + advanced removal from heap
     # T: O(n * log(k))
     # S: O(k)
     def medianSlidingWindow(self, nums: List[int], k: int) -> List[float]:
@@ -95,50 +97,56 @@ class Solution:
         small = []   # max heap, heap top is the maximum
         large = []   # min heap, heap top is the minimum
 
-        for i in range(k):
-            heapq.heappush(small, (-nums[i], i))
-        for _ in range(k - (k >> 1)):
-            # Make the large heap contain no less 
-            # elements than the small heap
-            self.move(small, large)
+        # Initial window
+        for r in range(k):
+            # Make the large heap contain no less elements than the small heap,
+            # so that when there are an odd number of elements in total, the 
+            # large heap's top is the median 
+            if len(small) == len(large):
+                tup = heapq.heappushpop(small, (-nums[r], r))  # heappushpop is faster than heappush + heappop in sequence
+                heapq.heappush(large, (-tup[0], tup[1]))
+            else:
+                tup = heapq.heappushpop(large, (nums[r], r))
+                heapq.heappush(small, (-tup[0], tup[1]))
 
         res[0] = self.median(small, large, k)
-        
-        for i in range(k, n):
-            j = i - k
-            x = nums[i]
 
+        for r in range(k, n):
             # Advanced efficient steps to shift the left boundary of the window:
             # 1. Move the element at the left boundary from one heap to another if needed
-            # 2. Do heap pop based on the index
-            if x >= large[0][0]:
-                heapq.heappush(large, (x, i))
-                if nums[j] <= large[0][0]:
+            # 2. Do heap pop based on the left boundary index of the window
+            l = r - k
+            if nums[r] >= large[0][0]:
+                heapq.heappush(large, (nums[r], r))
+                if nums[l] <= large[0][0]:
+                    # the large heap will not be balanced after window slides
                     self.move(large, small)
             else:
-                heapq.heappush(small, (-x, i))
-                if nums[j] >= large[0][0]:
+                heapq.heappush(small, (-nums[r], r))
+                if nums[l] >= large[0][0]:
+                    # the small heap will not be balanced after window slides
                     self.move(small, large)
-            while len(large) and large[0][1] <= j:
+            while len(large) > 0 and large[0][1] <= l:
                 heapq.heappop(large)
-            while len(small) and small[0][1] <= j:
+            while len(small) > 0 and small[0][1] <= l:
                 heapq.heappop(small)
 
-            res[j + 1] = self.median(small, large, k)
+            res[l + 1] = self.median(small, large, k)
 
         return res
 
     @staticmethod
+    # T: O(log(k))
     def move(src, dst):
         x, i = heapq.heappop(src)
         heapq.heappush(dst, (-x, i))
 
     @staticmethod
+    # T: O(1)
     def median(small, large, k):
         if k & 1:
             return large[0][0]
         return (-small[0][0] + large[0][0]) / 2.
-    '''
 
 # @lc code=end
 

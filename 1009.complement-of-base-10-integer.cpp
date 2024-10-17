@@ -7,6 +7,8 @@
 // @lc code=start
 class Solution {
 public:
+    // T: O(log(n))
+    // S: O(1)
     int bitwiseComplement(int n) {
         // if (!n)  return 1;
         // int i = 0, mask = 0, num = n;
@@ -20,6 +22,8 @@ public:
             a <<= 1;
             ++a;
         }
+        // At this point, a's bits are all ones
+        // so do XOR: 0 ^ 1 -> 1, 1 ^ 1 -> 0
         return n ^ a;
     }
 };

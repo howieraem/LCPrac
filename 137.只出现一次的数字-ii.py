@@ -11,10 +11,10 @@ class Solution:
         """Solution with bit manipulations. One can draw a state machine to assist:
         each of the state represents the count of a number. Binary operation quick
         formuli:
-            - x^1 = ~x
-            - x^0 = x
-            - x&0 = 0
-            - x&1 = x
+            - x ^ 1 = ~x
+            - x ^ 0 = x
+            - x & 0 = 0
+            - x & 1 = x
         """
         seen_once = seen_twice = 0
 

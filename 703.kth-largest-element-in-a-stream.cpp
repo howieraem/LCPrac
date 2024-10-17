@@ -5,10 +5,12 @@
  */
 #include <bits/stdc++.h>
 
+using std::vector;
+
 // @lc code=start
 class KthLargest {
     // S: O(k)
-    std::priority_queue<int, std::vector<int>, std::greater<int>> min_heap;
+    std::priority_queue<int, vector<int>, std::greater<int>> min_heap;
     int _k;
 
 public:
@@ -27,7 +29,9 @@ public:
     // T: O(log(k))
     int add(int val) {
         min_heap.push(val);
-        if (min_heap.size() > _k) min_heap.pop();
+        if (min_heap.size() > _k) {
+            min_heap.pop();
+        }
         return min_heap.top();
     }
 };

@@ -3,6 +3,7 @@
 #
 # [260] 只出现一次的数字 III
 #
+from typing import List
 
 # @lc code=start
 class Solution:
