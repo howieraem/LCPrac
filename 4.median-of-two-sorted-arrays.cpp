@@ -71,7 +71,7 @@ public:
         k = std::max(0, n1 + n2 - k);   // convert to (n1 + n2 - k)-th smallest
 
         int l = std::max(0, k - n2);  // if k > n2, need to take at least k - n2 elements from nums1
-        int r = std::min(k, n1);      // if k > n1, can take at most k elements from nums1
+        int r = std::min(k, n1);      // if k < n1, can take at most k elements from nums1
 
         // int l = 0;
         // int r = n1 - 1;
