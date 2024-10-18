@@ -17,7 +17,7 @@ public:
     // S: O(1)
     double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
         if (nums1.size() > nums2.size()) {
-            // make nums2 the longer array to reduce time complexity in binary search 
+            // make nums2 the longer array to reduce time complexity in binary search of nums1
             swap(nums1, nums2);
         }
 
@@ -35,9 +35,13 @@ public:
         const int n1 = nums1.size(), n2 = nums2.size(), k = (n1 + n2 + 1) >> 1;
         int l = 0, r = n1;  // range of i
         while (l < r) {
-            int i = l + ((r - l) >> 1), j = k - i;
-            if (nums1[i] < nums2[j - 1])  l = i + 1;
-            else  r = i;
+            int m1 = l + ((r - l) >> 1); 
+            int m2 = k - m1;
+            if (nums1[m1] < nums2[m2 - 1]) { 
+                l = m1 + 1;
+            } else {
+                r = m1;
+            }
         }
 
         // Check if split indices are out of bound
@@ -50,6 +54,44 @@ public:
             i < n1 ? nums1[i] : INT_MAX,
             j < n2 ? nums2[j] : INT_MAX);
         return 0.5 * maxLeft + 0.5 * minRight;
+    }
+
+    // Follow-up: find the k-th largest element of two sorted arrays
+    // T: O(log(k))
+    // S: O(1)
+    int findKthLargestOfTwoSortedArrays(vector<int>& nums1, vector<int>& nums2, int k) {
+        if (nums1.size() > nums2.size()) {
+            // make nums2 the longer array to reduce time complexity in binary search of nums1 
+            swap(nums1, nums2);
+        }
+
+        int n1 = nums1.size();
+        int n2 = nums2.size();
+
+        k = std::max(0, n1 + n2 - k);   // convert to (n1 + n2 - k)-th smallest
+
+        int l = std::max(0, k - n2);  // if k > n2, need to take at least k - n2 elements from nums1
+        int r = std::min(k, n1);      // if k > n1, can take at most k elements from nums1
+
+        // int l = 0;
+        // int r = n1 - 1;
+
+        while (l <= r) {
+            int m1 = l + ((r - l) >> 1);
+            int m2 = k - m1;
+            int nums1_l = m1 > 0 ? nums1[m1 - 1] : INT_MIN;
+            int nums1_r = m1 < n1 ? nums1[m1] : INT_MAX;
+            int nums2_l = m2 > 0 ? nums2[m2 - 1] : INT_MIN;
+            int nums2_r = m2 < n2 ? nums2[m2] : INT_MAX;
+            if (nums1_l <= nums2_r && nums2_l <= nums1_r) {
+                return std::max(nums1_l, nums2_l);
+            } else if (nums1_l > nums2_r) {
+                r = m1 - 1;
+            } else {
+                l = m1 + 1;
+            }
+        }
+        return -1;  // this should never happen
     }
 };
 // @lc code=end

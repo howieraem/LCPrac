@@ -15,22 +15,27 @@ class Solution {
         return res;
     }
 
-    private static void backtrack(StringBuilder path, int nL, int nR, List<String> res) {
-        if (nL > nR) return;
-        if (nL == 0 && nR == 0) {
+    private static void backtrack(StringBuilder path, int remainL, int remainR, List<String> res) {
+        if (remainL > remainR) {
+            // This is necessary, because we want a left parenthesis to appear in front of
+            // its corresponding right parenthesis. Without this, results will contain
+            // things like ")))((("
+            return;
+        }
+        if (remainL == 0 && remainR == 0) {
             res.add(path.toString());
             return;
         }
 
-        if (nL > 0) {
+        if (remainL > 0) {
             path.append('(');
-            backtrack(path, nL - 1, nR, res);
+            backtrack(path, remainL - 1, remainR, res);
             path.deleteCharAt(path.length() - 1);
         }
 
-        if (nR > 0) {
+        if (remainR > 0) {
             path.append(')');
-            backtrack(path, nL, nR - 1, res);
+            backtrack(path, remainL, remainR - 1, res);
             path.deleteCharAt(path.length() - 1);
         }
     }

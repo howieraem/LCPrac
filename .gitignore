@@ -5,3 +5,4 @@ draft.txt
 *.pdb
 .vscode
 am
+**/__pycache__

@@ -31,7 +31,8 @@ public:
 
         for (const int& x : nums) {
             for (int j = target; j >= x; --j) {
-                // The reason for iterating backwards is that in 2D DP dp[i][j] relies on dp[i-1][j-nums[i-1]] rather than dp[i][j - nums[i-1]].
+                // The reason for iterating backwards is that in 2D DP dp[i][j] relies on dp[i - 1][j - nums[i - 1]] rather than dp[i][j - nums[i - 1]].
+                // Each x should be used once only.
                 // Details: https://leetcode.com/problems/partition-equal-subset-sum/discuss/90592/01-knapsack-detailed-explanation/431026
                 dp[j] |= dp[j - x];
             }

@@ -52,7 +52,7 @@ public:
         // If not all courses (node) have been visited, then 
         // there must exist a cycle, i.e. unable to complete
         // all courses.
-        return numCourses == 0 ? res: vector<int>();
+        return numCourses == 0 ? res : vector<int>();
     }
     */
 

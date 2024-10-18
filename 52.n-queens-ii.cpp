@@ -35,14 +35,16 @@ private:
             return;
         }
         for (int col = 0; col < n; ++col) {
-            if (avail_col[col] && avail_diag1[row + col] && avail_diag2[n - 1 - row + col]) {
-                avail_col[col] = avail_diag1[row + col] = avail_diag2[n - 1 - row + col] = false;
+            int diag_idx = row + col;
+            int antidiag_idx = n - 1 - row + col;
+            if (avail_col[col] && avail_diag1[diag_idx] && avail_diag2[antidiag_idx]) {
+                avail_col[col] = avail_diag1[diag_idx] = avail_diag2[antidiag_idx] = false;
 
                 // DFS
                 backtrack(ans, avail_col, avail_diag1, avail_diag2, row + 1, n);
 
                 // Undo
-                avail_col[col] = avail_diag1[row + col] = avail_diag2[n - 1 - row + col] = true;
+                avail_col[col] = avail_diag1[diag_idx] = avail_diag2[antidiag_idx] = true;
             }
         }
     }

@@ -18,13 +18,14 @@ class Solution:
     # S: O(s ^ 2)
     def alienOrder(self, words: List[str]) -> str:
         graph = [[False] * 26 for _ in range(26)]
-        in_deg = [-1 for _ in range(26)]
+        in_deg = [-1 for _ in range(26)]  # default to -1 for non-existent chars
         n_uniq_chars = 0
 
         for w in words:
             for c in w:
-                if in_deg[cid(c)] == -1:
-                    in_deg[cid(c)] = 0
+                c = cid(c)
+                if in_deg[c] == -1:
+                    in_deg[c] = 0
                     n_uniq_chars += 1
 
         # Build a graph by checking each adjacent pairs of words 
@@ -39,10 +40,14 @@ class Solution:
                 if w1[j] != w2[j]:
                     c1 = cid(w1[j])
                     c2 = cid(w2[j])
+                    
+                    # Form an edge from c1 to c2
                     if not graph[c1][c2]:
                         graph[c1][c2] = True
                         in_deg[c2] += 1
+                    
                     break
+                
                 if j == n - 1 and n1 > n2:
                     # Invalid order
                     return ""

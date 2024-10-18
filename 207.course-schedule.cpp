@@ -16,16 +16,16 @@ public:
         int inDeg[numCourses];
         memset(inDeg, 0, sizeof(inDeg));
         vector<vector<int>> A(numCourses);
-        for (auto &edge : prerequisites) {
-            ++inDeg[edge[0]];
-            A[edge[1]].push_back(edge[0]);
+        for (auto& edge : prerequisites) {
+            ++inDeg[edge[0]];  // ++inDeg[dst]
+            A[edge[1]].push_back(edge[0]);  // A[src].push_back(dst)
             // Directed, do NOT write `A[edge[0]].push_back(edge[1]);`
         }
 
         // Topological sort using BFS
         queue<int> q;
         for (int i = 0; i < numCourses; ++i) {
-            if (!inDeg[i]) {
+            if (inDeg[i] == 0) {
                 q.push(i);
             }
         }
