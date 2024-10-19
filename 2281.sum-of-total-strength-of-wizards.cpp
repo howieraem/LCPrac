@@ -25,7 +25,7 @@ public:
     int totalStrength(vector<int>& strength) {
         const long long n = strength.size(), MOD = 1000000007;
         vector<int> pre_sum_l(n + 1), pre_sum_r(n + 1), pre_mul_l(n + 1), pre_mul_r(n + 1);
-        stack<int> st;
+        stack<int> st;  // stores indices of strengths ordered ASC (stack top corresponds to weakest)
 
         for (long long l = 0; l < n; ++l) {
             pre_sum_l[l + 1] = (pre_sum_l[l] + strength[l]) % MOD;
@@ -38,7 +38,7 @@ public:
 
         long long ans = 0;
         for (long long r = 0; r <= n; ++r) {
-            while (st.size() && (r == n || strength[st.top()] >= strength[r])) {
+            while (!st.empty() && (r == n || strength[st.top()] >= strength[r])) {
                 int pivot = st.top(); st.pop();
                 long long l = st.empty() ? 0 : st.top() + 1;
                 long long l_sum = (MOD + pre_mul_l[pivot + 1] - pre_mul_l[l] - l * (pre_sum_l[pivot + 1] - pre_sum_l[l]) % MOD) % MOD,

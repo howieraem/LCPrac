@@ -14,9 +14,7 @@ class UF {
     vector<int> parent, size;
 
 public:
-    UF(int n) {
-        parent = vector<int>(n);
-        size = vector<int>(n, 1);
+    UF(int n) : parent(n), size(n, 1) {
         for (int i = 0; i < n; ++i) {
             parent[i] = i;  // a node's parent is itself initially
         }
@@ -63,34 +61,35 @@ public:
         // If we can remove exactly 1 edge to achieve the tree structure, 
         // a single node can have at most 2 parents. Denote the corresponding
         // edges as candidates 1 and 2.
-        vector<int> cand1, cand2;
+        vector<int> e_cand1, e_cand2;
 
         // Find if there's a node with 2 parents
         unordered_map<int, vector<int>> parent_edge;    // key is a destination vertex, value is an in edge of that vertex
-        for (const auto &e : edges) {
+        for (const auto& e : edges) {
             auto it = parent_edge.find(e[1]);
             if (it != parent_edge.end()) {
-                cand1 = it->second;
-                cand2 = e;
+                e_cand1 = it->second;
+                e_cand2 = e;
                 break;
             }
             parent_edge[e[1]] = e;
         }
+        // At this point, if no candidate found, then the graph can be a single cycle
 
         // If there is a cycle and a node with 2 parents, then one of the candidate edges is on the cycle. 
         // If you can complete the cycle without the second candidate, then it must be the first. If you 
         // can't, then it must be the second. If there is no cycle, you want the second candidate anyways,
         // so the answer is the same as if the cycle included the second candidate.
         UF uf(edges.size() + 1);
-        for (const auto &e : edges) {
-            if (e == cand2) {
+        for (const auto& e : edges) {
+            if (e == e_cand2) {
                 continue;
             }
             if (!uf.connect(e[0], e[1])) {
-                return cand1.size() ? cand1 : e;
+                return e_cand1.empty() ? e : e_cand1;
             }
         }
-        return cand2;
+        return e_cand2;
     }
 };
 // @lc code=end

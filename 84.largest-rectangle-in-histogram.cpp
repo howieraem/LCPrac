@@ -15,26 +15,25 @@ public:
     // S: O(n)
     int largestRectangleArea(vector<int>& heights) {
         const int n = heights.size();
-        stack<pair<int, int>> s; // Stores pairs of (index, height) in ascending order of height
-        // Insert a dummy data point to make the following solution more elegant
-        s.push({-1, 0});
-        int ans = -1;
+        stack<int> st; // Stores index of height (in ASC order of height)
+
+        // Add a 0 at the end to treat bars as rising and falling edges (each bar has width 1), 
+        // and to avoid extra logic to calculate areas in the last iteration 
+        // (e.g., if the input heights are ordered ASC)
+        heights.push_back(0);
+
+        int ans = 0;
 
         for (int i = 0; i < heights.size(); ++i) {
-            while (s.top().second > heights[i]) {
-                const auto &[pre_i, h] = s.top(); s.pop();
-                int w = (i - 1 - s.top().first);
+            while (!st.empty() && heights[st.top()] > heights[i]) {
+                const int& h = heights[st.top()]; st.pop();
+                int pre_i = st.empty() ? -1 : st.top();  // -1 handles pure DESC input heights
+                int w = i - pre_i - 1;
                 ans = max(ans, h * w);
             }
-            s.push({i, heights[i]});
+            st.push(i);
         }
 
-        // Don't forget the last bars
-        while (s.top().first != -1) {
-            const auto &[i, h] = s.top(); s.pop();
-            int w = (n - 1 - s.top().first);
-            ans = max(ans, h * w);
-        }
         return ans;
     }
 };

@@ -20,7 +20,9 @@ class WordDictionary {
     TrieNode* root;
 
     bool search(const string& word, int cur_idx, TrieNode* cur_node) {
-        if (cur_idx == word.size()) return cur_node->is_word;
+        if (cur_idx == word.size()) {
+            return cur_node->is_word;
+        }
         if (word[cur_idx] == '.') {
             ++cur_idx;
             for (auto& child : cur_node->children) {

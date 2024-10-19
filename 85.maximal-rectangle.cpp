@@ -20,18 +20,20 @@ public:
         const int m = matrix.size(), n = matrix[0].size();
         int ans = 0;
 
-        // Converts the problem to finding the max. reactangle area
-        // like Question 84
-        vector<int> heights(n + 2, 0);  // zero-padded left and right by 1
+        // Converts the problem to finding the max. rectangle area of histograms Q84
+        // Add a zero height at the right to make the helper function elegant 
+        // (see explanations in Q84)
+        vector<int> heights(n + 1, 0);  
         for (int i = 0; i < m; ++i) {
             for (int j = 0; j < n; ++j) {
                 if (matrix[i][j] == '1') {
-                    ++heights[j + 1];
+                    ++heights[j];
                 } else {
-                    heights[j + 1] = 0;
+                    // the "histogram" bar cannot contain a zero in the middle
+                    heights[j] = 0;
                 }
             }
-            // now `heights` should look like [0, h0, h1, ..., hn, 0]
+            // now `heights` should look like [h(0), h(1), ..., h(n-1), 0]
             ans = max(ans, largestHistRectArea(heights));
         }
         return ans;
@@ -40,13 +42,15 @@ public:
 private:
     static int largestHistRectArea(vector<int> &heights) {
         int ans = 0;
-        stack<int> s;    // mono-stack that stores indices
+        stack<int> st;    // mono-stack that stores indices of heights (ordered ASC)
         for (int i = 0; i < heights.size(); ++i) {
-            while (s.size() && heights[s.top()] > heights[i]) {
-                int tmp = s.top(); s.pop();
-                ans = max(ans, (i - s.top() - 1) * heights[tmp]);
+            while (!st.empty() && heights[st.top()] > heights[i]) {
+                const int& h = heights[st.top()]; st.pop();
+                int pre_i = st.empty() ? -1 : st.top();  // -1 handles pure DESC input heights
+                int w = i - pre_i - 1;
+                ans = max(ans, h * w);
             }
-            s.push(i);
+            st.push(i);
         }
         return ans;
     }

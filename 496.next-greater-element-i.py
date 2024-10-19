@@ -7,6 +7,7 @@ from typing import *
 
 # @lc code=start
 class Solution:
+    # Mono stack
     # T: O(n)
     # S: O(n)
     def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
@@ -15,12 +16,13 @@ class Solution:
 
         n1, n2 = len(nums1), len(nums2)
         for i in range(n2):
+            # Numbers in stack are ordered DESC
             while len(stack) and stack[-1] < nums2[i]:
                 map[stack.pop()] = nums2[i]
             stack.append(nums2[i])
         
         # No next greater element exists
-        while len(stack):
+        while len(stack) > 0:
             map[stack.pop()] = -1
 
         # Every number in nums1 is also in nums2

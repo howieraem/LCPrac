@@ -3,7 +3,7 @@
  *
  * [226] Invert Binary Tree
  */
-#include <utility>
+#include <bits/stdc++.h>
 
 struct TreeNode {
     int val;
@@ -32,11 +32,44 @@ public:
     // S: O(log(n))
     TreeNode* invertTree(TreeNode* root) {
         if (!root) return nullptr;
+
+        // Either pre-order or post-order will work
+        std::swap(root->left, root->right);
         invertTree(root->left);
         invertTree(root->right);
-        std::swap(root->left, root->right);
+        // std::swap(root->left, root->right);
+
         return root;
     }
+
+    /*
+    // Iterative solution
+    // T: O(n)
+    // S: O(log(n))
+    TreeNode* invertTree(TreeNode* root) {
+        if (root == nullptr) {
+            return nullptr;
+        }
+
+        std::stack<TreeNode*> st;  // can also use a queue (becomes BFS)
+        st.push(root);
+
+        while (!st.empty()) {
+            TreeNode* node = st.top(); st.pop();
+            TreeNode* tmp = node->left;
+            node->left = node->right;
+            node->right = tmp;
+
+            if (node->left != nullptr) {
+                st.push(node->left);
+            }
+            if (node->right != nullptr) {
+                st.push(node->right);
+            }
+        }
+        return root;
+    }
+    */
 };
 // @lc code=end
 

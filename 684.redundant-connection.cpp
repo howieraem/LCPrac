@@ -12,9 +12,7 @@ class UF {
     vector<int> parent, size;
 
 public:
-    UF(int n) {
-        parent = vector<int>(n);
-        size = vector<int>(n, 1);
+    UF(int n) : parent(n), size(n, 1) {
         for (int i = 0; i < n; ++i) {
             parent[i] = i;  // a node's parent is itself initially
         }
@@ -53,8 +51,9 @@ public:
     // S: O(n)
     vector<int> findRedundantConnection(vector<vector<int>>& edges) {
         UF uf(edges.size() + 1);    // 1-indexed vertices
-        for (const auto &e : edges) {
-            if (!uf.connect(e[0], e[1])) {
+        for (const auto& e : edges) {
+            if (!uf.connect(e[0], e[1])) {  
+                // already connected, keep the earlier edges and return the last redundant edge
                 return e;
             }
         }

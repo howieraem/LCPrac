@@ -13,13 +13,14 @@ struct Node {
     bool isEnd;
 
     Node() : isEnd(false) {
-        for (int i = 0; i < 26; i++)
+        for (int i = 0; i < 26; i++) {
             next[i] = nullptr;
+        }
     }
 };
 
 // T: O(l), l := len(word)
-// S: O(l)
+// S: O(l * alpha_size)
 class Trie {
     Node *root;
 
@@ -42,7 +43,7 @@ public:
     
     bool search(string word) {
         Node *tmp = root;
-        for (const auto &c : word) {
+        for (const auto& c : word) {
             int cidx = c - 'a';
             if (!tmp->next[cidx]) {
                 return false;
@@ -54,7 +55,7 @@ public:
     
     bool startsWith(string prefix) {
         Node *tmp = root;
-        for (const auto &c : prefix) {
+        for (const auto& c : prefix) {
             int cidx = c - 'a';
             if (!tmp->next[cidx]) {
                 return false;

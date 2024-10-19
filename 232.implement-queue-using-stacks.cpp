@@ -8,12 +8,13 @@
 using std::stack;
 
 // @lc code=start
+// S: O(n)
 class MyQueue {
     stack<int> s_push, s_pop;
 
     void transfer() {
         if (s_pop.empty()) {
-            while (s_push.size()) {
+            while (!s_push.empty()) {
                 s_pop.push(s_push.top()); s_push.pop();
             }
         }
