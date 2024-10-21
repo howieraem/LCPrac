@@ -14,7 +14,8 @@ using namespace std;
 class FileSystem {
     struct Node {
         map<string, Node*> children;    // keys are ordered, required by `ls()`
-        string name, content;
+        string name;   // folder/file name
+        string content;
         bool is_file;   // In reality, this is not the same as `!content.empty()`
 
         Node(string _name = "") : name(_name), is_file(false) {};
@@ -24,23 +25,25 @@ class FileSystem {
 
     // T: O(n * log(n)), n := the number of '/'
     Node* find(string path) {
+        // Parse path into list of relevant folders and/or file
         vector<string> dirs;
         string name;
         for (int i = 1; i < path.size(); ++i) {
             if (path[i] == '/') {
-                if (name.size()) {
-                    dirs.push_back(name);
-                    name.clear();
+                if (!name.empty()) {
+                    dirs.push_back(std::move(name));
+                    // name.clear();
                 }
                 continue;
             } else {
                 name.push_back(path[i]);
             }
         }
-        if (name.size()) {  // don't forget the last one
-            dirs.push_back(name);    
+        if (!name.empty()) {  // don't forget the last one
+            dirs.push_back(std::move(name));    
         }
         
+        // Search in Trie
         Node *cur = root;
         for (const string &d : dirs) {
             if (cur->children.find(d) == cur->children.end()) {
@@ -64,6 +67,7 @@ public:
         if (cur->is_file) {
             res.push_back(cur->name);
         } else {
+            res.reserve(cur->children.size());
             for (const auto &p : cur->children) {
                 res.push_back(p.first);
             }

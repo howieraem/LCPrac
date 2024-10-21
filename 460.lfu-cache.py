@@ -4,25 +4,25 @@
 # [460] LFU Cache
 #
 from collections import defaultdict
-from typing import DefaultDict, Dict
+from typing import DefaultDict, Dict, Optional
 
 # @lc code=start
 class DLinkedList:
     class Node:
-        def __init__(self, k, v):
+        def __init__(self, k, v) -> None:
             self.k = k
             self.v = v
             self.freq = 1
-            self.prev: DLinkedList.Node = None
-            self.next: DLinkedList.Node = None
+            self.prev: Optional[DLinkedList.Node] = None
+            self.next: Optional[DLinkedList.Node] = None
 
-    def __init__(self):
+    def __init__(self) -> None:
         self._head = DLinkedList.Node(None, None)
         # circular, easier to track the tail
         self._head.prev = self._head.next = self._head
-        self._sz = 0
+        self._sz: int = 0
 
-    def __len__(self):
+    def __len__(self) -> int:
         return self._sz
 
     def add_to_head(self, node):
@@ -34,10 +34,10 @@ class DLinkedList:
             self._sz += 1
 
     def remove_node(self, node=None):
-        if not self._sz:
+        if self._sz == 0:
             return None
-        if not node:
-            node = self._head.prev  # tail of list
+        if node is None:
+            node = self._head.prev  # remove tail of list by default
         if isinstance(node, DLinkedList.Node):
             node.prev.next = node.next
             node.next.prev = node.prev
@@ -47,31 +47,31 @@ class DLinkedList:
 
 
 class LFUCache:
-    def __init__(self, capacity: int):
+    def __init__(self, capacity: int) -> None:
         self._sz = 0
         self._cap = capacity
-        self._nodes: Dict[int, DLinkedList.Node] = dict()
-        self._freqs: DefaultDict[int, DLinkedList] = defaultdict(DLinkedList)
+        self._nodes: Dict[int, DLinkedList.Node] = dict()  # k: node key, v: node
+        self._freqs: DefaultDict[int, DLinkedList] = defaultdict(DLinkedList)  # k: freq, v: doubly linked list
         self._min_freq = 0
 
-    def _update(self, node: DLinkedList.Node):
+    def _update(self, node: DLinkedList.Node) -> None:
         self._freqs[node.freq].remove_node(node)
-        if self._min_freq == node.freq and not len(self._freqs[node.freq]):
+        if self._min_freq == node.freq and len(self._freqs[node.freq]) == 0:
             self._min_freq += 1
         node.freq += 1
         self._freqs[node.freq].add_to_head(node)
 
     # T: O(1)
     def get(self, key: int) -> int:
-        if key not in self._nodes:
+        node = self._nodes.get(key, None)
+        if node is None:
             return -1
-        node = self._nodes[key]
         self._update(node)
         return node.v
 
     # T: O(1)
     def put(self, key: int, value: int) -> None:
-        if not self._cap:
+        if self._cap == 0:
             return
         if key in self._nodes:
             node = self._nodes[key]

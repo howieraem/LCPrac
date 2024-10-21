@@ -10,34 +10,37 @@ using std::vector;
 // @lc code=start
 // Intuitive solution: flatten the 2D vector and check if indices out of bound (not constant space)
 
-// T: O(n)
 // S: O(1)
 class Vector2D {
-    vector<vector<int>>::iterator x, x_end;
-    vector<int>::iterator y;
+    vector<vector<int>>::iterator row_it, row_end;
+    vector<int>::iterator col_it;
 
 public:
+    // T: O(1)
     Vector2D(vector<vector<int>>& vec) {
-        x = vec.begin();
-        x_end = vec.end();
-        if (x != x_end) {
-            y = x->begin();
+        row_it = vec.begin();
+        row_end = vec.end();
+        if (row_it != row_end) {
+            col_it = row_it->begin();
         }
     }
     
+    // T: O(n) worse
     int next() {
-        hasNext();  // in case y has reached x->end()
-        return *y++;
+        hasNext();  // in case col_it has reached row_it->end(), i.e. col_end
+        return *col_it++;
     }
     
+    // T: O(n) worse
     bool hasNext() {
-        while (x != x_end && y == x->end()) {
-            ++x;
-            if (x != x_end) {
-                y = x->begin();
+        // Use `while` rather than `if` in case next row/list is empty 
+        while (col_it == row_it->end() && row_it != row_end) {
+            ++row_it;
+            if (row_it != row_end) {
+                col_it = row_it->begin();
             }
         }
-        return x != x_end;
+        return row_it != row_end;
     }
 };
 
