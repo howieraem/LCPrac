@@ -66,8 +66,12 @@ private:
         // than pivot. 
         swap(points[begin], points[r]);
 
-        if (r < _k)  quickSelect(points, r + 1, end);
-        else if (r > _k)  quickSelect(points, begin, r - 1);
+        if (r < _k) {
+            quickSelect(points, r + 1, end);
+        }
+        else if (r > _k) {
+            quickSelect(points, begin, r - 1);
+        }
     }
 };
 // @lc code=end

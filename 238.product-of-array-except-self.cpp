@@ -18,11 +18,13 @@ public:
         vector<int> res(n, 1);
 
         // res[i] = product of nums on the left * product of nums on the right
-        for (int i = 0; i < n; ++i) {
-            res[i] *= left_product;
-            left_product *= nums[i];
-            res[n - i - 1] *= right_product;
-            right_product *= nums[n - i - 1];
+        for (int l = 0; l < n; ++l) {
+            res[l] *= left_product;
+            left_product *= nums[l];  // exclude self
+
+            int r = n - 1 - l;
+            res[r] *= right_product;
+            right_product *= nums[r];  // exclude self
         }
         return res;
     }

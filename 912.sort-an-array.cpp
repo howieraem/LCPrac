@@ -3,18 +3,19 @@
  *
  * [912] Sort an Array
  */
-#include <utility>
-#include <vector>
+#include <bits/stdc++.h>
 
 using namespace std;
 
-// @lc code=start
 /*
-// Quick sort: got TLE in leetcode's testcases, but works well in reality (numbers are random)
+// @lc code=start
+// Quick sort: may get TLE in leetcode's testcases, but works well in reality if numbers are random and distinct
 // T Worst: O(n^2)
 // T Average: O(n*log(n))
 // S: O(1)
 class Solution {
+    std::mt19937 gen;
+
     void quickSort(vector<int> &nums, int l, int r) {
         if (l >= r)  return;
         int p = partition(nums, l, r);
@@ -23,6 +24,10 @@ class Solution {
     }
 
     int partition(vector<int> &nums, int l, int r) {
+        std::uniform_int_distribution<> distrib(l, r);
+        int pivot_idx = distrib(gen);
+        swap(nums[pivot_idx], nums[r]);
+        
         int pivot = nums[r];
         int i = l - 1;
         for (int j = i + 1; j < r; ++j) {
@@ -35,6 +40,8 @@ class Solution {
     }
 
 public:
+    Solution() : gen((std::random_device())()) {};
+
     vector<int> sortArray(vector<int>& nums) {
         quickSort(nums, 0, nums.size() - 1);
         return nums;
@@ -42,6 +49,7 @@ public:
 };
 */
 
+/*
 // Heap sort: simulate heap push and heap pop
 // T: O(n*log(n))
 // S: O(1)
@@ -53,8 +61,9 @@ class Solution {
                 ++child;
             }
         
-            if (nums[root] > nums[child])  return;
-            else {
+            if (nums[root] > nums[child]) {
+                return;
+            } else {
                 swap(nums[root], nums[child]);
                 root = child;
                 child = (root << 1) + 1;
@@ -76,6 +85,7 @@ public:
         return nums;
     }
 };
+*/
 
 /*
 // Merge sort (out of place): parallelizable
@@ -83,21 +93,34 @@ public:
 // S: O(n)
 class Solution {
     void mergeSort(vector<int> &nums, int l, int r) {
-        if (l == r)  return;
+        if (l == r) {
+            return;
+        }
         int m = l + ((r - l) >> 1);
         mergeSort(nums, l, m);
         mergeSort(nums, m + 1, r);
 
         // Merge
         vector<int> tmp(r - l + 1);
-        int i = l, j = m + 1, k = 0;
+        int i = l; 
+        int j = m + 1; 
+        int k = 0;
         while (i <= m && j <= r) {
-            if (nums[i] <= nums[j])  tmp[k++] = nums[i++];
-            else  tmp[k++] = nums[j++];
+            if (nums[i] <= nums[j]) {
+                tmp[k++] = nums[i++];
+            } else { 
+                tmp[k++] = nums[j++];
+            }
         }
-        while (i <= m)  tmp[k++] = nums[i++];
-        while (j <= r)  tmp[k++] = nums[j++];
-        for (int p = 0; p < k; ++p)  nums[l + p] = tmp[p];
+        while (i <= m) {
+            tmp[k++] = nums[i++];
+        }
+        while (j <= r) {
+            tmp[k++] = nums[j++];
+        }
+        for (int p = 0; p < k; ++p) {
+            nums[l + p] = tmp[p];
+        }
     }
 
 public:

@@ -19,7 +19,7 @@ class Solution:
                     mismatch -= 1
 
         # Why divide by 2: optimal approach is to balance 2 sets of brackets 
-        # at a time using 1 swap
+        # at a time using 1 swap (greedy)
         return (mismatch + 1) >> 1  
         
 # @lc code=end

@@ -14,6 +14,7 @@ class Solution:
         n = len(s)
         mask_lens = []
 
+        # Enumerate all possible subseqs
         for mask in range(1, 1 << n):
             subseq = []
 

@@ -6,6 +6,7 @@
 
 # @lc code=start
 class Solution:
+    # advanced two pointers
     # T: O(n)
     # S: O(n)
     def pushDominoes(self, dominoes: str) -> str:
@@ -29,11 +30,13 @@ class Solution:
                     while l < i - 1:
                         l += 1
                         res[l] = 'L'
+                    # Now l = i - 1
+
                 else:  # R...L, turn until lo = hi
-                    l = i
+                    l = i  # move l directly to i
                     lo = r + 1
                     hi = l - 1
-                    while lo < hi:
+                    while lo < hi:  # Note "<" not "<=" because "R.L" is the final state
                         res[lo] = 'R'
                         res[hi] = 'L'
                         lo += 1

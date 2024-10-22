@@ -13,16 +13,37 @@ public:
     // T: O(m * n)
     // S: O(1)
     void setZeroes(vector<vector<int>>& matrix) {
-        const int m = matrix.size(), n = matrix[0].size();
-        bool col_zero_flag = false, row_zero_flag = false;
+        const int m = matrix.size(); 
+        const int n = matrix[0].size();
+        bool col_zero_flag = false; 
+        bool row_zero_flag = false;
+        // Check if 1st row contains zero
+        for (int j = 0; j < n; ++j) {
+            if (matrix[0][j] == 0) {
+                row_zero_flag = true;
+                break;
+            }
+        }
+        // Check if 1st col contains zero
+        for (int i = 0; i < m; ++i) {
+            if (matrix[i][0] == 0) {
+                col_zero_flag = true;
+                break;
+            }
+        }
 
         // Use 1st row and 1st col to store whether the corresponding 
-        // cols/rows should be zeroed
+        // cols/rows should be zeroed (with the bool flags, information 
+        // not lost)
         for (int i = 0; i < m; ++i) {
             for (int j = 0; j < n; ++j) {
                 if (matrix[i][j] == 0) {
-                    if (i == 0) row_zero_flag = true;
-                    if (j == 0) col_zero_flag = true;
+                    // if (i == 0) {
+                    //     row_zero_flag = true;
+                    // }
+                    // if (j == 0) {
+                    //     col_zero_flag = true;
+                    // }
                     matrix[i][0] = matrix[0][j] = 0;
                 }
             }

@@ -8,6 +8,7 @@ from typing import List
 
 # @lc code=start
 class Solution:
+    # sliding window
     # T: O(len(s) + len(p))
     # S: O(alpha_size)
     def findAnagrams(self, s: str, p: str) -> List[int]:
@@ -20,11 +21,11 @@ class Solution:
         res = []
         while r < len(s):
             # Expand window to the right
-            c = s[r]
+            c_r = s[r]
             r += 1
-            if c in required_chars:
-                window[c] += 1
-                if window[c] == required_chars[c]:
+            if c_r in required_chars:
+                window[c_r] += 1
+                if window[c_r] == required_chars[c_r]:
                     valid_cnt += 1
             
             while r - l >= len(p):
@@ -33,12 +34,12 @@ class Solution:
 
                 # Try shrinking window by moving the left pointer,
                 # then update the counts.
-                d = s[l]
-                l += 1
-                if d in required_chars:
-                    if window[d] == required_chars[d]:
+                c_l = s[l]
+                if c_l in required_chars:
+                    if window[c_l] == required_chars[c_l]:
                         valid_cnt -= 1
-                    window[d] -= 1
+                    window[c_l] -= 1
+                l += 1
         return res
         
 # @lc code=end

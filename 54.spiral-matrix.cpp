@@ -46,6 +46,48 @@ public:
         }
         return res;
     }
+
+    /*
+    // Follow-up: different direction with skipped elements
+    vector<int> spiralOrder(vector<vector<int>>& matrix) {
+        const int m = matrix.size(), n = matrix[0].size();
+        vector<int> res(m * n);
+        int left = 0, right = n - 1, top = 0, bottom = m - 1, p = 0;
+        bool keep = true;
+        while (left <= right && top <= bottom) {
+            for (int i = top; i <= bottom; ++i) {
+                if (keep) {
+                    res[p++] = matrix[i][left];
+                }
+                keep = !keep;
+            }
+
+            for (int j = left + 1; j <= right; ++j) {
+                if (keep) {
+                    res[p++] = matrix[bottom][j]; 
+                }
+                keep = !keep;
+            }
+
+            if (left < right && top < bottom) {
+                for (int i = bottom - 1; i > top; --i) {
+                    if (keep) {
+                        res[p++] = matrix[i][right];
+                    }
+                    keep = !keep;
+                }
+                for (int j = right; j > left; --j) {
+                    if (keep) {
+                        res[p++] = matrix[top][j];
+                    }
+                    keep = !keep;
+                }
+            }
+            ++left; --right; ++top; --bottom;
+        }
+        return res;
+    }
+    */
 };
 // @lc code=end
 

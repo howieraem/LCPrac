@@ -13,34 +13,35 @@ class Solution:
     # T: O(n)
     # S: O(n)
     def interchangeableRectangles(self, rectangles: List[List[int]]) -> int:
-        freq = {}
+        freqs = {}
         ans = 0
         for w, h in rectangles:
             ratio = w / h
-            if ratio in freq:
-               ans += freq[ratio] 
-            freq[ratio] += 1
+            ratio_existing_cnt = freqs.get(ratio, 0)
+            ans += ratio_existing_cnt 
+            freqs[ratio] += 1
         return ans
     '''
 
     # Solution 2: use greatest common divisor to avoid float keys, then 
     # use the number of combination formula nC2 to get the result
-    # T: O(n)
+    # T: O(n * avg(log(min(w, h)) for w, h in rectangles))
     # S: O(n)
     def interchangeableRectangles(self, rectangles: List[List[int]]) -> int:
-        freq = defaultdict(int)
+        freqs = defaultdict(int)
         for w, h in rectangles:
             gcd = self.gcd(w, h)
-            freq[(w // gcd, h // gcd)] += 1
+            freqs[(w // gcd, h // gcd)] += 1
             # accumulate the result here like solution 1 is also correct
         
         ans = 0
-        for v in freq.values():
+        for v in freqs.values():
             if v == 1:
                 continue
-            ans += ((v * (v - 1)) >> 1)  # nC2 = n! / (n-k)! * k = n * (n - 1) / 2
+            ans += ((v * (v - 1)) >> 1)  # nC2 = n! / ((n-2)! * 2) = n * (n - 1) / 2
         return ans
 
+    # T: O(log(min(x, y)))
     def gcd(self, x: int, y: int) -> int:
         return x if y == 0 else self.gcd(y, x % y)
         

@@ -45,7 +45,7 @@ public:
 
         vector<vector<string>> res;
         res.reserve(groups.size());
-        for (const auto &p : groups) {
+        for (auto& p : groups) {
             res.push_back(std::move(p.second));
         }
         return res;

@@ -33,7 +33,8 @@ public:
     
     // T: O(n)
     int count(vector<int> point) {
-        const int &x1 = point[0], &y1 = point[1];
+        const int& x1 = point[0]; 
+        const int& y1 = point[1];
         int ans = 0;
         for (const auto& [p3, p3_cnt] : pt_cnts) {
             const auto& [x3, y3] = p3;

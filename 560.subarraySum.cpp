@@ -16,19 +16,20 @@ public:
     int subarraySum(vector<int>& nums, int k) {
         unordered_map<int, int> mp;
         mp[0] = 1;
-        int cnt = 0, sum = 0;
+        int prefix_sum = 0;
+        int ans = 0;
 
         for (int i = 0; i < nums.size(); ++i) {
-            sum += nums[i];
+            prefix_sum += nums[i];
 
             // Sum of a subarray sum(nums[i:j + 1]) = prefix_sum[j] - prefix_sum[i - 1]
-            auto it = mp.find(sum - k);
+            auto it = mp.find(prefix_sum - k);
             if (it != mp.end()) {
-                cnt += it->second;
+                ans += it->second;
             }
-            ++mp[sum];
+            ++mp[prefix_sum];
         }
-        return cnt;
+        return ans;
     }
 };
 // @lc code=end
