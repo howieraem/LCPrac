@@ -7,6 +7,8 @@
 # @lc code=start
 class Solution:
     '''
+    Recursion/iteration
+
     Find the pattern:
     #1                  0
     #2        0                   1
@@ -18,7 +20,9 @@ class Solution:
     # T: O(n)
     # S: O(1)
     def kthGrammar(self, n: int, k: int) -> int:
-        n_digits = 1 << (n - 1)   # no. of digits on nth row
+        n_digits = 1 << (n - 1)   # no. of digits on nth row is 2**(n - 1)
+        if k > n_digits:
+            return 0
 
         first_digit_of_row_flag = True
 

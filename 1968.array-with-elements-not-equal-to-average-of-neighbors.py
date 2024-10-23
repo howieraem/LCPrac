@@ -7,6 +7,7 @@ from typing import List
 
 # @lc code=start
 class Solution:
+    # Greedy?
     # T: O(n)
     # S: O(1)
     def rearrangeArray(self, nums: List[int]) -> List[int]:

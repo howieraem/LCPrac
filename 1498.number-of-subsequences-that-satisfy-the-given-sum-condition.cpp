@@ -10,6 +10,8 @@ using std::vector;
 // @lc code=start
 class Solution {
 public:
+    // Variant of sorted two sum Q167
+    // Two pointers and pre-computed powers
     // T: O(n * log(n))
     // S: O(n) avoid pow overflow
     int numSubseq(vector<int>& nums, int target) {
@@ -18,7 +20,7 @@ public:
         const int MOD = 1000000007;
         const int n = nums.size();
         
-        // precompute pow to avoid dtype overflow
+        // precompute pow with MOD to avoid dtype overflow
         vector<int> pows(n, 1);
         for (int i = 1; i < n; ++i) {
             pows[i] = (pows[i - 1] << 1) % MOD;

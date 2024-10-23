@@ -7,6 +7,8 @@ from typing import List
 
 # @lc code=start
 class Solution:
+    # Variant of sorted two sum Q167
+    # Two pointers + greedy 
     # T: O(n * log(n))
     # S: O(n) sorting
     def numRescueBoats(self, people: List[int], limit: int) -> int:

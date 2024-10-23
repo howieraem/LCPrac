@@ -7,6 +7,7 @@ from typing import *
 
 # @lc code=start
 class Solution:
+    # Two pointers
     # T: O(n)
     # S: O(1)
     def twoSum(self, numbers: List[int], target: int) -> List[int]:

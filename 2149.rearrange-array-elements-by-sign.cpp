@@ -5,24 +5,27 @@
  */
 #include <vector>
 
-using namespace std;
+using std::vector;
 
 // @lc code=start
 class Solution {
 public:
+    // Two pointers
     // T: O(n)
     // S: O(1)
     vector<int> rearrangeArray(vector<int>& nums) {
         const int n = nums.size();
         vector<int> res(n);
-        int i = 0, j = 1, p = 0;
+        int i = 0; 
+        int j = 1; 
+        int p = 0;
         while (p < n) {
             if (nums[p] > 0) {
                 res[i++] = nums[p++]; 
-                i++;
+                i++;  // skip the next opposite signed number
             } else {
                 res[j++] = nums[p++];
-                j++;
+                j++;  // skip the next opposite signed number
             }
         }
         return res;

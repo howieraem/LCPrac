@@ -34,12 +34,14 @@ class Solution:
     def numMatchingSubseq(self, s: str, words: List[str]) -> int:
         words_start_with_char = defaultdict(list)
         for w in words:
+            if len(w) > len(s):
+                continue
             words_start_with_char[w[0]].append(w)
 
         ans = 0
         for c in s:
             w_candidates = words_start_with_char[c]
-            if not len(w_candidates):
+            if len(w_candidates) == 0:
                 continue
             words_start_with_char[c] = []
             for w in w_candidates:
@@ -52,31 +54,30 @@ class Solution:
         return ans
     '''
 
-    # Solution 3: similar to solution 2, but avoids copying characters and is thus optimized
+    # Solution 3: Advanced two pointers, similar to solution 2, but avoids copying characters and is thus optimized
     # T: O(len(s) + sum(len(w) for w in words))
     # S: O(sum(len(w) for w in words))
-    class Node:
-        def __init__(self, word: str):
-            self.word = word
-            self.idx = 0
-    
     def numMatchingSubseq(self, s: str, words: List[str]) -> int:
         words_start_with_char = defaultdict(list)
         for w in words:
-            words_start_with_char[w[0]].append(self.Node(w))
+            if len(w) > len(s):
+                continue
+            words_start_with_char[w[0]].append([w, 0])  # word, current_char_idx
         
         ans = 0
         for c in s:
             w_candidates = words_start_with_char[c]
-            if not len(w_candidates):
+            if len(w_candidates) == 0:
                 continue
-            words_start_with_char[c] = []
-            for node in w_candidates:
-                node.idx += 1
-                if node.idx == len(node.word):
+            words_start_with_char[c] = []  # IMPORTANT: reset for every char in pattern s
+            for word_info in w_candidates:
+                word_info[1] += 1   # incr the word's current char idx by 1
+                if word_info[1] == len(word_info[0]):
+                    # idx reaches end of the word
                     ans += 1
                 else:
-                    words_start_with_char[node.word[node.idx]].append(node)
+                    cur_start_char = word_info[0][word_info[1]]
+                    words_start_with_char[cur_start_char].append(word_info)
         return ans
 
 

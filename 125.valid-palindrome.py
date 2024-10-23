@@ -6,6 +6,7 @@
 
 # @lc code=start
 class Solution:
+    # two pointer
     # T: O(n)
     # S: O(1)
     def isPalindrome(self, s: str) -> bool:
@@ -15,8 +16,10 @@ class Solution:
         while i < j:
             c1, c2 = s[i], s[j]
             if not c1.isalnum():
+                # skip space/punctuation
                 i += 1
             elif not c2.isalnum():
+                # skip space/punctuation
                 j -= 1
             else:
                 if c1.lower() != c2.lower():
