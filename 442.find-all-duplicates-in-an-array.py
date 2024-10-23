@@ -19,10 +19,13 @@ class Solution:
         # if a number has appeared before by negating the corresponding index based on 
         # constraint 1 
         for x in nums:
-            idx = abs(x) - 1
-            if nums[idx] < 0:  # appeared before
-                res.append(idx + 1)
+            idx = abs(x) - 1   # take abs because x might have appeared and been negated
+            if nums[idx] < 0:  
+                # Appeared before
+                res.append(idx + 1)  # abs(x)
             else:
+                # Mark appearance with the negation approach, 
+                # because each number appears at most twice.
                 nums[idx] *= -1
         
         return res

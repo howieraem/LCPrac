@@ -33,15 +33,20 @@ public:
     int hIndex(vector<int>& citations) {
         const int n = citations.size();
         vector<int> freq(n + 1, 0);     // maximum possible h-index is the number of citations 
-        for (const int &c : citations) {
-            if (c >= n)  ++freq[n];
-            else  ++freq[c];
+        for (const int& c : citations) {
+            if (c >= n) {
+                ++freq[n];
+            } else {
+                ++freq[c];
+            }
         }
 
         int cnt = 0;
         for (int i = n; i >= 0; --i) {
             cnt += freq[i];
-            if (cnt >= i)  return i;
+            if (cnt >= i) {
+                return i;
+            }
         }
         return 0;
     }

@@ -21,13 +21,12 @@ public:
             vector<double> next_row(i + 2, 0);
 
             for (int j = 0; j <= i; ++j) {
-                if (cur_row[j] >= 1) {
+                if (cur_row[j] > 1) {
                     double dif = (cur_row[j] - 1) / 2.;
                     next_row[j] += dif;
                     next_row[j + 1] += dif;
                     cur_row[j] = 1;
                 }
-                cout << next_row.back() << endl;
             }
 
             if (i != query_row) {

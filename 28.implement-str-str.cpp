@@ -14,19 +14,25 @@ public:
     // S: O(m)
     int strStr(string haystack, string needle) {
         const int m = needle.size();
-        if (!m)  return 0;
-        
-        // failure function
+        if (m == 0) {
+            return 0;
+        }
+
+        // failure function, or longest prefix suffix (LPS)
+        // longest prefix of needle (except entire needle) that matches suffix of needle
+        // Worst: O(2 * m)
         int f[m];
         std::memset(f, 0, sizeof(f));
         int i = 1, j = 0;
         while (i < m) {
+            // compute for needle[i:j+1]
             if (needle[i] == needle[j]) {
                 f[i++] = ++j;
                 // f[i] = j + 1; i++; j++;
             } else if (j > 0) {
                 j = f[j - 1];
             } else {
+                // f[i] = 0;
                 ++i;
             }
         }
@@ -35,13 +41,18 @@ public:
         i = j = 0;
         while (i < haystack.size()) {
             if (haystack[i] == needle[j]) {
-                if (j == m - 1)  return i - j;
-                else {
-                    ++i; ++j;
+                if (j == m - 1) {
+                    return i - j;
+                } else {
+                    ++i; 
+                    ++j;
                 }
             } else {
-                if (j)  j = f[j - 1];
-                else  ++i;
+                if (j != 0) { 
+                    j = f[j - 1];
+                } else {
+                    ++i;
+                }
             }
         }
         return -1;

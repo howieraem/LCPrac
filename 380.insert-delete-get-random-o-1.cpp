@@ -10,15 +10,17 @@ using namespace std;
 // @lc code=start
 class RandomizedSet {
     unordered_map<int, int> val2Idx;
-    vector<int> vals;
+    vector<int> vals;   // Contains distinct values for O(1) GetRandom()
+    std::mt19937 gen;
 
 public:
-    RandomizedSet() {}
+    RandomizedSet() : gen((std::random_device())()) {}
     
     // T: O(1)
     bool insert(int val) {
-        if (val2Idx.find(val) != val2Idx.end())  return false;
-        // Since a set cannot contain duplicates, it is fine to overwrite its index
+        if (val2Idx.find(val) != val2Idx.end()) {
+            return false;
+        }
         val2Idx[val] = vals.size(); 
         vals.push_back(val);
         return true;
@@ -26,15 +28,18 @@ public:
     
     // T: O(1)
     bool remove(int val) {
-        if (val2Idx.find(val) == val2Idx.end())  return false;
-        int back = vals.back(), idx = val2Idx[val];
+        auto it = val2Idx.find(val);
+        if (it == val2Idx.end()) {
+            return false;
+        }
+        int back = vals.back(); 
+        int original_idx = it->second;
         // When a value is being removed, replace it with the back of
         // the value collection and update the corresponding index.
-        // Then, this back value can be safely popped from the value
-        // collection and the value being removed can be erased from
-        // the map.
-        vals[idx] = back;
-        val2Idx[back] = idx;
+        // Then, the duplicate back value can be safely popped from the value
+        // collection and the target value can also be erased from the map. 
+        vals[original_idx] = back;
+        val2Idx[back] = original_idx;
         vals.pop_back();
         val2Idx.erase(val);
         return true;
@@ -42,9 +47,8 @@ public:
     
     // T: O(1)
     int getRandom() {
-        // std::rand() returns a pseudo-random integral value 
-        // between ​0​ and RAND_MAX (​0​ and RAND_MAX included).
-        return vals[rand() % vals.size()];
+        std::uniform_int_distribution<> dis(0, vals.size() - 1);
+        return vals[dis(gen)];
     }
 };
 

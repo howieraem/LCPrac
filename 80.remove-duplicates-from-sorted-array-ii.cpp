@@ -13,6 +13,9 @@ public:
     // T: O(n)
     // S: O(1)
     int removeDuplicates(vector<int>& nums) {
+        if (nums.empty()) {
+            return 0;
+        }
         int sz = 1;
         int cnt = 1;
 

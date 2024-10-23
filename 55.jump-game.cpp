@@ -12,6 +12,7 @@ using std::vector;
 // @lc code=start
 class Solution {
 public:
+    // Greedy
     // T: O(n)
     // S: O(1)
     bool canJump(vector<int>& nums) {

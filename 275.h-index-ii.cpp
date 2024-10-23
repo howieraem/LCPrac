@@ -10,18 +10,25 @@ using std::vector;
 // @lc code=start
 class Solution {
 public:
+    // Binary search
     // T: O(log(n))
     // S: O(1)
     int hIndex(vector<int>& citations) {
         const auto n = citations.size();
-        if (citations[0] >= n)  return n;
-        int l = 0, r = n - 1, m;
+        if (citations[0] >= n) {
+            return n;
+        }
+        int l = 0, r = n - 1;
         while (l <= r) {
-            m = l + ((r - l) >> 1);
+            int m = l + ((r - l) >> 1);
             int h = n - m;
-            if (citations[m] == h)  return h;   // by definition
-            else if (citations[m] > h)  r = m - 1;
-            else  l = m + 1;
+            if (citations[m] == h) {
+                return h;   // by definition
+            } else if (citations[m] > h) {
+                r = m - 1;
+            } else {
+                l = m + 1;
+            }
         }
         return n - l;   // by definition
     }

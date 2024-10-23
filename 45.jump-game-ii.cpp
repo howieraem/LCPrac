@@ -18,13 +18,15 @@ public:
     int jump(vector<int>& nums) {
         int ans = 0, curFurthest = 0, curPos = 0;
         const int last = nums.size() - 1;
+
+        // Implicit BFS
         for (int i = 0; i < last; ++i) {
             curFurthest = max(curFurthest, i + nums[i]);
-            if (i == curPos) {
+            if (i == curPos) {  // all pos on the current BFS "level" visited
                 // Do next jump.
                 // This also applies to the base case i = 0
-                curPos = curFurthest;
-                ++ans;
+                curPos = curFurthest;   // getting the queue size for the next BFS "level"
+                ++ans;   // incrementing the BFS "level"
             }
         }
         return ans;
@@ -40,6 +42,7 @@ public:
         // cur_pos means the furthest reachable position after a jump/step/action performed.
         int ans = 0, cur_furthest = 0, cur_pos = 0, i = 0;
         const int dst = nums.size() - 1;
+
         while (cur_pos < dst) {
             while (i < nums.size() && i <= cur_pos) {
                 cur_furthest = max(cur_furthest, i + nums[i++]);

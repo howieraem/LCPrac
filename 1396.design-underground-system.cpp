@@ -13,9 +13,10 @@ using namespace std;
 // @lc code=start
 typedef pair<string, int> check_in; // station and check-in time
 
+// S: O(n)
 class UndergroundSystem {
-    unordered_map<int, check_in> passenger_check_in;
-    unordered_map<string, vector<int>> route_durations;
+    unordered_map<int, check_in> passenger_check_in;  // k: passenger_id, v: check_in (station, time)
+    unordered_map<string, vector<int>> route_durations;  // k: station1_station2, v: list of durations
 
 public:
     UndergroundSystem() {}

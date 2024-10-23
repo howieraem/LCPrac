@@ -7,7 +7,7 @@
 
 // @lc code=start
 class Solution {
-    const std::vector<std::pair<std::string, int>> mp = {
+    const std::vector<std::pair<std::string, int>> mp {
         {"M", 1000},
         {"CM", 900}, {"D", 500}, {"CD", 400}, {"C", 100},
         {"XC", 90}, {"L", 50}, {"XL", 40}, {"X", 10},
@@ -19,12 +19,12 @@ public:
     // S: O(1)
     std::string intToRoman(int num) {
         std::string ans;
-        for (const auto &p : mp) {
+        for (const auto& p : mp) {
             auto& [s, v] = p;
             if (num >= v) {
                 int cnt = num / v;
                 num %= v;
-                while (cnt--) {
+                while (cnt-- > 0) {
                     ans += s;
                 }
             }

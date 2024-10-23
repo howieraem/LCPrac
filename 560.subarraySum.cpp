@@ -11,11 +11,12 @@ using namespace std;
 // @lc code=start
 class Solution {
 public:
+    // Prefix sum + two sum
     // T: O(n)
     // S: O(n)
     int subarraySum(vector<int>& nums, int k) {
         unordered_map<int, int> mp;
-        mp[0] = 1;
+        mp[0] = 1;  // IMPORTANT
         int prefix_sum = 0;
         int ans = 0;
 

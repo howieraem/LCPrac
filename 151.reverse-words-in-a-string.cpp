@@ -9,7 +9,7 @@
 // @lc code=start
 class Solution {
 public:
-    // Inplace
+    // Two pointers, inplace
     // T: O(n)
     // S: O(1)
     std::string reverseWords(std::string& s) {
@@ -17,9 +17,11 @@ public:
         int i = 0, j = 0;
         while (i < n) {
             // skip spaces
-            while (i < n && s[i] == ' ') ++i;
+            while (i < n && s[i] == ' ') {
+                ++i;
+            }
 
-            // new space delimiter
+            // new space delimiter (single space)
             if (i < n && j > 0) {
                 s[j++] = ' ';
             }

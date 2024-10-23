@@ -15,6 +15,10 @@ public:
     int maxProfit(vector<int>& prices) {
         int sell = 0, buy = INT_MIN, cool = 0;
         
+        // buy[i] = max(cool[i - 1] - prices[i], buy[i - 1])
+        // sell[i] = max(buy[i - 1] + prices[i], sell[i - 1])
+        // cool[i] = max(sell[i - 1], cool[i - 1])
+
         // As many transactions as possible
         for (const int& price : prices) {
             int prev_sell = sell;
@@ -26,6 +30,7 @@ public:
             buy = std::max(buy, cool - price);
 
             // "cool" state can be achieved from "cool" or former "sell"
+            // Note that it's possible to cool down for more than 1 day
             cool = std::max(cool, prev_sell);
         }
 

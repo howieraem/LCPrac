@@ -3,8 +3,7 @@
  *
  * [1074] Number of Submatrices That Sum to Target
  */
-#include <unordered_map>
-#include <vector>
+#include <bits/stdc++.h>
 
 using std::unordered_map;
 using std::vector;
@@ -12,12 +11,13 @@ using std::vector;
 // @lc code=start
 class Solution {
 public:
+    // Advanced prefix sum + two sum
     // T: O(m ^ 2 * n)
     // S: O(m * n)
     int numSubmatrixSumTarget(vector<vector<int>>& matrix, int target) {
         const int m = matrix.size(), n = matrix[0].size();
         int sum[m + 1][n + 1];
-        memset(sum, 0, sizeof(sum));
+        std::memset(sum, 0, sizeof(sum));
         // Get prefix sums
         for (int i = 1; i <= m; ++i) {
             for (int j = 1; j <= n; ++j) {
@@ -31,17 +31,18 @@ public:
         unordered_map<int, int> mp;
         for (int i = 1; i <= m; ++i) {
             for (int j = i; j <= m; ++j) {
+                // Accumulate per column
                 for (int k = 1; k <= n; ++k) {
                     int cur = sum[j][k] - sum[i - 1][k];
-                    if (cur == target)  ++ans;
-                    int diff = cur - target;
-                    if (mp.find(diff) != mp.end()) {
-                        ans += mp[diff];
+                    ans += (cur == target);
+                    auto it = mp.find(cur - target);
+                    if (it != mp.end()) {
+                        ans += it->second;
                     }
                     ++mp[cur];
                 }
 
-                mp.clear();
+                mp.clear();  // IMPORTANT
             }
         }
         return ans;

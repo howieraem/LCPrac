@@ -6,8 +6,17 @@
 from typing import List
 
 # @lc code=start
+CHARS = {
+    'A': 0,
+    'C': 1,
+    'G': 2,
+    'T': 3
+}
+A = len(CHARS)
+
 class Solution:
-    # Rabin-Karp Algorithm: works well for a very large sequence length and a small alphabet size
+    # Rabin-Karp Algorithm (rolling hash): works well for a very large sequence length, 
+    # a small alphabet size (< 5) and a small fixed window size (< 30)
     # T: O(n * L), n := len(s), L = 10
     # S: O(n)
     def findRepeatedDnaSequences(self, s: str) -> List[str]:
@@ -16,18 +25,11 @@ class Solution:
         if N <= L:
             return []
         
-        CHARS = {
-            'A': 0,
-            'C': 1,
-            'G': 2,
-            'T': 3
-        }
-        A = len(CHARS)
         POW = A ** (L - 1)
         encoded = [CHARS[c] for c in s]
 
-        seen = set()
-        res = set()
+        seen = set()    # appear more than zero times
+        res = set()     # appear more than once
 
         # init hash for the first sequence of length L
         h = 0
@@ -42,7 +44,7 @@ class Solution:
             h += encoded[i + L - 1]
 
             if h in seen:
-                res.add(s[i:i+L])
+                res.add(s[i:i + L])
             else:
                 seen.add(h)
 

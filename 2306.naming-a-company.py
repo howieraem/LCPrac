@@ -4,10 +4,11 @@ class Solution:
     # T: O(alpha_size * len(ideas))
     # S: O(alpha_size * len(ideas))
     def distinctNames(self, ideas: List[str]) -> int:
+        OFFSET = ord('a')
         letter1_to_suffixes = [set() for _ in range(26)]
         for idea in ideas:
             letter1, suffix = idea[0], idea[1:]
-            letter1_to_suffixes[ord(letter1) - ord('a')].add(suffix)
+            letter1_to_suffixes[ord(letter1) - OFFSET].add(suffix)
         
         ans = 0
 
@@ -24,7 +25,7 @@ class Solution:
                 for suffix in letter1_to_suffixes[j]:
                     eligible2 += (suffix not in letter1_to_suffixes[i])
     
-                ans += ((eligible1 * eligible2) << 1)
+                ans += ((eligible1 * eligible2) << 1)  # mult by 2 because if (A, B) is valid then (B, A) is also valid
 
                 # alternative pythonic way:
                 # duplicates = len(letter1_to_suffixes[i] & letter1_to_suffixes[j])

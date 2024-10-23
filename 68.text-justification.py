@@ -7,6 +7,7 @@ from typing import List
 
 # @lc code=start
 class Solution:
+    # Advanced two pointers
     # T: O(n * max_width)
     # S: O(max_width)
     def fullJustify(self, words: List[str], max_width: int) -> List[str]:
@@ -49,6 +50,7 @@ class Solution:
 
             res.append("".join(line)) # "".join(List[str]) is faster than string concats
             
+            # Process the next batch of words
             i = j
         
         return res
