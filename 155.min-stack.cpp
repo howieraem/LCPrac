@@ -12,27 +12,31 @@ using std::stack;
 // @lc code=start
 typedef pair<int, int> data_pt; // (value, min_value_when_value_was_inserted)
 
+// S: O(n)
 class MinStack {
-private:
     stack<data_pt> stk;
 
 public:
     MinStack() {}
     
+    // T: O(1)
     void push(int val) {
-        stk.emplace(val, std::min(val, stk.size() ? getMin() : val));
+        stk.emplace(val, stk.empty() ? val : std::min(val, getMin()));
     }
     
+    // T: O(1)
     void pop() {
-        if (stk.size()) {
+        if (!stk.empty()) {
             stk.pop();
         }
     }
     
+    // T: O(1)
     int top() {
         return stk.top().first;
     }
     
+    // T: O(1)
     int getMin() {
         return stk.top().second;
     }

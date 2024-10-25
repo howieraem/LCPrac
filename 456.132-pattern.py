@@ -18,10 +18,10 @@ class Solution:
                 return True
             
             # mono-stack: numbers in stack are ordered DESC
-            while len(stack) > 0 and x > stack[-1]:
+            while len(stack) > 0 and stack[-1] < x:
                 # update mid if a larger number is found to be nums[j]
                 mid = stack.pop()
-                        
+
             stack.append(x)
         
         return False

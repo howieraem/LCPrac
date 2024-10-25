@@ -3,15 +3,15 @@
  *
  * [772] Basic Calculator III
  */
-#include <string>
-#include <vector>
+#include <bits/stdc++.h>
 
-using namespace std;
+using std::string;
+using std::vector;
 
 // @lc code=start
 class Solution {
 public:
-    // T: O(n)
+    // T: O(n), n := len(s)
     // S: O(n)
     int calculate(string s) {
         const int n = s.size();
@@ -20,18 +20,26 @@ public:
     }
 
 private:
-    static int helper(const string &s, int &i, const int &n) {
+    // DFS with implicit stack(s)
+    // Evaluates expression inside a pair of parentheses '(...)'
+    static int helper(const string& s, int& i, const int& n) {
         int cur = 0;
+        // Default to '+' because if the first number of an expression is positive 
+        // then it doesn't have a plus sign
         char pre_op = '+';
         vector<int> nums;
 
         while (i < n) {
             char c = s[i++];
-            if (c == ' ') continue;
+
+            if (c == ' ') {
+                continue;
+            }
 
             bool is_digit = isdigit(c);
             if (is_digit) {
-                cur = cur * 10 + (c - '0');
+                cur *= 10;
+                cur += (c - '0');
             } else if (c == '(') {
                 cur = helper(s, i, n);
             }
@@ -54,11 +62,13 @@ private:
                 pre_op = c;
             }
             
-            if (c == ')')  break;
+            if (c == ')') {
+                break;
+            }
         }
 
         int ans = 0;
-        for (const int &num : nums) {
+        for (const int& num : nums) {
             ans += num;
         }
         return ans;

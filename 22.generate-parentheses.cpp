@@ -13,31 +13,34 @@ using std::vector;
 class Solution {
     // T: O(2 ^ (2n)) as there are 2 recursive calls in backtrack() and it requires 2n steps to get one result
     // S: O(n)
-    static void backtrack(string &path, int nLeft, int nRight, vector<string> &res) {
-        if (nLeft > nRight) {
+    static void backtrack(string& path, int l_remain, int r_remain, vector<string>& res) {
+        if (l_remain > r_remain) {
             // As below we are adding the left parenthesis first, need to ensure 
             // the number of right parentheses do not exceed the number of left
             // parentheses.
+            // Example: we want a left parenthesis to appear in front of
+            // its corresponding right parenthesis. Without this, 
+            // results will contain things like ")))((("
             return;
         }
-        if (!(nLeft || nRight)) {
-            // nLeft == nRight == 0
+        if (!(l_remain > 0 || r_remain > 0)) {
+            // l_remain == r_remain == 0
             res.push_back(path);
             return;
         }
         // As `path + '('` or `path + ')'` will create a new string,
         // space complexity is better with passing `path` by reference 
         // and using push_back() and pop_back(). 
-        if (nLeft) {
-            // backtrack(path + '(', nLeft - 1, nRight, res);
+        if (l_remain > 0) {
+            // backtrack(path + '(', l_remain - 1, r_remain, res);
             path.push_back('(');
-            backtrack(path, nLeft - 1, nRight, res);
+            backtrack(path, l_remain - 1, r_remain, res);
             path.pop_back();
         }
-        if (nRight) {
-            // backtrack(path + ')', nLeft - 1, nRight, res);
+        if (r_remain > 0) {
+            // backtrack(path + ')', l_remain - 1, r_remain, res);
             path.push_back(')');
-            backtrack(path, nLeft, nRight - 1, res);
+            backtrack(path, l_remain, r_remain - 1, res);
             path.pop_back();
         }
     }

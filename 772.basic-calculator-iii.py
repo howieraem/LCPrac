@@ -6,11 +6,16 @@
 
 # @lc code=start
 class Solution:
+    # T: O(n)
+    # S: O(n)
     def calculate(self, s: str) -> int:
         i = 0
         n = len(s)
 
+        # DFS with implicit stack(s)
         def helper(s):
+            # Default to '+' because if the first number of an expression is positive 
+            # then it doesn't have a plus sign
             pre_op = '+'
             num = 0
             nums = []
@@ -22,7 +27,8 @@ class Solution:
 
                 is_digit = c.isdigit()
                 if is_digit:
-                    num = num * 10 + int(c)
+                    num *= 10
+                    num += int(c)
                 elif c == '(':
                     num = helper(s)
 

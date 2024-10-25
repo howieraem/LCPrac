@@ -20,19 +20,20 @@ public:
         int mult = 0;
         stack<pair<int, string>> stk;
 
-        for (const auto &c : s) {
+        for (const auto& c : s) {
             if (c == '[') {
-                stk.push({mult, cur});
+                stk.push({mult, std::move(cur)});
                 mult = 0;
-                cur.clear();
+                // cur.clear();
             } else if (c == ']') {
                 auto [outer_mult, outer] = stk.top(); stk.pop();
-                while (outer_mult--) {
+                while (outer_mult-- > 0) {
                     outer += cur;
                 }
-                cur = outer;
+                cur = std::move(outer);
             } else if (isdigit(c)) {
-                mult = mult * 10 + (c - '0');
+                mult *= 10;
+                mult += (c - '0');
             } else {
                 cur.push_back(c);
             }

@@ -13,9 +13,9 @@ class Solution {
         Stack<Integer> s = new Stack<>();
         int numK = Integer.MIN_VALUE;
         for (int i = n - 1; i >= 0; --i) {
-            if (nums[i] < numK)  return true;   // numK is the smallest in a non-empty mono stack
+            if (nums[i] < numK)  return true;   // numK is the smallest in a non-empty mono-stack
             while (!s.isEmpty() && s.peek() < nums[i]) {
-                // mono stack
+                // mono-stack
                 numK = Math.max(numK, s.pop());
             }
             s.push(nums[i]);

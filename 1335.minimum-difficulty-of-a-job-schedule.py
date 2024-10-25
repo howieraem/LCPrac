@@ -36,7 +36,7 @@ class Solution:
         return dp[d - 1][n - 1]
 
     '''
-    # Solution 2: 1D DP and mono stack
+    # Solution 2: 1D DP and mono-stack
     # T: O(n * d)
     # S: O(n)
     def minDifficulty(self, jobDifficulty: List[int], d: int) -> int:

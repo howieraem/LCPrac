@@ -18,9 +18,11 @@ public:
         const int n = nums.size();
         int ans = n + 1;  // default to an impossible length
         int window_sum = 0;
+
         int l = 0;
         for (int r = 0; r < n; ++r) {
             window_sum += nums[r];
+
             while (window_sum >= target) {
                 ans = min(ans, r - l + 1);
                 window_sum -= nums[l++];
@@ -41,7 +43,7 @@ public:
         }
 
         for (int i = n; i >= 0 && prefix_sums[i] >= target; --i) {
-            int j = std::upper_bound(prefix_sums.begin(), prefix_sums.end(), prefix_sums[i] - s) - prefix_sums.begin();
+            int j = std::upper_bound(prefix_sums.begin(), prefix_sums.end(), prefix_sums[i] - target) - prefix_sums.begin();
             ans = std::min(ans, i - j + 1);
         }
         return ans == n + 1 ? 0 : ans;

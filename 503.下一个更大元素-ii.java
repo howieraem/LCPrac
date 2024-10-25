@@ -20,7 +20,7 @@ class Solution {
             // Each idx will be visited twice.
             int idx = i % n;
 
-            // Mono stack: stack is ordered and stack top is minimum.
+            // Mono-stack: stack is ordered and stack top is minimum.
             // When i < n, larger numbers of the "circular" part are
             // already stored in the stack.
             while (!stack.empty() && stack.peek() <= nums[idx]) {

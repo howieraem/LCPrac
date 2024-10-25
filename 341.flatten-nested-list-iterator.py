@@ -49,23 +49,32 @@ class NestedInteger:
 #        Return None if this NestedInteger holds a single integer
 #        """
 
+# Why stack: consider the nested lists as calculator expressions 
+# or parentheses matching problems. There might exist cases like 
+# [x1, [x2, x3, [x4, x5], x6], x7].
+# S: O(n)
 class NestedIterator:
+    # T: O(n)
     def __init__(self, nestedList: List[NestedInteger]):
         self.stack: List[NestedInteger] = []
+        # stack is LIFO, so iterate from the back
         for i in range(len(nestedList) - 1, -1, -1):
             self.stack.append(nestedList[i])
     
+    # T: O(1)
     def next(self) -> int:
         if self.hasNext():
             return self.stack.pop().getInteger()
         return None
 
+    # T: O(n)
     def hasNext(self) -> bool:
-        while len(self.stack) and not self.stack[-1].isInteger():
+        while len(self.stack) > 0 and not self.stack[-1].isInteger():
             lst = self.stack.pop().getList()
+            # stack is LIFO, so iterate from the back
             for i in range(len(lst) - 1, -1, -1):
                 self.stack.append(lst[i])
-        return bool(len(self.stack))
+        return len(self.stack) > 0
 
 # Your NestedIterator object will be instantiated and called as such:
 # i, v = NestedIterator(nestedList), []

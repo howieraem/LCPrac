@@ -31,11 +31,14 @@ public:
      * modified in place. 
      */
     bool validateStackSequences(vector<int>& pushed, vector<int>& popped) {
-        int i = 0, j = 0;
-        for (auto &num : pushed) {
-            pushed[i++] = num;
-            while (i && pushed[i - 1] == popped[j]) {
-                --i, ++j;
+        int i = 0;
+        int j = 0;
+        // Reuse `pushed` as a stack, and do simulation
+        for (auto& num : pushed) {
+            pushed[i++] = num;  // simulate push
+            while (i > 0 && pushed[i - 1] == popped[j]) {   // simulate pop: !pushed.empty() && pushed.top() = popped[j]
+                --i; 
+                ++j;
             }
         }
         return i == 0;

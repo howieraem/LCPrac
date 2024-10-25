@@ -15,7 +15,8 @@ class Solution:
 
         for c in s:
             if c.isdigit():
-                mult = mult * 10 + int(c)
+                mult *= 10 
+                mult += int(c)
             elif c == '[':
                 stack.append((cur_strs, mult))
                 cur_strs = []

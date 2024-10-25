@@ -7,7 +7,7 @@ from typing import List
 
 # @lc code=start
 class Solution:
-    # Mono stack
+    # Mono-stack
     # T: O(n)
     # S: O(n)
     def nextGreaterElements(self, nums: List[int]) -> List[int]:
