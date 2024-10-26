@@ -24,9 +24,10 @@ struct ListNode {
  */
 class Solution {
     static ListNode* reverse(ListNode *head) {
-        ListNode *pre = nullptr, *cur = head, *tmp;
-        while (cur) {
-            tmp = cur->next;
+        ListNode* pre = nullptr; 
+        ListNode* cur = head;
+        while (cur != nullptr) {
+            ListNode* tmp = cur->next;
             cur->next = pre;
             pre = cur;
             cur = tmp;
@@ -41,7 +42,6 @@ public:
         ListNode* dummy = new ListNode(0, head);
 
         ListNode* pre = dummy; 
-        ListNode* start; 
         ListNode* end = dummy;
         while (end != nullptr) {
             for (int i = 0; i < k; ++i) {
@@ -54,7 +54,7 @@ public:
             }
 
             // Disconnect, reverse and re-connect
-            start = pre->next; 
+            ListNode* start = pre->next; 
             ListNode* tmp = end->next;
             end->next = nullptr;
             pre->next = reverse(start);

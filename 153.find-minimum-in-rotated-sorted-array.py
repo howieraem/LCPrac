@@ -7,7 +7,8 @@ from typing import *
 
 # @lc code=start
 class Solution:
-    # Binary-search the rotation pivot, so converge the left and right bounds on that point
+    # Binary search the rotation pivot, so converge the left and right bounds on that point
+    # Constraint: numbers are unique.
     # T: O(log(n))
     # S: O(1)
     def findMin(self, nums: List[int]) -> int:
@@ -19,6 +20,7 @@ class Solution:
                 # the rotation pivot is on the right of m
                 l = m + 1
             else:
+                # nums[m] <= nums[r]
                 # We can tell nums[m:r+1] is sorted as there is no duplicate, so the pivot is on mid's left.  
                 # Finding the smallest element is like finding the leftmost bound of some target. 
                 # It is possible for the mid index to point to a smaller value than at least 
@@ -26,6 +28,6 @@ class Solution:
                 # Set r = m rather than m - 1.
                 r = m
         return nums[l]
-        
+
 # @lc code=end
 

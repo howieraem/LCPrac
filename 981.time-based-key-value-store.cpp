@@ -12,6 +12,7 @@ class TimeMap {
     // If timestamps of set() for the same key is not guaranteed strictly increasing,
     // need to use a sorted map.
     // Otherwise, we can just use a vector and do binary search.
+    // k: key, v: map or list of (timestamp, value)
     std::unordered_map<string, std::map<int, string>> data;
     // std::unordered_map<string, std::vector<std::pair<int, string>>> data;
 

@@ -57,7 +57,7 @@ public:
     }
 
     // Follow-up: find the k-th largest element of two sorted arrays
-    // T: O(log(k))
+    // T: O(log(min(k, n1, n2)))
     // S: O(1)
     int findKthLargestOfTwoSortedArrays(vector<int>& nums1, vector<int>& nums2, int k) {
         if (nums1.size() > nums2.size()) {

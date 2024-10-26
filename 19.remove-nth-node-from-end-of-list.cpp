@@ -24,17 +24,24 @@ struct ListNode {
  */
 class Solution {
 public:
+    // Fast slow pointers
     // T: O(n)
     // S: O(1)
     ListNode* removeNthFromEnd(ListNode* head, int n) {
         ListNode* dummy = new ListNode();
         dummy->next = head;  // return dummy->next at the end, just in case the original head gets deleted
-        ListNode *fast = dummy, *slow = dummy;
-        while (n--) {
+        
+        ListNode* fast = dummy; 
+        ListNode* slow = dummy;
+        while (n-- > 0 && fast != nullptr) {
             fast = fast->next;
         }
+        if (fast == nullptr) {
+            // n is greater than list length
+            return head;
+        }
 
-        while (fast->next) {
+        while (fast->next != nullptr) {
             fast = fast->next;
             slow = slow->next;
         }

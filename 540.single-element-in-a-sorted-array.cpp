@@ -10,6 +10,7 @@ using std::vector;
 // @lc code=start
 class Solution {
 public:
+    // Binary search
     // T: O(log(n))
     // S: O(1)
     int singleNonDuplicate(vector<int>& nums) {
@@ -17,8 +18,8 @@ public:
         int r = nums.size() - 1;
         while (l < r) {
             int m = l + ((r - l) >> 1);
-            bool is_even = (m & 1) == 0; 
-            if ((is_even && nums[m] == nums[m + 1]) || (!is_even && nums[m] == nums[m - 1])) {
+            bool is_m_even = (m & 1) == 0; 
+            if ((is_m_even && nums[m] == nums[m + 1]) || (!is_m_even && nums[m] == nums[m - 1])) {
                 // the target must be on the right of m
                 l = m + 1;
             } else {

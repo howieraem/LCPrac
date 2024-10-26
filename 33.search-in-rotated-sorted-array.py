@@ -7,6 +7,8 @@ from typing import *
 
 # @lc code=start
 class Solution:
+    # Binary search
+    # Constraint: values are unique
     # T: O(log(n))
     # S: O(1)
     # Diagram explanation: https://image.ibb.co/n3kcgV/IMG-0145.jpg

@@ -7,6 +7,7 @@ from collections import defaultdict
 from typing import *
 
 # @lc code=start
+# S: O(n)
 class TimeMap:
 
     def __init__(self):

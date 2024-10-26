@@ -1,9 +1,8 @@
 /*
- * @lc app=leetcode id=21 lang=cpp
+ * @lc app=leetcode id=83 lang=cpp
  *
- * [21] Merge Two Sorted Lists
+ * [83] Remove Duplicates from Sorted List
  */
-
 struct ListNode {
     int val;
     ListNode *next;
@@ -25,22 +24,20 @@ struct ListNode {
  */
 class Solution {
 public:
-    // T: O(m + n)
+    // T: O(n)
     // S: O(1)
-    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
-        ListNode *dummy = new ListNode(), *cur = dummy;
-        while (list1 != nullptr && list2 != nullptr) {
-            if (list1->val < list2->val) {
-                cur->next = list1;
-                list1 = list1->next;
+    ListNode* deleteDuplicates(ListNode* head) {
+        ListNode* cur = head;
+        while (cur != nullptr && cur->next != nullptr) {
+            // Compare current and next nodes
+            if (cur->val == cur->next->val) {
+                // remove next node if value duplicate
+                cur->next = cur->next->next;
             } else {
-                cur->next = list2;
-                list2 = list2->next;
+                cur = cur->next;
             }
-            cur = cur->next;
         }
-        cur->next = list1 != nullptr ? list1 : list2;
-        return dummy->next;
+        return head;
     }
 };
 // @lc code=end

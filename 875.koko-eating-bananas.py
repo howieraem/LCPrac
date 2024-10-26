@@ -7,12 +7,13 @@ from typing import *
 
 # @lc code=start
 class Solution:
-    # Idea: binary-search the leftmost (least possible) speed of eating
+    # Idea: binary search the leftmost (least possible) speed of eating
     # T: O(len(piles) * log(max(piles)))
     # S: O(1)
     def minEatingSpeed(self, piles: List[int], h: int) -> int:
-        l = 1
-        r = max(piles)  # maximum speed is the largest pile
+        # find the range for binary search
+        l = 1           # minimum is a positive whole number
+        r = max(piles)  # maximum speed is the largest pile (finish in 1 hour)
 
         def can_finish(cur_speed):
             t = 0
@@ -29,6 +30,7 @@ class Solution:
                 r = m - 1
             else:
                 l = m + 1
+        
         return l
         
 # @lc code=end

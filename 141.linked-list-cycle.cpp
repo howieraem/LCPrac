@@ -20,6 +20,7 @@ struct ListNode {
  */
 class Solution {
 public:
+    // Fast slow pointers
     // T: O(n)
     // S: O(1)
     bool hasCycle(ListNode *head) {

@@ -44,15 +44,15 @@ public:
     // T: O(n), n := the number of nodes
     // S: O(n)
     Node* connect(Node* root) {
-        if (!root)  return nullptr;
+        if (root == nullptr)  return nullptr;
         queue<Node*> q;
         q.push(root);
 
-        while (q.size()) {
+        while (!q.empty()) {
             int qs = q.size();
-            while (qs--) {
+            while (qs-- > 0) {
                 Node *node = q.front(); q.pop();
-                if (qs) {
+                if (qs > 0) {
                     node->next = q.front();
                 }
                 if (node->left) {
@@ -70,9 +70,9 @@ public:
     // S: O(1)
     Node* connect(Node* root) {
         Node* pre = root;
-        while (pre) {
+        while (pre != nullptr) {
             Node* cur = pre;
-            while (cur) {
+            while (cur != nullptr) {
                 // Connects the left child to the right child
                 if (cur->left) {
                     cur->left->next = cur->right;

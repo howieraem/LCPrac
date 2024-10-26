@@ -27,12 +27,14 @@ class Solution {
     }
 
 public:
-    // Binary search (upper bound) max removable chars
-    // T: O(max(len(s), len(p)) * log(len(removable)))
+    // Binary search (rightmost) max removable chars
+    // T: O((len(s) + len(p)) * log(len(removable)))
     // S: O(len(s))
     int maximumRemovals(string s, string p, vector<int>& removable) {
-        int l = 0;
-        int r = removable.size() - 1;
+        // Range for binary search
+        int l = 0;   // minimum: not removing
+        int r = removable.size() - 1;   // maximum: remove chars at all provided positions
+
         string s_copy = s;
         while (l <= r) {
             int m = l + ((r - l) >> 1);
@@ -51,7 +53,7 @@ public:
                 }
             }
         }
-        return l;
+        return r + 1;  // add 1 because i <= m rather than i < m above?
     }
 };
 // @lc code=end

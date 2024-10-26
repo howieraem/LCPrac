@@ -36,6 +36,7 @@ class Solution:
                 else:
                     l = m + 1
             else:
+                # Different from Q33
                 # In this case we have to linearly skip the duplicate,
                 # because we cannot determine which side of m is sorted
                 l += 1

@@ -32,10 +32,8 @@ class WordDictionary {
             }
             return false;
         } else {
-            // IMPORTANT: increment cur_idx after reading the next child here, unlike 
-            // the opposite case above which just skips the current char
-            auto next_node = cur_node->children[word[cur_idx++] - 'a'];
-            return next_node != nullptr && search(word, cur_idx, next_node);
+            auto next_node = cur_node->children[word[cur_idx] - 'a'];
+            return next_node != nullptr && search(word, cur_idx + 1, next_node);
         }
     }
 
