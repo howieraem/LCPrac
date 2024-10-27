@@ -42,7 +42,7 @@ public:
 
 private:
     void dfs(TreeNode* node, int depth, vector<int>& res) {
-        if (!node) return;
+        if (node == nullptr) return;  // depth will not increase
         if (depth == res.size()) {
             res.push_back(node->val);
         }

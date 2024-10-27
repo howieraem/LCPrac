@@ -3,20 +3,26 @@
 #
 # [452] 用最少数量的箭引爆气球
 #
+from typing import List
 
 # @lc code=start
 class Solution:
+    # Interval + Sorting + Greedy
+    # T: O(n * log(n))
+    # S: O(n) timsort
     def findMinArrowShots(self, points: List[List[int]]) -> int:
-        if not points:
+        if len(points) == 0:
             return 0
-        points.sort(key=lambda x: x[1])
-        cnt = 1
-        pre = points[0][1]
-        for balloon in points:
-            if balloon[0] > pre:
-                pre = balloon[1]
-                cnt += 1
-        return cnt
+        points.sort(key=lambda x: x[1])  # sort by interval ends
+
+        ans = 1
+        pre_end = points[0][1]
+        for cur_start, cur_end in points:
+            if cur_start > pre_end:
+                pre_end = cur_end
+                ans += 1
+        
+        return ans
 
 # @lc code=end
 

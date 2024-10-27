@@ -20,6 +20,9 @@ struct ListNode {
  */
 class Solution {
 public:
+    // Fast slow pointers
+    // T: O(n)
+    // S: O(1)
     ListNode *detectCycle(ListNode *head) {
         ListNode *fast = head, *slow = head;
         do {
@@ -27,6 +30,7 @@ public:
             fast = fast->next->next;
             slow = slow->next;
         } while (fast != slow);
+        // Now slow pointer is at the intersection (cycle's entrance) 
 
         fast = head;
         while (fast != slow) {

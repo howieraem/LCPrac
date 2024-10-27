@@ -6,17 +6,23 @@
 #include <memory>
 
 // @lc code=start
+// Array and pointers
 // T: O(1)
 // S: O(k)
 class MyCircularQueue {
-    int cap, front, rear, len;
+    int cap;  // max capacity 
+    int len;  // current size
+    int front;  // front pointer
+    int rear;   // rear pointer
     std::unique_ptr<int[]> arr;
 
 public:
     MyCircularQueue(int k) : cap{k}, arr{new int[k]}, front{0}, rear{-1}, len{0} {}
     
     bool enQueue(int value) {
-        if (isFull()) return false;
+        if (isFull()) {
+            return false;
+        }
         rear = (rear + 1) % cap;    // if (++rear == cap) rear = 0;
         arr[rear] = value;
         ++len;
@@ -24,7 +30,9 @@ public:
     }
     
     bool deQueue() {
-        if (isEmpty()) return false;
+        if (isEmpty()) {
+            return false;
+        }
         front = (front + 1) % cap;  // if (++front == cap) front = 0;
         --len;
         return true;

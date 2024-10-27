@@ -20,6 +20,7 @@ class TreeNode:
 #         self.left = left
 #         self.right = right
 class Solution:
+    # Level order traversal BFS + Math
     # T: O(n), n := no. of nodes
     # S: O(n)
     def widthOfBinaryTree(self, root: Optional[TreeNode]) -> int:

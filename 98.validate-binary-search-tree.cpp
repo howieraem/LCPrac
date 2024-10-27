@@ -51,19 +51,23 @@ public:
     // T: O(N), N := the number of nodes
     // S: O(N)
     bool isValidBST(TreeNode* root) {
-        if (!root) return true;
+        if (root == nullptr) {
+            return true;
+        }
         
         std::stack<TreeNode*> stk;
         TreeNode* pre = nullptr;
-        while (root || stk.size()) {
-            while (root) {
+        while (root != nullptr || !stk.empty()) {
+            while (root != nullptr) {
                 stk.push(root);
                 root = root->left;
             }
             
             // The visit logic in in-order traversal
             root = stk.top(); stk.pop();
-            if (pre && root->val <= pre->val) return false;
+            if (pre != nullptr && root->val <= pre->val) {
+                return false;
+            }
             pre = root;
             // The visit logic in in-order traversal
             

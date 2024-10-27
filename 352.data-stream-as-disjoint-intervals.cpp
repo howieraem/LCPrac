@@ -8,6 +8,8 @@
 using std::vector;
 
 // @lc code=start
+// Interval + Sorted Set 
+// S: O(n)
 class SummaryRanges {
     std::set<int> nums;
 
@@ -25,17 +27,19 @@ public:
             return {};
         }
         vector<vector<int>> res;
-        int l = *nums.begin();
-        int r = *nums.begin();
-        for (const int& x : nums) {
-            if (x > r + 1) {
-                res.push_back({l, r});
-                l = x;
+        int cur_start = *nums.begin();
+        int cur_end = *nums.begin();
+        for (const int& start : nums) {
+            if (start > cur_end + 1) {
+                res.push_back({cur_start, cur_end});
+                cur_start = start;
+                cur_end = start;
+            } else {
+                cur_end = start;
             }
-            r = x;
         }
         // do NOT forget last interval
-        res.push_back({l, r});
+        res.push_back({cur_start, cur_end});
         return res;
     }
 };

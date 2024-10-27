@@ -24,18 +24,22 @@ struct ListNode {
  */
 class Solution {
 public:
+    // Merge sort on linked list
     // T: O(n * log(n))
     // S: O(1)
     ListNode* sortList(ListNode* head) {
-        if (!head || !(head->next)) {
+        if (head == nullptr || head->next == nullptr) {
             return head;
         }
         
+        // Get list length
         int n = 0;
         for (ListNode* cur = head; cur != nullptr; cur = cur->next) {
             ++n;
         }
 
+        // Divide and conquer
+        // step size: 1, 2, 4, ...
         ListNode* dummy = new ListNode(0, head);
         for (int step = 1; step < n; step <<= 1) {
             ListNode* pre = dummy;
@@ -62,7 +66,7 @@ private:
         }
         ListNode* nxt = head->next;
         head->next = nullptr;
-        return nxt;
+        return nxt;  // return the head of the next list
     }
 
     ListNode* merge(ListNode* l1, ListNode* l2, ListNode* head) {
@@ -81,7 +85,7 @@ private:
         while (cur->next != nullptr) {
             cur = cur->next;
         }
-        return cur;
+        return cur;  // return the list tail (non-null) 
     }
 };
 // @lc code=end

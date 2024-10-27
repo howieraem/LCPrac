@@ -10,13 +10,16 @@ class Solution:
     # T: O(n * log(n))
     # S: O(n) timsort space complexity
     def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        if len(intervals) == 0:
+            return []
+
         # Sort by start time and then end time, both ASC.
         # Sort by start time only also works.
         intervals.sort()
 
         res = []
         cur_start, cur_end = intervals[0]
-        for i in range(len(intervals)):
+        for i in range(1, len(intervals)):
             start, end = intervals[i]
             if start > cur_end:
                 # No overlap, start a new interval

@@ -31,7 +31,8 @@ struct TreeNode {
  */
 class Solution {
 public:
-    // Why do we need two traversal results to reconstruct? Because neither results indicate null nodes.
+    // Why do we need two traversal results to reconstruct? 
+    // Because neither results indicate null nodes.
     // T: O(n)
     // S: O(n)
     TreeNode* buildTree(const vector<int>& preorder, const vector<int>& inorder) {
@@ -46,12 +47,14 @@ public:
     }
 
 private:
-    // Reconstruct the tree with pre-order traversal.
+    // Reconstruct the tree with pre-order traversal + two pointers
     TreeNode* helper(
             const vector<int>& preorder, 
             const unordered_map<int, int>& inorder_value_to_idx, 
             int l_pre, int r_pre, int l_in) {
-        if (l_pre > r_pre) return nullptr;
+        if (l_pre > r_pre) {
+            return nullptr;
+        }
 
         int root_val = preorder[l_pre];
         int root_idx_inorder = inorder_value_to_idx.at(root_val);  // can't use operator[] for const unordered_map

@@ -15,7 +15,7 @@ using std::vector;
 // @lc code=start
 class Solution {
 public:
-    // Solution 1: separate sorting
+    // Solution 1: separate sorting + two pointers + greedy
     // T: O(n*log(n))
     // S: O(n)
     int minMeetingRooms(vector<vector<int>>& intervals) {
@@ -28,14 +28,15 @@ public:
         sort(starts.begin(), starts.end());
         sort(ends.begin(), ends.end());
 
-        int ans = 0, curEndIdx = 0;
+        int ans = 0; 
+        int cur_end_idx = 0;
         for (int i = 0; i < n; ++i) {
-            if (starts[i] < ends[curEndIdx]) {
+            if (starts[i] < ends[cur_end_idx]) {
                 // Has overlap, must create a new room
                 ++ans;
             } else {
                 // No overlap, an existing room can be reused
-                ++curEndIdx;
+                ++cur_end_idx;
             }
         }
         return ans;

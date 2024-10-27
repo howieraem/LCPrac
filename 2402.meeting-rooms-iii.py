@@ -2,6 +2,7 @@ import heapq
 from typing import List
 
 class Solution:
+    # Two heaps + merge interval
     # T: O((n + len(meetings)) * log(n))
     # S: O(n)
     def mostBooked(self, n: int, meetings: List[List[int]]) -> int:

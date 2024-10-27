@@ -20,7 +20,10 @@ public:
 
         for (int i = 1; i < intervals.size(); ++i) {
             // If any intervals overlap, then it's impossible to attend these meetings
-            if (intervals[i][0] < intervals[i - 1][1])  return false;
+            if (intervals[i][0] < intervals[i - 1][1]) {
+                // cur_start < pre_end
+                return false;
+            }
         }
         return true;
     }

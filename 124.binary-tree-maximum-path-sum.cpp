@@ -31,6 +31,7 @@ struct TreeNode {
  */
 class Solution {
 public:
+    // Post-order traversal DFS + DP
     // T: O(n), n := the number of nodes
     // S: O(n)
     int maxPathSum(TreeNode* root) {

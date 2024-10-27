@@ -10,23 +10,25 @@ class Solution:
     # T: O(V + E) = O(n) ?
     # S: O(V + E) = O(n) ?
     def minTime(self, n: int, edges: List[List[int]], hasApple: List[bool]) -> int:
-        G = [[] for _ in range(n)]
+        adj = [[] for _ in range(n)]
         for u, v in edges:
-            G[u].append(v)
-            G[v].append(u)
+            adj[u].append(v)
+            adj[v].append(u)
         vis = [False] * n
         vis[0] = True
-        return Solution.dfs(0, hasApple, G, vis)
+        return Solution.dfs(0, hasApple, adj, vis)
 
     @staticmethod
-    def dfs(cur: int, hasApple: List[bool], G: List[List[int]], vis: List[bool]):
+    def dfs(cur: int, hasApple: List[bool], adj: List[List[int]], vis: List[bool]):
         ans = 0
-        for next_node in G[cur]:
+        for next_node in adj[cur]:
             if vis[next_node]:
                 continue
             vis[next_node] = True
-            ans += Solution.dfs(next_node, hasApple, G, vis)
+            ans += Solution.dfs(next_node, hasApple, adj, vis)  # accumulate children time
+        
         if cur != 0 and (ans > 0 or hasApple[cur]):
+            # Every edge on the path to an apple takes 2 seconds (forth and back).
             ans += 2
         return ans
 

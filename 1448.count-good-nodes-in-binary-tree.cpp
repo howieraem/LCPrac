@@ -27,7 +27,7 @@ struct TreeNode {
  * };
  */
 class Solution {
-    // Pre-order traversal
+    // Pre-order traversal DFS
     int helper(TreeNode* node, int cur_max) {
         if (node == nullptr) return 0;
         int ans = 0;
@@ -37,7 +37,7 @@ class Solution {
         }
         ans += helper(node->left, cur_max);
         ans += helper(node->right, cur_max);
-        return ans;
+        return ans;  // the number of good nodes of subtree with node as root
     }
 
 public:

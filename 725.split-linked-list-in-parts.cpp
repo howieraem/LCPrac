@@ -28,31 +28,37 @@ struct ListNode {
  */
 class Solution {
 public:
+    // T: O(n)
+    // S: O(1)
     vector<ListNode*> splitListToParts(ListNode* head, int k) {
+        // Get linked list length
         int n = 0;
         ListNode* cur = head;
-        while (cur) {
+        while (cur != nullptr) {
             ++n;
             cur = cur->next;
         }
 
         vector<ListNode*> res(k, nullptr);
-        int r = n % k, a = n / k;
+        int base_part_len = n / k;
+        int extra_part_len = n % k;
         cur = head; 
         ListNode* pre = nullptr;
 
         // Since res is filled with null,
-        // add `cur != null` in loop condition
-        // to stop early. Meanwhile, r could
-        // be decremented in each loop.
-        for (int i = 0; cur && i < k; ++i, --r) {
+        // add `cur != null` in loop condition to
+        // stop early. Meanwhile, r is decremented 
+        // in each iteration (1 additional element
+        // appended to the first few parts).
+        for (int i = 0; cur != nullptr && i < k; ++i) {
             res[i] = cur;
             // Add 1 to a if r > 0
-            for (int j = 0; j < a + (r > 0); ++j) {
+            for (int j = 0; j < base_part_len + (extra_part_len > 0); ++j) {
                 pre = cur;
                 cur = cur->next;
             }
-            pre->next = nullptr;
+            pre->next = nullptr;  // split at each part's tail
+            --extra_part_len;
         }
         return res;
     }

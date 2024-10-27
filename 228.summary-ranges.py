@@ -7,6 +7,9 @@ from typing import *
 
 # @lc code=start
 class Solution:
+    # Two pointers / interval
+    # T: O(n)
+    # S: O(1) excl. output
     def summaryRanges(self, nums: List[int]) -> List[str]:
         res = []
         n = len(nums)

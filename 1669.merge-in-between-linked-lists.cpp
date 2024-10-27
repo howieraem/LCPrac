@@ -28,20 +28,31 @@ public:
     // T: O(len(list2) + b)
     // S: O(1)
     ListNode* mergeInBetween(ListNode* list1, int a, int b, ListNode* list2) {
-        ListNode* start = list1, *end = list1;
-        while (a-- > 1) {
-            start = start->next;
+        if (b > a) {
+            return list1;
         }
 
-        while (b-- > 0) {
+        ListNode* start = list1, *end = list1;
+        while (a-- > 1 && start != nullptr) {
+            start = start->next;
+        }
+        if (start == nullptr) {
+            return list1;
+        }
+
+        while (b-- > 0 && end != nullptr) {
             end = end->next;
         }
 
+        // Connect head of list2
         start->next = list2;
         while (list2->next) {
             list2 = list2->next;
         }
-        list2->next = end->next;
+
+        // Connect tail of list2 back to list1
+        list2->next = end != nullptr ? end->next : nullptr;
+        
         return list1;
     }
 };

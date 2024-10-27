@@ -12,7 +12,7 @@ class DLinkedList:
         def __init__(self, k, v) -> None:
             self.k = k
             self.v = v
-            self.freq = 1
+            self.freq = 1   # required in LFU but not in LRU
             self.prev: Optional[DLinkedList.Node] = None
             self.next: Optional[DLinkedList.Node] = None
 
@@ -47,6 +47,9 @@ class DLinkedList:
 
 
 class LFUCache:
+    # Different from LRU: 
+    # - pop based on op frequency, not just most recent op
+    # - each frequency corresponds to a doubly linked list
     def __init__(self, capacity: int) -> None:
         self._sz = 0
         self._cap = capacity

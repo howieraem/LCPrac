@@ -37,10 +37,16 @@ public:
     // T: O(k)
     // S: O(k)
     int kthSmallest(TreeNode* root, int& k) {
-        if (!root) return -1; // root->val >= 0
+        if (root == nullptr) {
+            return -1; // root->val >= 0
+        }
         int x = kthSmallest(root->left, k);
-        if (!k) return x; // k already becomes 0 while visiting left subtree
-        if (!--k) return root->val; // k becomes 0 at current node
+        if (k == 0) {
+            return x; // k already becomes 0 while visiting left subtree
+        }
+        if (--k == 0) {
+            return root->val; // k becomes 0 at current node
+        }
         return kthSmallest(root->right, k); // continue visit right subtree
     }
     */
@@ -50,15 +56,17 @@ public:
     // S: O(k)
     int kthSmallest(TreeNode* root, int& k) {
         stack<TreeNode*> stk;
-        while (root || stk.size()) {
-            while (root) {
+        while (root != nullptr || !stk.empty()) {
+            while (root != nullptr) {
                 stk.push(root);
                 root = root->left;
             }   
             
             // The visit logic in in-order traversal
             root = stk.top(); stk.pop();
-            if (!--k) break;
+            if (--k == 0) {
+                break;
+            }
             // The visit logic in in-order traversal
 
             root = root->right;

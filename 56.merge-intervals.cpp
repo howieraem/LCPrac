@@ -14,6 +14,10 @@ public:
     // T: O(n * log(n))
     // S: O(log(n)) (introsort space complexity)
     vector<vector<int>> merge(vector<vector<int>>& intervals) {
+        if (intervals.empty()) {
+            return {};
+        }
+
         // Sort by start time and then end time
         sort(intervals.begin(), intervals.end());
 
