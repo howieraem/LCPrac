@@ -27,16 +27,22 @@ struct TreeNode {
  */
 class Solution {
 public:
+    // DFS
     // T: O(n)
     // S: O(n)
-    TreeNode* trimBST(TreeNode* root, int low, int high) {
-        if (!root)  return nullptr;
+    TreeNode* trimBST(TreeNode* root, const int& low, const int& high) {
+        if (root == nullptr) {
+            return root;
+        }
+
+        // Skip current node if value not in range, virtually removing it
         if (root->val > high) {
             return trimBST(root->left, low, high);
         }
         if (root->val < low) {
             return trimBST(root->right, low, high);
         }
+
         root->left = trimBST(root->left, low, high);
         root->right = trimBST(root->right, low, high);
         return root;

@@ -36,6 +36,9 @@ class TreeNode {
 class Solution {
     private int ans;
 
+    // Post-order traversal DFS
+    // T: O(n)
+    // S: O(n)
     public int distributeCoins(TreeNode root) {
         ans = 0;
         helper(root);
@@ -43,11 +46,14 @@ class Solution {
     }
 
     private int helper(TreeNode node) {
-        if (node == null)  return 0;
+        if (node == null) {
+            return 0;
+        }
+
         node.val += helper(node.left);
         node.val += helper(node.right);
 
-        // The goal is to make every node's value 1.
+        // The goal is to set every node's value to 1.
         // Thus, `toMove = node.val - 1` coins need  
         // to be moved in/out for each node. If 
         // toMove > 0, move coins out. Otherwise, 

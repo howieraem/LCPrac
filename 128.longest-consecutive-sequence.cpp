@@ -14,6 +14,7 @@ using std::vector;
 // @lc code=start
 class Solution {
 public:
+    // Hash set + Interval
     // T: O(n)
     // S: O(n)
     int longestConsecutive(vector<int>& nums) {
@@ -21,6 +22,7 @@ public:
         int ans = 0;
         for (const auto& x : s) {
             if (s.find(x - 1) == s.end()) {  // IMPORTANT: with this check, time complexity is not O(n ^ 2)
+                // Begin a new consecutive elements sequence
                 int y = x + 1;
                 while (s.find(y) != s.end()) {
                     ++y;

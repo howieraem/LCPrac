@@ -3,6 +3,12 @@
  *
  * [129] 求根到叶子节点数字之和
  */
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+};
 
 // @lc code=start
 /**
@@ -17,16 +23,27 @@
 
 class Solution {
 public:
+    // T: O(n)
+    // S: O(n) recursion stack
     int sumNumbers(TreeNode* root) {
         return helper(root, 0);
     }
 
 private:
-    int helper(TreeNode* root, int res) {
-        if (root == nullptr)  return 0;
-        int tmp = res*10 + root->val;
-        if (root->left == nullptr && root->right == nullptr)  return tmp;
-        return helper(root->left, tmp) + helper(root->right, tmp);
+    // Pre-order traversal
+    int helper(TreeNode* root, int path_num) {
+        if (root == nullptr) {
+            return 0;
+        }
+        path_num *= 10;
+        path_num += root->val;
+        if (root->left == nullptr && root->right == nullptr) {
+            // Leaf node
+            return path_num;
+        }
+
+        // Return sum of all root-to-leaf numbers
+        return helper(root->left, path_num) + helper(root->right, path_num);
     }
 };
 // @lc code=end

@@ -28,11 +28,27 @@ public:
     // T: O(n), n := the number of nodes
     // S: O(n) recursion stack worst case
     TreeNode* lowestCommonAncestor(TreeNode* root, const TreeNode* p, const TreeNode* q) {
-        if (!root || root == p || root == q)  return root;
-        TreeNode *left = lowestCommonAncestor(root->left, p, q),
-                 *right = lowestCommonAncestor(root->right, p, q);
-        if (left && right)  return root;
-        return left ? left : right; // if left is not null return left, else return right
+        if (root == nullptr || root == p || root == q) {
+            // Base case:
+            // 1. Null root/child, indicating target not found on the current path
+            // 2. If the current node is a target node, return the node directly 
+            //    so that the outer recursions know that the descendant exists 
+            //    in a relevant subtree
+            return root;
+        }
+
+        // Post-order traversal
+        TreeNode* left = lowestCommonAncestor(root->left, p, q);
+        TreeNode* right = lowestCommonAncestor(root->right, p, q);
+
+        // Both p and q found under this node, and not in the same branch, 
+        // the current node is therefore the LCA
+        if (left != nullptr && right != nullptr) {
+            return root;
+        }
+
+        // The LCA or at most one descendant found
+        return left != nullptr ? left : right;
     }
 };
 // @lc code=end

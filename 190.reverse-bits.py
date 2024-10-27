@@ -10,7 +10,7 @@ class Solution:
     # S: O(s), s := no. of bits
     def reverseBits(self, n: int) -> int:
         ans = 0
-        for i in range(32):
+        for _ in range(32):
             ans <<= 1  # shift left 1
             ans |= (n & 1)  # append rightmost bit to ans
             n >>= 1  # remove rightmost bit

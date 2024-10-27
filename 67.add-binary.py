@@ -17,7 +17,7 @@ class Solution:
         # As we add a and b from their least significant bits, 
         # the result must be updated from the least significant
         # bit to the most significant bit
-        while i and j:
+        while i > 0 and j > 0:
             i -= 1
             j -= 1
             l -= 1
@@ -25,14 +25,14 @@ class Solution:
             res[l] = str(s & 1)
             carry = (s >> 1)
 
-        while i:
+        while i > 0:
             i -= 1
             l -= 1
             s = (a[i] == '1') + carry
             res[l] = str(s & 1)
             carry = (s >> 1)
 
-        while j:
+        while j > 0:
             j -= 1
             l -= 1
             s = (b[j] == '1') + carry

@@ -41,6 +41,7 @@ class Solution {
 public:
     /*
     // Iterative solution with an auxiliary queue
+    // BFS level order traversal
     // T: O(n), n := the number of nodes
     // S: O(n)
     Node* connect(Node* root) {
@@ -53,7 +54,7 @@ public:
             for (int i = 0; i < qs; ++i) {
                 Node *node = q.front(); q.pop();
                 if (i < qs - 1) {
-                    // except the last node of the layer
+                    // except the last node of the level
                     node->next = q.front();
                 }
                 if (node->left) {
@@ -72,23 +73,29 @@ public:
     // T: O(n), n := the number of nodes
     // S: O(1)
     Node* connect(Node* root) {
-        Node *cur = root;
-        Node tmp(-1);
-        while (cur) {
-            Node *pre = &tmp;
-            while (cur) {
-                if (cur->left) {
-                    pre->next = cur->left;
-                    pre = pre->next;
-                }
-                if (cur->right) {
-                    pre->next = cur->right;
-                    pre = pre->next;
-                }
-                cur = cur->next;
+        Node* cur = root;
+
+        Node* dummy = new Node();  // pre-head of a level
+        Node* p = dummy;
+
+        while (cur != nullptr) {
+            if (cur->left != nullptr) {
+                p->next = cur->left;   // populate next pointer
+                p = p->next;   // move right on the same level
             }
-            if (pre != &tmp) {  // level is not empty
-                cur = tmp.next;
+            if (cur->right != nullptr) {
+                p->next = cur->right;  // populate next pointer
+                p = p->next;   // move right on the same level
+            }
+            
+            if (cur->next != nullptr) {
+                cur = cur->next;  // move right on the same level
+            } else {
+                cur = dummy->next;   // change to pre-head of next level
+                
+                // begin a new level
+                dummy->next = nullptr;
+                p = dummy;
             }
         }
         return root;

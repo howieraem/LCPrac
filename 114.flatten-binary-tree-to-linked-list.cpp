@@ -26,23 +26,31 @@ struct TreeNode {
  */
 class Solution {
 public:
+    // Post-order traversal DFS
     // T: O(N)
     // S: O(N)
     void flatten(TreeNode* root) {
-        if (!root)  return;
+        if (root == nullptr) {
+            return;
+        }
 
+        // As the result order should be pre-order traversal,
+        // process left subtree first, and then right subtree
         flatten(root->left);
         flatten(root->right);
 
         // Connects the left subtree to the right of current node
-        TreeNode *left = root->left, *right = root->right;
+        TreeNode* left = root->left; 
+        TreeNode* right = root->right;
         root->left = nullptr;
         root->right = left;
 
         // Finds the end of left subtree which is just connected to the right 
         // and then attach the right subtree
-        TreeNode *ptr = root;
-        while (ptr->right)  ptr = ptr->right;
+        TreeNode* ptr = root;
+        while (ptr->right) {
+            ptr = ptr->right;
+        }
         ptr->right = right;
     }
 };

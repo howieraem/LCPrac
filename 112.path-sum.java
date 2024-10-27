@@ -34,6 +34,7 @@ class TreeNode {
  * }
  */
 class Solution {
+    // Pre-order traversal DFS
     // T: O(n)
     // S: O(n)
     public boolean hasPathSum(TreeNode root, int targetSum) {
@@ -41,6 +42,7 @@ class Solution {
             return false;
         }
         if (root.left == null && root.right == null) { 
+            // leaf node
             return root.val == targetSum;
         }
         targetSum -= root.val;

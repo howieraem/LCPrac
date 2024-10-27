@@ -13,10 +13,11 @@ using namespace std;
 // @lc code=start
 class Solution {
 public:
+    // Hash map(s)
     vector<vector<string>> groupAnagrams(vector<string>& strs) {
         unordered_map<string, vector<string>> groups;
         
-        for (const string &s : strs) {
+        for (const string& s : strs) {
             /*
             // Below is faster for long strings and small alphabet size
             // T: O(m * (n + s)), m := len(strs), n := max. length of string in strs
@@ -40,6 +41,7 @@ public:
             // S: O(m * n)
             string key = s;
             sort(key.begin(), key.end());
+
             groups[key].push_back(s);
         }
 

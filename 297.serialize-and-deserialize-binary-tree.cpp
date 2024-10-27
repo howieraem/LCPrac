@@ -46,8 +46,9 @@ public:
     TreeNode* deserialize(string data) {
         queue<string> q;
         string tmp;
-        for (const auto &c : data) {
+        for (const auto& c : data) {
             if (c == ',') {
+                // A new node or subtree
                 q.push(std::move(tmp));
                 // tmp.clear();
                 continue;
@@ -60,19 +61,23 @@ public:
 
 private:
     void build_str(TreeNode* node, string& res) {
-        if (!node) res.push_back('X');
-        else {
+        if (node == nullptr) {
+            res.push_back('X');
+        } else {
+            // Pre-order traversal
             res.append(to_string(node->val)).push_back(',');
             build_str(node->left, res);
-            res.push_back(',');  // IMPORTANT
+            res.push_back(',');  // IMPORTANT separate subtrees
             build_str(node->right, res);
         }
     }
 
-    TreeNode* build_tree(queue<string> &q) {
-        // Preorder traversal
+    TreeNode* build_tree(queue<string>& q) {
+        // Pre-order traversal
         const string val = q.front(); q.pop();
-        if (val == "X")  return nullptr;
+        if (val == "X") {
+            return nullptr;
+        }
         TreeNode* node = new TreeNode(stoi(val));
         node->left = build_tree(q);
         node->right = build_tree(q);
