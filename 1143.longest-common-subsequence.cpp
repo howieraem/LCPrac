@@ -55,11 +55,13 @@ public:
         for (int i = 0; i < m; ++i) {
             int preRow = dp[0];
             for (int j = 0; j < n; ++j) {
-                int preRowpreCol = preRow;
-                preRow = dp[j + 1];
+                int preRow_preCol = preRow;   // dp[i][j]
+                preRow = dp[j + 1];           // dp[i][j + 1]
                 if (text1[i] == text2[j]) {
-                    dp[j + 1] = preRowpreCol + 1;
+                    // dp[i + 1][j + 1]
+                    dp[j + 1] = preRow_preCol + 1;
                 } else {
+                    // dp[i + 1][j + 1]
                     dp[j + 1] = max(dp[j], preRow);
                 }
             }

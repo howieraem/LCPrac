@@ -26,17 +26,22 @@ public:
         queue<int> q;
         for (int i = 0; i < numCourses; ++i) {
             if (inDeg[i] == 0) {
+                // begin with nodes without any prerequisites
                 q.push(i);
             }
         }
 
-        while (q.size()) {
+        while (!q.empty()) {
             for (int sz = q.size(); sz > 0; --sz) {
                 int pre = q.front(); q.pop();
                 --numCourses;
 
-                for (const int &cur : A[pre]) {
-                    if (!(--inDeg[cur]))  q.push(cur);
+                for (const int& cur : A[pre]) {
+                    if (--inDeg[cur] == 0) {
+                        // All prerequisites fulfilled, proceed with the course 
+                        // (next level of BFS)
+                        q.push(cur);
+                    }
                 }
             }
         }

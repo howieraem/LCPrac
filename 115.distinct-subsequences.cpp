@@ -14,8 +14,11 @@ public:
     // T: O(m * n), m := len(s), n := len(t)
     // S: O(m) after state compression
     int numDistinct(string s, string t) {
-        const int m = s.size(), n = t.size();
-        if (m < n) return 0;
+        const int m = s.size(); 
+        const int n = t.size();
+        if (m < n) {
+            return 0;
+        }
 
         /*
         // Naive 2D DP: dp[i][j] means the number of distinct subsequences of s[:i] equal to t[:j]
@@ -47,8 +50,8 @@ public:
             for (int j = 1; j <= n; ++j) {
                 int tmp = dp[j]; // dp[i - 1][j]
                 if (s[i - 1] == t[j - 1]) {
-                    dp[j] += pre; // dp[i - 1][j - 1]
-                }
+                    dp[j] += pre; // dp[i][j] = dp[i - 1][j] + dp[i - 1][j - 1]
+                }  // otherwise dp[i][j] = dp[i - 1][j], do nothing for a compressed dp array
                 pre = tmp; // dp[i - 1][j] becomes dp[i - 1][j - 1] in the next iteration
             }
         }

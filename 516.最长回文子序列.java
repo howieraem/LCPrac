@@ -8,9 +8,12 @@ import java.util.Arrays;
 
 // @lc code=start
 class Solution {
+    // 2D DP
+    // T: O(n ^ 2)
+    // S: O(n) state compression
     public int longestPalindromeSubseq(String s) {
         int n = s.length();
-        /* dp[i][j] means the longest palindrome subseq in s[i:j+1] */
+        /* dp[i][j] means the length of longest palindrome subseq in s[i:j+1] */
         // int[][] dp = new int[n][n];
         int[] dp = new int[n];
 
@@ -23,7 +26,7 @@ class Solution {
         for (int i = n - 2; i >= 0; --i) {
             int pre = 0;
             for (int j = i + 1; j < n; ++j) {
-                int tmp = dp[j];    // stores dp[i + 1][j - 1]
+                int tmp = dp[j];    // stores dp[i + 1][j - 1] for next loop
 
                 if (s.charAt(i) == s.charAt(j)) {
                     /* add 2 for both s[i] and s[j] */

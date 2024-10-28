@@ -16,9 +16,16 @@ public:
     // S: O(min(m, n)) after state compression
     int minDistance(string word1, string word2) {
         if (word1.size() < word2.size()) {
-            std::swap(word1, word2);
+            std::swap(word1, word2);  // make m >= n
         }
-        const int m = word1.size(), n = word2.size();
+        const int m = word1.size();
+        if (m == 0) {
+            return 0;
+        }
+        const int n = word2.size();
+        if (n == 0) {
+            return m;
+        }
 
         /*
         // Naive 2D DP: dp[i][j] means edit distance between word1[:i] and word2[:j]

@@ -10,14 +10,20 @@ using std::string;
 // @lc code=start
 class Solution {
 public:
+    // 1D DP
     // T: O(n)
     // S: O(1) after state compression
     int numDecodings(string s) {
-        // No way to decode string with leading zero(s)
-        if (s[0] == '0') return 0;
-        
         const int n = s.size();
-        if (n == 1) return 1;
+
+        // No way to decode string with leading zero(s)
+        if (n == 0 || s[0] == '0') {
+            return 0;
+        }
+        
+        if (n == 1) {
+            return 1;
+        }
 
         // dp[i] means the number of decoding ways for s[:i].
         // Base case: dp[0] = 1.
@@ -26,10 +32,13 @@ public:
         for (int i = 2; i <= n; ++i) {  // IMPORTANT: i <= n
             int dp_i;
             if (s[i - 1] == '0') {
+                // can't decode if substr starts with 0
                 dp_i = 0;
             } else {
                 dp_i = dp_i_1;
             }
+
+            // "10" <= s[i-2, i-1] <= "26"
             if (s[i - 2] == '1' || (s[i - 2] == '2' && s[i - 1] < '7')) {
                 dp_i += dp_i_2;
             }

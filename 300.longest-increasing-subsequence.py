@@ -8,7 +8,7 @@ from typing import List
 # @lc code=start
 class Solution:
     '''
-    # Solution 1: DP
+    # Solution 1: 1D DP
     # T: O(n ^ 2)
     # S: O(n)
     def lengthOfLIS(self, nums: List[int]) -> int:
@@ -36,7 +36,7 @@ class Solution:
     def lengthOfLIS(self, nums: List[int]) -> int:
         sub = []
         for x in nums:
-            if not len(sub) or sub[-1] < x:
+            if len(sub) == 0 or sub[-1] < x:
                 # Extend the length
                 sub.append(x)
             else:
@@ -54,9 +54,9 @@ class Solution:
         sub_idxs = []
         path = [-1] * len(nums)
         for i, x in enumerate(nums):
-            if not len(sub) or sub[-1] < x:
+            if len(sub) == 0 or sub[-1] < x:
                 sub.append(x)
-                path[i] = -1 if not len(sub_idxs) else sub_idxs[-1]
+                path[i] = -1 if len(sub_idxs) == 0 else sub_idxs[-1]
                 sub_idxs.append(i)
             else:
                 idx = self.left_bound(sub, x)
@@ -76,7 +76,7 @@ class Solution:
     def left_bound(nums: List[int], target: int):
         l, r = 0, len(nums) - 1
         while l <= r:
-            m = (l + r) >> 1
+            m = l + ((r - l) >> 1)
             if nums[m] >= target:
                 r = m - 1
             else:

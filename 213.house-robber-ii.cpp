@@ -10,14 +10,21 @@ using std::vector;
 // @lc code=start
 class Solution {
 public:
+    // 1D DP
     // T: O(n)
     // S: O(1)
     int rob(vector<int>& nums) {
         const auto n = nums.size();
-        if (n == 1) return nums[0];
+        if (n == 0) {
+            return 0;
+        }
+        if (n == 1) {
+            return nums[0];
+        }
 
-        // Circular array, instead of doing index modulus, we know 
-        // we can't rob both the first and the last houses, so just 
+        // Circular array, we can't use index modulus trick i % n here because each 
+        // house can be robbed at most once. 
+        // Instead, we know we can't rob both the first and the last houses, so just 
         // start from either and check which yields higher value.
         return std::max(rob(nums, 0, n - 1), rob(nums, 1, n));
     }

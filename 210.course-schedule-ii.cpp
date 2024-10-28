@@ -28,7 +28,8 @@ public:
         queue<int> q;
         // Start with the courses without prerequisites (in degree is 0)
         for (int i = 0; i < numCourses; ++i) {
-            if (!inDeg[i]) {
+            if (inDeg[i] == 0) {
+                // begin with nodes without any prerequisites
                 q.push(i);
             }
         }
@@ -42,7 +43,7 @@ public:
                 res.push_back(pre);
 
                 for (const int &nxt : A[pre]) {
-                    if (!(--inDeg[nxt])) {
+                    if (--inDeg[nxt] == 0) {
                         // All prerequisites fulfilled
                         q.push(nxt);
                     }
@@ -83,17 +84,20 @@ public:
     }
 
 private:
-    static bool dfs(const vector<vector<int>> &g, vector<uint8_t> &vis, int i, vector<int> &res) {
-        if (vis[i] == VISITING)  return false;    // cycle found
-        else if (vis[i] == VISITED)  return true;
+    static bool dfs(const vector<vector<int>>& g, vector<uint8_t>& vis, int i, vector<int>& res) {
+        if (vis[i] == VISITING) {
+            return false;    // cycle found
+        } else if (vis[i] == VISITED) {
+            return true;
+        }
 
         vis[i] = VISITING;
-        for (const int &nxt : g[i]) {
+        for (const int& nxt : g[i]) {
             if (!dfs(g, vis, nxt, res)) {
                 return false;
             }
         }
-        vis[i] = VISITED;
+        vis[i] = VISITED;   // prerequisite path complete, no cycle
 
         res.push_back(i);
         return true;

@@ -12,11 +12,14 @@ using namespace std;
 // @lc code=start
 class Solution {
 public:
-    // T: O(m * n) ?
+    // Memoized DFS (top-down 2D DP)
+    // T: O(m * n)
     // S: O(m * n)
     int longestIncreasingPath(vector<vector<int>>& matrix) {
         const int m = matrix.size(), n = matrix[0].size();
-        vector<vector<int>> memo(m, vector<int>(n, 0));
+        // Use memo dfs if state transitions cannot be well formulated
+        // like this (with 2D coordinates and max 4 directions)
+        vector<vector<int>> memo(m, vector<int>(n, 0));  
         int ans = 0;
         for (int i = 0; i < m; ++i) {
             for (int j = 0; j < n; ++j) {
@@ -30,7 +33,10 @@ private:
     static constexpr int DIRN[] {-1, 0, 1, 0, -1};
 
     static int dfs(vector<vector<int>> &matrix, int i, int j, vector<vector<int>> &memo) {
-        if (memo[i][j])  return memo[i][j];
+        if (memo[i][j] > 0) {
+            // state visited, reuse
+            return memo[i][j];
+        }
         ++memo[i][j];
         for (int d = 0; d < 4; ++d) {
             int ni = i + DIRN[d], nj = j + DIRN[d + 1];

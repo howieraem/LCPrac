@@ -11,11 +11,12 @@ using namespace std;
 class Solution {
 public:
     /*
-    // Solution 1
+    // Solution 1: 2D DP
     // T: O(n ^ 2)
     // S: O(n ^ 2)
     string longestPalindrome(string s) {
         const int n = s.size();
+        // dp[i][j] means s[i...j] whether is a palindrome
         bool dp[n][n];  // avoid using vector<bool>
         for (int i = 0; i < n; ++i) {
             fill_n(dp[i], n, false);
@@ -25,7 +26,7 @@ public:
         for (int r = 0; r < n; ++r) {
             for (int l = 0; l < r; ++l) {
                 if (s[l] == s[r] && (r - l <= 2 || dp[l + 1][r - 1])) {
-                    dp[l][r] = true;
+                    dp[l][r] = true;  // covers base cases like dp[i][i] = true
                     if (r - l + 1 > res_len) {
                         res_len = r - l + 1;
                         res_start = l;
@@ -37,12 +38,14 @@ public:
     }
     */
 
-    // Solution 2
+    // Solution 2: Two pointers
     // T: O(n ^ 2)
     // S: O(1)
     string longestPalindrome(string s) {
         const int n = s.size();
-        if (n < 2)  return s;
+        if (n < 2)  {
+            return s;
+        }
 
         int res_len = 1, res_start = 0;
 
@@ -63,7 +66,7 @@ public:
 private:
     // Tries extending the palindrome s[l:r+1] to both left and right, and updates
     // the maximum length and the final start index of that palindrome
-    static void extendPalindrome(string s, int l, int r, int &res_len, int &res_start) {
+    static void extendPalindrome(string s, int l, int r, int& res_len, int& res_start) {
         while (l >= 0 && r < s.size() && s[l] == s[r]) {
             --l, ++r;
         }

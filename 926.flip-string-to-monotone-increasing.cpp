@@ -10,6 +10,7 @@ using std::string;
 // @lc code=start
 class Solution {
 public:
+    // 1D DP
     // T: O(n)
     // S: O(1)
     int minFlipsMonoIncr(string s) {
@@ -20,8 +21,9 @@ public:
             cnt_one += is_one;
             dp += !is_one;
 
-            // either flip all ones seen to zeros, or flip zeros to ones,
-            // whichever costs less
+            // Suppose s[:i-1] is already monotone increasing, if
+            // s[i] is anti-pattern, either flip zero to one, or 
+            // flip all seen ones to zeros, whichever costs less.
             dp = std::min(dp, cnt_one);
         }
         return dp;

@@ -10,6 +10,7 @@ using std::vector;
 // @lc code=start
 class Solution {
 public:
+    // 1D DP, 0/1 knapsack problem
     // T: O(n * sum(nums))
     // S: O(sum(nums)) after state compression
     bool canPartition(vector<int>& nums) {

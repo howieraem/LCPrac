@@ -29,19 +29,23 @@ class Solution {
     //     return dp[n - 1][K][0];
     // }
 
+    // 2D DP (generalized to any number of allowable transactions, same as Q188)
+    // T: O(n * k), k := no. of allowable transactions
+    // S: O(k) state compression
     public int maxProfit(int[] prices) {
-        int[] buys = new int[K], sells = new int[K];
-        Arrays.fill(buys, Integer.MIN_VALUE);
+        int[] dp_buy = new int[K];
+        Arrays.fill(dp_buy, Integer.MIN_VALUE);
+        int[] dp_sell = new int[K];
 
         for (int i = 0; i < prices.length; ++i) {
-            buys[0] = Math.max(buys[0], -prices[i]);
-            sells[0] = Math.max(sells[0], buys[0] + prices[i]);
+            dp_buy[0] = Math.max(dp_buy[0], -prices[i]);
+            dp_sell[0] = Math.max(dp_sell[0], dp_buy[0] + prices[i]);
             for (int j = 1; j < K; ++j) {
-                buys[j] = Math.max(buys[j], sells[j - 1] - prices[i]);
-                sells[j] = Math.max(sells[j], buys[j] + prices[i]);
+                dp_buy[j] = Math.max(dp_buy[j], dp_sell[j - 1] - prices[i]);  // can buy only after the last sell
+                dp_sell[j] = Math.max(dp_sell[j], dp_buy[j] + prices[i]);
             }
         }
-        return sells[K - 1];
+        return dp_sell[K - 1];
     }
 }
 // @lc code=end

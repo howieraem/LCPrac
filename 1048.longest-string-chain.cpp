@@ -13,6 +13,7 @@ using namespace std;
 // @lc code=start
 class Solution {
 public:
+    // 1D DP with hash map
     // T: O(n * (log(n) + l)), n := len(words), l := max word length
     // S: O(n)
     int longestStrChain(vector<string>& words) {
@@ -20,14 +21,23 @@ public:
         sort(words.begin(), words.end(), [] (const string& w1, const string& w2) { 
             return w1.size() < w2.size(); });
 
-        unordered_map<string, int> dp;
+        unordered_map<string, int> dp;  // k: word, v: longest chain to reach this word
         int ans = 0;
         for (auto &w: words) {
+            // base case: dp[w] = 1
+            dp[w] = 1;
+            auto dp_w_it = dp.find(w);
+
             for (int i = 0; i < w.size(); ++i) {
+                // skip a char and see if a predecessor exists
                 string pre = w.substr(0, i) + w.substr(i + 1);
-                dp[w] = max(dp[w], dp.find(pre) == dp.end() ? 1 : dp[pre] + 1);
+
+                auto dp_pre_it = dp.find(pre);
+                if (dp_pre_it != dp.end()) {
+                    dp_w_it->second = max(dp_w_it->second, dp_pre_it->second + 1);
+                }
             }
-            ans = max(ans, dp[w]);
+            ans = max(ans, dp_w_it->second);
         }
         return ans;
     }

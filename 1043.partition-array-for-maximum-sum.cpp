@@ -13,7 +13,7 @@ using std::vector;
 class Solution {
 public:
     /*
-    // Solution 1
+    // Solution 1: 2D DP
     // T: O(n * k)
     // S: O(n)
     int maxSumAfterPartitioning(vector<int>& arr, int k) {
@@ -22,10 +22,14 @@ public:
         // dp[i] means the maximum sum after partitioning for arr[:i+1]
         vector<int> dp(n + 1);
 
-        for (int i = 1; i <= n; ++i) {
-            int cur_max_num = 0, cur_max_sum = 0;
-            for (int j = 1; j <= k && j <= i; ++j) {
+        for (int i = 1; i <= n; ++i) {   // prefix array length
+            int cur_max_num = 0; 
+            int cur_max_sum = 0;
+            for (int j = 1; j <= k && j <= i; ++j) {   // subarr length
+                // subarrs: arr[i], arr[max(0, i-1) ... i], ..., arr[max(0, i-k) ... i]
                 cur_max_num = max(cur_max_num, arr[i - j]);
+
+                // whether or not to partition at j
                 cur_max_sum = max(cur_max_sum, dp[i - j] + cur_max_num * j);
             }
             dp[i] = cur_max_sum;
@@ -34,7 +38,8 @@ public:
     }
     */
 
-    // Solution 2: same time complexity as solution 1 (bit more time for modulus computation),
+    // Solution 2: 2D DP + index modulo trick 
+    // Same time complexity as solution 1 (bit more time for modulus computation), 
     // but better space complexity.
     // T: O(n * k)
     // S: O(k)
@@ -45,7 +50,8 @@ public:
         vector<int> dp(k);
 
         for (int i = 1; i <= n; ++i) {
-            int cur_max_num = 0, cur_max_sum = 0;
+            int cur_max_num = 0;
+            int cur_max_sum = 0;
             for (int j = 1; j <= k && j <= i; ++j) {
                 cur_max_num = max(cur_max_num, arr[i - j]);
                 cur_max_sum = max(cur_max_sum, dp[(i - j) % k] + cur_max_num * j);

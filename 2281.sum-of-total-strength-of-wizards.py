@@ -3,6 +3,7 @@ from typing import List
 
 class Solution:
     # Prefix sum and mono-stack
+    # similar to Q1856
     # T: O(n)
     # S: O(n)
     def totalStrength(self, strength: List[int]) -> int:

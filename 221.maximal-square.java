@@ -8,7 +8,8 @@ import java.util.Arrays;
 
 // @lc code=start
 class Solution {
-    /* // Original DP
+    /* 
+    // Original 2D DP
     public int maximalSquare(char[][] matrix) {
         final int m = matrix.length, n = matrix[0].length;
         int[][] dp = new int[m][n];
@@ -29,7 +30,9 @@ class Solution {
         for (int i = 1; i < m; ++i) {
             for (int j = 1; j < n; ++j) {
                 if (matrix[i][j] == '1') {
-                    len = Math.max(len, dp[i][j] = Math.min(dp[i - 1][j - 1], Math.min(dp[i - 1][j], dp[i][j - 1])) + 1);
+                    // side len with (i, j) as the bottom right corner
+                    dp[i][j] = Math.min(dp[i - 1][j - 1], Math.min(dp[i - 1][j], dp[i][j - 1])) + 1;
+                    len = Math.max(len, dp[i][j]);
                 }
             }
         }
@@ -38,41 +41,49 @@ class Solution {
     */
 
     /*
-    // DP with optimized space v1
+    // 2D DP with optimized space v1
     public int maximalSquare(char[][] matrix) {
         final int m = matrix.length, n = matrix[0].length;
-        int[] cur = new int[n], pre = new int[n];
+        int[] dp_cur = new int[n], dp_pre = new int[n];
         int len = 0;
         for (int i = 0; i < m; ++i) {
             for (int j = 0; j < n; ++j) {
                 if (i == 0 || j == 0 || matrix[i][j] == '0') {
-                    cur[j] = matrix[i][j] - '0';
+                    dp_cur[j] = matrix[i][j] - '0';
                 } else {
-                    cur[j] = Math.min(pre[j - 1], Math.min(pre[j], cur[j - 1])) + 1;
+                    dp_cur[j] = Math.min(dp_pre[j - 1], Math.min(dp_pre[j], dp_cur[j - 1])) + 1;
                 }
-                len = Math.max(len, cur[j]);
+                len = Math.max(len, dp_cur[j]);
             }
-            System.arraycopy(cur, 0, pre, 0, n);
-            Arrays.fill(cur, 0);
+
+            // copy dp_cur to dp_pre, and zero dp_cur
+            System.arraycopy(dp_cur, 0, dp_pre, 0, n);
+            Arrays.fill(dp_cur, 0);
         }
         return len * len;
     }
     */
 
-    // DP with optimized space v2
+    // 2D DP with optimized space v2
+    // T: O(m * n)
+    // S: O(n) state compression
     public int maximalSquare(char[][] matrix) {
         final int m = matrix.length, n = matrix[0].length;
-        int[] cur = new int[n];
-        int len = 0, pre = Integer.MAX_VALUE, tmp;
+        int[] dp = new int[n];
+        int len = 0; 
+        int pre = Integer.MAX_VALUE;  // dp[i - 1][j - 1]
         for (int i = 0; i < m; ++i) {
             for (int j = 0; j < n; ++j) {
-                tmp = cur[j];
+                int tmp = dp[j];
                 if (i == 0 || j == 0 || matrix[i][j] == '0') {
-                    cur[j] = matrix[i][j] - '0';
+                    // Cases:
+                    // 1. left or top edge
+                    // 2. non-one cells
+                    dp[j] = matrix[i][j] - '0';
                 } else {
-                    cur[j] = Math.min(pre, Math.min(cur[j], cur[j - 1])) + 1;
+                    dp[j] = Math.min(pre, Math.min(dp[j], dp[j - 1])) + 1;
                 }
-                len = Math.max(len, cur[j]);
+                len = Math.max(len, dp[j]);
                 pre = tmp;
             }
         }

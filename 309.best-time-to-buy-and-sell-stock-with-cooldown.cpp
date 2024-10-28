@@ -10,6 +10,7 @@ using std::vector;
 // @lc code=start
 class Solution {
 public:
+    // 1D DP
     // T: O(n)
     // S: O(1)
     int maxProfit(vector<int>& prices) {

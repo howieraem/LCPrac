@@ -9,9 +9,10 @@ using std::vector;
 
 // @lc code=start
 class Solution {
-    static const inline vector<vector<int>> NEXT_IDS = {
-        {4, 6},
-        {6, 8},
+    // Define the knight's reachable neighbors for each numeric cell 
+    static const inline vector<vector<int>> NEXT_IDS {
+        {4, 6},  // cell 0
+        {6, 8},  // cell 1
         {7, 9},
         {4, 8},
         {0, 3, 9},
@@ -25,25 +26,36 @@ class Solution {
     static const int F = 1000000007;
 
 public:
-    // T: O(n)
-    // S: O(1)
+    // 2D DP + Graph
+    // T: O(n * E), E := number of edges
+    // S: O(V)
     int knightDialer(int n) {
-        // Base case
-        vector<int> cur(10, 1);
-        n -= 1;
-
-        while (n--) {
-            vector<int> next(10, 0);
-            for (int i = 0; i < 10; ++i) {
-                for (const auto& j : NEXT_IDS[i]) {
-                    next[j] = (cur[i] % F + next[j] % F) % F;
-                }
-            }
-            cur = next;
+        if (n <= 0) {
+            return 0;
         }
 
+        // dp[n][i] means the number of distinct phone numbers 
+        // with length n starting with cell i - 1.
+        // As dp[n][...] only depends on dp[n - 1][...], compress states.
+        // Base case dp[1][i] = 1.
+        vector<int> dp_cur(10, 1);
+        n -= 1;
+
+        while (n-- > 0) {
+            vector<int> dp_next(10, 0);
+            for (int i = 0; i < 10; ++i) {
+                for (const auto& j : NEXT_IDS[i]) {
+                    // dp[n][j] = sum(dp[n - 1][i]) where i->j is a valid edge
+                    // (a + b) % m = (a % m + b % m) % m
+                    dp_next[j] = (dp_cur[i] % F + dp_next[j] % F) % F;
+                }
+            }
+            dp_cur = std::move(dp_next);
+        }
+
+        // A phone number can start with any digits, so sum them up
         int ans = 0;
-        for (const auto &num : cur) {
+        for (const auto &num : dp_cur) {
             ans = (ans % F + num % F) % F;
         }
         return ans;

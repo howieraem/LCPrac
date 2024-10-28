@@ -7,7 +7,7 @@ from typing import List
 
 # @lc code=start
 class Solution:
-    # DP
+    # 2D DP
     # T: O(n ^ 2)
     # S: O(n)
     def findNumberOfLIS(self, nums: List[int]) -> int:
@@ -31,6 +31,7 @@ class Solution:
                     elif new_len == lens[i]:
                         # IMPORTANT: there are more subseqs of the same len
                         cnts[i] += cnts[j]
+            
             max_len = max(max_len, lens[i])
 
         ans = 0

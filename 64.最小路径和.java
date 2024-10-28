@@ -6,6 +6,9 @@
 
 // @lc code=start
 class Solution {
+    // 2D DP
+    // T: O(m * n)
+    // S: O(1) modifying input
     public int minPathSum(int[][] grid) {
         final int m = grid.length, n = grid[0].length;
         // for (int i = 0; i < m; ++i) {

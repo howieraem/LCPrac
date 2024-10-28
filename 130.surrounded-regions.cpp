@@ -15,6 +15,8 @@ public:
     // Idea: 'O's not connected (top, bottom, left or right) to the boundaries will be flipped to 'X'.
     // Incorporate a third char '#' to mark 'O's connected to the boundaries and distinguish from 'O's 
     // to be flipped.
+    // Do DFS/BFS for 'O's connected to the boundaries; distinguish them 
+    // from 'O's not connected to the boundaries.
 
     // T: O(m * n)
     // S: O(m * n)

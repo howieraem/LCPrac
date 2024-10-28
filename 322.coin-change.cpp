@@ -11,6 +11,7 @@ using std::min;
 // @lc code=start
 class Solution {
 public:
+    // 0/1 knapsack problem + 1D DP
     // T: O(len(coins) * amount)
     // S: O(amount)
     int coinChange(vector<int>& coins, int amount) {

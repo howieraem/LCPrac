@@ -3,8 +3,7 @@
  *
  * [1140] Stone Game II
  */
-#include <algorithm>
-#include <vector>
+#include <bits/stdc++.h>
 
 using std::max;
 using std::vector;
@@ -12,28 +11,34 @@ using std::vector;
 // @lc code=start
 class Solution {
 public:
-    // T: O(n^3)
-    // S: O(n^2)
+    // 3D DP + prefix sum / suffix sum
+    // T: O(n ^ 3)
+    // S: O(n ^ 2)
     int stoneGameII(vector<int>& piles) {
         const int n = piles.size();
-        int dp[n + 1][n + 1];   // dp[i][j] is the maximum number of stones Alex can get when starting at index i with M = j
+        // dp[i][m] is the maximum number of stones Alice can get  
+        // when starting at index i with M = m
+        int dp[n + 1][n + 1];
         memset(dp, 0, sizeof(dp));
-        int sufSum[n + 1];  // suffix sum
-        memset(sufSum, 0, sizeof(sufSum));
-        for (int i = n - 1; i >= 0; --i) {
-            sufSum[i] = sufSum[i + 1] + piles[i];
-        }
 
-        // base case
-        for (int i = 0; i <= n; ++i) {
-            dp[i][n] = sufSum[i];
+        int suffix_sum[n + 1];
+        memset(suffix_sum, 0, sizeof(suffix_sum));
+        for (int i = n - 1; i >= 0; --i) {
+            suffix_sum[i] = suffix_sum[i + 1] + piles[i];
         }
 
         // iterate from the back to the front
         for (int i = n - 1; i >= 0; --i) {
-            for (int j = n - 1; j >= 1; --j) {
-                for (int x = 1; x <= 2 * j && i + x <= n; ++x) {
-                    dp[i][j] = max(dp[i][j], sufSum[i] - dp[i + x][max(j, x)]);
+            for (int m = 1; m <= n; ++m) {
+                if (i + (m << 1) < n) {
+                    // Alice considers taking from 1 to 2*m piles,
+                    // such that piles Bob gets will be minimized
+                    for (int x = 1; x <= (m << 1); ++x) {
+                        dp[i][m] = max(dp[i][m], suffix_sum[i] - dp[i + x][max(m, x)]);
+                    }
+                } else {
+                    // Alice can take all remaining piles
+                    dp[i][m] = suffix_sum[i];
                 }
             }
         }

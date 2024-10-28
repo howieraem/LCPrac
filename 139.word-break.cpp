@@ -19,11 +19,13 @@ public:
 
         const int n = s.size();
 
-        // dp[i] means whether s[:i] can be segmented into a space-separated sequence of one or more dictionary words
+        // dp[i] means whether s[:i] can be segmented 
+        // into a space-separated sequence of one or 
+        // more dictionary words
         vector<uint8_t> dp(n + 1, 0);
         dp[0] = 1;  // IMPORTANT base case
 
-        for (int i = 1; i <= n; ++i) {
+        for (int i = 1; i <= n; ++i) {   // i can be interpreted as length of prefix of s
             for (int j = 0; j < i; ++j) {
                 // dp[i] is true iff dp[j] is true and s[j:i] is in dict.
                 // substr() is O(n)

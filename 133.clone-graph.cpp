@@ -53,21 +53,23 @@ public:
     // T: O(V + E)
     // S: O(V + E)
     Node* cloneGraph(Node* node) {
-        if (node == nullptr) return nullptr;  // IMPORTANT
-        std::queue<Node*> q;
-        std::unordered_map<Node*, Node*> node_copy;
+        if (node == nullptr) {
+            return nullptr;  // IMPORTANT
+        }
+        std::queue<Node*> q;   // queue of original nodes
+        std::unordered_map<Node*, Node*> node_copy;  // k: original, v: copy
 
         auto copy = new Node(node->val);
         q.push(node);
         node_copy[node] = copy;
 
-        while (q.size()) {
+        while (!q.empty()) {
             auto cur = q.front(); q.pop();
             auto cur_copy = node_copy[cur];
             for (const auto& neighbor : cur->neighbors) {
                 auto it = node_copy.find(neighbor);
                 if (it == node_copy.end()) {
-                    // neighbor not yet visited
+                    // neighbor not yet visited, put it in the next level of BFS
                     auto neighbor_copy = new Node(neighbor->val);
                     q.push(neighbor);
                     node_copy[neighbor] = neighbor_copy;
@@ -86,7 +88,9 @@ public:
     // T: O(V + E)
     // S: O(V + E)
     Node* cloneGraph(Node* node) {
-        if (node == nullptr) return nullptr;  // IMPORTANT
+        if (node == nullptr) {
+            return nullptr;  // IMPORTANT
+        }
         std::unordered_map<Node*, Node*> node_copy;
         return dfs(node, node_copy);
     }

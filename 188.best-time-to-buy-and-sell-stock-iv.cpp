@@ -10,6 +10,7 @@ using std::vector;
 // @lc code=start
 class Solution {
 public:
+    // 2D DP
     // T: O(n * k)
     // S: O(k) after state compression
     int maxProfit(int k, vector<int>& prices) {
@@ -31,8 +32,8 @@ public:
             return ans;
         }
 
-        // dp[i][k][0] means money left after selling on the ith day at most kth times
-        // dp[i][k][1] means money left after buying on the ith day at most kth times
+        // dp[i][k][0] means money balance after selling on the ith day at most kth times
+        // dp[i][k][1] means money balance after buying on the ith day at most kth times
         // vector<vector<vector<int>>> dp(n, vector<vector<int>>(k + 1, vector<int>(2, 0)));
         vector<vector<int>> dp(k + 1, vector<int>(2, 0));
 

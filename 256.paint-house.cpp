@@ -25,15 +25,23 @@ public:
         return min(finalCosts[0], min(finalCosts[1], finalCosts[2]));
     }
     */
-
-    // Space optimized version
+    
+    // 1D DP
+    // T: O(n * c), n := len(costs), c := len(costs[0])
+    // S: O(c) after state compression
     int minCost(vector<vector<int>>& costs) {
+        if (costs.empty() || costs[0].empty()) {
+            return 0;
+        }
+
+        // dp[i] means the minimum cost if the i-th color is chosen for the final house
         int dp[costs[0].size()];
         copy(costs[0].begin(), costs[0].end(), dp);
         int pre[costs[0].size()];
 
         for (int i = 1; i < costs.size(); ++i) {
-            // Choose a different color with less cost
+            // Choose a different color with less cost,
+            // similar to Q198
             memcpy(pre, dp, sizeof(dp));
             dp[0] = min(pre[1], pre[2]) + costs[i][0],
             dp[1] = min(pre[0], pre[2]) + costs[i][1],

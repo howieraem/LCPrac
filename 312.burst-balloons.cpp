@@ -12,7 +12,7 @@ using std::max;
 class Solution {
 public:
     /*
-    // DP (bottom-up)
+    // 2D DP (bottom-up)
     // T: O(n ^ 3)
     // S: O(n ^ 2)
     int maxCoins(vector<int>& nums) {
@@ -47,7 +47,7 @@ public:
     }
     */
     
-    // Memoized DFS (top-down)
+    // Memoized DFS (top-down 2D DP)
     // T: O(n ^ 3)
     // S: O(n ^ 2)
     int maxCoins(vector<int>& nums) {
@@ -67,13 +67,23 @@ public:
         return dfs(balloons, memo, 0, n - 1);
     }
 
+    // There are O(n ^ 2) memo states. Calculating each memo state takes O(n).
     // IMPORTANT: dfs(..., l, r) does not involve bursting balloons[l] and balloons[r]
     int dfs(const vector<int>& balloons, vector<vector<int>>& memo, int l, int r) {
-        if (l + 1 == r) return 0;
-        if (memo[l][r] != 0) return memo[l][r];
+        if (l + 1 == r) {
+            // search done, no balloons to be bursted between l and r
+            return 0;
+        }
+        if (memo[l][r] != 0) {
+            // state visited, reuse
+            return memo[l][r];
+        }
         for (int i = l + 1; i < r; ++i) {  
-            memo[l][r] = max(memo[l][r], 
-                             balloons[l] * balloons[i] * balloons[r] + dfs(balloons, memo, l, i) + dfs(balloons, memo, i, r));
+            memo[l][r] = max(
+                    memo[l][r], 
+                    balloons[l] * balloons[i] * balloons[r] + 
+                        dfs(balloons, memo, l, i) + 
+                        dfs(balloons, memo, i, r));
         }
         return memo[l][r];
     }

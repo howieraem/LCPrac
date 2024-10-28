@@ -3,7 +3,7 @@
  *
  * [10] Regular Expression Matching
  */
-#include <string>
+#include <bits/stdc++.h>
 
 using std::string;
 
@@ -11,12 +11,16 @@ using std::string;
 class Solution {
 public:
     /*
-    // Solution with 2D array
+    // 2D DP Solution
     // T: O(len(s) * len(p))
     // S: O(len(s) * len(p))
     bool isMatch(string s, string p) {
-        const int m = s.size(), n = p.size();
-        if (n != 0 && p[0] == '*')  return true;
+        const int m = s.size(); 
+        const int n = p.size();
+        if (n != 0 && p[0] == '*') {
+            // p can match any s
+            return true;
+        }
 
         // dp[i][j] means whether s[:i] matches regex p[:j]. Add 1 to both dimensions to
         // consider the base cases like an empty string and/or an empty pattern.
@@ -26,7 +30,8 @@ public:
         // Base cases: dp[i][0] should be false (cannot match an empty pattern) unless s is empty.
         dp[0][0] = true;
         for (int j = 2; j <= n; ++j) { // j starts from 2 because we've checked if p[0] == '*'
-            // Which p matches s = ""? The answer is either an empty pattern p = "" 
+            // '*' Matches zero or more of the preceding element.
+            // What patterns can match s = ""? The answer is either an empty pattern p = "" 
             // or a pattern that can represent an empty string such as p="a*", 
             // p="z*" or more interestingly a combination of them as in p="a*b*c*".
             dp[0][j] = (p[j - 1] == '*' && dp[0][j - 2]);
@@ -48,7 +53,7 @@ public:
     }
     */
 
-    // Solution with 1D array (states compressed)
+    // 2D DP Solution with 1D DP array (states compressed)
     // T: O(len(s) * len(p))
     // S: O(len(p))
     bool isMatch(string s, string p) {
@@ -56,7 +61,7 @@ public:
         if (n != 0 && p[0] == '*')  return true;
 
         bool dp[n + 1];
-        memset(dp, false, sizeof(dp));
+        std::memset(dp, false, sizeof(dp));
 
         dp[0] = true;
         for (int j = 2; j <= n; ++j) { // j starts from 2 because we've checked if p[0] == '*'
