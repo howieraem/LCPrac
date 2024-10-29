@@ -10,6 +10,7 @@ using namespace std;
 // @lc code=start
 class Solution {
 public:
+    // backtracking
     // T: O(n * n!)
     // S: O(n)
     // Complexity explanation see https://leetcode.com/problems/n-queens/discuss/1551695
@@ -31,6 +32,7 @@ private:
     static void backtrack(
         int &ans, bool avail_col[], bool avail_diag1[], bool avail_diag2[], int row, const int &n) {
         if (row == n) {
+            // reached bottom of board
             ++ans;
             return;
         }

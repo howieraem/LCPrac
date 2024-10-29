@@ -12,7 +12,7 @@ using std::queue;
 using std::vector;
 
 // @lc code=start
-using state = std::array<int, 3>;  // (cost, next_vertex, no_of_stops)
+using state = std::array<int, 3>;  // (cost, next_vertex, num_of_stops)
 
 class Solution {
 public:
@@ -28,18 +28,20 @@ public:
         }
 
         priority_queue<state, vector<state>, greater<state>> min_heap;
-        vector<int> stops(n, INT_MAX);
+        vector<int> stops(n, INT_MAX);   // how many stops on the path from src to node
 
         min_heap.push({0, src, 0});
 
         // The heap will store at max E*k values which will happen when `dst` cannot be reached in k stops
-        while (min_heap.size()) {
+        while (!min_heap.empty()) {
             auto [cost, u, cur_stops] = min_heap.top(); min_heap.pop();
-            // IMPORTANT: 1. pruning; 2. at most k edges => at most k+1 nodes
+            // IMPORTANT: 1. pruning; 2. at most k edges => at most (k + 1) nodes
             if (cur_stops > stops[u] || cur_stops > k + 1) {
                 continue;
             }
-            if (u == dst) return cost;
+            if (u == dst) {
+                return cost;
+            }
             stops[u] = cur_stops++;
             
             for (const auto& [v, w] : adj[u]) {
@@ -96,7 +98,7 @@ public:
 
         ++k;  // at most k edges => at most k+1 nodes
         
-        while (k-- != 0 && q.size()) {
+        while (k-- != 0 && !q.empty()) {
             int qs = q.size();
 
             while (qs-- > 0) {

@@ -11,6 +11,7 @@ using namespace std;
 // @lc code=start
 class Solution {
 public:
+    // backtracking
     // T: O(n * n!)
     // S: O(n)
     // Complexity analysis see https://leetcode.com/problems/n-queens/discuss/1551695
@@ -35,12 +36,15 @@ private:
             bool *avail_col, bool *avail_diag, bool *avail_antidiag, 
             int row, const int &n) {
         if (row == n) {
+            // reached bottom of board
             res.push_back(board);
             return;
         }
         for (int col = 0; col < n; ++col) {
             int diag_idx = row + col;
             int antidiag_idx = n - 1 - row + col;
+
+            // queen can be placed at current (row, col)
             if (avail_col[col] && avail_diag[diag_idx] && avail_antidiag[antidiag_idx]) {
                 avail_col[col] = avail_diag[diag_idx] = avail_antidiag[antidiag_idx] = false;
                 board[row][col] = 'Q';

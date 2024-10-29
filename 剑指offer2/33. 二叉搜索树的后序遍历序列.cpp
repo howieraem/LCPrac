@@ -27,7 +27,7 @@ public:
     }
 */
 
-    // Solution based on divide-and-conquer: O(N^2) time. 
+    // Solution based on divide and conquer: O(N^2) time. 
     // Interestingly, the runtime in C++ is faster than the mono-stack solution.
     bool verifyPostorder(vector<int>& postorder) {
         return verifyPostorder(postorder, 0, postorder.size() - 1);

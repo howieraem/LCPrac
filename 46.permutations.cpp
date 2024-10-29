@@ -11,6 +11,7 @@ using std::vector;
 // @lc code=start
 class Solution {
 public:
+    // backtracking
     // T: O(n * n!)
     // S: O(n) for result copying
     vector<vector<int>> permute(vector<int>& nums) {

@@ -18,19 +18,27 @@ class Solution:
                 return False
         return True
     '''
+
+    # hash map
+    # T: O(n)
+    # S: O(alpha_size)
     def isIsomorphic(self, s: str, t: str) -> bool:
+        if len(s) != len(t):
+            return False
+
         # 128 is the number of ASCII characters
-        map_s = [0] * 128
-        map_t = [0] * 128
-        for i in range(len(s)):     # given len(s) = len(t)
-            cidx_s, cidx_t = ord(s[i]), ord(t[i])
+        map_s = [-1] * 128  # k: char, v: last appear idx
+        map_t = [-1] * 128  # k: char, v: last appear idx
+
+        for i, (cs, ct) in enumerate(zip(s, t)):
+            cidx_s = ord(cs)
+            cidx_t = ord(ct)
             if map_s[cidx_s] != map_t[cidx_t]:
                 return False
-            if not map_s[cidx_s]:   
-                # Record positions if not appeared before.
-                # No need to update anymore.
-                map_s[cidx_s] = i + 1
-                map_t[cidx_t] = i + 1
+
+            map_s[cidx_s] = i
+            map_t[cidx_t] = i
+        
         return True
 
         

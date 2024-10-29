@@ -21,8 +21,8 @@ class Solution:
         dist = [(inf, inf)] * n     # list of (cost, hops)
         dist[src] = (0, 0)
 
-        pq = [(0, src, 0)]  # heap of (cost, node, hops)
-        while len(pq):
+        pq = [(0, src, 0)]  # min heap of (cost, node, hops)
+        while len(pq) > 0:
             cost, node, hops = heappop(pq)
             if node == dst and hops <= k + 1:
                 return cost

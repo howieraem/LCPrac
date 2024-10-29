@@ -14,7 +14,7 @@ class Solution {
     const string_view mapping[10] {
         "", "", "abc", "def", "ghi", "jkl",
         "mno", "pqrs", "tuv", "wxyz"
-    };
+    };  // k: digit (used as index), v: chars
 
 public:
     /*
@@ -41,7 +41,7 @@ public:
     }
     */
 
-    // Recursive solution
+    // Recursive solution (backtracking)
     // T: O(4 ^ len(digits)) as one digit corresponds to at most 4 letters
     // S: O(len(digits)) for copying intermediate results
     vector<string> letterCombinations(string digits) {
@@ -57,6 +57,7 @@ public:
             res.push_back(path);
             return;
         }
+        // proceed with children
         for (const auto& letter : mapping[digits[i] - '0']) {
             path[i] = letter;
             dfs(digits, i + 1, path, res);

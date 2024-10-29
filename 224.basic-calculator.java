@@ -7,6 +7,7 @@ import java.util.*;
 
 // @lc code=start
 class Solution {
+    // Iterative solution with stack
     // T: O(n)
     // S: O(n)
     public int calculate(String s) {

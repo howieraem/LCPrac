@@ -3,7 +3,7 @@
  *
  * [1557] Minimum Number of Vertices to Reach All Nodes
  */
-#include <vector>
+#include <bits/stdc++.h>
 
 using std::vector;
 
@@ -11,7 +11,7 @@ using std::vector;
 class Solution {
 public:
     // Find the minimum set of nodes that can reach all other nodes
-    // The answer is the nodes with 0 in-degree.
+    // The answer is the nodes with 0 in-degree for a DAG.
     // T: O(V + E)
     // S: O(V)
     vector<int> findSmallestSetOfVertices(int n, const vector<vector<int>>& edges) {

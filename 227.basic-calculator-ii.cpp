@@ -3,9 +3,7 @@
  *
  * [227] Basic Calculator II
  */
-#include <cctype>
-#include <deque>
-#include <string>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -51,7 +49,7 @@ public:
         }
 
         int ans = 0;
-        while (stk.size()) {
+        while (!stk.empty()) {
             ans += stk.top(); stk.pop();
         }
         return ans;

@@ -12,13 +12,16 @@ class Solution:
         self.backtrack(res, [], nums)
         return res
 
-    def backtrack(self, res, path, remain):
-        if not remain:
+    def backtrack(self, res, path, candidates):
+        if len(candidates) == 0:
             res.append(path[:])
             return
-        for i, num in enumerate(remain):
+        for i, num in enumerate(candidates):
             path.append(num)
-            self.backtrack(res, path, remain[:i]+remain[i+1:])  # ignore remain[i] and use the other elements
+
+            # ignore candidates[i] and use the other elements
+            self.backtrack(res, path, candidates[:i]+candidates[i+1:])
+            
             path.pop()
     
 # @lc code=end

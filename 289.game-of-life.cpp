@@ -3,6 +3,9 @@
  *
  * [289] Game of Life
  */
+#include <bits/stdc++.h>
+
+using std::vector;
 
 // @lc code=start
 class Solution {
@@ -10,6 +13,7 @@ class Solution {
                          dy[] {-1, -1, -1, 0, 0, 1, 1, 1};
 
 public:
+    // bit manipulation + matrix iterations
     // T: O(m * n)
     // S: O(1)
     void gameOfLife(vector<vector<int>>& board) {
@@ -24,6 +28,7 @@ public:
                 for (int d = 0; d < 8; ++d) {
                     int ni = i + dx[d], nj = j + dy[d];
                     if (ni >= 0 && ni < m && nj >= 0 && nj < n) {
+                        // Get neighbor alive sum (use 1st least significant bit)
                         sum += (board[ni][nj] & 0b01);
                     }
                 }
@@ -31,7 +36,7 @@ public:
                 if (board[i][j] == 1 && (sum == 2 || sum == 3)) {
                     board[i][j] |= 0b10;    // next state is alive
                     // If sum > 3, next state is dead, the 2nd bit is still 0
-                } else if (!board[i][j] && sum == 3) {
+                } else if (board[i][j] == 0 && sum == 3) {
                     board[i][j] |= 0b10;
                 }
             }

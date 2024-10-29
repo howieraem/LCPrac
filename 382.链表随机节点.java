@@ -16,28 +16,34 @@ import java.util.concurrent.ThreadLocalRandom;
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
+// S: O(1)
 class Solution {
     private ListNode head;
 
     /** @param head The linked list's head.
         Note that the head is guaranteed to be not null, so it contains at least one node. */
+    // T: O(1)
     public Solution(ListNode head) {
         this.head = head;
     }
     
     /** Returns a random node's value. */
+    // T: O(n)
     public int getRandom() {
-        int cnt = 0, reserve = 0;
+        int cnt = 0; 
+        int val = 0;
         ListNode cur = head;
         while (cur != null) {
             ++cnt;
             int rand = ThreadLocalRandom.current().nextInt(1, cnt + 1);
             if (rand == cnt) {
-                reserve = cur.val;
+                // Similar to Q398
+                // P(i = x) = P(x selected) * P(x not replaced if previously selected)
+                val = cur.val;
             }
             cur = cur.next;
         }
-        return reserve;
+        return val;
     }
 }
 

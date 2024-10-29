@@ -11,11 +11,12 @@ using std::max;
 // @lc code=start
 class Solution {
 public:
-    // T: O(n^l) worst case, n := len(candidates), l := target / min(candidates)
+    // Sorting + backtracking
+    // T: O(n ^ l) worst case, n := len(candidates), l := target / min(candidates)
     // S: O(l)
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
         vector<vector<int>> res;
-        sort(candidates.begin(), candidates.end());
+        sort(candidates.begin(), candidates.end());  // helps pruning
         vector<int> path;
         backtrack(path, candidates, target, res);
         return res;
@@ -23,13 +24,20 @@ public:
 
 private:
     static void backtrack(vector<int> &path, const vector<int>& candidates, int remain, vector<vector<int>> &res) {
-        if (!remain) {
+        if (remain == 0) {
             res.push_back(vector<int>(path));
             return;
         }
-        for (const int &num : candidates) {  // The same number may be chosen from candidates an unlimited number of times
-            if (num > remain)  break;
-            if (path.size() && num < path.back())  continue;
+        // The same number may be chosen from candidates an unlimited number of times
+        for (const int &num : candidates) {
+            if (num > remain) {
+                // prune
+                break;
+            }
+            if (!path.empty() && num < path.back()) {
+                // candidates sorted
+                continue;
+            }
             path.push_back(num);
             backtrack(path, candidates, remain - num, res);
             path.pop_back();

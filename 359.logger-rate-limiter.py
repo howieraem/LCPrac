@@ -14,8 +14,8 @@ import threading
 class Logger:
     def __init__(self):
         self.last_seen_t = 0
-        self.cur = dict()  # stores [last_seen_t, last_seen_t + 10)
-        self.pre = dict()  # stores [last_seen_t + 10, last_seen_t + 20)
+        self.cur = dict()  # k: msg, v: timestamp in [last_seen_t, last_seen_t + 10)
+        self.pre = dict()  # k: msg, v: timestamp in [last_seen_t + 10, last_seen_t + 20)
         # self.lock = threading.Lock()  # simulates parallelism
 
     def shouldPrintMessage(self, timestamp: int, message: str) -> bool:
@@ -42,6 +42,7 @@ class Logger:
         # self.lock.release()
         return True
 
+# Alternative solution if rate is customizable: use a queue to store timestamps, and hash map(s) 
 
 # Your Logger object will be instantiated and called as such:
 # obj = Logger()

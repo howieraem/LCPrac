@@ -28,6 +28,7 @@ struct ListNode {
  */
 class Solution {
 public:
+    // Divide and conquer
     // T: O(n * log(k)), k := the number of lists, n := avg. length of list
     // S: O(log(k)) due to recursion stacks
     ListNode* mergeKLists(vector<ListNode*>& lists) {

@@ -16,7 +16,9 @@ class Solution:
         stack = []
 
         # Idea: Make the array "circular" by virtually making a copy to its right,
-        # i.e. iterate from 0 to 2n and then use modulus to get the original index
+        # i.e. iterate from 0 to 2n and then use modulus to get the original index.
+        # This index modulo trick works here because there is at most one next 
+        # greater element for each element (elements not reused).
         for i in range(n << 1):
             # stack of indices (corresponding numbers are ordered DESC)
             while len(stack) > 0 and nums[stack[-1]] < nums[i % n]:

@@ -9,7 +9,7 @@ class Solution:
     OPS = {'+', '-', '*'}
 
     def diffWaysToCompute(self, input: str) -> List[int]:
-        # divide-and-conquer (binary tree post-order traversal)
+        # divide and conquer (binary tree post-order traversal)
         if input.isdigit():
             return [int(input)]
         

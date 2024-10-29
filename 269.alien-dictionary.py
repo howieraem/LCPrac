@@ -13,6 +13,7 @@ def cid(c):
     return ord(c) - A
 
 class Solution:
+    # Graph BFS + topological sort
     # Build a DAG graph so that we can get a possible order without invalid dependencies.
     # T: O(n * l + s ^ 2), n := len(words), l := max word length, s := 26
     # S: O(s ^ 2)
@@ -59,7 +60,7 @@ class Solution:
             if in_deg[i] == 0:
                 q.append(i)
 
-        while len(q):
+        while len(q) > 0:
             i = q.popleft()
             res.append(chr(i + A))
             for j in range(len(graph[i])):
@@ -69,6 +70,7 @@ class Solution:
                         q.append(j)
 
         # Cycle exists if len(res) != n_uniq_chars
+        # The result is the lexicographically increasing order of the chars in this language.
         return "".join(res) if len(res) == n_uniq_chars else ""
 
 # @lc code=end

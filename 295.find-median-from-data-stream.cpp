@@ -12,6 +12,7 @@ using std::priority_queue;
 using std::vector;
 
 // @lc code=start
+// Dual heaps
 class MedianFinder {
     // S: O(n)
     priority_queue<int> small;  // max heap storing the smaller half of the elements

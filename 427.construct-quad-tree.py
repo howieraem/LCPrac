@@ -28,6 +28,7 @@ class Node:
 """
 
 class Solution:
+    # Post-order traversal DFS
     # T: O(n ^ 2)
     # S: O(log(n)) recursion stack
     def construct(self, grid: List[List[int]]) -> 'Node':
@@ -53,6 +54,9 @@ class Solution:
                 node.bottomLeft = bottom_left
                 node.bottomRight = bottom_right
                 node.isLeaf = False
+            # else:
+            # If the current grid has the same value (i.e all 1's or all 0's), 
+            # isLeaf should be True, and the four children should be Null.
             return node
 
         return helper(0, 0, len(grid))

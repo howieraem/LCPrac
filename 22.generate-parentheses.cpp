@@ -11,6 +11,7 @@ using std::vector;
 
 // @lc code=start
 class Solution {
+    // backtracking
     // T: O(2 ^ (2n)) as there are 2 recursive calls in backtrack() and it requires 2n steps to get one result
     // S: O(n)
     static void backtrack(string& path, int l_remain, int r_remain, vector<string>& res) {

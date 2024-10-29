@@ -45,9 +45,9 @@ public:
             ListNode* pre = dummy;
             ListNode* cur = dummy->next;
             while (cur != nullptr) {
-                ListNode* l = cur;
-                ListNode* r = split(l, step);
-                cur = split(r, step);
+                ListNode* l = cur;             // head of left sub linked list with len = step
+                ListNode* r = split(l, step);  // head of right sub linked list with len = step
+                cur = split(r, step);          // head of linked list after right linked list (rest of linked list not processed)
                 pre = merge(l, r, pre);
             }
         }

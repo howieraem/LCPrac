@@ -30,8 +30,9 @@ struct TreeNode {
  */
 class Solution {
 public:
+    // Divide and conquer
     // T: O(n), n := len(nums)
-    // S: O(n)
+    // S: O(log(n)) balanced tree, max tree height
     TreeNode* sortedArrayToBST(vector<int>& nums) {
         return helper(nums, 0, nums.size() - 1);
     }

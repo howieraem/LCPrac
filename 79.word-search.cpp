@@ -11,6 +11,7 @@ using std::vector;
 // @lc code=start
 class Solution {
 public:
+    // backtracking
     // T: O(m * n * 3 ^ l), m := board height, n := board width, l := word length
     // S: O(l)
     bool exist(vector<vector<char>>& board, string word) {
@@ -28,7 +29,7 @@ private:
     static constexpr int D[] {-1, 0, 1, 0, -1};
 
     // T: O(3 ^ l) (Though 4 adjacencies for each cell in the middle, the adjancency that is the previous step should not be counted)
-    static bool backtrack(vector<vector<char>> &b, const string &w, int r, int c, int wi) {
+    static bool backtrack(vector<vector<char>> &board, const string &w, int r, int c, int wi) {
         if (wi == w.size()) {
             return true;
         }
@@ -36,18 +37,20 @@ private:
         // As there might only be one element in the board, we must
         // check before (rather than inside) the for loop below.
         // Otherwise, test cases like {board=[['a']], word="a"} will fail.
-        if (r < 0 || r == b.size() || c < 0 || c == b[r].size())  return false;
-        if (b[r][c] != w[wi]) {
+        if (r < 0 || r >= board.size() || c < 0 || c >= board[r].size()) {
+            return false;
+        }
+        if (board[r][c] != w[wi]) {
             return false;
         }
 
-        b[r][c] = 0;    // mark visited
+        board[r][c] = 0;      // mark visited
         for (int d = 0; d < 4; ++d) {
-            if (backtrack(b, w, r + D[d], c + D[d + 1], wi + 1)) {
+            if (backtrack(board, w, r + D[d], c + D[d + 1], wi + 1)) {
                 return true;
             }
         }
-        b[r][c] = w[wi];  // undo visit
+        board[r][c] = w[wi];  // undo visit
         return false;
     }
 };

@@ -14,6 +14,7 @@ typedef pair<int, int> int_pair;
 
 class Solution {
 public:
+    // Heap + two pointers
     // T: O(k * log(k))
     // S: O(k)
     vector<vector<int>> kSmallestPairs(vector<int>& nums1, vector<int>& nums2, int k) {
@@ -22,11 +23,12 @@ public:
         // min heap (because we are finding the kth smallest)
         auto compare = [&nums1, &nums2](const int_pair &a, const int_pair &b) { 
             return nums1[a.first] + nums2[a.second] > nums1[b.first] + nums2[b.second]; };
+        // heap stores pairs of indices (i, j) for nums1 and nums2 respectively
         priority_queue<int_pair, vector<int_pair>, decltype(compare)> pq(compare);
-        pq.emplace(0, 0);
+        pq.emplace(0, 0);  // beginning of both arrays, i = 0, j = 0
 
         vector<vector<int>> res;
-        while (k-- > 0 && pq.size()) {
+        while (k-- > 0 && !pq.empty()) {
             auto p = pq.top(); pq.pop();
             res.push_back({nums1[p.first], nums2[p.second]});
 
@@ -50,7 +52,7 @@ public:
             if (p.first + 1 < m) {
                 pq.emplace(p.first + 1, p.second);
             }
-            if (!p.first && p.second + 1 < n) {
+            if (p.first == 0 && p.second + 1 < n) {
                 pq.emplace(p.first, p.second + 1);
             }
         }

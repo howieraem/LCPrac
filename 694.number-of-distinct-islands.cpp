@@ -45,6 +45,7 @@ private:
         island.push_back(dirn);
         grid[i][j] = 0;     // mark visited
         for (int d = 0; d < 4; ++d) {
+            // dirn char {'0', '1', '2', '3'}
             dfs(grid, i + D[d], j + D[d + 1], island, d + '0');
         }
         island.push_back('b');  // REQUIRED
@@ -67,7 +68,7 @@ private:
                     grid[i][j] = 0;
                     island = ",";
                     
-                    while (q.size()) {
+                    while (!q.empty()) {
                         const auto &[r, c] = q.front();
                         for (int d = 0; d < 4; ++d) {
                             int nr = r + D[d], nc = c + D[d + 1];
@@ -75,6 +76,7 @@ private:
                             if (nr >= 0 && nr < m && nc >= 0 && nc < n && grid[nr][nc]) {
                                 grid[nr][nc] = 0;
                                 q.push({nr, nc});
+                                // dirn char {'0', '1', '2', '3'}
                                 island.push_back(d + '0');
                             }
                         }
