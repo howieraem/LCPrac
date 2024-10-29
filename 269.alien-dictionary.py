@@ -72,6 +72,9 @@ class Solution:
         # Cycle exists if len(res) != n_uniq_chars
         # The result is the lexicographically increasing order of the chars in this language.
         return "".join(res) if len(res) == n_uniq_chars else ""
+    
+    # Similar problems: given some candidate subsequences, check if they are drawn 
+    # from the same sequence with unique numbers
 
 # @lc code=end
 

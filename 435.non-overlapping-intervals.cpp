@@ -16,6 +16,9 @@ public:
     // S: O(log(n)) for sorting
     int eraseOverlapIntervals(vector<vector<int>>& intervals) {
         const int n = intervals.size();
+        if (n == 0) {
+            return 0;
+        }
 
         // Sort by interval ends ascending. Given two overlapping intervals, 
         // we can only keep one, the question is which one should we keep?

@@ -6,11 +6,11 @@
 
 # @lc code=start
 # Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
+class TreeNode:
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
 
 class Solution:
     '''
@@ -22,20 +22,28 @@ class Solution:
     '''
 
     # Using the properties of complete binary tree
+    # T: O(log(n) ^ log(n))
+    # S: O(log(n))
     def countNodes(self, root: TreeNode) -> int:
-        if not root:
+        if root is None:
             return 0
-        left = self.countLevels(root.left)
-        right = self.countLevels(root.right)
+        left = self.getLevels(root.left)
+        right = self.getLevels(root.right)
         if left == right:
-            # all levels full
-            return self.countNodes(root.right) + (1 << left)
-        return self.countNodes(root.left) + (1 << right)  # all levels full except last level
+            # Left subtree is a perfect binary tree
+            # Right subtree is a complete binary tree
+            return self.countNodes(root.right) + (1 << left)   # 2 ^ left
+        
+        # left > right
+        # Left subtree is a complete binary tree (deeper)
+        # Right subtree is a perfect binary tree
+        return self.countNodes(root.left) + (1 << right)  # 2 ^ right
 
+    # nodes in the last level are as far left as possible
     @staticmethod
-    def countLevels(root):
+    def getLevels(root):
         lvl = 0
-        while root:
+        while root is not None:
             lvl += 1
             root = root.left
         return lvl

@@ -5,7 +5,7 @@
  */
 
 // @lc code=start
-/** Solution based on segment tree. */
+/** Solution based on . */
 class NumArray {
     private int[] tree;
     private int n;

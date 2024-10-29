@@ -78,7 +78,8 @@ public:
             // state visited, reuse
             return memo[l][r];
         }
-        for (int i = l + 1; i < r; ++i) {  
+        for (int i = l + 1; i < r; ++i) {
+            // whether to burst i-th balloon or not  
             memo[l][r] = max(
                     memo[l][r], 
                     balloons[l] * balloons[i] * balloons[r] + 

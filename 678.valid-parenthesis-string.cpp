@@ -3,10 +3,14 @@
  *
  * [678] Valid Parenthesis String
  */
+#include <bits/stdc++.h>
+
+using std::string;
 
 // @lc code=start
 class Solution {
 public:
+    // Greedy
     // T: O(n)
     // S: O(1)
     bool checkValidString(string s) {
@@ -22,10 +26,10 @@ public:
                 ++lower;
             } else if (c == ')') {
                 --upper;
-                lower -= (lower > 0);  // keep lower bound >= 0
+                lower -= (lower > 0);  // lower = max(lower - 1, 0), keep lower bound >= 0
             } else { // c == '*'
                 ++upper;                // if '*' represents '('
-                lower -= (lower > 0);   // if '*' represents ')', and keep lower bound >= 0
+                lower -= (lower > 0);   // if '*' represents ')', lower = max(lower - 1, 0), and keep lower bound >= 0
             }
 
             if (upper < 0) {

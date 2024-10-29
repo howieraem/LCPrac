@@ -4,7 +4,7 @@ using std::vector;
 
 // S: O(m * n)
 class NumMatrix {
-    vector<vector<int>> tree;  // binary indexed tree, efficient 2d data structure to store prefix sums
+    vector<vector<int>> tree;  // binary indexed tree (Fenwick tree), efficient 2d data structure to store prefix sums
     vector<vector<int>> vals;
     int m;
     int n;

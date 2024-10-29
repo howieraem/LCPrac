@@ -11,12 +11,14 @@ using namespace std;
 // @lc code=start
 class Solution {
 public:
+    // backtracking + simple 2D DP
     // T: O(n * 2 ^ n)
     // S: O(n ^ 2) for the is_palindrome 2D array
     vector<vector<string>> partition(string s) {
         vector<vector<string>> res;
         const int n = s.size();
         
+        // Precompute DP
         // is_palindrome[i][j] means whether s[i:j+1] is a palindrome.
         // Precompute this dp info to reduce time cost in backtracking.
         // In Q132, this part is essential as backtracking is not needed.

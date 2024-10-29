@@ -27,8 +27,12 @@ struct TreeNode {
  */
 class Solution {
     bool traverse(TreeNode* l, TreeNode* r) {
-        if (!l && !r) return true;  // the parent node is a leaf node
-        if (!l || !r || l->val != r->val) return false;
+        if (l == nullptr && r == nullptr) {
+            return true;  // the parent node is a leaf node
+        }
+        if (l != nullptr || r != nullptr || l->val != r->val) {
+            return false;
+        }
         return traverse(l->left, r->right) && traverse(l->right, r->left);
     }
 
@@ -36,7 +40,7 @@ public:
     // T: O(n)
     // S: O(1) tail recursion
     bool isSymmetric(TreeNode* root) {
-        return !root ? true : traverse(root->left, root->right);
+        return root == nullptr ? true : traverse(root->left, root->right);
     }
 };
 // @lc code=end
