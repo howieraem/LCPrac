@@ -25,7 +25,8 @@ class Solution:
             return [-1, -1]
         ans_l = l
 
-        # Find right most
+        # Find right most 
+        # (note that setting l = 0 is not necessary if two searches are consecutive)
         l, r = 0, n - 1
         while l <= r:
             m = l + ((r - l) >> 1)

@@ -9,7 +9,7 @@ class Solution:
     # T: O(n)
     # S: O(n)
     def calculate(self, s: str) -> int:
-        i = 0
+        i = 0   # IMPORTANT: global var changed by all recursive dfs calls
         n = len(s)
 
         # DFS with implicit stack(s)
@@ -32,8 +32,9 @@ class Solution:
                 elif c == '(':
                     num = helper(s)
 
-                # Deal with operations when c is an operator or 
-                # the index i has reached the end of s
+                # When c is an operator/parenthesis or 
+                # the index i has reached the end of s, 
+                # need to calculate intermediate steps.
                 # if (not is_digit and c != ' ') or i == n:
                 if not is_digit or i == n:
                     if pre_op == '+':
@@ -45,6 +46,7 @@ class Solution:
                     elif pre_op == '/':
                         # nums[-1] //= num won't work for negative num 
                         nums[-1] = int(nums[-1] / num)
+                    # else do nothing for '(' or ')'
                     
                     num = 0
                     pre_op = c

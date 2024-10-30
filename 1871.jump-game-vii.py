@@ -7,12 +7,15 @@ from collections import deque
 
 # @lc code=start
 class Solution:
-    # DP + sliding window
+    # 1D DP + sliding window
     # T: O(n)
     # S: O(n)
     def canReach(self, s: str, minJump: int, maxJump: int) -> bool:
         n = len(s)
-        pre = 0
+        if n == 0 or s[0] == '1':
+            return False
+
+        n_pre_pos = 0
         dp = [False] * n   # dp[i] = True if s[i] can be reached
         dp[0] = True
 
@@ -20,26 +23,27 @@ class Solution:
         1. To determine the state of dp[i], one need to check the states in window dp[i - maxJ : i - minJ], 
            because any one of them can reach i if it's labeled True.
         2. Then you need to check if there is a True in this window. Notice that this is a sliding window problem, 
-           so you don't need to calculate it everytime. You only need to remove the effect from dp[i - maxJ - 1] 
+           so you don't need to calculate it every time. You only need to remove the effect from dp[i - maxJ - 1] 
            and add the dp[i - minJ]. This is done by these two lines of code pre += dp[i - minJ] and pre -= dp[i - maxJ - 1]
         3. The if statements `if i >= minJ:` and `if i > maxJ:` are dealing with the initial boundary.
         '''
         for i in range(1, n):
             if i >= minJump and dp[i - minJump]:
-                pre += 1
+                n_pre_pos += 1
             if i > maxJump and dp[i - maxJump - 1]:
-                pre -= 1
-            dp[i] = pre > 0 and s[i] == '0'
+                n_pre_pos -= 1
+            dp[i] = n_pre_pos > 0 and s[i] == '0'
+        
         return dp[n - 1]
 
-    # BFS (+ Greedy?)
+    # BFS + Greedy
     # T: O(n)
     # S: O(n)
     def canReach(self, s: str, minJump: int, maxJump: int) -> bool:
         q = deque()
         q.append(0)
         furthest = 0
-        while q:
+        while len(q) > 0:
             cur = q.popleft()
             if cur == len(s) - 1:
                 return True

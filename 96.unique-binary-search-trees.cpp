@@ -10,6 +10,7 @@ using std::vector;
 // @lc code=start
 class Solution {
 public:
+    // 1D DP + binary search tree
     // T: O(n ^ 2)
     // S: O(n)
     int numTrees(int n) {

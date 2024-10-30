@@ -62,6 +62,7 @@ DIRN = (0, -1, 0, 1, 0)
 
 
 class Solution:
+    # Union find, flatten 2D coords to 1D
     # T: O(len(positions) * log(m * n))
     # S: O(m * n)
     def numIslands2(self, m: int, n: int, positions: List[List[int]]) -> List[int]:

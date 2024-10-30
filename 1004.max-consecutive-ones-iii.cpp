@@ -16,10 +16,17 @@ public:
     // T: O(n)
     // S: O(1)
     int longestOnes(vector<int>& nums, int k) {
-        int l = 0, r;
+        int l = 0;
+        int r = 0;
         for (r = 0; r < nums.size(); ++r) {
-            if (!nums[r])  --k;
-            if (k < 0 && !nums[l++])  ++k;
+            if (nums[r] == 0) {
+                --k;
+            }
+            if (k < 0 && nums[l++] == 0) {
+                // Too many zeros to be flipped,
+                // shift the left window boundary
+                ++k;
+            }
         }
         return r - l;
     }

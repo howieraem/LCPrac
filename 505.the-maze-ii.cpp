@@ -27,7 +27,7 @@ public:
         while (q.size()) {
             int qs = q.size();
 
-            while (qs--) {
+            while (qs-- > 0) {
                 auto p = q.front(); q.pop();
                 for (int d = 0; d < 4; ++d) {
                     int i = p[0], j = p[1];

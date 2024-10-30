@@ -52,7 +52,7 @@ class Solution:
                 # If p and q are already connected,
                 # then there must exist a cycle
                 return False
-        return uf.cnt == 1  # not fully connected
+        return uf.cnt == 1  # check if fully connected (if no, a forest)
 
 # @lc code=end
 

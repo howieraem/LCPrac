@@ -47,7 +47,6 @@ public:
             for (const auto& [v, w] : adj[u]) {
                 min_heap.push({cost + w, v, cur_stops});
             }
-
         }
         return -1;
     }

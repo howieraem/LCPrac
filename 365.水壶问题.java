@@ -6,6 +6,10 @@
 
 // @lc code=start
 class Solution {
+    // Given a * jug1 + b * jug2 = target, check if integer solutions a and b exist
+    // The answer is to find the greatest common divisor.
+    // T: O(log(max(jug1, jug2)))
+    // S: O(1) 
     public boolean canMeasureWater(int jug1Capacity, int jug2Capacity, int targetCapacity) {
         if (jug1Capacity + jug2Capacity < targetCapacity)  return false;
         if (jug1Capacity == 0 || jug2Capacity == 0) {
@@ -21,13 +25,12 @@ class Solution {
     }
 
     private int gcd(int x, int y) {
-        int remainder = x % y;
-        while (remainder != 0) {
+        while (y != 0) {
+            int temp = x % y;
             x = y;
-            y = remainder;
-            remainder = x % y;
+            y = temp;
         }
-        return y;
+        return x;
     }
 }
 // @lc code=end

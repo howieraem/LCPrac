@@ -38,6 +38,7 @@ class Solution:
             n2 = len(w2)
             n = min(n1, n2)
             for j in range(n):
+                # compare chars at same index
                 if w1[j] != w2[j]:
                     c1 = cid(w1[j])
                     c2 = cid(w2[j])

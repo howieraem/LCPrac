@@ -28,11 +28,16 @@ public:
                 peak = ++up;
                 ans += 1 + up;
             } else if (ratings[i - 1] == ratings[i]) {
+                // equal rating, add minimum candy
                 up = 0;
                 down = 0;
                 peak = 0;
                 ans += 1;
             } else {
+                // Because we are checking relative ratings pairwise,
+                // not absolute ratings, it is possible that the ratings 
+                // keep decreasing. The valley rating still need at least 
+                // one candy.
                 up = 0;
                 ++down;
                 // The peak child should get additional candies 

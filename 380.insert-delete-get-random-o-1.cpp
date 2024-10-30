@@ -47,6 +47,7 @@ public:
     
     // T: O(1)
     int getRandom() {
+        // may need to handle empty set case
         std::uniform_int_distribution<> dis(0, vals.size() - 1);
         return vals[dis(gen)];
     }

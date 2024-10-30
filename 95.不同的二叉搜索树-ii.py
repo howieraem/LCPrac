@@ -6,15 +6,23 @@
 import functools
 from typing import List
 
-# @lc code=start
-# Definition for a binary tree node.
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
         self.left = left
         self.right = right
 
+# @lc code=start
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
 class Solution:
+    # Divide and conquer + DFS
+    # T: O(4 ^ n / sqrt(n))  Catalan number
     def generateTrees(self, n: int) -> List[TreeNode]:
         if not n:
             return []
@@ -44,5 +52,5 @@ class Solution:
         return generateTrees(1, n)
         
 # @lc code=end
-s = Solution()
-print(len(s.generateTrees(19)))
+# s = Solution()
+# print(len(s.generateTrees(19)))
