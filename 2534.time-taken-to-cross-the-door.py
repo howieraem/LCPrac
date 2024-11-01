@@ -2,10 +2,12 @@ from collections import deque
 from typing import List
 
 class Solution:
+    # queues + simulation
     # T: O(n + max(arrival))
     # S: O(n)
     def timeTaken(self, arrival: List[int], state: List[int]) -> List[int]:
-        # smallest index goes first, so use queues
+        # Smallest index goes first, so use queues.
+        # As time and arrival array is non-decreasing, no need to use priority queue
         enter_q = deque()
         exit_q = deque()
         

@@ -22,17 +22,27 @@ public:
             ++f[nums[i]];
         }
 
-        vector<vector<int>> buckets(n + 1);
+        vector<vector<int>> buckets(n + 1);  // upper bound of frequency is n
         for (const auto& e : f) {
+            // buckets[freq].push_back(x)
             buckets[e.second].push_back(e.first);
         }
 
         vector<int> res;
         res.reserve(k);
         // upper bound of frequency is n
-        for (int i = n; i >= 0 && res.size() < k; --i) {
-            if (!buckets[i].empty()) {
-                res.insert(res.end(), buckets[i].begin(), buckets[i].end());
+        for (int i = n; i >= 0; --i) {
+            // if (!buckets[i].empty()) {
+            //     res.insert(res.end(), buckets[i].begin(), buckets[i].end());
+            // }
+            // if (res.size() >= k) {
+            //     break;
+            // }
+            for (int& x : buckets[i]) {
+                res.push_back(std::move(x));
+                if (res.size() == k) {
+                    return res;
+                }
             }
         }
         // The problem specs state that "it is guaranteed that the answer is unique",

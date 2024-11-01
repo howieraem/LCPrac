@@ -51,6 +51,7 @@ class UF {
 }
 
 class Solution {
+    // Union find / Disjoint set union
     // Kruskal’s algorithm to generate a minimum spanning tree (MST) for the graph
     // T: O(E * (log(E) + a(V))), a() := inverse Ackermann func
     // S: O(V + log(E)) for union find and sorting edges

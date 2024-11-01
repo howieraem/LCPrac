@@ -24,6 +24,8 @@ public:
     vector<vector<int>> pacificAtlantic(vector<vector<int>>& heights) {
         const int m = heights.size(), n = heights[0].size();
         queue<pos> q_p, q_a;
+
+        // alternatively, can use one vis matrix and check if vis[i][j] == 2 in the end
         vector<vector<uint8_t>> vis_p(m, vector<uint8_t>(n, 0)), vis_a(m, vector<uint8_t>(n, 0));
 
         // Horizontal boundaries
