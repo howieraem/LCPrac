@@ -8,6 +8,8 @@ import java.util.TreeSet;
 
 // @lc code=start
 class Solution {
+    // T: O(n ^ 2 * m * log(m))
+    // S: O(m * n)
     public int maxSumSubmatrix(int[][] matrix, int k) {
         int m = matrix.length, n = matrix[0].length;
         int[][] preSum = new int[m + 1][n + 1];
@@ -18,7 +20,7 @@ class Solution {
             }
         }
 
-        // Iterate cols in outter loops because m (no. of rows) can be much greater than n (no. of cols)
+        // Iterate cols in outer loops because m (no. of rows) can be much greater than n (no. of cols)
         int ans = Integer.MIN_VALUE;
         for (int y1 = 0; y1 < n; ++y1) {
             for (int y2 = y1 + 1; y2 <= n; ++y2) {

@@ -17,10 +17,12 @@ public:
     // S: O(m * n)
     int longestIncreasingPath(vector<vector<int>>& matrix) {
         const int m = matrix.size(), n = matrix[0].size();
-        // Use memo dfs if state transitions cannot be well formulated
+        // Use memo dfs if state transitions cannot be well formulated or hard to formulate the order of updating dp table
         // like this (with 2D coordinates and max 4 directions)
         vector<vector<int>> memo(m, vector<int>(n, 0));  
         int ans = 0;
+
+        // Start dfs from every cell (some intermediate results from previous cells can be reused)
         for (int i = 0; i < m; ++i) {
             for (int j = 0; j < n; ++j) {
                 ans = max(ans, dfs(matrix, i, j, memo));

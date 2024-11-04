@@ -50,14 +50,16 @@ class Solution:
             a = ord(w[0]) - OFFSET
             b = ord(w[1]) - OFFSET
             if cnts[b][a] > 0:
-                ans += 4
+                ans += 4   # 'ba' and 'ab' will be in the palindrome
                 cnts[b][a] -= 1
             else:
+                # not incrementing ans here because the case above has covered
                 cnts[a][b] += 1
 
+        # If both chars equal, like 'aa', can only use one of such strings in the center of the longest palindrome
         for i in range(26):
             if cnts[i][i] > 0:
-                ans += 2
+                ans += 2   # 'aa' only
                 break
         
         return ans

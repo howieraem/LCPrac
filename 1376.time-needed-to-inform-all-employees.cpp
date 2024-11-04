@@ -25,12 +25,13 @@ public:
     }
 
 private:
+    // post-order traversal of n-ary tree
     int dfs(const vector<vector<int>>& graph, int u, const vector<int>& informTime) {
         int ans = 0;
         for (const int& v : graph[u]) {
             ans = std::max(ans, dfs(graph, v, informTime));
         }
-        return ans + informTime[u];  // cost to visit current node and all children
+        return ans + informTime[u];  // cost to visit current node and all children (worst of all children)
     }
 };
 // @lc code=end
