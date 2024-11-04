@@ -12,8 +12,10 @@ class RangeModule:
 
     # T: O(n)
     def addRange(self, left: int, right: int) -> None:
-        start = bisect_left(self.track, left)
-        end = bisect_right(self.track, right)
+        # Note: instead of [left, right), if [left, right] is required, add 1 to right.
+        start = bisect_left(self.track, left)  # everything to the left is <
+        end = bisect_right(self.track, right)  # everything to the left is <=
+
         subtrack = []
         # If the index is even, it means that it is currently outside the range of 
         # start and end indexes being tracked. In this case, update the track array.
@@ -23,13 +25,14 @@ class RangeModule:
             subtrack.append(right)
 
         # Behavior of Python slicing below: if start == end, then `subtrack` is inserted to `track` 
-        # at index start, without overwriting elements after index start; if start != end, then after 
+        # at index start, without overwriting any elements; if start != end, then after 
         # insertion subtrack[0] will be at index start, and track[start + 1:] will be overwritten
         # by subtrack[1:].
         self.track[start:end] = subtrack
 
     # T: O(log(n))
     def queryRange(self, left: int, right: int) -> bool:
+        # Note: if check single value in range, set left = right = value.
         start = bisect_right(self.track, left)
         end = bisect_left(self.track, right)
         # Rules in `track`: odd indices are the end points of ranges being tracked,
@@ -54,7 +57,7 @@ class RangeModule:
             subtrack.append(right)
 
         # Behavior of Python slicing below: if start == end, then `subtrack` is inserted to `track` 
-        # at index start, without overwriting elements after index start; if start != end, then after 
+        # at index start, without overwriting any elements; if start != end, then after 
         # insertion subtrack[0] will be at index start, and track[start + 1:] will be overwritten
         # by subtrack[1:].
         self.track[start:end] = subtrack

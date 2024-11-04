@@ -8,6 +8,9 @@ from typing import *
 
 # @lc code=start
 class Solution:
+    # Memoized DFS + bit manipulation
+    # T: O(n ^ 2 * (2 ^ n + w)), n := len(words), w := max(len(w) for w in words)
+    # S: O(n * (2 ^ n + w))
     def shortestSuperstring(self, words: List[str]) -> str:
         """
         Traveling salesman problem. Model each word as a graph node,
@@ -29,15 +32,16 @@ class Solution:
         
         n = len(words)
 
+        # If not using bit mask, may use bool list instead to mark whether a word has been visited/used
         @lru_cache(None)
-        def dfs(pre: int, mask: int) -> str:
+        def dfs(prev_visited_word_idx: int, mask: int) -> str:
             res = ""
-            if mask + 1 == (1 << n):
+            if mask == (1 << n) - 1:
                 # all words visited
                 return res
             for i in range(n):
                 if not mask & (1 << i):  # words[i] has not been visited
-                    candidate = get_min_cost_substr(words[pre], words[i]) + dfs(i, mask | (1 << i))
+                    candidate = get_min_cost_substr(words[prev_visited_word_idx], words[i]) + dfs(i, mask | (1 << i))
                     if res == "" or len(res) > len(candidate):
                         res = candidate
             return res

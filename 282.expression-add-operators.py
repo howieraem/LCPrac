@@ -11,7 +11,7 @@ class Solution:
         res = []
         n = len(num)
 
-        def dfs(path, idx, val, pre_mult_factor):
+        def dfs(path: str, idx: int, val: int, pre_mult_factor: int) -> None:
             if idx == n:
                 if val == target:
                     res.append(path)

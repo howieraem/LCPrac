@@ -23,7 +23,8 @@ public:
         // Worst: O(2 * m)
         int f[m];
         std::memset(f, 0, sizeof(f));
-        int i = 1, j = 0;
+        int i = 1; 
+        int j = 0;
         while (i < m) {
             // compute for needle[i:j+1]
             if (needle[i] == needle[j]) {
@@ -48,7 +49,7 @@ public:
                     ++j;
                 }
             } else {
-                if (j != 0) { 
+                if (j > 0) { 
                     j = f[j - 1];
                 } else {
                     ++i;

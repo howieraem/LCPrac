@@ -10,6 +10,7 @@ using std::vector;
 // @lc code=start
 class Solution {
 public:
+    // Matrix + bit manipulation + greedy?
     // T: O(m * n)
     // S: O(n)
     bool removeOnes(vector<vector<int>>& grid) {
@@ -25,6 +26,7 @@ public:
             flipped_row0[j] = 1 - flipped_row0[j];
         }
 
+        // check if following rows looks like either row 0 or flipped row 0 
         for (int i = 1; i < M; ++i) {
             if (grid[i] != grid[0] && grid[i] != flipped_row0) {
                 return false;

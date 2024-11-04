@@ -79,9 +79,9 @@ public:
         while (l <= r) {
             int m1 = l + ((r - l) >> 1);
             int m2 = k - m1;
-            int nums1_l = m1 > 0 ? nums1[m1 - 1] : INT_MIN;
+            int nums1_l = m1 >= 1 ? nums1[m1 - 1] : INT_MIN;
             int nums1_r = m1 < n1 ? nums1[m1] : INT_MAX;
-            int nums2_l = m2 > 0 ? nums2[m2 - 1] : INT_MIN;
+            int nums2_l = m2 >= 1 ? nums2[m2 - 1] : INT_MIN;
             int nums2_r = m2 < n2 ? nums2[m2] : INT_MAX;
             if (nums1_l <= nums2_r && nums2_l <= nums1_r) {
                 return std::max(nums1_l, nums2_l);

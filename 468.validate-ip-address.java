@@ -9,18 +9,18 @@ class Solution {
     public String validIPAddress(String IP) {
         if (IP.isBlank())  return "Neither";
 
-        String[] v4 = IP.split("\\.", -1);
         // Whether the string has three '.'
         if (IP.chars().filter(c -> c == '.').count() == 3) {
+            String[] v4 = IP.split("\\.", -1);
             for (String s : v4) {
                 if (!validV4Seg(s))  return "Neither";
             }
             return "IPv4";
         }
 
-        String[] v6 = IP.split("\\:", -1);
         // Whether the string has three ':'
         if (IP.chars().filter(c -> c == ':').count() == 7) {
+            String[] v6 = IP.split("\\:", -1);
             for (String s : v6) {
                 if (!validV6Seg(s))  return "Neither";
             }
@@ -41,7 +41,9 @@ class Solution {
     }
 
     private static boolean validV6Seg(String s) {
-        if (s.length() > 4)  return false;
+        if (s.length() > 4) {
+            return false;
+        }
         try {
             return Integer.parseInt(s, 16) >= 0 && s.charAt(0) != '-';
         } catch (NumberFormatException e) {

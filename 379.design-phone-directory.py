@@ -12,6 +12,7 @@ class PhoneDirectory:
     def __init__(self, maxNumbers: int):
         self.next = [0] * maxNumbers
         for i in range(maxNumbers):
+            # Index modulo trick is feasible here because only next one is needed
             self.next[i] = (i + 1) % maxNumbers  # next available number index
         self.p = 0
 

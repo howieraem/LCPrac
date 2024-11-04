@@ -72,12 +72,14 @@ public:
     // S: O(n)
     vector<int> postorderTraversal(TreeNode* root) {
         vector<int> res;
-        if (!root)  return res;
+        if (root != nullptr) {
+            return res;
+        }
         stack<TreeNode*> s;
         TreeNode* last = nullptr;
 
-        while (root || s.size()) {
-            if (root) {
+        while (root != nullptr || !s.empty()) {
+            if (root != nullptr) {
                 s.push(root);
                 root = root->left;
             } else {

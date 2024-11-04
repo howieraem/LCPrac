@@ -40,6 +40,32 @@ class Solution {
     }
 }
 
+// Follow-up: randomly pick k unique numbers from a range [lo, hi)
+int[] sample(int lo, int hi, int k) {
+    if (lo >= hi) {
+        return {};
+    }
+    k = Math.min(k, (double)hi - lo);
+    Random r = new Random();
+    int[] res = new int[k];
+
+    for (int i = 0; i < k; i++) {
+        res[i] = lo + i;
+    }
+
+    int i = k;
+    while (i < hi - lo) {
+        i++;
+        int j = r.nextInt(i);
+        // 这个整数小于 k 的概率就是 k/i
+        if (j < k) {
+            // overwrite
+            res[j] = lo + i - 1;
+        }
+    }
+    return res;
+}
+
 /**
  * Your Solution object will be instantiated and called as such:
  * Solution obj = new Solution(nums);

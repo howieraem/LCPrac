@@ -25,25 +25,25 @@ public:
         int steps = 1;
         q.push(beginWord);
 
-        while (q.size()) {
+        while (!q.empty()) {
             int qs = q.size();
-            while (qs--) {
+            while (qs-- > 0) {
                 auto word = q.front(); q.pop();
 
                 // Replace the i-th char with another possible char
                 for (int i = 0; i < word.size(); ++i) {
                     char original = word[i];
                     for (char c = 'a'; c <= 'z'; ++c) {
-                        // if (c != original) {
+                        if (c != original) {
                             word[i] = c;
                             if (word == endWord)  return steps + 1;
                             if (ws.find(word) != ws.end()) {
                                 q.push(word);  // IMPORTANT: push a copy
-                                ws.erase(word);  // IMPORTANT: avoid producing duplicate intermediate word
+                                ws.erase(word);  // IMPORTANT: avoid producing duplicate intermediate word (acting as the visit set)
                             }
-                        // }
+                        }
                     }
-                    word[i] = original;  // IMPORTANT: undo the change before proceeding to change the next char
+                    word[i] = original;  // IMPORTANT: undo the change before proceeding to change the next char (like backtracking?)
                 }
             }
             ++steps;
@@ -84,14 +84,14 @@ public:
                 for (int i = 0; i < word.size(); ++i) {
                     char original = word[i];
                     for (char c = 'a'; c <= 'z'; ++c) {
-                        // if (c != original) {
+                        if (c != original) {
                             word[i] = c;
                             if (p_end_set->find(word) != p_end_set->end())  return steps;
                             if (ws.find(word) != ws.end()) {
                                 tmp.insert(word);  // IMPORTANT: push a copy
                                 ws.erase(word);  // IMPORTANT: avoid producing duplicate intermediate word
                             }
-                        // }
+                        }
                     }
                     word[i] = original;  // IMPORTANT: undo the change before proceeding to change the next char
                 }

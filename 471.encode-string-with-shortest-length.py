@@ -13,7 +13,7 @@ class Solution:
         if n <= 4:  # encoding will not shorten if length <= 4
             return s
 
-        # dp[i][j] is the answer for s[i:j+1]
+        # dp[i][j] is the shortest encoded str for s[i:j+1]
         dp = [[""] * n for _ in range(n)]
         for length in range(1, n + 1):
             for i in range(n - length + 1):
@@ -29,6 +29,7 @@ class Solution:
 
                 pattern = self.get_longest_pattern(substr)
                 if len(pattern) == len(substr):
+                    # this will not shorten because of the leading "1"
                     continue
                 # pattern should be the same as dp[i][i + len(pattern) - 1]
                 abbr = str(len(substr) // len(pattern)) + '[' + dp[i][i + len(pattern) - 1] + ']'

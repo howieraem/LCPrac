@@ -5,13 +5,14 @@ D = (0, 1, 0, -1, 0)
 
 class Solution:
     # Compute the safety score matrix given the thieves
+    # Similar to Q542
     def bfs(self, grid, score, n):
         q = deque()
 
         for i in range(n):
             for j in range(n):
                 if grid[i][j] == 1:
-                    score[i][j] = 0
+                    score[i][j] = 0  # at thief's location, safest dist is 0
                     q.append((i, j))
 
         while len(q) > 0:
@@ -36,12 +37,13 @@ class Solution:
             return 0
 
         # Compute the safety score matrix given the thieves
-        score = [[float('inf')] * n for _ in range(n)]
+        # score[i][j] means the manhattan dist to the nearest thief
+        score = [[float('inf')] * n for _ in range(n)]  # init to infinity
         self.bfs(grid, score, n)
 
         vis = [[False] * n for _ in range(n)]
         vis[0][0] = True
-        max_heap = [(-score[0][0], 0, 0)]
+        max_heap = [(-score[0][0], 0, 0)]  # maximize distance to any thieves
         heapq.heapify(max_heap)
 
         while len(max_heap) > 0:

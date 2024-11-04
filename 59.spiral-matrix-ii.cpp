@@ -10,6 +10,7 @@ using std::vector;
 // @lc code=start
 class Solution {
 public:
+    // Advanced two pointers
     // T: O(n ^ 2)
     // S: O(1) ignoring output
     vector<vector<int>> generateMatrix(int n) {
@@ -36,7 +37,10 @@ public:
                 }
             }
             
-            ++left; --right; ++top; --bottom;
+            ++left;
+            --right;
+            ++top;
+            --bottom;
         }
 
         return res;

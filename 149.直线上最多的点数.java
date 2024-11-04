@@ -14,11 +14,12 @@ class Solution {
         if (points.length < 3) {
             return points.length;
         }
-        int res = 0;
+        int ans = 0;
         // 遍历每个点
         for (int i = 0; i < points.length; i++) {
             // 保存经过当前点的直线中，最多的点
-            int duplicate = 0, max = 0;
+            int duplicate = 0;
+            int max = 0;
             HashMap<String, Integer> map = new HashMap<>();
 
             // Compare all possible pairs of points
@@ -43,9 +44,9 @@ class Solution {
                 max = Math.max(max, map.get(key));
             }
             // 1 代表当前考虑的点，duplicate 代表和当前的点重复的点
-            res = Math.max(res, max + duplicate + 1);
+            ans = Math.max(ans, max + duplicate + 1);
         }
-        return res;
+        return ans;
     }
     
     // Calculate greatest common divisor

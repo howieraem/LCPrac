@@ -19,11 +19,14 @@ class Solution:
             return mat
         n = len(mat[0])
 
+        # dist = [[float('inf')] * n for _ in range(m)]
+
         q = deque()
         for i in range(m):
             for j in range(n):
                 if mat[i][j] == 0:
                     q.append((i, j))
+                    # dist[i][j] = 0
                 else:
                     mat[i][j] = -1  # marked as not processed
 
@@ -32,9 +35,10 @@ class Solution:
             for d in range(4):
                 ni = i + DIRN[d]
                 nj = j + DIRN[d + 1]
-                if 0 <= ni < m and 0 <= nj < n and mat[ni][nj] == -1:
+                if 0 <= ni < m and 0 <= nj < n and mat[ni][nj] == -1:  # and dist[ni][nj] > dist[i][j] + 1:
                     q.append((ni, nj))
                     mat[ni][nj] = mat[i][j] + 1
+                    # dist[ni][nj] = dist[i][j] + 1
 
         return mat
 

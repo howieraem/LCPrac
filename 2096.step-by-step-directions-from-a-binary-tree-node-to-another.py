@@ -29,8 +29,9 @@ class Solution:
         path_s, path_d = [], []
         self.find(root, startValue, path_s)
         self.find(root, destValue, path_d)
-        # Now path_s order is from start node to root, and similar for path_d
-        while len(path_s) and len(path_d) and path_s[-1] == path_d[-1]:
+        # Now path_s order is from start node to root, and similar for path_d.
+        # Remove the common "prefix" paths.
+        while len(path_s) > 0 and len(path_d) > 0 and path_s[-1] == path_d[-1]:
             path_s.pop()
             path_d.pop()
         return 'U' * len(path_s) + "".join(reversed(path_d))

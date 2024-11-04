@@ -18,25 +18,30 @@ class TreeNode:
 #         self.left = left
 #         self.right = right
 class Solution:
+    # Values of in-order traversal of BST is sorted
+    # T: O(n)
+    # S: O(h)
     def getMinimumDifference(self, root: Optional[TreeNode]) -> int:
-        cur_min = 2**31 - 1
-        pre = None
+        cur_min = float('inf')
+        pre_val = -1
 
         def inorder(node: TreeNode):
-            nonlocal cur_min, pre
-            if not node:
-                return cur_min
+            nonlocal cur_min, pre_val
+            if node is None:
+                # return cur_min
+                return
             
             inorder(node.left)
 
-            if pre:
-                cur_min = min(cur_min, node.val - pre.val)
-            pre = node
+            if pre_val != -1:
+                cur_min = min(cur_min, node.val - pre_val)
+            pre_val = node.val
 
             inorder(node.right)
-            return cur_min
+            # return cur_min
 
-        return inorder(root)
+        inorder(root)
+        return cur_min
             
 
         

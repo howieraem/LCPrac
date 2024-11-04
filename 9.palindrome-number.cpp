@@ -10,7 +10,7 @@ public:
     // T: O(log10(x))
     // S: O(1)
     bool isPalindrome(int x) {
-        if (x < 0 || (x && !(x % 10))) {
+        if (x < 0 || (x != 0 && x % 10 == 0)) {
             // x < 0 or (x != 0 and x ends with 0)
             return false;
         }

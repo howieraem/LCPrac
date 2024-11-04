@@ -7,9 +7,11 @@ from typing import *
 
 # @lc code=start
 class Solution:
+    # advanced two pointers
     # T: O(n + sum(len(w) for w in words))
     # S: O(1)
     def expressiveWords(self, s: str, words: List[str]) -> int:
+        K = 3
         n = len(s)
         ans = 0
         for w in words:
@@ -35,7 +37,7 @@ class Solution:
 
                 # Either w contains too many same chars, or the repeated char group size is less than 3.
                 # IMPORTANT: Don't break if w_repeat == s_repeat
-                if w_repeat > s_repeat or w_repeat < s_repeat < 3:
+                if w_repeat > s_repeat or w_repeat < s_repeat < K:
                     break
 
                 i += 1
