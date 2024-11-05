@@ -7,6 +7,7 @@ import heapq
 
 # @lc code=start
 class Solution:
+    # Memoized recursion + heap / sorting
     # T: O(n * log(k)), n := hi - lo
     # S: O(n) recursion
     def getKth(self, lo: int, hi: int, k: int) -> int:

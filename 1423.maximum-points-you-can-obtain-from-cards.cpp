@@ -42,6 +42,9 @@ public:
 
     // Alternative approach: calculate prefix and suffix sums for cardPoints,
     // and maximize prefix_sum[i] + suffix_sum[k - i] for i in range k.
+
+    // Alternative approach: memoized DFS, memo[i][j][k] means max card points
+    // attainable with picking k cards from cardPoints[:i] union cardPoints[j:]
 };
 // @lc code=end
 

@@ -6,10 +6,12 @@
 
 # @lc code=start
 class Solution:
+    # Two pointers
     # T: O(m ^ 2) worst, O(m * n) on average
     # S: O(1)
     def minWindow(self, s1: str, s2: str) -> str:
-        m, n = len(s1), len(s2)
+        m = len(s1)
+        n = len(s2)
         i = 0
         j = 0
         min_len = m + 1
@@ -18,6 +20,7 @@ class Solution:
         while i < m:
             if s1[i] == s2[j]:
                 j += 1
+                
                 if j == n:
                     # Found a valid subseq in s1
                     subseq_end = i + 1

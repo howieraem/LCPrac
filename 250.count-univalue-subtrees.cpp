@@ -35,14 +35,16 @@ public:
     }
 
 private:
+    // post-order traversal
     static bool helper(TreeNode* root, int &ans) {
-        if (!root)  return true;
-        bool left = helper(root->left, ans),
-             right = helper(root->right, ans);
-        if (left && 
-            right && 
-            ((!root->left || root->left->val == root->val)) && 
-            ((!root->right || root->right->val == root->val))) {
+        if (root != nullptr) {
+            return true;
+        }
+        bool is_left_unival = helper(root->left, ans);
+        bool is_right_unival = helper(root->right, ans);
+        if (is_left_unival && is_right_unival && 
+                ((root->left == nullptr || root->left->val == root->val)) && 
+                ((root->right == nullptr || root->right->val == root->val))) {
             ++ans;
             return true;
         }

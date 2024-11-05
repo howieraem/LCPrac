@@ -15,6 +15,7 @@ class Solution {
     }
 
 public:
+    // Hash map + two pointers
     // T: O(n * l ^ 2), n := len(words), l := avg(len(w) for w in words)
     // S: O(n * l)
     vector<vector<int>> palindromePairs(vector<string>& words) {
@@ -29,6 +30,7 @@ public:
         res.reserve(((n * (n - 1)) >> 1));
 
         for (int i = 0; i < n; ++i) {
+            // Reverse the word
             string w = words[i];
             std::reverse(w.begin(), w.end());
             const int l = w.size();
@@ -43,6 +45,9 @@ public:
                 auto it = word_to_idx.find(wv.substr(0, k));
                 // Since w has been reversed, wv.substr(k) is the original prefix.
                 // If the prefix is a palindrome, then reversing won't affect it.
+                // Note that an empty prefix is also considered a palindrome.
+                // Example 1: k = 3, w = "cba", wv = "abc", wv[:k] = "abc", "abc" in map, wv[k:] = "" is palindromic 
+                // Example 2: k = 1, w = "lls", wv = "sll", wv[:k] = "s", "s" in map, wv[k:] = "ll" is palindromic 
                 if (it != word_to_idx.end() && it->second != i && is_palindrome(wv.substr(k))) {
                     res.push_back({it->second, i});
                 }

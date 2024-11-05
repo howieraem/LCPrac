@@ -6,6 +6,7 @@
 import java.util.Random;
 
 // @lc code=start
+// Reservoir Sampling
 // S: O(n), or O(1) if storing pointer to the array
 class Solution {
     private int[] nums;
@@ -49,11 +50,12 @@ int[] sample(int lo, int hi, int k) {
     Random r = new Random();
     int[] res = new int[k];
 
-    for (int i = 0; i < k; i++) {
+    int i = 0;
+    for (i = 0; i < k; i++) {
         res[i] = lo + i;
     }
 
-    int i = k;
+    // Now i = k
     while (i < hi - lo) {
         i++;
         int j = r.nextInt(i);

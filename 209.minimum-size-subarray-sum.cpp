@@ -32,7 +32,7 @@ public:
     }
 
     /*
-    // Follow-up, requiring T: O(log(n))
+    // Follow-up, requiring T: O(n * log(n))
     // S: O(n)
     int minSubArrayLen(int target, vector<int>& nums) {
         const int n = nums.size();
@@ -43,7 +43,8 @@ public:
         }
 
         for (int i = n; i >= 0 && prefix_sums[i] >= target; --i) {
-            int j = std::upper_bound(prefix_sums.begin(), prefix_sums.end(), prefix_sums[i] - target) - prefix_sums.begin();
+            int j = std::upper_bound(
+                    prefix_sums.begin(), prefix_sums.end(), prefix_sums[i] - target) - prefix_sums.begin();
             ans = std::min(ans, i - j + 1);
         }
         return ans == n + 1 ? 0 : ans;

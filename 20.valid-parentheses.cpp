@@ -12,6 +12,7 @@ using std::string;
 // @lc code=start
 class Solution {
 public:
+    // stack
     // T: O(N)
     // S: O(N)
     bool isValid(string s) {

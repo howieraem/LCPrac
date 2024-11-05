@@ -20,9 +20,11 @@ class Solution {
             }
         }
 
-        bool connect(int p, int q) {
+        void connect(int p, int q) {
             int rootP = find(p), rootQ = find(q);
-            if (rootP == rootQ)  return false;  // already connected
+            if (rootP == rootQ)  {
+                return;  // already connected
+            }
 
             // Re-balance height by connecting the smaller graph to the larger graph,
             // to avoid building a linked list
@@ -34,7 +36,6 @@ class Solution {
                 size[rootQ] += size[rootP];
             }
             --cnt;
-            return true;
         }
 
         bool all_connected() {
@@ -62,10 +63,16 @@ public:
         UF uf(n);
         for (const auto& log : logs) {
             uf.connect(log[1], log[2]);
-            if (uf.all_connected()) return log[0];
+            if (uf.all_connected()) {
+                return log[0];
+            }
         }
         return -1;
     }
+
+    // Follow-up: if in each line of log, log[1] and log[2] are strings,
+    // instead of having hash maps in UF, use an external hash map or trie 
+    // to store the strings and assign each string an id instead.
 };
 // @lc code=end
 

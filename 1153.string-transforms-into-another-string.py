@@ -6,6 +6,7 @@
 
 # @lc code=start
 class Solution:
+    # Greedy + hash map
     # T: O(n)
     # S: O(s), s := 26
     def canConvert(self, str1: str, str2: str) -> bool:

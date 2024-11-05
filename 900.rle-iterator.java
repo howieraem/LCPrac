@@ -5,15 +5,18 @@
  */
 
 // @lc code=start
+// S: O(n)
 class RLEIterator {
     private int[] arr;
     private int cnt_idx;
 
+    // T: O(1)
     public RLEIterator(int[] A) {
         arr = A;
         cnt_idx = 0;
     }
 
+    // T: O(n) worst
     public int next(int n) {
         // skip a value if the current n is greater than its count
         while (cnt_idx < arr.length && n > arr[cnt_idx]) {

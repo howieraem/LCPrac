@@ -22,7 +22,7 @@ class Solution:
         # its "children" valid results that are shorter
         not_found = True
 
-        while len(q) and not_found:
+        while len(q) > 0 and not_found:
             l = len(q)
 
             for _ in range(l):
@@ -34,6 +34,7 @@ class Solution:
                 if not_found:
                     for i in range(len(s)):
                         if s[i] != '(' and s[i] != ')':
+                            # other chars, keep
                             continue
 
                         t = s[:i] + s[i + 1:]

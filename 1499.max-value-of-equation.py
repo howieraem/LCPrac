@@ -9,7 +9,9 @@ from typing import *
 
 # @lc code=start
 """
-As xi < xj, yi + yj + |xi - xj| = (yi - xi) + (yj + xj)
+As xi < xj and |xi - xj| <= k, 
+yi + yj + |xi - xj| = (yi - xi) + (yj + xj)
+maximize yi - xi
 """
 
 class Solution:
@@ -35,17 +37,22 @@ class Solution:
     # T: O(n)
     # S: O(n)
     def findMaxValueOfEquation(self, points: List[List[int]], k: int) -> int:
-        q = deque()  # deque of tuples (yi - xi, x). deque front yi - xi is always the maximum.
+        q = deque()  # deque of tuples (yi - xi, x) ordered DESC. deque front yi - xi is always the maximum.
         ans = float('-inf')
         for x, y in points:
-            while len(q) and q[0][1] < x - k:
+            while len(q) > 0 and q[0][1] < x - k:
                 # xj - xi cannot be greater than k
                 q.popleft()
-            if len(q):
+            
+            if len(q) > 0:
                 ans = max(ans, q[0][0] + y + x)
-            while len(q) and q[-1][0] <= y - x:
+            
+            while len(q) > 0 and q[-1][0] <= y - x:
+                # keep greater yi - xi
                 q.pop()
+            
             q.append((y - x, x))
+        
         return ans
 
 # @lc code=end
