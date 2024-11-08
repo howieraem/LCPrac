@@ -40,6 +40,20 @@ class Solution:
         no_rob_ret = max(l_rob_ret, l_no_rob_ret) + max(r_rob_ret, r_no_rob_ret)
         
         return rob_ret, no_rob_ret
+    
+    '''
+    # follow-up: n-ary tree
+    def helper(node):
+        if node is None:
+            return 0, 0
+        dp_rob_current = node.val
+        dp_rob_skip = 0
+        for child in node.children:
+            dp_child_rob, dp_child_skip = helper(child)
+            dp_rob_current += dp_child_skip
+            dp_rob_skip += max(dp_child_rob, dp_child_skip)
+        return dp_rob_current, dp_rob_skip
+    '''
 
 # @lc code=end
 

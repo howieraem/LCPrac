@@ -22,36 +22,41 @@ public:
      * there aren't any edges between vertices of the same set. 
      * A graph satisfying this condition is called a bipartite graph.
      */
+    // Graph coloring + Bipartition
     // T: O(V + E)
     // S: O(V + E)
     bool possibleBipartition(int n, vector<vector<int>>& dislikes) {
         vector<vector<int>> A(n + 1);
         vector<int> colors(n + 1, UNCOLORED);
-        bool vis[n + 1];    // avoid using vector<bool>
-        fill_n(vis, n + 1, false);
 
         // Build adjacency
         for (const auto &e : dislikes) {
+            // undirected
             A[e[0]].push_back(e[1]);
             A[e[1]].push_back(e[0]);
         }
 
-        // BFS
+        // Do BFS at each node
         queue<int> q;
         for (int i = 1; i <= n; ++i) {
-            if (!vis[i]) {
+            if (colors[i] == UNCOLORED) {
                 colors[i] = BLUE;
                 q.push(i);
 
-                while (q.size()) {
+                while (!q.empty()) {
                     int u = q.front(); q.pop();
-                    if (vis[u])  continue;
-                    vis[u] = true;
-                    for (const auto v : A[u]) {
-                        if (colors[u] == colors[v]) {
+                    for (const auto& v : A[u]) {
+                        if (colors[v] == colors[u]) {
                             // Conflict edge found, return false
                             return false;
                         }
+
+                        if (colors[v] != UNCOLORED) {
+                            // visited
+                            continue;
+                        }
+
+                        // Assign a different color for adjacent/child nodes
                         colors[v] = colors[u] == BLUE ? GREEN : BLUE;
                         q.push(v);
                     }

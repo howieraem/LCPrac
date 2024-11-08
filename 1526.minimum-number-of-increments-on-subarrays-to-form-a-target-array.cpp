@@ -10,6 +10,7 @@ using std::vector;
 // @lc code=start
 class Solution {
 public:
+    // Greedy
     // T: O(n)
     // S: O(1)
     int minNumberOperations(vector<int>& target) {
