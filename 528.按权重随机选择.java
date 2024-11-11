@@ -22,11 +22,14 @@ import java.util.Random;
  *          - the closest prefix sum greater than this number
  *          - the next prefix sum if this number equals a prefix sum
  */
+// Prefix sum + binary search
+// S: O(n)
 class Solution {
     private int[] prefixSum;
     private int n, sum;
     private Random rand = new Random();
 
+    // T: O(n)
     public Solution(int[] w) {
         n = w.length;
         prefixSum = new int[n];
@@ -37,16 +40,23 @@ class Solution {
         sum = prefixSum[n - 1];
     }
     
+    // T: O(log(n))
     public int pickIndex() {
-        int target = rand.nextInt(sum);
-        int l = 0, r = n - 1;
-        while (l < r) {
+        // In Java, random.nextInt(X) will return value from 0 to X - 1 (inclusive).
+        // As there is no 0 weight, we need to add 1 to avoid getting 0 from the random function.
+        // Add 1 will make the range as 1 to X, which is exactly the real range we need.
+        int target = rand.nextInt(sum) + 1;
+        int l = 0;
+        int r = n - 1;
+        while (l <= r) {
             int m = l + ((r - l) >> 1);
-            // Note: when target equals a prefix sum, the left boundary
-            // still needs to be shifted because the target falls into 
-            // the next interval between this prefix sum and its next one
-            if (prefixSum[m] <= target)  l = m + 1;
-            else  r = m;
+            if (prefixSum[m] == target) {
+                return m;
+            } else if (prefixSum[m] < target) {
+                l = m + 1;
+            } else {
+                r = m - 1;
+            }
         }
         return l;
     }

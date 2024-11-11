@@ -36,8 +36,9 @@ public:
 
         vector<int> res;
         res.reserve(numCourses);
-        while (q.size()) {
-            for (int sz = q.size(); sz > 0; --sz) {
+        while (!q.empty()) {
+            int sz = q.size();
+            while (sz-- > 0) {
                 int pre = q.front(); q.pop();
                 --numCourses;
                 res.push_back(pre);

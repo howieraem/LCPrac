@@ -39,33 +39,33 @@ class Solution {
         }
         return idx;
     }
-}
 
-// Follow-up: randomly pick k unique numbers from a range [lo, hi)
-int[] sample(int lo, int hi, int k) {
-    if (lo >= hi) {
-        return {};
-    }
-    k = Math.min(k, (double)hi - lo);
-    Random r = new Random();
-    int[] res = new int[k];
-
-    int i = 0;
-    for (i = 0; i < k; i++) {
-        res[i] = lo + i;
-    }
-
-    // Now i = k
-    while (i < hi - lo) {
-        i++;
-        int j = r.nextInt(i);
-        // 这个整数小于 k 的概率就是 k/i
-        if (j < k) {
-            // overwrite
-            res[j] = lo + i - 1;
+    // Follow-up: randomly pick k unique numbers from a range [lo, hi)
+    int[] pickKNumsInRange(int lo, int hi, int k) {
+        if (lo >= hi) {
+            return {};
         }
+        k = Math.min(k, (double)hi - lo);
+        Random r = new Random();
+        int[] res = new int[k];
+
+        int i = 0;
+        for (i = 0; i < k; i++) {
+            res[i] = lo + i;
+        }
+
+        // Now i = k
+        while (i < hi - lo) {
+            i++;
+            int j = r.nextInt(i);
+            // 这个整数小于 k 的概率就是 k/i
+            if (j < k) {
+                // overwrite
+                res[j] = lo + i - 1;
+            }
+        }
+        return res;
     }
-    return res;
 }
 
 /**

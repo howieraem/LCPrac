@@ -9,6 +9,7 @@
 using namespace std;
 
 // @lc code=start
+// Prefix sum + binary search
 class Solution {
     int n;
 
@@ -44,9 +45,11 @@ public:
     // T: O(log(n))
     // S: O(1)
     int pickIndex() {
-        int target = rand() % preSum.back(), l = 0, r = n - 1, m;
+        int target = rand() % preSum.back();
+        int l = 0; 
+        int r = n - 1;
         while (l < r) {
-            m = l + ((r - l) >> 1);
+            int m = l + ((r - l) >> 1);
             if (preSum[m] > target) {
                 r = m;
             } else {

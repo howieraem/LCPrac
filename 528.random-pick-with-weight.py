@@ -26,7 +26,7 @@ class Solution:
         l = 0
         r = self.n - 1
         while l <= r:
-            m = (l + r) >> 1
+            m = l + ((r - l) >> 1)
             if self.psum[m] > target:
                 r = m - 1
             else:   # NOTE: When self.psum[m] == target, need to pick the next index

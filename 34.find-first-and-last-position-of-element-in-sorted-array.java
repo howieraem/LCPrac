@@ -23,11 +23,11 @@ class Solution {
             int m = l + ((r - l) >>> 1);
             if (nums[m] >= target) {
                 r = m - 1;
+                if (nums[m] == target) {
+                    idx = m;
+                }
             } else {
                 l = m + 1;
-            }
-            if (nums[m] == target) {
-                idx = m;
             }
         }
         return idx;
@@ -41,11 +41,11 @@ class Solution {
             int m = l + ((r - l) >>> 1);
             if (nums[m] <= target) {
                 l = m + 1;
+                if (nums[m] == target) {
+                    idx = m;
+                }
             } else {
                 r = m - 1;
-            }
-            if (nums[m] == target) {
-                idx = m;
             }
         }
         return idx;

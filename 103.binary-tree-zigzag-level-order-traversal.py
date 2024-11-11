@@ -37,7 +37,7 @@ class Solution:
                 # polling as well as pushing
                 for _ in range(qs):
                     node: TreeNode = q.pop()
-                    lvl.append(node.val)
+                    lvl.append(node.val)  # visit
                     if node.right:
                         q.appendleft(node.right)
                     if node.left:
@@ -46,7 +46,7 @@ class Solution:
                 # Same as Q102
                 for _ in range(qs):
                     node: TreeNode = q.popleft()
-                    lvl.append(node.val)
+                    lvl.append(node.val)  # visit
                     if node.left:
                         q.append(node.left)
                     if node.right:

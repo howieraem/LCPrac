@@ -8,12 +8,19 @@ import java.util.ArrayList;
 
 // @lc code=start
 class Solution {
+    // Two pointers + greedy + interval
+    // T: O(m + n)
+    // S: O(1)
     public int[][] intervalIntersection(int[][] firstList, int[][] secondList) {
-        int n1 = firstList.length, n2 = secondList.length;
-        if (n1 == 0 || n2 == 0)  return new int[0][0];
+        final int n1 = firstList.length; 
+        final int n2 = secondList.length;
+        if (n1 == 0 || n2 == 0) {
+            return new int[0][0];
+        }
 
         List<int[]> res = new ArrayList<>();
-        int i = 0, j = 0;
+        int i = 0;
+        int j = 0;
         while (i < n1 && j < n2) {
             int start1 = firstList[i][0], end1 = firstList[i][1], 
                 start2 = secondList[j][0], end2 = secondList[j][1];
@@ -46,7 +53,8 @@ class Solution {
             //         ++j;
             //     }
             // }
-            int start = Math.max(start1, start2), end;  // end = min(end1, end2);
+            int start = Math.max(start1, start2); 
+            int end;  // end = min(end1, end2);
             if (end1 < end2) {
                 end = end1;
                 ++i;
@@ -54,7 +62,9 @@ class Solution {
                 end = end2;
                 ++j;
             }
-            if (start <= end)  res.add(new int[]{start, end});
+            if (start <= end) {
+                res.add(new int[]{start, end});
+            }
         }
         
         return res.toArray(new int[res.size()][]);
