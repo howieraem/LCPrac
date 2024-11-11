@@ -14,6 +14,8 @@ class Solution:
         if n == 1:
             return 10
         F = 1000000007
+
+        # A[i][j] is 1 if j is a valid neighbor of i, 0 otherwise.
         A = np.array([[0, 0, 0, 0, 1, 0, 1, 0, 0, 0],
                       [0, 0, 0, 0, 0, 0, 1, 0, 1, 0],
                       [0, 0, 0, 0, 0, 0, 0, 1, 0, 1],
@@ -27,7 +29,7 @@ class Solution:
 
         res = np.eye(10, dtype=np.int64)
         n -= 1
-        while n:
+        while n != 0:
             if n & 1:  # n is odd
                 res = (res % F @ A % F) % F
             A %= F
