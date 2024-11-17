@@ -3,8 +3,7 @@
  *
  * [528] Random Pick with Weight
  */
-#include <cstdlib>  // for rand()
-#include <vector>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -16,10 +15,12 @@ class Solution {
     // note: depending on the input weight, may need long long type
     vector<int> preSum;
 
+    std::mt19937 gen;
+
 public:
     // T: O(n)
     // S: O(n)
-    Solution(vector<int>& w) {
+    Solution(vector<int>& w) : gen((std::random_device())()) {
         n = w.size();
         preSum = vector<int>(n, 0);
         preSum[0] = w[0];
@@ -45,7 +46,11 @@ public:
     // T: O(log(n))
     // S: O(1)
     int pickIndex() {
-        int target = rand() % preSum.back();
+        // get uniformly distributed int from [0, psum.back() - 1]
+        // int target = rand() % preSum.back();  
+        std::uniform_int_distribution<> distrib(0, preSum.back() - 1);
+        int target = distrib(gen);
+
         int l = 0; 
         int r = n - 1;
         while (l < r) {

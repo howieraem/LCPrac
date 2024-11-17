@@ -8,14 +8,17 @@ from typing import *
 
 # @lc code=start
 class Solution:
+    # hash map + sorting + greedy
     # Same as Q846
     # T: O(n + m * log(m)) amortized, m := the number of unique numbers
     # S: O(m)
     def isPossibleDivide(self, nums: List[int], k: int) -> bool:
         if len(nums) % k:
             return False
+        
         cnts = Counter(nums)
-        for x in sorted(cnts):
+        
+        for x in sorted(cnts.keys()):
             if cnts[x] > 0:
                 required = cnts[x]
 
@@ -24,7 +27,9 @@ class Solution:
                 for y in range(x + 1, x + k):
                     if y not in cnts or cnts[y] < required:
                         return False
-                    cnts[y] -= required
+
+                    cnts[y] -= required   # IMPORTANT: consume next numbers
+        
         return True
         
 # @lc code=end

@@ -12,7 +12,8 @@ using std::vector;
 class Solution {
 public:
     /*
-    // Original DP
+    // Original 2D DP
+    // Variant of Q221
     // T: O(m * n)
     // S: O(m * n)
     int countSquares(vector<vector<int>>& matrix) {
@@ -25,9 +26,11 @@ public:
         int ans = 0;
         for (int i = 0; i < m; ++i) {
             for (int j = 0; j < n; ++j) {
-                if (matrix[i][j]) {
-                    if (i == 0 || j == 0) dp[i][j] = 1;
-                    else {
+                if (matrix[i][j] == 1) {
+                    if (i == 0 || j == 0) {
+                        // top or left boundary (base cases)
+                        dp[i][j] = 1;
+                    } else {
                         dp[i][j] = std::min(dp[i - 1][j - 1], std::min(dp[i - 1][j], dp[i][j - 1])) + 1;
                     }
                     ans += dp[i][j];  // In Q221, this would be ans = max(ans, dp[i][j])
@@ -38,7 +41,7 @@ public:
     }
     */
 
-    // Space-optimized DP
+    // 2D DP with state compression
     // T: O(m * n)
     // S: O(n)
     int countSquares(vector<vector<int>>& matrix) {
@@ -51,9 +54,11 @@ public:
         for (int i = 0; i < m; ++i) {
             for (int j = 0; j < n; ++j) {
                 int tmp = dp[j];
-                if (matrix[i][j]) {
-                    if (i == 0 || j == 0) dp[j] = 1;
-                    else {
+                if (matrix[i][j] == 1) {
+                    if (i == 0 || j == 0) {
+                        dp[j] = 1;
+                    } else {
+                        // min(dp[i][j - 1], dp[i - 1][j], dp[i - 1][j - 1])
                         dp[j] = std::min(pre, std::min(dp[j], dp[j - 1])) + 1;
                     }
                     ans += dp[j];
@@ -61,7 +66,7 @@ public:
                     // IMPORTANT
                     dp[j] = 0;
                 }
-                pre = tmp;   // pre becomes dp[i - 1][j] in the next iteration of i
+                pre = tmp;   // pre becomes dp[i][j - 1] in the next iteration of i
             }
         }
         return ans;

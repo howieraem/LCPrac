@@ -7,6 +7,7 @@ from typing import List
 
 # @lc code=start
 class Solution:
+    # Mono stack
     # T: O(n)
     # S: O(n)
     def find132pattern(self, nums: List[int]) -> bool:

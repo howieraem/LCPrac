@@ -3,7 +3,7 @@
 #
 # [448] Find All Numbers Disappeared in an Array
 #
-from collections import List
+from typing import List
 
 # @lc code=start
 class Solution:

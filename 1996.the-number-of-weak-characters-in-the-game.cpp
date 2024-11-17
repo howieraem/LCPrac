@@ -10,6 +10,7 @@ using std::vector;
 // @lc code=start
 class Solution {
 public:
+    // Sorting + Greedy
     // T: O(n * log(n))
     // S: O(log(n)) for std::sort()
     int numberOfWeakCharacters(vector<vector<int>>& properties) {

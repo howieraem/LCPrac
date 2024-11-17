@@ -35,15 +35,19 @@ public:
     vector<int> inorderTraversal(TreeNode* root) {
         vector<int> res;
         stack<TreeNode*> s;
-        while (root || s.size()) {
-            if (root) {
+        while (root != nullptr || !s.empty()) {
+            if (root != nullptr) {
                 s.push(root);
                 root = root->left;
-            } else {    // finished the left subtrees
-                root = s.top(); s.pop();
-                res.push_back(root->val);
-                root = root->right;
-            }
+                continue;
+            }    
+
+            // finished the left subtrees,
+            // visit current node
+            root = s.top(); s.pop();
+            res.push_back(root->val);
+            
+            root = root->right;
         }
         return res;
     }

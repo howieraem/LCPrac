@@ -3,13 +3,16 @@
  *
  * [119] Pascal's Triangle II
  */
+#include <bits/stdc++.h>
+
+using std::vector;
 
 // @lc code=start
 class Solution {
 public:
-    // Solution 1: iteratively update the array from the end to the beginning
+    // Solution 1: 2D DP, iteratively update the array from the end to the beginning
     // T: O(rowIndex ^ 2)
-    // S: O(1)
+    // S: O(1) excl. output
     vector<int> getRow(int rowIndex) {
         vector<int> res(rowIndex + 1);
         res[0] = 1;
@@ -32,7 +35,7 @@ public:
     }
 
     /*
-    // Solution 2: based on the fact that the ith element on the nth row is C(n, i)
+    // Solution 2: Math, based on the fact that the ith element on the nth row is C(n, i)
     // T: O(rowIndex)
     // S: O(1)
     vector<int> getRow(int rowIndex) {

@@ -24,7 +24,8 @@ class UF:
             # Already connected
             return False
 
-        # Rebalancing, avoid degration to linked list
+        # Rebalancing, avoid degradation to linked list
+        # connect smaller subgraph to the larger one
         if self.sizes[root_p] > self.sizes[root_q]:
             self.parents[root_q] = root_p
             self.sizes[root_p] += self.sizes[root_q]

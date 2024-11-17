@@ -15,21 +15,23 @@ struct Node {
     }
 };
 
+// Math + linked list
 // T: O(1) on average
 // S: O(max)
 class MyHashMap {
-    // a prime number larger than the maximum no. of operations
-    static const int SZ = 19997;
-    static const int F = 12582917;
+    // prime numbers are helpful for avoiding collisions
+    static const int SZ = 19997;  // a prime number larger than the maximum no. of operations
+    static const int F = 12582917;   // another large prime number
     Node* data[SZ];
 
-    static int hash(int k) {
-        return (int) ((long) k * F % SZ);
+    static int hash(int key) {
+        return (int) ((long) key * F % SZ);
+        // A more realistic hash function: (((key * F) & (1 << 20) - 1) >> 5) % SZ, but not necessary for this problem
     }
 
 public:
     void put(int key, int val) {
-        // Find the node with k value equals key and remove it from the chain
+        // Find the node with node.k == key and remove it from the chain
         remove(key);
 
         int h = hash(key);
@@ -41,28 +43,38 @@ public:
     int get(int key) {
         int h = hash(key);
         Node *node = data[h];
-        while (node) {
-            if (node->k == key)  return node->v;
+        while (node != nullptr) {
+            if (node->k == key) {
+                return node->v;
+            }
+            // collision, check next one
             node = node->next;
         }
+        // key doesn't exist
         return -1;
     }
 
     void remove(int key) {
         int h = hash(key);
-        Node* pre = data[h];
-        if (pre) {
-            if (pre->k == key)  data[h] = pre->next;
-            else {
-                while (pre->next) {
-                    if (pre->next->k == key) {
-                        pre->next = pre->next->next;
+        Node* node = data[h];
+        if (node != nullptr) {
+            if (node->k == key) { 
+                data[h] = node->next;
+                delete node;
+            } else {
+                // collision, search for the matching key
+                while (node->next != nullptr) {
+                    Node* tmp = node->next;
+                    if (tmp->k == key) {
+                        node->next = tmp->next;
+                        delete tmp;
                         break;
                     }
-                    pre = pre->next;
+                    node = node->next;
                 }
             }
         }
+        // do nothing if key doesn't exist
     }
 };
 

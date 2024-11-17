@@ -37,7 +37,7 @@ public:
 private:
     void quickSelect(vector<vector<int>>& points, int begin, int end) {
         // Find a random pivot and move it to the beginning of the array of the subproblem 
-        std::uniform_int_distribution<> distrib(begin, end);
+        std::uniform_int_distribution<> distrib(begin, end);  // uniformly distributed int [begin, end]
         int pivot_idx = distrib(gen);
         swap(points[begin], points[pivot_idx]);
         int pivot = dist(points[begin]);
