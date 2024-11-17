@@ -8,18 +8,27 @@
 // @lc code=start
 typedef std::pair<int, int> booking;
 
+// S: O(n)
 class MyCalendar {
     std::set<booking> bookings;
 
 public:
     MyCalendar() {}
 
-    // O(log(n))
+    // T: O(log(n))
     bool book(int start, int end) {
         booking b(start, end);
         auto next = bookings.upper_bound(b);
-        if (next != bookings.end() && next->first < end) return false; // equivalent to Java's TreeMap.ceiling()
-        if (next != bookings.begin() && start < std::prev(next)->second) return false; // equivalent to Java's TreeMap.floor()
+        if (next != bookings.end() && next->first < end) {
+            // equivalent to Java's TreeMap.ceiling()
+            // there is an existing interval with start < the booking's end
+            return false; 
+        }
+        if (next != bookings.begin() && start < std::prev(next)->second) {
+            // equivalent to Java's TreeMap.floor()
+            // there is an existing interval with end > the booking's start
+            return false; 
+        }
         bookings.insert(std::move(b));
         return true;
     }

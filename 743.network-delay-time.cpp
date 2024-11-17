@@ -57,7 +57,7 @@ public:
         min_heap.emplace(0, k);
         dist[k] = 0;
         
-        while (min_heap.size()) {
+        while (!min_heap.empty()) {
             auto [_, u] = min_heap.top(); min_heap.pop();
             for (const auto& [v, w] : adj[u]) {
                 if (dist[v] > dist[u] + w) {

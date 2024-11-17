@@ -7,6 +7,7 @@ from typing import List
 
 # @lc code=start
 class Solution:
+    # Sorting + Binary search + Greedy?
     # T: O(n * log(n))
     # S: O(n)
     def maxEnvelopes(self, envelopes: List[List[int]]) -> int:
@@ -20,7 +21,7 @@ class Solution:
         # heights_lis is sorted, so use greedy + binary search (leftmost)
         # to find where to overwrite in the LIS. More explanation: 
         # https://leetcode.com/problems/longest-increasing-subsequence/discuss/1326308
-        heights_lis = [envelopes[0][1]]
+        heights_lis = [envelopes[0][1]]   # intermediate result is always sorted ASC
         for i in range(1, len(envelopes)):
             h = envelopes[i][1]
             if h > heights_lis[-1]:

@@ -10,11 +10,12 @@ using std::string;
 // @lc code=start
 class Solution {
 public:
-    // Greedy + two pointer
+    // Greedy + Two pointers
     // T: O(m * n) worst case
     // S: O(1)
     bool isMatch(string s, string p) {
-        int i = 0, j = 0; 
+        int i = 0;
+        int j = 0; 
         int j_star = -1;  // last idx of '*' in p
         int last_match = -1; // idx of the previously matched char in s when '*' encountered in p
 
@@ -23,12 +24,15 @@ public:
         while (i < s.size()) {
             if (j < p.size() && (s[i] == p[j] || p[j] == '?')) {
                 // single char match
-                ++i; ++j;
+                ++i; 
+                ++j;
             } else if (j < p.size() && p[j] == '*') {
-                j_star = j++;
+                // match multiple
+                j_star = j;
+                ++j;
                 last_match = i;
             } else if (j_star != -1) {
-                // encountered '*' in p, move string pointer
+                // encountered '*' in p previously, move string pointer
                 j = j_star + 1;
                 i = ++last_match;
             } else {

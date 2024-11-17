@@ -14,10 +14,11 @@ class Solution:
         stack = []
         map = dict()
 
-        n1, n2 = len(nums1), len(nums2)
+        # Find next greater element for each element in nums2 
+        n2 = len(nums2)
         for i in range(n2):
-            # Numbers in stack are ordered DESC
-            while len(stack) and stack[-1] < nums2[i]:
+            # Numbers in stack are ordered DESC (strictly)
+            while len(stack) and stack[-1] <= nums2[i]:
                 map[stack.pop()] = nums2[i]
             stack.append(nums2[i])
         
@@ -25,7 +26,9 @@ class Solution:
         while len(stack) > 0:
             map[stack.pop()] = -1
 
+        # Map the result to nums1
         # Every number in nums1 is also in nums2
+        n1 = len(nums1)
         res = [0] * n1
         for i in range(n1):
             res[i] = map[nums1[i]]

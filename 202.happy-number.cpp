@@ -31,7 +31,8 @@ public:
     }
 
     // More intuitive solution: use a hash set to simulate and check
-    // if the intermediate number is not 1 and has appeared again
+    // if the intermediate number is either 1 (a happy number) or 
+    // (not 1 and has appeared again, i.e. not a happy number)
 
     // The operation of keep summing the squares of the digits leads either to 1 or the loop of
     // 4 -> 16 -> 37 -> 58-> 89 -> 145 -> 42 -> 20 -> 4

@@ -51,6 +51,7 @@ public:
                         // Check char-by-char following the current direction
                         int widx = 0, cur_r = i, cur_c = j;
                         while (widx < l) {
+                            // either empty, or occupied by a char that matches the sequence
                             if (board[cur_r][cur_c] != ' ' && board[cur_r][cur_c] != word[widx]) {
                                 break;
                             }

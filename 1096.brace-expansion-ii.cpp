@@ -13,16 +13,18 @@ using std::vector;
 // @lc code=start
 class Solution {
 public:
+    // stack + hash set + sorting
     // T: O(n ^ 2) due to string copying and product of sets, n := len(expression)
     // S: O(n)
     vector<string> braceExpansionII(string expression) {
         stack<unordered_set<string>> stk;
-        unordered_set<string> set1, set2;
+        unordered_set<string> set1;  // stores the set before a ',' is seen
+        unordered_set<string> set2;  // stores the current growing string candidates
 
         for (const char& c : expression) {
             if ('a' <= c && c <= 'z') {
-                if (set2.size()) {
-                    // add char c to each string in set2
+                if (!set2.empty()) {
+                    // add char c to each string in set2 (product)
                     unordered_set<string> tmp;
                     for (const auto& s : set2) {
                         string t(s);
@@ -44,9 +46,15 @@ public:
                 for (const auto& s : set2) {
                     set1.insert(s);
                 }
+                
+                // For "x{...}", do a cross product between "x" (previous set2) and "{...}" (set1)
+                // Examples: consider "a{...}" and ",{...}". 
+                // In the first case, set2 will become {a + c for c in {...}}. 
+                // In the second case, set2 will be empty.
                 set2 = product(pre_set2, set1);
                 set1 = std::move(pre_set1);
             } else if (c == ',') {
+                // set2 can no longer grow
                 for (const auto& s : set2) {
                     // union of 2 sets
                     set1.insert(s);

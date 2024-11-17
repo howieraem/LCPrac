@@ -6,14 +6,18 @@
 from typing import *
 
 # @lc code=start
+OFFSET = ord('a')
+
 def cid(c):
-    return ord(c) - ord('a')
+    return ord(c) - OFFSET
 
 class TrieNode:
     def __init__(self):
         self.children: List[Optional[TrieNode]] = [None] * 26
         self.is_word: bool = False
 
+# Trie + suffix
+# S: O(n * l)
 class StreamChecker:
     # T: O(n * l)
     def __init__(self, words: List[str]):
@@ -28,6 +32,7 @@ class StreamChecker:
                 node = node.children[i]
             node.is_word = True
 
+    # trick: search backwards, check if the reversed word(s) is in the trie
     # T: O(l)
     def query(self, letter: str) -> bool:
         self.chars.append(letter)
@@ -40,6 +45,10 @@ class StreamChecker:
             if node.is_word:
                 return True
         return False
+    
+    # follow-up: words can be added dynamically; return all words matching sequence
+    # maintain the max length of words added; suffix search window should be no longer 
+    # than this max length (use a queue to pop the earlier chars).
 
 # Your StreamChecker object will be instantiated and called as such:
 # obj = StreamChecker(words)

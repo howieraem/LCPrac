@@ -62,6 +62,45 @@ class Solution {
     }
 }
 
+// Follow-up: randomly sample a number from disjoint intervals
+public class RandomFromIntervals {
+    Random rand = new Random();
+  
+    private int getRandomInRange(int[][] intervals) {
+        int[] preSum = getCumulativeSum(intervals);
+        int target = rand.nextInt(preSum[intervals.length - 1]);
+        int idx = binarySearch(target, preSum, 0, preSum.length - 1);
+
+        // find the index of the interval hit, then add offset
+        return intervals[idx][0] + target - (idx > 0 ? preSum[idx - 1] : 0);
+    }
+  
+    private int binarySearch(int target, int[] preSum, int l, int r) {
+        while (l <= r) {
+            int m = l + ((r - l) >>> 1);
+            
+            if (preSum[m] <= target) {
+                l = m + 1;
+            } else {
+                r = m - 1;
+            }
+        }
+        
+        return l;
+    }
+  
+    private int[] getCumulativeSum(int[][] intervals) {
+        int[] preSum = new int[intervals.length];
+
+        // the element for computing prefix sum becomes the interval length instead
+        preSum[0] = intervals[0][1] - intervals[0][0] + 1;
+        for (int i = 1; i < intervals.length; ++i) {
+            preSum[i] = intervals[i][1] - intervals[i][0] + 1 + preSum[i - 1];
+        }
+        return preSum;
+    }
+  }
+
 /**
  * Your Solution object will be instantiated and called as such:
  * Solution obj = new Solution(w);

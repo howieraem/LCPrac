@@ -14,7 +14,7 @@ using std::vector;
 // @lc code=start
 class Solution {
 public:
-    // Hash set + Interval
+    // Hash set + Interval + Greedy?
     // T: O(n)
     // S: O(n)
     int longestConsecutive(vector<int>& nums) {

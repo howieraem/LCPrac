@@ -9,7 +9,7 @@ from typing import List
 class Solution:
     # T: O(len(tasks))
     # S: O(n_task_types)
-    def leastInterval(self, tasks: List[str], n: int) -> int:
+    def leastInterval(self, tasks: List[str], cooldown: int) -> int:
         freqs = [0] * 26
         OFFSET = ord('A')
         n_tasks = len(tasks)
@@ -25,7 +25,7 @@ class Solution:
             elif freqs[ci] == max_freq:
                 n_tasks_with_max_freq += 1
 
-        n_slots_for_less_freq_tasks = (max_freq - 1) * (n - (n_tasks_with_max_freq - 1))
+        n_slots_for_less_freq_tasks = (max_freq - 1) * (cooldown - (n_tasks_with_max_freq - 1))
         n_tasks_with_less_freqs = n_tasks - max_freq * n_tasks_with_max_freq
         n_slots_idle = max(0, n_slots_for_less_freq_tasks - n_tasks_with_less_freqs)
         

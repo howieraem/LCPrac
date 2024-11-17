@@ -10,12 +10,13 @@ using namespace std;
 // @lc code=start
 class Solution {
 public:
+    // Prefix sum
     // T: O(n)
     // S: O(1)
     int pivotIndex(vector<int>& nums) {
         int sum = 0;
-        for (auto &n : nums) {
-            sum += n;
+        for (const int& x : nums) {
+            sum += x;
         }
 
         int leftSum = 0;
