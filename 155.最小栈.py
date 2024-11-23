@@ -27,12 +27,16 @@ class MinStack:
         return self.min_stack[-1]
 
 """
-# Solution without using extra space:
+# Solution without pushing a copy of min every time
+# stack + tracking of minimum
+# S: O(n)
 class MinStack:
+    # T: O(1)
     def __init__(self):
         self.stack = []
         self.min = float('inf')
 
+    # T: O(1)
     def push(self, x: int) -> None:
         if x <= self.min:   
             # append last min if a new min is found; note `<=`
@@ -40,17 +44,19 @@ class MinStack:
             self.min = x
         self.stack.append(x)
 
+    # T: O(1)
     def pop(self) -> None:
         if self.stack.pop() == self.min:
             # recover the last min
             self.min = self.stack.pop()
 
+    # T: O(1)
     def top(self) -> int:
         return self.stack[-1]
 
+    # T: O(1)
     def getMin(self) -> int:
         return self.min
-
 
 
 

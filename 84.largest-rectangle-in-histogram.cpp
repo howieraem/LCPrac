@@ -19,16 +19,21 @@ public:
 
         // Add a 0 at the end to treat bars as rising and falling edges (each bar has width 1), 
         // and to avoid extra logic to calculate areas in the last iteration 
-        // (e.g., if the input heights are ordered ASC)
+        // (e.g., if all input heights are already ordered ASC)
         heights.push_back(0);
 
         int ans = 0;
 
         for (int i = 0; i < heights.size(); ++i) {
+            // When clearing higher bars, update max rectangle area as well
             while (!st.empty() && heights[st.top()] > heights[i]) {
                 const int& h = heights[st.top()]; st.pop();
-                int pre_i = st.empty() ? -1 : st.top();  // -1 handles pure DESC input heights
-                int w = i - pre_i - 1;
+                // pre_i is the index of the previous higher bar after poping the first higher bar 
+                // i - 1 represents the right boundary of the considered rectangle, and stack top now 
+                // represents the left boundary. Thus, w = i - 1 - pre_i.
+                // Set pre_i to -1 to handle empty stack, i.e. pure DESC input heights.
+                int pre_i = st.empty() ? -1 : st.top();  
+                int w = i - 1 - pre_i;
                 ans = max(ans, h * w);
             }
             st.push(i);

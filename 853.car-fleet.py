@@ -11,7 +11,7 @@ class Solution:
     # T: O(n * log(n))
     # S: O(n)
     def carFleet(self, target: int, position: List[int], speed: List[int]) -> int:
-        cars = [None] * len(position)   # (start_pos, min_t_to_reach_target)
+        cars = [None] * len(position)   # (start_pos, min_t_to_reach_target_ignoring_slower_cars)
         for i, (p, s) in enumerate(zip(position, speed)):
             cars[i] = (p, (target - p) / s)
 

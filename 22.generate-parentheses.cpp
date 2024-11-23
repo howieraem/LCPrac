@@ -18,7 +18,7 @@ class Solution {
         if (l_remain > r_remain) {
             // As below we are adding the left parenthesis first, need to ensure 
             // the number of right parentheses do not exceed the number of left
-            // parentheses.
+            // parentheses (i.e., N - r_remain <= N - l_remain).
             // Example: we want a left parenthesis to appear in front of
             // its corresponding right parenthesis. Without this, 
             // results will contain things like ")))((("
@@ -26,6 +26,7 @@ class Solution {
         }
         if (!(l_remain > 0 || r_remain > 0)) {
             // l_remain == r_remain == 0
+            // path.size() == N * 2
             res.push_back(path);
             return;
         }

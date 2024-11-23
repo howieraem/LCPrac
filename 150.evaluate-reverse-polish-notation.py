@@ -7,37 +7,32 @@ from typing import List
 
 # @lc code=start
 class Solution:
+    # stack + simulation
     # T: O(n)
     # S: O(n)
     def evalRPN(self, tokens: List[str]) -> int:
         stack = []
         for s in tokens:
             if s == '+':
-                a = stack[-1]
-                stack.pop()
-                b = stack[-1]
-                stack.pop()
+                a = stack.pop()
+                b = stack.pop()
                 stack.append(b + a)
             elif s == '-':
-                a = stack[-1]
-                stack.pop()
-                b = stack[-1]
-                stack.pop()
+                a = stack.pop()
+                b = stack.pop()
                 stack.append(b - a)
             elif s == '*':
-                a = stack[-1]
-                stack.pop()
-                b = stack[-1]
-                stack.pop()
+                a = stack.pop()
+                b = stack.pop()
                 stack.append(b * a)
             elif s == '/':
-                a = stack[-1]
-                stack.pop()
-                b = stack[-1]
-                stack.pop()
+                a = stack.pop()
+                b = stack.pop()
                 stack.append(int(b / a))
             else:
+                # token is a number
                 stack.append(int(s))
+        
         return stack[-1]
 
 # @lc code=end
