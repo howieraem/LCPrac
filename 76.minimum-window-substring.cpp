@@ -13,8 +13,9 @@ using std::vector;
 
 class Solution {
 public:
-    // T: O(m + n), m := len(s), n := len(t)
-    // S: O(s), s := alphabet size
+    // Sliding window + hash map
+    // T: O(m + n + alpha_size), m := len(s), n := len(t)
+    // S: O(alpha_size)
     string minWindow(string s, string t) {
         vector<int> cnts(ALPHA_SIZE, 0);
         for (const auto& c : t) {
@@ -31,9 +32,10 @@ public:
         // at least the count of chars in the substring of s).
         int l = 0;
         for (int r = 0; r < s.size(); ++r) {
-            // Increment the number of types of chars included if 
+            // Increment the number of chars included if 
             // the count of char at s[r] is non-negative.
-            // If a char in s is not in t, it is possible that cnts[s[r]] drops below 0.
+            // If a char in s is not in t, it is possible 
+            // that cnts[s[r]] drops below 0.
             n_incl_chars += (cnts[s[r]]-- > 0);
 
             // Try shifting the left boundary (shrinking the window) if
@@ -46,6 +48,13 @@ public:
                     ans_begin = l;
                 }
 
+                // Increment count for s[l] in window,
+                // and shift left boundary.
+                // If the count of s[l] becomes positive,
+                // s[l] is no longer in the window.
+                // If the count of s[l] remains negative,
+                // s[l] is not a part of t, and thus 
+                // n_incl_chars remains the same.
                 n_incl_chars -= (++cnts[s[l]] > 0);
                 ++l;
             }

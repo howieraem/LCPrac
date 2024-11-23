@@ -11,6 +11,7 @@ using std::vector;
 // @lc code=start
 class Solution {
 public:
+    // Hash set
     // T: O(n)
     // S: O(n)
     bool containsDuplicate(vector<int>& nums) {

@@ -8,7 +8,7 @@
 class Solution:
     # Sliding window
     # T: O(n)
-    # S: O(s), s := 128
+    # S: O(alpha_size), alpha_size := 128
     def lengthOfLongestSubstring(self, s: str) -> int:
         last_seen_idxs = [-1] * 128  # there are 128 ASCII char types
         ans = 0

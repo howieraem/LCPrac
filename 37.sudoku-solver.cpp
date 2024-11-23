@@ -14,6 +14,7 @@ class Solution {
     bool cube[3][3][9];
 
 public:
+    // Backtracking
     // T: O(9 ^ k), k := no. of unfilled cells
     // S: O(k) recursion stack
     void solveSudoku(vector<vector<char>>& board) {

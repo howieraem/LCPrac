@@ -13,6 +13,9 @@ class Solution:
     def twoSum(self, numbers: List[int], target: int) -> List[int]:
         i = 0
         j = len(numbers) - 1
+        
+        # numbers sorted, move one pointer in each iteration 
+        # depending on the current sum compared with target
         while i < j:
             x = numbers[i] + numbers[j]
             if x == target:

@@ -10,11 +10,13 @@ using std::vector;
 // @lc code=start
 class Solution {
 public:
+    // Prefix product (variant of prefix sum)
     // T: O(n)
     // S: O(1)
     vector<int> productExceptSelf(vector<int>& nums) {
         const int n = nums.size();
-        int left_product = 1, right_product = 1;
+        int left_product = 1; 
+        int right_product = 1;
         vector<int> res(n, 1);
 
         // res[i] = product of nums on the left * product of nums on the right

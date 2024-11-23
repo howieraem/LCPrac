@@ -28,7 +28,8 @@ public:
             }
 
             // dq.front() is the index of the maximum number
-            // in the current sliding window
+            // in the current sliding window.
+            // Note that the deque size may be less than k.
             while (!dq.empty() && nums[dq.back()] < nums[r]) {
                 dq.pop_back();
             }

@@ -6,7 +6,7 @@
 
 # @lc code=start
 class Solution:
-    # two pointer
+    # two pointers
     # T: O(n)
     # S: O(1)
     def isPalindrome(self, s: str) -> bool:
@@ -26,6 +26,7 @@ class Solution:
                     return False
                 i += 1
                 j -= 1
+        
         return True
 
 # @lc code=end

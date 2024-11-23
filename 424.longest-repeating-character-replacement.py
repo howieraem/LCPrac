@@ -6,9 +6,9 @@
 
 # @lc code=start
 class Solution:
-    # Sliding window
+    # Sliding window + Hash map
     # T: O(n)
-    # S: O(s), s := 26
+    # S: O(alpha_size), alpha_size := 26
     def characterReplacement(self, s: str, k: int) -> int:
         cnts = [0] * 26
         max_cnt = 0
@@ -24,10 +24,12 @@ class Solution:
             # try to replace other kinds of chars. If there are too 
             # many other chars to replace, shift the left boundary 
             # of the window.
-            while r - l + 1 - max_cnt > k:
+            while r - l + 1 > max_cnt + k:
                 cnts[ord(s[l]) - ord('A')] -= 1
                 l += 1
-        
+
+            # At this point, window width = max_cnt + k, all chars in the window 
+            # can be made the same, so update ans
             ans = max(ans, r - l + 1)
         
         return ans

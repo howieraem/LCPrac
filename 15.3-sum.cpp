@@ -10,6 +10,7 @@ using namespace std;
 // @lc code=start
 class Solution {
 public:
+    // Sorting + Two pointers
     // T: O(n ^ 2)
     // S: O(1)
     vector<vector<int>> threeSum(vector<int>& nums) {
@@ -19,7 +20,7 @@ public:
         const int target = 0;
 
         for (int i = 0; i < n - 2; ++i) {
-            int x = nums[i];
+            const int& x = nums[i];
             if (x > target) {
                 // After sorting, since y and z in the code below will be greater 
                 // than x, we have x + y + z > target = 0. There is thus no need 
@@ -31,9 +32,12 @@ public:
                 continue;   // skip duplicates of x
             }
 
-            int l = i + 1, r = n - 1;
+            int l = i + 1;
+            int r = n - 1;
             while (l < r) {
-                int y = nums[l], z = nums[r], s = x + y + z;
+                const int& y = nums[l]; 
+                const int& z = nums[r]; 
+                int s = x + y + z;
                 if (s == target) {
                     res.push_back({x, y, z});
 

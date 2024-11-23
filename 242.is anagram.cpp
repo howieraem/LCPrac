@@ -10,15 +10,24 @@ using namespace std;
 // @lc code=start
 class Solution {
 public:
+    // Hash map
+    // T: O(n + alpha_sz)
+    // S: O(alpha_sz)
     bool isAnagram(string s, string t) {
-        if (s.size() != t.size())  return false;
+        if (s.size() != t.size()) {
+            return false;
+        }
         int count[26] = {0};
         for (int i = 0; i < s.size(); ++i) {
-            count[s[i] - 'a']++;
-            count[t[i] - 'a']--;
+            ++count[s[i] - 'a'];
+            --count[t[i] - 'a'];
         }
-        for (auto &num : count) {
-            if (num) return false;
+
+        // check if all char net counts are zero
+        for (const auto &num : count) {
+            if (num != 0) {
+                return false;
+            }
         }
         return true;
     }

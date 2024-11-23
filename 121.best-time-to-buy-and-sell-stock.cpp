@@ -12,7 +12,7 @@ using std::min;
 // @lc code=start
 class Solution {
 public:
-    // Solution 1
+    // 1D DP
     // T: O(n)
     // S: O(1)
     int maxProfit(vector<int>& prices) {

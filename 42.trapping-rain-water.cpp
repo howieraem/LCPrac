@@ -16,6 +16,9 @@ public:
     // T: O(n)
     // S: O(1)
     int trap(vector<int>& height) {
+        if (height.empty()) {
+            return 0;
+        }
         int ans = 0;
         int l = 0; 
         int r = height.size() - 1; 
