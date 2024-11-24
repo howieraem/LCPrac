@@ -24,7 +24,8 @@ struct ListNode {
  */
 class Solution {
 public:
-    // Different from normal number addition, the carry is going to the next pair of numbers
+    // Linked list + two pointers + math
+    // Different from normal number addition, the carry is going to the next pair of numbers (to the right)
     // T: O(max(n1, n2)), n1 := len(l1), n2 := len(l2)
     // S: O(1)
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {

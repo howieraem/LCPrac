@@ -30,10 +30,41 @@ public:
         // If n1 + n2 is odd, i + j = n1 - i + n2 - j + 1, we have:
         //     median_A = max(nums1[i - 1], nums2[j - 1])
         // For either case, j can be inferred from i:
-        //     j = (n1 + n2 + 1) / 2 - i
+        //     j = (n1 + n2 + 1) // 2 - i
         // and i can be found via binary search as nums1 is already sorted.
-        const int n1 = nums1.size(), n2 = nums2.size(), k = (n1 + n2 + 1) >> 1;
-        int l = 0, r = n1;  // range of i
+        const int n1 = nums1.size(); 
+        const int n2 = nums2.size(); 
+        const int n = n1 + n2;
+        const int k = (n + 1) >> 1;
+
+        int l = 0;
+        int r = n1;   // IMPORTANT: because we need to check nums1[m1 - 1], initial r should be n1 rather than n1 - 1.
+        while (l <= r) {
+            int m1 = l + ((r - l) >> 1); 
+            int m2 = k - m1;
+
+            int nums1_l = m1 >= 1 ? nums1[m1 - 1] : INT_MIN;
+            int nums1_r = m1 < n1 ? nums1[m1] : INT_MAX;
+            int nums2_l = m2 >= 1 ? nums2[m2 - 1] : INT_MIN;
+            int nums2_r = m2 < n2 ? nums2[m2] : INT_MAX;
+
+            if (nums1_l <= nums2_r && nums2_l <= nums1_r) {
+                return n & 1 ? 
+                        max(nums1_l, nums2_l) :
+                        ((double)(max(nums1_l, nums2_l) + min(nums1_r, nums2_r))) / 2.0;
+            } else if (nums1_l > nums2_r) {
+                r = m1 - 1;
+            } else {
+                l = m1 + 1;
+            }
+        }
+        return -1;  // this should never happen unless input arrays invalid
+
+        /*
+        // Alternative approach: check bounds outside binary search loop
+        // Do Binary search on nums1
+        int l = 0;
+        int r = n1;
         while (l < r) {
             int m1 = l + ((r - l) >> 1); 
             int m2 = k - m1;
@@ -45,15 +76,19 @@ public:
         }
 
         // Check if split indices are out of bound
-        int i = l, j = k - l;
+        int i = l;
+        int j = k - l;
         int maxLeft = max(
             i > 0 ? nums1[i - 1] : INT_MIN,
             j > 0 ? nums2[j - 1] : INT_MIN);
-        if ((n1 + n2) & 1)  return static_cast<double>(maxLeft);
+        if (n & 1) {
+            return static_cast<double>(maxLeft);
+        }
         int minRight = min(
             i < n1 ? nums1[i] : INT_MAX,
             j < n2 ? nums2[j] : INT_MAX);
         return 0.5 * maxLeft + 0.5 * minRight;
+        */
     }
 
     // Follow-up: find the k-th largest element of two sorted arrays
@@ -65,8 +100,8 @@ public:
             swap(nums1, nums2);
         }
 
-        int n1 = nums1.size();
-        int n2 = nums2.size();
+        const int n1 = nums1.size();
+        const int n2 = nums2.size();
 
         k = std::max(0, n1 + n2 - k);   // convert to (n1 + n2 - k)-th smallest
 
@@ -74,15 +109,17 @@ public:
         int r = std::min(k, n1);      // if k < n1, can take at most k elements from nums1
 
         // int l = 0;
-        // int r = n1 - 1;
+        // int r = n1;
 
         while (l <= r) {
             int m1 = l + ((r - l) >> 1);
             int m2 = k - m1;
+
             int nums1_l = m1 >= 1 ? nums1[m1 - 1] : INT_MIN;
             int nums1_r = m1 < n1 ? nums1[m1] : INT_MAX;
             int nums2_l = m2 >= 1 ? nums2[m2 - 1] : INT_MIN;
             int nums2_r = m2 < n2 ? nums2[m2] : INT_MAX;
+
             if (nums1_l <= nums2_r && nums2_l <= nums1_r) {
                 return std::max(nums1_l, nums2_l);
             } else if (nums1_l > nums2_r) {
@@ -91,7 +128,7 @@ public:
                 l = m1 + 1;
             }
         }
-        return -1;  // this should never happen
+        return -1;  // this should never happen unless input arrays invalid
     }
 };
 // @lc code=end

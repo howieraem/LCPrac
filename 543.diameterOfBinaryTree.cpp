@@ -7,6 +7,13 @@
 
 using namespace std;
 
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
+
 // @lc code=start
 /**
  * Definition for a binary tree node.
@@ -20,18 +27,26 @@ using namespace std;
 class Solution {
 public:
     int diameterOfBinaryTree(TreeNode* root) {
-        ans = 1;
-        helper(root);
-        return ans-1;
+        int ans = 0;
+        helper(root, ans);
+        return ans;
     }
+
 private:
-    int ans;
-    int helper(TreeNode* root) {
-        if (root == nullptr)  return 0;
-        int left = helper(root->left);
-        int right = helper(root->right);
-        ans = max(left + right + 1, ans);
-        return max(left, right) + 1;
+    // Post-order traversal + 1D DP
+    // T: O(n)
+    // S: O(n) recursion stack
+    int helper(TreeNode* root, int& ans) {
+        if (root == nullptr) {
+            return 0;
+        }
+
+        int l_longest_path = helper(root->left, ans);
+        int r_longest_path = helper(root->right, ans);
+        
+        // The longest path may not pass through parent node
+        ans = max(l_longest_path + r_longest_path, ans);
+        return max(l_longest_path, r_longest_path) + 1;
     }
 };
 // @lc code=end

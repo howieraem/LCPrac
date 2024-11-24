@@ -24,7 +24,7 @@ struct ListNode {
  */
 class Solution {
 public:
-    // Fast slow pointers
+    // Linked list + Fast slow pointers
     // T: O(n)
     // S: O(1)
     ListNode* removeNthFromEnd(ListNode* head, int n) {
@@ -41,14 +41,20 @@ public:
             return head;
         }
 
+        // fast pointer leads slow pointer by n
         while (fast->next != nullptr) {
             fast = fast->next;
             slow = slow->next;
         }
 
-        slow->next = slow->next->next;  // remove node from list
+        // remove node from list
+        ListNode* target = slow->next;
+        slow->next = slow->next->next;
+        delete target;
 
-        return dummy->next;
+        head = dummy->next;
+        delete dummy;
+        return head;
     }
 };
 // @lc code=end

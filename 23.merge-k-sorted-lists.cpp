@@ -28,11 +28,27 @@ struct ListNode {
  */
 class Solution {
 public:
-    // Divide and conquer
+    // Linked list + Divide and conquer + two pointers
     // T: O(n * log(k)), k := the number of lists, n := avg. length of list
-    // S: O(log(k)) due to recursion stacks
+    // S: O(log(k)) if using recursive partition, O(1) if using iterative partition
     ListNode* mergeKLists(vector<ListNode*>& lists) {
-        return partition(lists, 0, lists.size() - 1);
+        // Recursive partition
+        // return partition(lists, 0, lists.size() - 1);
+
+        // Iterative partition
+        if (lists.empty()) {
+            return nullptr;
+        }
+
+        int n = lists.size();
+        while (n > 1) {
+            for (int l = 0; l < (n >> 1); ++l) {
+                int r = n - 1 - l;
+                lists[l] = mergeTwoLists(lists[l], lists[r]);
+            }
+            n = (n + 1) >> 1;
+        }
+        return lists.front();
     }
 
 private:
@@ -46,7 +62,7 @@ private:
             int m = l + ((r - l) >> 1);
             ListNode* l1 = partition(lists, l, m);
             ListNode* l2 = partition(lists, m + 1, r);
-            return merge(l1, l2);
+            return mergeTwoLists(l1, l2);
         }
     }
 
@@ -54,7 +70,7 @@ private:
     // Recursively merges two lists (might be faster in some languages), 
     // and avoids creating a dummy node (but recursion stack exists)
     // S: O(n)
-    static ListNode* merge(ListNode* l1, ListNode* l2) {
+    static ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
         if (l1 == nullptr) {
             return l2;
         }
@@ -62,18 +78,18 @@ private:
             return l1;
         }
         if (l1->val < l2->val) {
-            l1->next = merge(l1->next, l2);
+            l1->next = mergeTwoLists(l1->next, l2);
             return l1;
         } else {
-            l2->next = merge(l1, l2->next);
+            l2->next = mergeTwoLists(l1, l2->next);
             return l2;
         }
     }
     */
-
-    // Iteratively merges two lists
+ 
+    // Iteratively merges two lists, like Q21
     // S: O(1)
-    static ListNode* merge(ListNode* l1, ListNode* l2) {
+    static ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
         ListNode* dummy = new ListNode();
         ListNode* cur = dummy;
         ListNode* cur1 = l1;
@@ -89,12 +105,11 @@ private:
             cur = cur->next;
         }
 
-        if (cur1 == nullptr) {
-            cur->next = cur2;
-        } else {
-            cur->next = cur1;
-        }
-        return dummy->next;
+        cur->next = cur1 != nullptr ? cur1 : cur2;
+
+        ListNode* head = dummy->next;
+        delete dummy;
+        return head;
     }
 };
 // @lc code=end

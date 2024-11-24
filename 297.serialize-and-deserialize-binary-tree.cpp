@@ -42,8 +42,9 @@ public:
 
     // Decodes your encoded data to tree.
     // T: O(n)
-    // S: O(n) recursion stack worst case
+    // S: O(n)
     TreeNode* deserialize(string data) {
+        // extract nodes (incl. null)
         queue<string> q;
         string tmp;
         for (const auto& c : data) {
@@ -56,6 +57,7 @@ public:
             tmp.push_back(c);
         }
         q.push(std::move(tmp));  // don't forget the last one
+        
         return build_tree(q);
     }
 
@@ -63,13 +65,14 @@ private:
     void build_str(TreeNode* node, string& res) {
         if (node == nullptr) {
             res.push_back('X');
-        } else {
-            // Pre-order traversal
-            res.append(to_string(node->val)).push_back(',');
-            build_str(node->left, res);
-            res.push_back(',');  // IMPORTANT separate subtrees
-            build_str(node->right, res);
+            return;
         }
+
+        // Pre-order traversal
+        res.append(to_string(node->val)).push_back(',');
+        build_str(node->left, res);
+        res.push_back(',');  // IMPORTANT separate subtrees
+        build_str(node->right, res);
     }
 
     TreeNode* build_tree(queue<string>& q) {

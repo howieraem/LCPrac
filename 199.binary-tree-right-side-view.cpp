@@ -30,7 +30,8 @@ struct TreeNode {
  */
 class Solution {
 public:
-    // Approach 1: level-order traversal (BFS), record the last node of each layer
+    // Approach 1: level-order traversal (BFS), record the last node of each level
+    
     // Approach 2: DFS below
     // T: O(n), n := the number of nodes
     // S: O(n)
@@ -42,11 +43,16 @@ public:
 
 private:
     void dfs(TreeNode* node, int depth, vector<int>& res) {
-        if (node == nullptr) return;  // depth will not increase
+        if (node == nullptr) {
+            return;  // depth will not increase
+        }
+        
         if (depth == res.size()) {
+            // new level
             res.push_back(node->val);
         }
         ++depth;
+
         // Not a standard pre-order traversal, as the right child is visited first.
         // If visit the left child first, the result becomes the left side view.
         dfs(node->right, depth, res);

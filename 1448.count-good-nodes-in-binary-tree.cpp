@@ -29,12 +29,16 @@ struct TreeNode {
 class Solution {
     // Pre-order traversal DFS
     int helper(TreeNode* node, int cur_max) {
-        if (node == nullptr) return 0;
+        if (node == nullptr) {
+            return 0;
+        }
+        
         int ans = 0;
         if (node->val >= cur_max) {
             ++ans;
             cur_max = node->val;
         }
+        
         ans += helper(node->left, cur_max);
         ans += helper(node->right, cur_max);
         return ans;  // the number of good nodes of subtree with node as root
@@ -44,7 +48,10 @@ public:
     // T: O(n)
     // S: O(n) worst case, linked list
     int goodNodes(TreeNode* root) {
-        return helper(root, INT_MIN);
+        if (root == nullptr) {
+            return 0;
+        }
+        return helper(root, root->val);
     }
 };
 // @lc code=end

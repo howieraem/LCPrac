@@ -32,6 +32,7 @@ public:
 
 class Solution {
 public:
+    // Linked list + two pointers
     // T: O(n)
     // S: O(1) (not considering the output list)
     Node* copyRandomList(Node* head) {

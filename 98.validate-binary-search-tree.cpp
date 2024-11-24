@@ -26,28 +26,34 @@ struct TreeNode {
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+// The in-order traversal result of a BST is sorted
 class Solution {
 public:
     /* 
-    // Recursive pre-order traversal approach
+    // Recursive in-order traversal + two pointers
     // T: O(N), N := the number of nodes
     // S: O(N)
     bool isValidBST(TreeNode* root) {
-        // Had to use long extrema to handle INT_MIN and INT_MAX in test cases.
-        // Better to record the current minimum and maximum nodes instead.
-        return isValidBST(root, LONG_MIN, LONG_MAX);
+        TreeNode* pre = nullptr;
+        return isValidBST(root, pre);
     }
 
-    static bool isValidBST(TreeNode* root, long min, long max) {
-        if (!root)  return true;
-        if ((root->val <= min) || (root->val >= max)) {
+    static bool isValidBST(TreeNode* cur, TreeNode* pre) {
+        if (cur == nullptr) {
+            return true;
+        }
+        if (!isValidBST(cur->left, pre)) {
             return false;
         }
-        return isValidBST(root->left, min, root->val) && isValidBST(root->right, root->val, max);
+        if (pre != nullptr && pre->val >= cur->val) {
+            return false;
+        }
+        pre = cur;
+        return isValidBST(cur->right, pre);
     }
     */
 
-    // Iterative in-order traversal approach: the in-order traversal result of a BST is sorted.
+    // Iterative in-order traversal + two pointers
     // T: O(N), N := the number of nodes
     // S: O(N)
     bool isValidBST(TreeNode* root) {
@@ -65,7 +71,7 @@ public:
             
             // The visit logic in in-order traversal
             root = stk.top(); stk.pop();
-            if (pre != nullptr && root->val <= pre->val) {
+            if (pre != nullptr && pre->val >= root->val) {
                 return false;
             }
             pre = root;

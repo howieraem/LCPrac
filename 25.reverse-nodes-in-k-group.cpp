@@ -23,7 +23,7 @@ struct ListNode {
  * };
  */
 class Solution {
-    static ListNode* reverse(ListNode *head) {
+    static ListNode* reverseLinkedList(ListNode *head) {
         ListNode* pre = nullptr; 
         ListNode* cur = head;
         while (cur != nullptr) {
@@ -36,6 +36,7 @@ class Solution {
     }
 
 public:
+    // Linked list + two pointers
     // T: O(n)
     // S: O(1)
     ListNode* reverseKGroup(ListNode* head, int k) {
@@ -44,6 +45,7 @@ public:
         ListNode* pre = dummy; 
         ListNode* end = dummy;
         while (end != nullptr) {
+            // move end pointer to the end of the k-size group
             for (int i = 0; i < k; ++i) {
                 end = end->next;
 
@@ -54,16 +56,22 @@ public:
             }
 
             // Disconnect, reverse and re-connect
-            ListNode* start = pre->next; 
             ListNode* tmp = end->next;
             end->next = nullptr;
-            pre->next = reverse(start);
+
+            ListNode* start = pre->next; 
+            pre->next = reverseLinkedList(start);
+            
             start->next = tmp;
 
+            // Now the start pointer should point to the end of the reversed k-size group
             // Prepare for next round of reversing k nodes
             pre = end = start;
         }
-        return dummy->next;
+
+        head = dummy->next;
+        delete dummy;
+        return head;
     }
 };
 // @lc code=end

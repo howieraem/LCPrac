@@ -14,6 +14,7 @@ class Node:
         self.k = k
         self.v = v
 
+# Customized linked list + hash map
 # S: O(n)
 class LRUCache:
     def __init__(self, capacity: int):

@@ -36,6 +36,7 @@ class Solution {
     }
 
 public:
+    // Linked list + two pointers + fast slow pointers
     // Split list in halves, reverse the 2nd half, and merge the 1st half and the reversed 2nd half
     // T: O(n)
     // S: O(1)

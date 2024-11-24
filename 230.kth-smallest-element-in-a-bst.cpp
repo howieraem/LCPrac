@@ -38,23 +38,28 @@ public:
     // S: O(k)
     int kthSmallest(TreeNode* root, int& k) {
         if (root == nullptr) {
-            return -1; // root->val >= 0
+            return -1;  // Constraint: node->val >= 0
         }
+        
         int x = kthSmallest(root->left, k);
         if (k == 0) {
-            return x; // k already becomes 0 while visiting left subtree
+            // Early stop/prune: k already becomes 0 while visiting left subtree
+            return x;
         }
+
         if (--k == 0) {
             return root->val; // k becomes 0 at current node
         }
-        return kthSmallest(root->right, k); // continue visit right subtree
+
+        // continue visit right subtree
+        return kthSmallest(root->right, k); 
     }
     */
 
     // Iterative version
     // T: O(k)
     // S: O(k)
-    int kthSmallest(TreeNode* root, int& k) {
+    int kthSmallest(TreeNode* root, int k) {
         stack<TreeNode*> stk;
         while (root != nullptr || !stk.empty()) {
             while (root != nullptr) {

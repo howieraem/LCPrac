@@ -25,13 +25,15 @@ struct ListNode {
  */
 class Solution {
 public:
+    // Linked list + two pointers
     // T: O(n)
     // S: O(1)
     ListNode* reverseList(ListNode* head) {
-        ListNode* pre = nullptr, *cur = head, *tmp;
-        while (cur) {
-            // next connect to pre instead
-            tmp = cur->next;
+        ListNode* pre = nullptr; 
+        ListNode* cur = head;
+        while (cur != nullptr) {
+            // cur's next connect to pre instead
+            ListNode* tmp = cur->next;
             cur->next = pre;
 
             // shift pointers

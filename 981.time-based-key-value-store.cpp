@@ -34,6 +34,10 @@ public:
             return "";
         }
         const auto& ts_map = ts_it->second;
+
+        // Because we need the largest prev_t <= timestamp,
+        // use upper_bound to find the smallest t strictly > timestamp,
+        // and then get its previous value
         auto it = ts_map.upper_bound(timestamp);
         return it == ts_map.begin() ? "" : std::prev(it)->second; 
 

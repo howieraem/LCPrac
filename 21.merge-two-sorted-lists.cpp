@@ -25,10 +25,12 @@ struct ListNode {
  */
 class Solution {
 public:
+    // Linked list + two pointers
     // T: O(m + n)
     // S: O(1)
     ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
-        ListNode *dummy = new ListNode(), *cur = dummy;
+        ListNode *dummy = new ListNode(); 
+        ListNode *cur = dummy;
         while (list1 != nullptr && list2 != nullptr) {
             if (list1->val < list2->val) {
                 cur->next = list1;
@@ -40,7 +42,10 @@ public:
             cur = cur->next;
         }
         cur->next = list1 != nullptr ? list1 : list2;
-        return dummy->next;
+        
+        ListNode *head = dummy->next;
+        delete dummy;
+        return head;
     }
 };
 // @lc code=end

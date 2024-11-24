@@ -12,7 +12,7 @@ class Solution:
     # S: O(1)
     def minEatingSpeed(self, piles: List[int], h: int) -> int:
         # find the range for binary search
-        l = 1           # minimum is a positive whole number
+        l = 1           # minimum is the smallest positive int
         r = max(piles)  # maximum speed is the largest pile (finish in 1 hour)
 
         def can_finish(cur_speed):
@@ -30,6 +30,16 @@ class Solution:
                 r = m - 1
             else:
                 l = m + 1
+
+        '''
+        # Alternatively
+        while l < r:
+            m = l + ((r - l) >> 1)
+            if can_finish(m):
+                r = m
+            else:
+                l = m + 1
+        '''
         
         return l
         
