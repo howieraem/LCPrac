@@ -8,6 +8,7 @@
 using std::vector;
 
 // @lc code=start
+// Heap: min heap for top k largest
 class KthLargest {
     // S: O(k)
     std::priority_queue<int, vector<int>, std::greater<int>> min_heap;
@@ -22,7 +23,9 @@ public:
             // Keep the heap size no more than k by popping the smaller values,
             // so that the heap top is always the k-th largest, and the heap 
             // contains only the top-k elements. 
-            if (min_heap.size() > k) min_heap.pop();
+            if (min_heap.size() > k) {
+                min_heap.pop();
+            }
         }
     }
     

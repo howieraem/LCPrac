@@ -7,6 +7,7 @@ from typing import List
 
 # @lc code=start
 class Solution:
+    # Greedy + hash map (counter)
     # T: O(len(tasks))
     # S: O(n_task_types)
     def leastInterval(self, tasks: List[str], cooldown: int) -> int:

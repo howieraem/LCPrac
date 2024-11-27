@@ -8,7 +8,8 @@ from typing import *
 
 # @lc code=start
 class Solution:
-    # We don't care the order of the k points, and assume points can be modified, so we can use quick select
+    # Quick select without extra heap space
+    # We don't care the order of the k points, and assume input points can be modified
     # T: O(n ^ 2) worst, O(n) best/average
     # S: O(1) iterative
     def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:
@@ -31,12 +32,16 @@ class Solution:
     @staticmethod
     def partition(points, l, r):
         p = randint(l, r)
+        # Swap pivot point to the left
         points[l], points[p] = points[p], points[l]
 
         pivot = Solution.dist(points[l])
         i, j = l + 1, r
 
         while i <= j:
+            # Skip indices if the distances already meet the requirement 
+            # that smaller distances should be on the left of pivot and 
+            # the larger distances should be on the right of pivot
             if Solution.dist(points[i]) <= pivot:
                 i += 1
                 continue
@@ -55,8 +60,8 @@ class Solution:
             i += 1
             j -= 1
         
-        # Now j should be the new index of pivot, so that numbers on the left
-        # are less than or equal to pivot and numbers on the right are greater 
+        # Now j should be the new index of pivot, so that distance numbers on the left
+        # are less than or equal to pivot and distance numbers on the right are greater 
         # than or equal to pivot. 
         points[l], points[j] = points[j], points[l]
         return j
