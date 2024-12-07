@@ -10,6 +10,7 @@ using std::vector;
 // @lc code=start
 class Solution {
 public:
+    // Two pointers + Math
     // T: O(n)
     // S: O(1)
     vector<int> sortedSquares(vector<int>& nums) {

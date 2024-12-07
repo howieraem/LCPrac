@@ -11,12 +11,14 @@ using namespace std;
 // @lc code=start
 class Solution {
 public:
+    // Greedy + hash map
+    // T: O(n)
+    // S: O(n)
     int leastInterval(vector<char>& tasks, int n) {
         int freq[26] {};
         int maxFreq = 0, maxNum = 0;
         for (int i = 0; i < tasks.size(); ++i) {
-            char& c = tasks[i];
-            int ci = c - 'A';
+            int ci = tasks[i] - 'A';
             ++freq[ci];
             if (freq[ci] > maxFreq) {
                 maxFreq = freq[ci];
