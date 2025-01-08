@@ -24,7 +24,7 @@ public:
         }
 
         // check if all char net counts are zero
-        for (const auto &num : count) {
+        for (const int& num : count) {
             if (num != 0) {
                 return false;
             }

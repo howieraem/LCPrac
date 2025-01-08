@@ -28,8 +28,9 @@ public:
     // T: O(n)
     // S: O(1)
     ListNode* removeNthFromEnd(ListNode* head, int n) {
+        // return dummy->next at the end, in case the original head gets deleted
         ListNode* dummy = new ListNode();
-        dummy->next = head;  // return dummy->next at the end, just in case the original head gets deleted
+        dummy->next = head;
         
         ListNode* fast = dummy; 
         ListNode* slow = dummy;

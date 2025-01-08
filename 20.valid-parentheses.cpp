@@ -25,8 +25,9 @@ public:
                 auto sc = stk.top();
                 if ((c == ')' && sc != '(') || 
                     (c == ']' && sc != '[') || 
-                    (c == '}' && sc != '{'))
+                    (c == '}' && sc != '{')) {
                     return false;
+                }
                 stk.pop();
             }       
         }

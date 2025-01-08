@@ -33,8 +33,9 @@ public:
     // S: O(log(k)) if using recursive partition, O(1) if using iterative partition
     ListNode* mergeKLists(vector<ListNode*>& lists) {
         // Recursive partition
-        // return partition(lists, 0, lists.size() - 1);
+        return partition(lists, 0, lists.size() - 1);
 
+        /*
         // Iterative partition
         if (lists.empty()) {
             return nullptr;
@@ -49,6 +50,7 @@ public:
             n = (n + 1) >> 1;
         }
         return lists.front();
+        */
     }
 
 private:
