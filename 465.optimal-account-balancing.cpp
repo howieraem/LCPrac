@@ -13,8 +13,9 @@ using std::vector;
 
 class Solution {
 public:
-    // T: O(n!), n := len(transactions)
-    // S: O(n)?
+    // backtracking
+    // T: O((n - 1)!), n := len(transactions)
+    // S: O(n)
     int minTransfers(vector<vector<int>>& transactions) {
         unordered_map<int, int> balances;
         for (const auto& tran : transactions) {
@@ -38,17 +39,23 @@ private:
         const int n = debts.size();
 
         // skip the zero debts
-        while (start_idx < n && debts[start_idx] == 0) ++start_idx;
+        while (start_idx < n && debts[start_idx] == 0) {
+            ++start_idx;
+        }
+
+        if (start_idx == n) {
+            return 0;
+        }
 
         int ans = INT_MAX;
         for (int i = start_idx + 1; i < n; ++i) {
-            if (debts[i] * debts[start_idx] < 0) {
+            if (debts[i] * debts[start_idx] < 0) {   // different signs, one owes other
                 debts[i] += debts[start_idx];
                 ans = std::min(ans, 1 + dfs(start_idx + 1, debts));
                 debts[i] -= debts[start_idx];  // backtrack
             }
         }
-        return ans < INT_MAX ? ans : 0;
+        return ans;
     }
 };
 // @lc code=end

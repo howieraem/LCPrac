@@ -10,6 +10,7 @@ using std::string;
 // @lc code=start
 class Solution {
 public:
+    // two pointers
     // T: O(n)
     // S: O(1)
     bool validPalindrome(string s) {
@@ -19,14 +20,14 @@ public:
             if (s[l] != s[r]) {
                 // Skip either the current left character or the right character
                 // and determine whether the remaining substring is a palindrome.
-                return isPalindrome(s, l + 1, r, n) || isPalindrome(s, l, r - 1, n);
+                return isPalindrome(s, l + 1, r) || isPalindrome(s, l, r - 1);
             }
         }
         return true;
     }
 
 private:
-    bool isPalindrome(const string &s, int l, int r, const int &n) {
+    bool isPalindrome(const string &s, int l, int r) {
         for (; l < r; ++l, --r) {
             if (s[l] != s[r])  return false;
         }

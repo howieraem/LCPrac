@@ -3,7 +3,7 @@
  *
  * [4] Median of Two Sorted Arrays
  */
-import "math"
+package lc
 
 // @lc code=start
 // T: O(log(min(n1, n2)))
@@ -17,28 +17,28 @@ func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
 	n2 := len(nums2)
 
 	/*
-		If we split the sorted array to two halves of equal lengths, then
-		median is the average of max(lower half) and min(upper half), i.e. the
-		two numbers immediately next to the split point. If the array size is
-		odd, max(lower half) and min(upper half) should be the same element.
+			If we split the sorted array to two halves of equal lengths, then
+			median is the average of max(lower half) and min(upper half), i.e. the
+			two numbers immediately next to the split point. If the array size is
+			odd, max(lower half) and min(upper half) should be the same element.
 
-		The task is to find the indexes m1 and m2 from nums1 and nums2 respectively to
-	    calculate the median of the merged array. Note that m1 and m2 are indices
-		closest to the median of the merged array, not the indices of the medians
-		of nums1 and nums2.
-	    If (n1 + n2) is odd:
-	        median = max(nums1[m1 - 1], nums2[m2 - 1])
-	    Else:
-	        median = (max(nums1[m1 - 1], nums2[m2 - 1]) + min(nums1[m1], nums2[m2])) / 2.
+			The task is to find the indexes m1 and m2 from nums1 and nums2 respectively to
+		    calculate the median of the merged array. Note that m1 and m2 are indices
+			closest to the median of the merged array, not the indices of the medians
+			of nums1 and nums2.
+		    If (n1 + n2) is odd:
+		        median = max(nums1[m1 - 1], nums2[m2 - 1])
+		    Else:
+		        median = (max(nums1[m1 - 1], nums2[m2 - 1]) + min(nums1[m1], nums2[m2])) / 2.
 
-	    Based on the fact that the number of elements on the left of the median must equal
-	    the number of elements on the right of the median, we can derive the relationship
-	    between m1, m2 and array lengths:
-	        m1 + m2 = n1 + n2 - m1 - m2 + ((n1 + n2) % 2)
-	        m1 + m2 = (n1 + n2 + 1) // 2 which is a constant
+		    Based on the fact that the number of elements on the left of the median must equal
+		    the number of elements on the right of the median, we can derive the relationship
+		    between m1, m2 and array lengths:
+		        m1 + m2 = n1 + n2 - m1 - m2 + ((n1 + n2) % 2)
+		        m1 + m2 = (n1 + n2 + 1) // 2 which is a constant
 
-		Binary search the leftmost m1 in nums1 which is sorted such that nums1[m1] == nums2[m2 - 1].
-		m2 is immediately determined by m1.
+			Binary search the leftmost m1 in nums1 which is sorted such that nums1[m1] == nums2[m2 - 1].
+			m2 is immediately determined by m1.
 	*/
 	k := (n1 + n2 + 1) >> 1
 	l := 0
@@ -90,4 +90,3 @@ func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
 }
 
 // @lc code=end
-
