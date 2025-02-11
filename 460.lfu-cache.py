@@ -7,6 +7,9 @@ from collections import defaultdict
 from typing import DefaultDict, Dict, Optional
 
 # @lc code=start
+# Hash Map + Linked List
+# S: O(n)
+
 class DLinkedList:
     class Node:
         def __init__(self, k, v) -> None:

@@ -19,22 +19,22 @@ public:
         vector<int> res(n);
         stack<int> stk;   // Mono-stack with indexes of DESC heights.
         for (int i = 0; i < n; ++i) {
-            // Suppose the current element is h, and 
-            // the stack top element has index i in the input.
+            // Suppose the current element is h, and the stack top 
+            // element's index is j in the input heights.
             while (!stk.empty() && heights[stk.top()] <= heights[i]) {
                 // If that element's height <= h,
-                // it can see h, so we increment res[i]++.
+                // it can see h, so we increment res[j].
                 // Because h is tall and block the line of sight.
                 // that element can't see any element after h,
-                // we have done the work for it, 
-                // so we stack.pop() it from the stack.
+                // we have done the work for it and do stack.pop() 
+                // to remove it from the stack.
                 ++res[stk.top()];
                 stk.pop();
             }
             if (!stk.empty()) {
                 // If stack is not empty at this point, that element 
                 // will be the left next greater element of h, and 
-                // it can still see h, so increment res[i]++.
+                // it can still see h, so increment res[j].
                 ++res[stk.top()];
             }
             stk.push(i);

@@ -10,6 +10,7 @@ using std::vector;
 // @lc code=start
 class Solution {
 public:
+    // two pointers
     // T: O(m + n)
     // S: O(1)
     void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {

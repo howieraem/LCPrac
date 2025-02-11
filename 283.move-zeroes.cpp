@@ -11,17 +11,20 @@ using namespace std;
 // @lc code=start
 class Solution {
 public:
+    // two pointers
     // T: O(n)
     // S: O(1)
     void moveZeroes(vector<int>& nums) {
-        for (int i = 0, j = 0; i < nums.size(); ++i) {
-            if (nums[i]) {
-                if (i > j) {
-                    nums[j] = nums[i];
-                    nums[i] = 0;
-                }
-                ++j;
+        int i = 0;
+        for (int x : nums) {
+            if (x != 0) {
+                nums[i++] = x;
             }
+        }
+
+        // now, all numbers at i and onwards should be zeroed
+        while (i < nums.size()) {
+            nums[i++] = 0;
         }
     }
 };

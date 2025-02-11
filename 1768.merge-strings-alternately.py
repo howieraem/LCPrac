@@ -6,6 +6,7 @@
 
 # @lc code=start
 class Solution:
+    # two pointers
     # T: O(m + n)
     # S: O(m + n) immutable str in python
     def mergeAlternately(self, word1: str, word2: str) -> str:

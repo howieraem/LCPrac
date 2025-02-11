@@ -45,6 +45,7 @@ public:
 
 class Solution {
 public:
+    // union find + hash map
     // T: O(m * n * log(n)), m := len(accounts), n := avg(len(a) for a in accounts)
     // S: O(m * n)
     vector<vector<string>> accountsMerge(vector<vector<string>>& accounts) {
@@ -66,12 +67,14 @@ public:
             }
         }
 
-        // Collect emails that belong to the same users
+        // Collect emails that belong to the same users 
+        // (doesn't include the first email above)
         unordered_map<int, vector<string>> id2emails;
         for (const auto &e : email2id) {
             id2emails[uf.find(e.second)].push_back(e.first);
         }
 
+        // Transform to the required output format
         vector<vector<string>> res;
         for (const auto &e : id2emails) {
             vector<string> emails = e.second;
@@ -79,8 +82,8 @@ public:
 
             vector<string> account;
             account.reserve(1 + emails.size());
-            account.push_back(accounts[e.first][0]);
-            for (auto& email : emails) {
+            account.push_back(accounts[e.first][0]);  // add first email
+            for (auto& email : emails) {  // add other same-person emails
                 account.push_back(std::move(email));
             }
             res.push_back(std::move(account));

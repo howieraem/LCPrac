@@ -7,6 +7,7 @@ from typing import List
 
 # @lc code=start
 class Solution:
+    # array + math
     # T: O(n)
     # S: O(1)
     def arraySign(self, nums: List[int]) -> int:

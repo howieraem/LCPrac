@@ -8,6 +8,8 @@
 using namespace std;
 
 // @lc code=start
+// Hash Map + Array
+// S: O(n)
 class RandomizedSet {
     unordered_map<int, int> val2Idx;
     vector<int> vals;   // Contains distinct values for O(1) GetRandom()

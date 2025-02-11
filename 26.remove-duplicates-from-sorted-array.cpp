@@ -10,6 +10,7 @@ using std::vector;
 // @lc code=start
 class Solution {
 public:
+    // Two pointers
     // T: O(n)
     // S: O(1)
     int removeDuplicates(vector<int>& nums) {
