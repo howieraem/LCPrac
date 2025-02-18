@@ -26,6 +26,7 @@ class BinaryIndexedTree:
             self.nums[k] += x
             k += (k & -k)
 
+# Square root decomposition + bucket sort?
 # S: O(n)
 class MRUQueue:
     # T: O(n)
