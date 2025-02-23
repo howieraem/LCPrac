@@ -3,6 +3,7 @@
  *
  * [50] Pow(x, n)
  */
+package lc
 
 // @lc code=start
 func expBySquaring(x float64, n int) float64 {
@@ -27,4 +28,3 @@ func myPow(x float64, n int) float64 {
 }
 
 // @lc code=end
-
