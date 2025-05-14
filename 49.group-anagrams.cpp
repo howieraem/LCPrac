@@ -36,7 +36,7 @@ public:
             }
             */
 
-            // Below is faster for short strings and large alphabet size
+            // Below is faster for short strings and diverse alphabet types
             // T: O(m * n * log(n))
             // S: O(m * n)
             string key = s;

@@ -7,6 +7,7 @@
 
 using std::vector;
 using std::max;
+using std::sort;
 
 // @lc code=start
 class Solution {
