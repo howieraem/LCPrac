@@ -13,16 +13,16 @@ class Solution {
     for (int i = 1; i <= n; ++i) {
       std::string ans;
 
-      if (!(i % 3)) {
+      if (i % 3 == 0) {
         ans += "Fizz";
       }
-      if (!(i % 5)) {
+      if (i % 5 == 0) {
         ans += "Buzz";
       }
       if (ans.empty()) {
         res.push_back(std::to_string(i));
       } else {
-        res.push_back(ans);
+        res.push_back(std::move(ans));
       }
     }
     return res;

@@ -56,9 +56,7 @@ public:
             extendPalindrome(s, i, i, res_len, res_start);
 
             // even length (start with two identical characters which will be the center of the palindrome)
-            if (s[i] == s[i + 1]) {
-                extendPalindrome(s, i, i + 1, res_len, res_start);
-            }
+            extendPalindrome(s, i, i + 1, res_len, res_start);
         }
         return s.substr(res_start, res_len);
     }
