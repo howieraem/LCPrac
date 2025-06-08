@@ -28,7 +28,8 @@ public:
         // dp[i] means the number of decoding ways for s[:i].
         // Base case: dp[0] = 1.
         // dp[i] only depends on dp[i - 1] and dp[i - 2], so we can compress the states.
-        int dp_i_2 = 1, dp_i_1 = 1;
+        int dp_i_2 = 1;
+        int dp_i_1 = 1;
         for (int i = 2; i <= n; ++i) {  // IMPORTANT: i <= n
             int dp_i;
             if (s[i - 1] == '0') {

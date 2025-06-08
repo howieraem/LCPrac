@@ -38,6 +38,8 @@ struct TreeNode {
 // S: O(m + n)
 class Solution {
     // Pre-order traversal
+    // T: O(n)
+    // S: O(n)
     void serialize(TreeNode* root, string& s) {
         if (root == nullptr) {
             s.push_back('#');
@@ -97,8 +99,13 @@ class Solution {
     }
 
 public:
+    // DFS + KMP
+    // T: O(m + n)
+    // S: O(m + n)
+    // Better than recursively checking isSameTree which will take O(m * n)
     bool isSubtree(TreeNode* root, TreeNode* subRoot) {
-        string tree1, tree2;
+        string tree1;
+        string tree2;
         serialize(root, tree1);
         serialize(subRoot, tree2);
         // return tree1.find(tree2) != string::npos;  // std implementation is not KMP

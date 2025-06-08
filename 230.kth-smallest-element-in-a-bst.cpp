@@ -72,7 +72,7 @@ public:
             if (--k == 0) {
                 break;
             }
-            // The visit logic in in-order traversal
+            // End of the visit logic in in-order traversal
 
             root = root->right;
         }

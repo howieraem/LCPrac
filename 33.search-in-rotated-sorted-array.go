@@ -3,12 +3,13 @@
  *
  * [33] Search in Rotated Sorted Array
  */
+package lc
 
 // @lc code=start
 // T: O(log(n))
 // S: O(1)
 func search(nums []int, target int) int {
-    l := 0
+	l := 0
 	r := len(nums) - 1
 	for l <= r {
 		m := l + ((r - l) >> 1)
@@ -30,5 +31,5 @@ func search(nums []int, target int) int {
 	}
 	return -1
 }
-// @lc code=end
 
+// @lc code=end

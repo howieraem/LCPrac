@@ -12,7 +12,7 @@ class Solution {
 public:
     // Sorting + Two pointers
     // T: O(n ^ 2)
-    // S: O(1)
+    // S: O(sorting)
     vector<vector<int>> threeSum(vector<int>& nums) {
         sort(nums.begin(), nums.end());
         vector<vector<int>> res;
@@ -25,7 +25,7 @@ public:
                 // After sorting, since y and z in the code below will be greater 
                 // than x, we have x + y + z > target = 0. There is thus no need 
                 // to iterate over the remaining x.
-                // However, if target < 0, this may not be valid.
+                // However, if x < 0 and target < 0, this may not be valid.
                 return res;
             }
             if (i > 0 && nums[i - 1] == x) {

@@ -25,7 +25,8 @@ struct ListNode {
  */
 class Solution {
     ListNode* reverse_list(ListNode* head) {
-        ListNode *pre = nullptr, *cur = head;
+        ListNode* pre = nullptr;
+        ListNode* cur = head;
         while (cur != nullptr) {
             ListNode* tmp = cur->next;
             cur->next = pre;
@@ -61,13 +62,13 @@ public:
         ListNode* p1 = head;
         while (p2 != nullptr) {
             // Change connections
-            ListNode* original_next_p2 = p2->next;
+            ListNode* original_p2_next = p2->next;
             p2->next = p1->next;
             p1->next = p2;
 
             // Shift pointers
-            p1 = p2->next;   // original next p1
-            p2 = original_next_p2;
+            p1 = p2->next;   // original p1->next above
+            p2 = original_p2_next;
         }
     }
 };

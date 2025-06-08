@@ -16,14 +16,14 @@ public:
     // T: O(n)
     // S: O(n)
     vector<int> topKFrequent(vector<int>& nums, int k) {
-        unordered_map<int, int> f;
+        unordered_map<int, int> freqs;
         const int n = nums.size();
         for (int i = 0; i < n; ++i) {
-            ++f[nums[i]];
+            ++freqs[nums[i]];
         }
 
         vector<vector<int>> buckets(n + 1);  // upper bound of frequency is n
-        for (const auto& e : f) {
+        for (const auto& e : freqs) {
             // buckets[freq].push_back(x)
             buckets[e.second].push_back(e.first);
         }

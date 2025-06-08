@@ -10,6 +10,7 @@ using std::vector;
 // @lc code=start
 class Solution {
 public:
+    // Bit Manipulation + 1D DP
     // T: O(n)
     // S: O(1)
     vector<int> countBits(int n) {

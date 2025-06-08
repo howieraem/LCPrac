@@ -10,13 +10,14 @@ class Solution:
     # T: O(n)
     # S: O(alpha_size), alpha_size := 26
     def characterReplacement(self, s: str, k: int) -> int:
+        OFFSET = ord('A')
         cnts = [0] * 26
         max_cnt = 0
         ans = 0
         
         l = 0
         for r in range(len(s)):
-            c = ord(s[r]) - ord('A')
+            c = ord(s[r]) - OFFSET
             cnts[c] += 1
             max_cnt = max(cnts[c], max_cnt)
             
@@ -25,7 +26,7 @@ class Solution:
             # many other chars to replace, shift the left boundary 
             # of the window.
             while r - l + 1 > max_cnt + k:
-                cnts[ord(s[l]) - ord('A')] -= 1
+                cnts[ord(s[l]) - OFFSET] -= 1
                 l += 1
 
             # At this point, window width = max_cnt + k, all chars in the window 

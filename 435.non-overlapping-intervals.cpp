@@ -29,7 +29,7 @@ public:
         });
 
         /*
-        int& cur_end = intervals[0][1];
+        int cur_end = intervals[0][1];
         int non_overlap_cnt = 1;
         for (int i = 1; i < n; ++i) {
             if (cur_end <= intervals[i][0]) {
@@ -46,7 +46,7 @@ public:
         */
 
         // Alternative solution without subtraction
-        int& cur_end = intervals[0][1];
+        int cur_end = intervals[0][1];
         int ans = 0;
         for (int i = 1; i < n; ++i) {
             if (cur_end > intervals[i][0]) {

@@ -75,7 +75,7 @@ public:
                 return false;
             }
             pre = root;
-            // The visit logic in in-order traversal
+            // End of the visit logic in in-order traversal
             
             root = root->right;
         }

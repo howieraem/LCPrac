@@ -3,6 +3,13 @@
  *
  * [235] Lowest Common Ancestor of a Binary Search Tree
  */
+package lc
+
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
+}
 
 // @lc code=start
 /**
@@ -31,5 +38,5 @@ func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
 	}
 	return ans
 }
-// @lc code=end
 
+// @lc code=end

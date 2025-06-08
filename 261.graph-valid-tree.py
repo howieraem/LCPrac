@@ -14,7 +14,7 @@ class UF:
 
         # Store how many nodes are connected to each node, 
         # which is used in connecting two nodes to avoid 
-        # degration to linked list
+        # degradation to linked list
         self.sizes = [1] * n
 
     # With rebalancing, T is O(log(n))

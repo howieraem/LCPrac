@@ -27,8 +27,9 @@ public:
             for (int l = 0; l < r; ++l) {
                 if (s[l] == s[r] && (r - l <= 2 || dp[l + 1][r - 1])) {
                     dp[l][r] = true;  // covers base cases like dp[i][i] = true
-                    if (r - l + 1 > res_len) {
-                        res_len = r - l + 1;
+                    int candidate_len = r - l + 1;
+                    if (candidate_len > res_len) {
+                        res_len = candidate_len;
                         res_start = l;
                     }
                 }

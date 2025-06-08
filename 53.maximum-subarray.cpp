@@ -22,6 +22,10 @@ public:
         // vector<int> subarr;
 
         for (const auto& x : nums) {
+            // Either append the current number to the subarray by adding it to the subarray sum,
+            // or start a new subarray by assigning the current number to the subarray sum. 
+            dp = max(dp + x, x);
+
             // If the actual subarray should be returned
             // if (dp + x > x) {
             //     dp += x;
@@ -30,10 +34,6 @@ public:
             //     dp = x;
             //     subarr.clear()
             // }
-
-            // Either append the current number to the subarray by adding it to the subarray sum,
-            // or start a new subarray by assigning the current number to the subarray sum. 
-            dp = max(dp + x, x);
 
             ans = max(ans, dp);
         }
